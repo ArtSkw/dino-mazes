@@ -52,6 +52,15 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Deployment (13 October 2026)
+
+Live at https://artskw.github.io/dino-mazes/ from the public repository
+`ArtSkw/dino-mazes`. Every push to `main` runs type check, lint, domain tests and the
+production-build tests, then publishes to GitHub Pages (`.github/workflows/deploy.yml`).
+Security and performance audits: `reports/security_audit_20261013-1845.md`,
+`reports/performance_audit_20261013-1845.md`. The site is public (with `noindex`), not
+access-restricted; official show images and source art are kept out of the repository.
+
 ## Owner review, round 5 (13 October 2026)
 
 | # | Request | What changed | Evidence |
@@ -71,7 +80,7 @@ inside the wall (`closestInCapsule`).
 |---|---|---|
 | Domain unit + property | `npm test` | 152 passed |
 | Browser flows (Chromium + WebKit) | `npm run test:e2e` | 47 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
-| Offline relaunch (production build) | `npm run test:offline` | 1 passed |
+| Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
 
 E2E coverage: fresh install in Polish under an English browser locale; language
@@ -141,7 +150,7 @@ easy 5×5 everywhere; medium 7×7 (7×5 at 1024×600); harder 9×9 at 1440×900,
 - Supervised child play sessions (finding "Wróć", resuming at the endpoint, hint use).
 - Owner approval of cartoon likeness for all five characters (see art QA).
 - Audio on real devices (iOS unlock on first touch, mute, background pause).
-- HTTPS deployment with real access restriction; offline install on the iPad.
+- Offline install on the iPad from the live URL; real access restriction if the family wants the site private.
 - Real-GPU frame rates on the oldest family tablet.
 - Watching the new UI motion (bubble, butterfly arrival, staggered entrances) at 10 % speed in
   a real browser's Animations panel; only headless screenshots were taken.

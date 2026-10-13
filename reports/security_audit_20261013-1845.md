@@ -82,3 +82,11 @@ Double-check: whether you accept public hosting of the character art (finding 1)
 `art/prompts/jobs-v3-executed-animation.json` (written by Codex) contains absolute local
 paths with your macOS user name, which become public with the repository; and the GitHub
 Pages URL is shared only with family.
+
+## Addendum (same day, after deployment)
+
+Checking the live site found a production-only defect (not a security issue): the painted
+panel, leaf-button and corner-leaf images returned 404 (`/dino-mazes/assets/assets/ui/…`)
+because relative `url()` values in CSS custom properties resolve against the stylesheet in
+production. Fixed in `src/main.ts` with absolute URLs; `tests/offline/offline.spec.ts` now
+checks those surfaces on the production build and runs in the deploy workflow.

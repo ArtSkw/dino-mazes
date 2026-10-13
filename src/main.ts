@@ -13,10 +13,14 @@ import { SaveStore, probeStorage } from './storage/save';
 import { Ui } from './ui/ui';
 
 const rootStyle = document.documentElement.style;
-rootStyle.setProperty('--img-panel', `url(${assetUrl(ASSETS.ui['cream-panel']?.image ?? '')})`);
-rootStyle.setProperty('--img-wood', `url(${assetUrl(ASSETS.ui['wood-button']?.image ?? '')})`);
-rootStyle.setProperty('--img-leaf', `url(${assetUrl(ASSETS.ui['leaf-button']?.image ?? '')})`);
-rootStyle.setProperty('--img-leaf-deco', `url(${assetUrl(ASSETS.ui['panel-leaf']?.image ?? '')})`);
+// Absolute URLs: a relative url() inside a custom property resolves against the
+// stylesheet that uses it (dist/assets/*.css in production), not the page, which
+// produced assets/assets/... 404s on GitHub Pages.
+const cssImage = (path: string | undefined): string => `url("${new URL(assetUrl(path ?? ''), document.baseURI).href}")`;
+rootStyle.setProperty('--img-panel', cssImage(ASSETS.ui['cream-panel']?.image));
+rootStyle.setProperty('--img-wood', cssImage(ASSETS.ui['wood-button']?.image));
+rootStyle.setProperty('--img-leaf', cssImage(ASSETS.ui['leaf-button']?.image));
+rootStyle.setProperty('--img-leaf-deco', cssImage(ASSETS.ui['panel-leaf']?.image));
 
 const storage = probeStorage(() => window.localStorage);
 const store = new SaveStore(storage);

@@ -28,6 +28,10 @@ jobs:
       - run: npm ci
       # Type check, lint and the domain test suite must pass before anything ships.
       - run: npm run check
+      # The production build itself: offline relaunch and painted UI surfaces
+      # (catches build-only problems the dev server hides).
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:offline
       - run: npm run build
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5

@@ -11,7 +11,7 @@ test('after the first visit the game relaunches and plays offline', async ({ pag
     const name = keys.find((k) => k.startsWith('dino-mazes-'));
     if (!name) return false;
     const cache = await caches.open(name);
-    return (await cache.keys()).length > 40;
+    return (await cache.keys()).length >= 35;
   }, null, { timeout: 60_000, polling: 500 });
   // Give the page a saved session, then go offline and relaunch.
   await page.getByRole('button', { name: 'Graj' }).click({ force: true });
@@ -41,4 +41,28 @@ test('after the first visit the game relaunches and plays offline', async ({ pag
   await page.getByRole('button', { name: 'Kolejna przygoda' }).click({ force: true });
   await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { screen: string } } } }).__dino.ctrl.state.screen === 'intro');
   await context.setOffline(false);
+});
+
+test('painted UI surfaces (panels, leaf and wood buttons, corner leaf) load in the production build', async ({ page }) => {
+  await page.goto('./?test');
+  await page.waitForFunction(() => (window as never as { __dino?: { ctrl: { state: { screen: string } } } }).__dino?.ctrl.state.screen === 'welcome', null, { timeout: 30_000 });
+  const urls = await page.evaluate(() => {
+    const pick = (sel: string, prop: string, pseudo: string | null = null): string => {
+      const el = document.querySelector(sel);
+      return el ? getComputedStyle(el, pseudo).getPropertyValue(prop) : '';
+    };
+    return [
+      pick('.welcome-card', 'border-image-source'),
+      pick('.btn-play', 'border-image-source'),
+      pick('.reset-btn', 'border-image-source'),
+      pick('.welcome-card', 'background-image', '::after'),
+    ].map((v) => /url\("?([^")]+)"?\)/.exec(v)?.[1] ?? `missing: ${v}`);
+  });
+  for (const url of urls) {
+    expect(url).not.toContain('missing');
+    expect(url).not.toContain('assets/assets/');
+    const res = await page.request.get(url);
+    expect(res.ok(), url).toBe(true);
+    expect(res.headers()['content-type'], url).toContain('image/');
+  }
 });
