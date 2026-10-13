@@ -1,0 +1,1445 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-12",
+  "scope": "Source artwork inventory; existing game runtime integration is documented in art/review/RUNTIME_QA.md. V3 masters are pending owner likeness sign-off.",
+  "runtimeReady": false,
+  "selectedSourceCount": 17,
+  "generatedCharacterFrames": 80,
+  "assets": [
+    {
+      "id": "style-anchor",
+      "source": "source/style-anchor-v2.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "alphaRange": null,
+      "bytes": 3318626,
+      "sha256": "188387f70fe38f01bb598f12ee319bdd721431f8e538e3893c8d115b3e12fef1",
+      "status": "concept-only",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/style-anchor-v2.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "character-bill",
+      "source": "source/character-bill-v2.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bytes": 1291316,
+      "sha256": "082ad59843e543a53f565a31ae20c5467f2d78a11f48b638bb5df38c6ae4b447",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/character-bill.txt",
+        "prompts/character-bill-cleanup.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "frameCount": 16,
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 4,
+        "cellWidth": 313.5,
+        "cellHeight": 313.5,
+        "warning": "Not an extraction atlas. Measure frame bounds and registration; nominal cells are fractional."
+      },
+      "sequences": [
+        {
+          "name": "idle",
+          "nominalFrames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "drawing",
+          "nominalFrames": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "encouragement",
+          "nominalFrames": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "celebration",
+          "nominalFrames": [
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "identityReference": "references/gigantosaurus-cast.png",
+      "motionQA": "pending Claude extraction and loop preview"
+    },
+    {
+      "id": "character-tiny",
+      "source": "source/character-tiny-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bytes": 2241405,
+      "sha256": "0bfa3267adf071098a1d8c7703ad7021851e7bac7681dec8ddecf304bb0dba04",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/character-tiny-executed.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "frameCount": 16,
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 4,
+        "cellWidth": 313.5,
+        "cellHeight": 313.5,
+        "warning": "Not an extraction atlas. Measure frame bounds and registration; nominal cells are fractional."
+      },
+      "sequences": [
+        {
+          "name": "idle",
+          "nominalFrames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "drawing",
+          "nominalFrames": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "encouragement",
+          "nominalFrames": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "celebration",
+          "nominalFrames": [
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "identityReference": "references/gigantosaurus-cast.png",
+      "motionQA": "pending Claude extraction and loop preview"
+    },
+    {
+      "id": "character-mazu",
+      "source": "source/character-mazu-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bytes": 1956453,
+      "sha256": "58836374edc13fc0c201eefb0b737a21a9565dac6a3b1c81e3fc99f85e3e0f8d",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/character-mazu.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "frameCount": 16,
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 4,
+        "cellWidth": 313.5,
+        "cellHeight": 313.5,
+        "warning": "Not an extraction atlas. Measure frame bounds and registration; nominal cells are fractional."
+      },
+      "sequences": [
+        {
+          "name": "idle",
+          "nominalFrames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "drawing",
+          "nominalFrames": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "encouragement",
+          "nominalFrames": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "celebration",
+          "nominalFrames": [
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "identityReference": "references/gigantosaurus-cast.png",
+      "motionQA": "pending Claude extraction and loop preview"
+    },
+    {
+      "id": "character-rocky",
+      "source": "source/character-rocky-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bytes": 1596714,
+      "sha256": "44dfb213b4811510bfe6d99e8896abbc46ab108e4666cf87bbb3302837500b75",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/character-rocky.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "frameCount": 16,
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 4,
+        "cellWidth": 313.5,
+        "cellHeight": 313.5,
+        "warning": "Not an extraction atlas. Measure frame bounds and registration; nominal cells are fractional."
+      },
+      "sequences": [
+        {
+          "name": "idle",
+          "nominalFrames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "drawing",
+          "nominalFrames": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "encouragement",
+          "nominalFrames": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "celebration",
+          "nominalFrames": [
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "identityReference": "references/gigantosaurus-cast.png",
+      "motionQA": "pending Claude extraction and loop preview"
+    },
+    {
+      "id": "character-giganto",
+      "source": "source/character-giganto-v2.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bytes": 1994247,
+      "sha256": "af920d8a90c9ef9be3574aad8a68ee1a4b5c35eee3fbcd2f48b25c1b4a369444",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/character-giganto.txt",
+        "prompts/character-giganto-spacing.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "frameCount": 16,
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 4,
+        "cellWidth": 313.5,
+        "cellHeight": 313.5,
+        "warning": "Not an extraction atlas. Measure frame bounds and registration; nominal cells are fractional."
+      },
+      "sequences": [
+        {
+          "name": "idle",
+          "nominalFrames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "drawing",
+          "nominalFrames": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "encouragement",
+          "nominalFrames": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "celebration",
+          "nominalFrames": [
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "identityReference": "references/gigantosaurus-cast.png",
+      "motionQA": "pending Claude extraction and loop preview"
+    },
+    {
+      "id": "treasure-kit",
+      "source": "source/treasure-kit-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        254
+      ],
+      "bytes": 2275501,
+      "sha256": "0924c46a2e1a64722d8f0badc1c7cdbc19e2ece2fd5641005d4a4fefaaf0fdd8",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/treasure-kit.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "jungle-backdrop",
+      "source": "source/jungle-backdrop-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "alphaRange": null,
+      "bytes": 2334690,
+      "sha256": "6a35073fa30257e07adf0dc74d7ea7ba556b7be819d0677806f8f5b2ef27ea74",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/jungle-backdrop.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "ground-plate",
+      "source": "source/ground-plate-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "alphaRange": null,
+      "bytes": 2148229,
+      "sha256": "9c623da4b1a42a4da70b762f61a14e15652624822382e1fdf84fa809ee9fe2c7",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/ground-plate.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "foliage-kit",
+      "source": "source/foliage-kit-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        254
+      ],
+      "bytes": 2311166,
+      "sha256": "a87e9a005f4654a349951f1cb6c8185b568810f1d76a33138e8cf3f923768e84",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/foliage-kit.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "collection-background",
+      "source": "source/collection-background-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "alphaRange": null,
+      "bytes": 2174235,
+      "sha256": "113622409fb59dddceed8229b1b3d1219a083ddb71903c1859b207e5374a9925",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/collection-background.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "ui-surfaces",
+      "source": "source/ui-surfaces-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        254
+      ],
+      "bytes": 1855786,
+      "sha256": "c169b514afc0ba6b6ef2a69539b12d6d9ba28337d734c02abda9063c2299c4cc",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/ui-surfaces.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "character-bill-v3",
+      "source": "source/character-bill-v3",
+      "sourceKind": "single-frame-folder",
+      "width": 1254,
+      "height": 1254,
+      "canvasSize": [
+        1254,
+        1254
+      ],
+      "frameCount": 8,
+      "reactionFrameCount": 8,
+      "requestedReactionFrameCount": 32,
+      "optionalTalkFrameCount": 4,
+      "master": "master.png",
+      "recommendedCandidate": "c",
+      "candidateCount": 3,
+      "files": [
+        {
+          "path": "master-candidate-a.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "61def451a4c37d689f529ad0e9ba446a9417539adb5ab21e2dbf5a8e50fb5f68",
+          "bytes": 816003
+        },
+        {
+          "path": "master-candidate-b.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "eb537b61ad77d98ea851a2d5305edf4292df8f9dc7ab860307921ecf95a41fb7",
+          "bytes": 875709
+        },
+        {
+          "path": "master-candidate-c.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "e0845680e268af35c9b9b02374e0e818ea44fd1a68f02e79fd812f5fb87ecea3",
+          "bytes": 596583
+        },
+        {
+          "path": "master-framed.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "fd2e59922adf25709a4a08d6fd0ca287460e82cc4319f29b6ab714b95f802689",
+          "bytes": 524351
+        },
+        {
+          "path": "master.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "fd2e59922adf25709a4a08d6fd0ca287460e82cc4319f29b6ab714b95f802689",
+          "bytes": 524351
+        },
+        {
+          "path": "idle-00.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "fd2e59922adf25709a4a08d6fd0ca287460e82cc4319f29b6ab714b95f802689",
+          "bytes": 524351
+        },
+        {
+          "path": "idle-01.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "67581412c5bd5658c8f5058211d7a57824a1ecfdade784216ac1db1764aef5b4",
+          "bytes": 540348
+        },
+        {
+          "path": "idle-02.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "5b4e8c4224661ae8290b178380f1e0f0c7d7e86319e9a2344ca180754bc64e09",
+          "bytes": 554505
+        },
+        {
+          "path": "idle-03.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "e773638dee71b704acfd930e32dbf21f854125da966e1682da51ca5dc4d9f346",
+          "bytes": 549887
+        },
+        {
+          "path": "idle-04.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "30accd1dd0c0768c0b9f9b217728eb35c00c984111e82d02bf8322e399923fb3",
+          "bytes": 550499
+        },
+        {
+          "path": "idle-05.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "458d06f112d0cdb1435411042199dee9f494ca4c46a94a7e6c1981ecc72d7d35",
+          "bytes": 557029
+        },
+        {
+          "path": "idle-06.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "5d961cd8952aa79bed3ca30f698272b6d1ca3b24e6c421c052c31372f747ab67",
+          "bytes": 535852
+        },
+        {
+          "path": "idle-07.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "7fa7e278e6fd8faaace982aa4d8db0a1f4ba7cd2a7cae290a413eb892da08443",
+          "bytes": 533922
+        }
+      ],
+      "promptFile": "prompts/jobs-v3-characters.json",
+      "promptFiles": [
+        "prompts/v3-executed/bill-master-a.txt",
+        "prompts/v3-executed/bill-master-b.txt",
+        "prompts/v3-executed/bill-master-c.txt",
+        "prompts/v3-executed/bill-master-framing.txt"
+      ],
+      "status": "source-candidate-runtime-qa-pending",
+      "stage": "animation-generation",
+      "ownerApproval": {
+        "status": "approved-to-proceed",
+        "date": "2026-10-13",
+        "scope": "Owner authorized final Rocky/Giganto likeness check and refinements followed by animation generation; technical framing revisions selected by Codex."
+      },
+      "runtimePath": null,
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "identityReference": "references/gigantosaurus-cast.png",
+      "poseReference": "review/runtime/bill-frame0.png",
+      "qa": {
+        "measurements": {
+          "file": "art/source/character-bill-v3/master.png",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "subjectBoundsAlpha40": [
+            416,
+            165,
+            935,
+            1254
+          ],
+          "marginsPercent": {
+            "top": 13.2,
+            "left": 33.2,
+            "right": 25.4,
+            "bottom": 0.0
+          }
+        },
+        "framing": "Imagegen framing revision created; side/head clearance improved. Exact requested percentages remain approximate, to be measured and reported in final QA.",
+        "animation": "Generation in progress; temporal QA pending.",
+        "browserComposite": "Candidate C inspected on cream at comparison size and on dark green in proposed set. No obvious edge artifacts observed at these display sizes; raw alpha preserved. Likeness approval and framing normalization pending."
+      },
+      "additionalIdentityReferences": [
+        "references/bill-v3/official-front.png",
+        "references/bill-v3/official-coconut.png",
+        "references/bill-v3/official-side.png"
+      ],
+      "revisionNote": "Owner requested closer cartoon likeness and artifact cleanup. Candidate C removes invented side fin, adds dorsal scutes, narrows neck and changes blue to slate teal. Likeness approval remains pending.",
+      "masterLikenessCandidate": "c",
+      "masterSource": "master-framed.png",
+      "executedAnimationJobFile": "prompts/jobs-v3-executed-animation.json"
+    },
+    {
+      "id": "character-tiny-v3",
+      "source": "source/character-tiny-v3",
+      "sourceKind": "single-frame-folder",
+      "width": 1254,
+      "height": 1254,
+      "canvasSize": [
+        1254,
+        1254
+      ],
+      "frameCount": 8,
+      "reactionFrameCount": 8,
+      "requestedReactionFrameCount": 32,
+      "optionalTalkFrameCount": 4,
+      "master": "master.png",
+      "recommendedCandidate": "a",
+      "candidateCount": 2,
+      "files": [
+        {
+          "path": "master-candidate-a.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "4b6d3acfe214328843b86ccd123435fdaad6f86ac6887b998003517152220d26",
+          "bytes": 1496886
+        },
+        {
+          "path": "master-candidate-b.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "24921ee46556936ebd706ad1b3f52ea01c88391a702b49b166fed1bf9be5eb8f",
+          "bytes": 1504195
+        },
+        {
+          "path": "master-framed.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "abb6c75494d5d061e4273149fcd7cf91d538e4ca49510db066e34eb594063617",
+          "bytes": 1113937
+        },
+        {
+          "path": "master.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "abb6c75494d5d061e4273149fcd7cf91d538e4ca49510db066e34eb594063617",
+          "bytes": 1113937
+        },
+        {
+          "path": "idle-00.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "abb6c75494d5d061e4273149fcd7cf91d538e4ca49510db066e34eb594063617",
+          "bytes": 1113937
+        },
+        {
+          "path": "idle-01.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "0056116bf7121cdf66a63767c1fd095b9062c2f063c4f53d82ac04715a03221a",
+          "bytes": 1112277
+        },
+        {
+          "path": "idle-02.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "55cbab7029836410f22c3a07953730359d72d07d5e0603713dad3bd4c7a8da52",
+          "bytes": 1118971
+        },
+        {
+          "path": "idle-03.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "cebb9fa2a1e941651f1f4ca4adf2dca595c9cfc68c9c6c3aab88cd34cd707f7b",
+          "bytes": 1101522
+        },
+        {
+          "path": "idle-04.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "dcf44de05b8dbac586a5d0a88644950e964d9be20e77f801cd90761b3773d861",
+          "bytes": 1096849
+        },
+        {
+          "path": "idle-05.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "39d21e14f1292b0cd61eb7e2f63b7e1ec47c92d6d0eabc1f153c7a0aee79c51b",
+          "bytes": 1103439
+        },
+        {
+          "path": "idle-06.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "a67b3105780db5cff7748d7452a90dc4a3881e6e3a9f9943d20c9b535b37ebc8",
+          "bytes": 1089216
+        },
+        {
+          "path": "idle-07.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "74a0e958214a36276ae54746b2650291056f5fa1d561137a456ed96e6b591032",
+          "bytes": 1081420
+        }
+      ],
+      "promptFile": "prompts/jobs-v3-characters.json",
+      "promptFiles": [
+        "prompts/v3-executed/tiny-master-a.txt",
+        "prompts/v3-executed/tiny-master-b.txt",
+        "prompts/v3-executed/tiny-master-framing.txt"
+      ],
+      "status": "source-candidate-runtime-qa-pending",
+      "stage": "animation-generation",
+      "ownerApproval": {
+        "status": "approved-to-proceed",
+        "date": "2026-10-13",
+        "scope": "Owner authorized final Rocky/Giganto likeness check and refinements followed by animation generation; technical framing revisions selected by Codex."
+      },
+      "runtimePath": null,
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "identityReference": "references/gigantosaurus-cast.png",
+      "poseReference": "review/runtime/tiny-frame0.png",
+      "qa": {
+        "measurements": {
+          "file": "art/source/character-tiny-v3/master.png",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "subjectBoundsAlpha40": [
+            210,
+            188,
+            1093,
+            1254
+          ],
+          "marginsPercent": {
+            "top": 15.0,
+            "left": 16.7,
+            "right": 12.8,
+            "bottom": 0.0
+          }
+        },
+        "framing": "Imagegen framing revision created; side/head clearance improved. Exact requested percentages remain approximate, to be measured and reported in final QA.",
+        "animation": "Generation in progress; temporal QA pending.",
+        "browserComposite": "Proposed masters inspected on cream and dark green; all ten candidates inspected on cream at comparison size. No opaque background rectangles observed. This is visual review, not animation QA."
+      },
+      "masterLikenessCandidate": "a",
+      "masterSource": "master-framed.png",
+      "executedAnimationJobFile": "prompts/jobs-v3-executed-animation.json"
+    },
+    {
+      "id": "character-mazu-v3",
+      "source": "source/character-mazu-v3",
+      "sourceKind": "single-frame-folder",
+      "width": 1254,
+      "height": 1254,
+      "canvasSize": [
+        1254,
+        1254
+      ],
+      "frameCount": 8,
+      "reactionFrameCount": 8,
+      "requestedReactionFrameCount": 32,
+      "optionalTalkFrameCount": 4,
+      "master": "master.png",
+      "recommendedCandidate": "c",
+      "candidateCount": 3,
+      "files": [
+        {
+          "path": "master-candidate-a.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "5c1e599003408d006dc3f1fcba3a8211865351483b46d2c74b46b881dee4016c",
+          "bytes": 1405415
+        },
+        {
+          "path": "master-candidate-b.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "0835b3a8194b823b10e2b72781f17ea85cd3b389c20a1580ad493b3a2c472e84",
+          "bytes": 1433228
+        },
+        {
+          "path": "master-candidate-c.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "f4f88bae594612e6eccc7a474ae280f10123b51286fa436fe096e256d336bd16",
+          "bytes": 1384421
+        },
+        {
+          "path": "master-framed.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "698826816aac7d11beae031e3fde5f74b29c00e0925cc0606a81ac2efd15942d",
+          "bytes": 1139125
+        },
+        {
+          "path": "master.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "698826816aac7d11beae031e3fde5f74b29c00e0925cc0606a81ac2efd15942d",
+          "bytes": 1139125
+        },
+        {
+          "path": "idle-00.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "698826816aac7d11beae031e3fde5f74b29c00e0925cc0606a81ac2efd15942d",
+          "bytes": 1139125
+        },
+        {
+          "path": "idle-01.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "57d516face7629246769395cbf56d8ca01013c31781b28cb4975244a85a6fadc",
+          "bytes": 1109646
+        },
+        {
+          "path": "idle-02.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "5ef34b76c1ed6598191b6b1a31dae39d068df2e62324f35d5701e7d76c9c8fbf",
+          "bytes": 1129520
+        },
+        {
+          "path": "idle-03.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "fccafca866c9643032a0ba0b77859127f75e72e15e1699e6426c13ea79adbebd",
+          "bytes": 1120924
+        },
+        {
+          "path": "idle-04.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "053319403e6739894c8f7b1043cebf1966b334b21f81eb9a26cec6fa811f1cb0",
+          "bytes": 1122803
+        },
+        {
+          "path": "idle-05.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "3dcdb927e9c367c7bda9581387124cef74e60416368017f8571332eb8f526f2f",
+          "bytes": 1107896
+        },
+        {
+          "path": "idle-06.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "9b021f857d2e9031064f6ffbe7787640b4ada87d4302108d9be0b57ed8aca166",
+          "bytes": 1107983
+        },
+        {
+          "path": "idle-07.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "988b6b4c1e4a4288f50afd423cb58d82128949d70be7929ae87273961b4f6481",
+          "bytes": 1091702
+        }
+      ],
+      "promptFile": "prompts/jobs-v3-characters.json",
+      "promptFiles": [
+        "prompts/v3-executed/mazu-master-a.txt",
+        "prompts/v3-executed/mazu-master-b.txt",
+        "prompts/v3-executed/mazu-master-c.txt",
+        "prompts/v3-executed/mazu-master-framing.txt"
+      ],
+      "status": "source-candidate-runtime-qa-pending",
+      "stage": "animation-generation",
+      "ownerApproval": {
+        "status": "approved-to-proceed",
+        "date": "2026-10-13",
+        "scope": "Owner authorized final Rocky/Giganto likeness check and refinements followed by animation generation; technical framing revisions selected by Codex."
+      },
+      "runtimePath": null,
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "identityReference": "references/gigantosaurus-cast.png",
+      "poseReference": "review/runtime/mazu-frame0.png",
+      "qa": {
+        "measurements": {
+          "file": "art/source/character-mazu-v3/master.png",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "subjectBoundsAlpha40": [
+            186,
+            176,
+            1094,
+            1254
+          ],
+          "marginsPercent": {
+            "top": 14.0,
+            "left": 14.8,
+            "right": 12.8,
+            "bottom": 0.0
+          }
+        },
+        "framing": "Imagegen framing revision created; side/head clearance improved. Exact requested percentages remain approximate, to be measured and reported in final QA.",
+        "animation": "Generation in progress; temporal QA pending.",
+        "browserComposite": "Candidate C inspected on cream at comparison size and dark green in proposed set. No obvious edge artifacts at these display sizes. Likeness approval and framing normalization pending.",
+        "browserScreenshot": "review/v3/mazu-revision-browser-check.png"
+      },
+      "additionalIdentityReferences": [
+        "references/mazu-v3/official-book.png",
+        "references/mazu-v3/official-closeup.png",
+        "references/mazu-v3/official-cast.png"
+      ],
+      "revisionNote": "Owner requested closer appearance using three new cartoon references. Candidate C has taller protruding eyes, smaller brown irises, raised golden scales, smooth cream throat, slimmer arms, small dorsal bumps and signature vine strap/leaf satchel. Likeness approval pending.",
+      "masterLikenessCandidate": "c",
+      "masterSource": "master-framed.png",
+      "executedAnimationJobFile": "prompts/jobs-v3-executed-animation.json"
+    },
+    {
+      "id": "character-rocky-v3",
+      "source": "source/character-rocky-v3",
+      "sourceKind": "single-frame-folder",
+      "width": 1254,
+      "height": 1254,
+      "canvasSize": [
+        1254,
+        1254
+      ],
+      "frameCount": 8,
+      "reactionFrameCount": 8,
+      "requestedReactionFrameCount": 32,
+      "optionalTalkFrameCount": 4,
+      "master": "master.png",
+      "recommendedCandidate": "a",
+      "candidateCount": 3,
+      "files": [
+        {
+          "path": "master-candidate-a.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "6c57d024cb033e6aef058018c7aa9b0eca4f4acf96247f8ea6a7564be631a565",
+          "bytes": 802883
+        },
+        {
+          "path": "master-candidate-b.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "7736efe5d2f4f10edace74d7d04cf9c7c7d7192058f81c85aa506a0fe0322c71",
+          "bytes": 894477
+        },
+        {
+          "path": "master-candidate-c.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "580aa6c5f6e956c4f880a0b294a2d77e89943f2e9371fbf4457cb1b72ea926b4",
+          "bytes": 651025
+        },
+        {
+          "path": "master-framed.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "6ab57eba179f2848f70d029483653cf867373c4bf31b7e6225b49204a8fbc035",
+          "bytes": 564608
+        },
+        {
+          "path": "master.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "6ab57eba179f2848f70d029483653cf867373c4bf31b7e6225b49204a8fbc035",
+          "bytes": 564608
+        },
+        {
+          "path": "idle-00.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "6ab57eba179f2848f70d029483653cf867373c4bf31b7e6225b49204a8fbc035",
+          "bytes": 564608
+        },
+        {
+          "path": "idle-01.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "0391d1141aa0080e3428994a3fdd75d3919199b47d2f1203ce846ccbba8b70b2",
+          "bytes": 567567
+        },
+        {
+          "path": "idle-02.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "1dd8ae3347313f39ac0f17097135f4df00fd59cb499af25348da48cca25a848e",
+          "bytes": 574758
+        },
+        {
+          "path": "idle-03.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "8680368d4cbbbcf7d791b97b59ad4ad561e60443536838f206099cab3311aafb",
+          "bytes": 569078
+        },
+        {
+          "path": "idle-04.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "344b3e120222ff63fa798545f1c7067a4eb5827b8c01022da5057e7f51c95538",
+          "bytes": 575445
+        },
+        {
+          "path": "idle-05.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "b123b0cef3a0e6f636f6e9e8a8031ebbd233a1e87b9c36a5a0aebf0990adc84b",
+          "bytes": 570130
+        },
+        {
+          "path": "idle-06.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "19c975dfbdbbaa5534bea988cb757cebd5f954f8fdb1be954ae64d4b8b8cd287",
+          "bytes": 566210
+        },
+        {
+          "path": "idle-07.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "f1a63a2f8c795771b6765a1586153c8d3b5ea309048a34f8e8930af6de2b4cce",
+          "bytes": 566998
+        }
+      ],
+      "promptFile": "prompts/jobs-v3-characters.json",
+      "promptFiles": [
+        "prompts/v3-executed/rocky-master-a.txt",
+        "prompts/v3-executed/rocky-master-b.txt",
+        "prompts/v3-executed/rocky-master-framing.txt",
+        "prompts/v3-executed/rocky-master-c.txt"
+      ],
+      "status": "source-candidate-runtime-qa-pending",
+      "stage": "animation-generation",
+      "ownerApproval": {
+        "status": "approved-to-proceed",
+        "date": "2026-10-13",
+        "scope": "Owner authorized final Rocky/Giganto likeness check and refinements followed by animation generation; technical framing revisions selected by Codex."
+      },
+      "runtimePath": null,
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "identityReference": "references/gigantosaurus-cast.png",
+      "poseReference": "review/runtime/rocky-frame0.png",
+      "qa": {
+        "measurements": {
+          "file": "art/source/character-rocky-v3/master.png",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "subjectBoundsAlpha40": [
+            340,
+            150,
+            946,
+            1254
+          ],
+          "marginsPercent": {
+            "top": 12.0,
+            "left": 27.1,
+            "right": 24.6,
+            "bottom": 0.0
+          }
+        },
+        "framing": "Imagegen framing revision created; side/head clearance improved. Exact requested percentages remain approximate, to be measured and reported in final QA.",
+        "animation": "Generation in progress; temporal QA pending.",
+        "browserComposite": "Proposed masters inspected on cream and dark green; all ten candidates inspected on cream at comparison size. No opaque background rectangles observed. This is visual review, not animation QA."
+      },
+      "masterLikenessCandidate": "c",
+      "masterSource": "master-framed.png",
+      "executedAnimationJobFile": "prompts/jobs-v3-executed-animation.json"
+    },
+    {
+      "id": "character-giganto-v3",
+      "source": "source/character-giganto-v3",
+      "sourceKind": "single-frame-folder",
+      "width": 1254,
+      "height": 1254,
+      "canvasSize": [
+        1254,
+        1254
+      ],
+      "frameCount": 8,
+      "reactionFrameCount": 8,
+      "requestedReactionFrameCount": 32,
+      "optionalTalkFrameCount": 4,
+      "master": "master.png",
+      "recommendedCandidate": "b",
+      "candidateCount": 3,
+      "files": [
+        {
+          "path": "master-candidate-a.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "8887b565c71467687218921b9a804d864368b309e7da4ca82bc84304648bfdd7",
+          "bytes": 1720457
+        },
+        {
+          "path": "master-candidate-b.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "5e521a343c46126b6c91bc131225511cf9a0e6e45ed795bc3065e4f2fe0345cd",
+          "bytes": 1512033
+        },
+        {
+          "path": "master-candidate-c.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "05d2439906bc6584e8e21b2ca9afcc49904e3e0d29dc4b6fe1d78172540a3774",
+          "bytes": 1691378
+        },
+        {
+          "path": "master-framed.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "3d6451cd6c56597941989baec8ec6d5f6f1d67d41e097feaae286819309846f3",
+          "bytes": 1384794
+        },
+        {
+          "path": "master.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "3d6451cd6c56597941989baec8ec6d5f6f1d67d41e097feaae286819309846f3",
+          "bytes": 1384794
+        },
+        {
+          "path": "idle-00.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "3d6451cd6c56597941989baec8ec6d5f6f1d67d41e097feaae286819309846f3",
+          "bytes": 1384794
+        },
+        {
+          "path": "idle-01.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "1c77d76c661ff051173c52939d0642a453f2d06190529c9a83fa0ea05e639e60",
+          "bytes": 1357714
+        },
+        {
+          "path": "idle-02.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "7824a97e0a6fca6fdae3fd907f25a126dba43fbbe6ff76a043f08f3212b438f5",
+          "bytes": 1371136
+        },
+        {
+          "path": "idle-03.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "505dfc0fb3270b48ad6a21512fa822d55ab8ea974765bf7b1db2d4b484fa0dad",
+          "bytes": 1366855
+        },
+        {
+          "path": "idle-04.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "23603be05324215487c7b21d962c80fa7fd8c6674411b3099ac7a4cb41eafaa2",
+          "bytes": 1374037
+        },
+        {
+          "path": "idle-05.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "5405b4368a18a8427e4b23093af5e65dd39e054483f0bb46bf5bb630ec83fd5e",
+          "bytes": 1364324
+        },
+        {
+          "path": "idle-06.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "cd68d62ca93263501b63e543b4839ff04daea7edeca61b7a849e982e14dbf1f8",
+          "bytes": 1356658
+        },
+        {
+          "path": "idle-07.png",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "hasAlpha": true,
+          "sha256": "86c61bf373bc8e9183663aba1fd9b10ef92ab197f3cd1c0507f8fb7e4d83e780",
+          "bytes": 1347175
+        }
+      ],
+      "promptFile": "prompts/jobs-v3-characters.json",
+      "promptFiles": [
+        "prompts/v3-executed/giganto-master-a.txt",
+        "prompts/v3-executed/giganto-master-b.txt",
+        "prompts/v3-executed/giganto-master-framing.txt",
+        "prompts/v3-executed/giganto-master-c.txt"
+      ],
+      "status": "source-candidate-runtime-qa-pending",
+      "stage": "animation-generation",
+      "ownerApproval": {
+        "status": "approved-to-proceed",
+        "date": "2026-10-13",
+        "scope": "Owner authorized final Rocky/Giganto likeness check and refinements followed by animation generation; technical framing revisions selected by Codex."
+      },
+      "runtimePath": null,
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "identityReference": "references/gigantosaurus-cast.png",
+      "poseReference": "review/runtime/giganto-frame0.png",
+      "qa": {
+        "measurements": {
+          "file": "art/source/character-giganto-v3/master.png",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "subjectBoundsAlpha40": [
+            129,
+            164,
+            1199,
+            1254
+          ],
+          "marginsPercent": {
+            "top": 13.1,
+            "left": 10.3,
+            "right": 4.4,
+            "bottom": 0.0
+          }
+        },
+        "framing": "Imagegen framing revision created; side/head clearance improved. Exact requested percentages remain approximate, to be measured and reported in final QA.",
+        "animation": "Generation in progress; temporal QA pending.",
+        "browserComposite": "Proposed masters inspected on cream and dark green; all ten candidates inspected on cream at comparison size. No opaque background rectangles observed. This is visual review, not animation QA."
+      },
+      "masterLikenessCandidate": "c",
+      "masterSource": "master-framed.png",
+      "executedAnimationJobFile": "prompts/jobs-v3-executed-animation.json"
+    }
+  ],
+  "unselectedVariants": [
+    {
+      "path": "source/style-anchor-v1.png",
+      "reason": "Superseded tilted group composition and identity drift."
+    },
+    {
+      "path": "source/character-bill-v1.png",
+      "reason": "Earlier version before edge cleanup."
+    },
+    {
+      "path": "source/character-giganto-v1.png",
+      "reason": "Insufficient frame spacing; use v2."
+    },
+    {
+      "path": "source/treasure-kit-v2.png",
+      "reason": "Extraction attempt increased saturation; original v1 already has usable alpha."
+    }
+  ],
+  "updatedAt": "2026-10-13",
+  "v3": {
+    "stage": "animation-generation",
+    "masterCandidatesGenerated": 14,
+    "proposedMasters": 5,
+    "animationFramesGenerated": 35,
+    "approvalDate": "2026-10-13",
+    "request": "CODEX_REQUEST_V3.md",
+    "review": "review/v3/index.html",
+    "browserReviewScreenshot": "review/v3/masters-browser-check.png",
+    "framingRevisionsGenerated": 5,
+    "neutralFramesCopied": 5,
+    "reactionFramesAvailable": 40,
+    "completedReactions": [
+      "idle"
+    ]
+  }
+}

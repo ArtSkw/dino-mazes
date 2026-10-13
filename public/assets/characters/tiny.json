@@ -1,0 +1,108 @@
+{
+ "id": "tiny",
+ "source": "art/source/character-tiny-v1.png",
+ "sourceSha256": "0bfa3267adf071098a1d8c7703ad7021851e7bac7681dec8ddecf304bb0dba04",
+ "image": "assets/characters/tiny.webp",
+ "frameWidth": 296,
+ "frameHeight": 304,
+ "spacing": 4,
+ "columns": 4,
+ "frames": 16,
+ "pivot": {
+  "x": 0.5118,
+  "y": 1.0
+ },
+ "content": {
+  "x": 0.0642,
+  "y": 0.0296,
+  "w": 0.8919,
+  "h": 0.9671
+ },
+ "contentActive": {
+  "x": 0.0236,
+  "y": 0.023,
+  "w": 0.9527,
+  "h": 0.977
+ },
+ "sequences": {
+  "idle": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "drawing": [
+   4,
+   5,
+   6,
+   7
+  ],
+  "encouragement": [
+   8,
+   9,
+   10,
+   11
+  ],
+  "celebration": [
+   12,
+   13,
+   14,
+   15
+  ]
+ },
+ "measuredCells": {
+  "x": [
+   0,
+   333,
+   643,
+   960,
+   1254
+  ],
+  "y": [
+   0,
+   317,
+   632,
+   941,
+   1254
+  ]
+ },
+ "registrationShiftsX": [
+  0,
+  21,
+  18,
+  19,
+  0,
+  21,
+  17,
+  20,
+  2,
+  7,
+  11,
+  20,
+  -3,
+  14,
+  16,
+  18
+ ],
+ "bottoms": [
+  310,
+  310,
+  310,
+  310,
+  306,
+  306,
+  306,
+  306,
+  304,
+  304,
+  305,
+  304,
+  303,
+  303,
+  303,
+  304
+ ],
+ "edgeTouchingFrames": [],
+ "bytes": 403544,
+ "decodedBytes": 5874752
+}

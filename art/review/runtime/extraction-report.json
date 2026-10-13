@@ -1,0 +1,482 @@
+{
+ "bill": {
+  "frameSize": [
+   241,
+   283
+  ],
+  "shiftsX": [
+   0,
+   26,
+   40,
+   46,
+   -1,
+   31,
+   40,
+   45,
+   3,
+   23,
+   30,
+   36,
+   -14,
+   25,
+   13,
+   32
+  ],
+  "bottoms": [
+   304,
+   304,
+   304,
+   304,
+   294,
+   294,
+   294,
+   294,
+   292,
+   293,
+   293,
+   293,
+   292,
+   292,
+   292,
+   292
+  ],
+  "edgeTouching": [],
+  "bytes": 229488
+ },
+ "tiny": {
+  "frameSize": [
+   296,
+   304
+  ],
+  "shiftsX": [
+   0,
+   21,
+   18,
+   19,
+   0,
+   21,
+   17,
+   20,
+   2,
+   7,
+   11,
+   20,
+   -3,
+   14,
+   16,
+   18
+  ],
+  "bottoms": [
+   310,
+   310,
+   310,
+   310,
+   306,
+   306,
+   306,
+   306,
+   304,
+   304,
+   305,
+   304,
+   303,
+   303,
+   303,
+   304
+  ],
+  "edgeTouching": [],
+  "bytes": 403544
+ },
+ "mazu": {
+  "frameSize": [
+   305,
+   274
+  ],
+  "shiftsX": [
+   0,
+   19,
+   24,
+   20,
+   0,
+   19,
+   24,
+   19,
+   -2,
+   12,
+   13,
+   17,
+   -2,
+   16,
+   18,
+   17
+  ],
+  "bottoms": [
+   297,
+   297,
+   297,
+   297,
+   287,
+   287,
+   288,
+   287,
+   286,
+   287,
+   287,
+   289,
+   281,
+   282,
+   282,
+   282
+  ],
+  "edgeTouching": [],
+  "bytes": 336222
+ },
+ "rocky": {
+  "frameSize": [
+   257,
+   305
+  ],
+  "shiftsX": [
+   0,
+   39,
+   36,
+   42,
+   0,
+   38,
+   37,
+   42,
+   -1,
+   36,
+   29,
+   43,
+   -1,
+   32,
+   27,
+   42
+  ],
+  "bottoms": [
+   310,
+   310,
+   310,
+   310,
+   307,
+   307,
+   307,
+   306,
+   306,
+   306,
+   305,
+   305,
+   293,
+   293,
+   294,
+   294
+  ],
+  "edgeTouching": [],
+  "bytes": 285062
+ },
+ "giganto": {
+  "frameSize": [
+   293,
+   255
+  ],
+  "shiftsX": [
+   0,
+   11,
+   16,
+   16,
+   0,
+   13,
+   15,
+   16,
+   0,
+   13,
+   11,
+   14,
+   -2,
+   12,
+   11,
+   14
+  ],
+  "bottoms": [
+   302,
+   302,
+   302,
+   302,
+   271,
+   272,
+   271,
+   272,
+   278,
+   278,
+   278,
+   278,
+   273,
+   273,
+   273,
+   273
+  ],
+  "edgeTouching": [],
+  "bytes": 364688
+ },
+ "treasure-kit-v1.png": {
+  "coconut": {
+   "image": "assets/treasures/coconut.webp",
+   "width": 320,
+   "height": 310,
+   "bytes": 48868,
+   "sourceBox": [
+    46,
+    66,
+    522,
+    530
+   ]
+  },
+  "nut": {
+   "image": "assets/treasures/nut.webp",
+   "width": 301,
+   "height": 320,
+   "bytes": 26974,
+   "sourceBox": [
+    598,
+    126,
+    942,
+    490
+   ]
+  },
+  "flower": {
+   "image": "assets/treasures/flower.webp",
+   "width": 313,
+   "height": 320,
+   "bytes": 35100,
+   "sourceBox": [
+    1042,
+    70,
+    1490,
+    526
+   ]
+  },
+  "stone": {
+   "image": "assets/treasures/stone.webp",
+   "width": 320,
+   "height": 279,
+   "bytes": 27686,
+   "sourceBox": [
+    66,
+    594,
+    478,
+    954
+   ]
+  },
+  "shell": {
+   "image": "assets/treasures/shell.webp",
+   "width": 315,
+   "height": 320,
+   "bytes": 30836,
+   "sourceBox": [
+    574,
+    558,
+    962,
+    954
+   ]
+  },
+  "berries": {
+   "image": "assets/treasures/berries.webp",
+   "width": 320,
+   "height": 314,
+   "bytes": 36544,
+   "sourceBox": [
+    1070,
+    562,
+    1490,
+    974
+   ]
+  }
+ },
+ "foliage-kit-v1.png": {
+  "hedge-a": {
+   "image": "assets/foliage/hedge-a.webp",
+   "width": 360,
+   "height": 373,
+   "bytes": 44284,
+   "sourceBox": [
+    14,
+    58,
+    394,
+    450
+   ]
+  },
+  "hedge-b": {
+   "image": "assets/foliage/hedge-b.webp",
+   "width": 349,
+   "height": 375,
+   "bytes": 45194,
+   "sourceBox": [
+    410,
+    54,
+    778,
+    450
+   ]
+  },
+  "rocks": {
+   "image": "assets/foliage/rocks.webp",
+   "width": 346,
+   "height": 321,
+   "bytes": 36280,
+   "sourceBox": [
+    798,
+    106,
+    1162,
+    446
+   ]
+  },
+  "flower-bush": {
+   "image": "assets/foliage/flower-bush.webp",
+   "width": 342,
+   "height": 369,
+   "bytes": 42832,
+   "sourceBox": [
+    1166,
+    78,
+    1526,
+    466
+   ]
+  },
+  "banana-plant": {
+   "image": "assets/foliage/banana-plant.webp",
+   "width": 311,
+   "height": 384,
+   "bytes": 47850,
+   "sourceBox": [
+    10,
+    454,
+    426,
+    962
+   ]
+  },
+  "fern": {
+   "image": "assets/foliage/fern.webp",
+   "width": 308,
+   "height": 384,
+   "bytes": 50668,
+   "sourceBox": [
+    406,
+    490,
+    794,
+    970
+   ]
+  },
+  "monstera": {
+   "image": "assets/foliage/monstera.webp",
+   "width": 373,
+   "height": 384,
+   "bytes": 37274,
+   "sourceBox": [
+    786,
+    522,
+    1226,
+    970
+   ]
+  },
+  "butterfly": {
+   "image": "assets/foliage/butterfly.webp",
+   "width": 306,
+   "height": 250,
+   "bytes": 21224,
+   "sourceBox": [
+    1206,
+    598,
+    1530,
+    866
+   ]
+  }
+ },
+ "ui-surfaces-v1.png": {
+  "wood-button": {
+   "image": "assets/ui/wood-button.webp",
+   "width": 720,
+   "height": 272,
+   "bytes": 30364,
+   "sourceBox": [
+    14,
+    110,
+    766,
+    406
+   ]
+  },
+  "leaf-button": {
+   "image": "assets/ui/leaf-button.webp",
+   "width": 720,
+   "height": 276,
+   "bytes": 40360,
+   "sourceBox": [
+    770,
+    106,
+    1526,
+    410
+   ]
+  },
+  "cream-pill": {
+   "image": "assets/ui/cream-pill.webp",
+   "width": 720,
+   "height": 262,
+   "bytes": 24304,
+   "sourceBox": [
+    14,
+    562,
+    802,
+    862
+   ]
+  },
+  "cream-panel": {
+   "image": "assets/ui/cream-panel.webp",
+   "width": 703,
+   "height": 462,
+   "bytes": 29084,
+   "sourceBox": [
+    806,
+    458,
+    1526,
+    938
+   ],
+   "leafRemoved": true
+  },
+  "panel-leaf": {
+   "image": "assets/ui/panel-leaf.webp",
+   "width": 135,
+   "height": 127,
+   "bytes": 4552,
+   "fromPanelRight": 12,
+   "fromPanelTop": 7
+  }
+ },
+ "panel-leaf": {
+  "image": "assets/ui/panel-leaf.webp",
+  "width": 135,
+  "height": 127,
+  "bytes": 4552,
+  "fromPanelRight": 12,
+  "fromPanelTop": 7
+ },
+ "jungle-backdrop-v1.png": {
+  "image": "assets/bg/jungle.webp",
+  "width": 1536,
+  "height": 1024,
+  "bytes": 137316,
+  "sourceSha256": "6a35073fa30257e07adf0dc74d7ea7ba556b7be819d0677806f8f5b2ef27ea74"
+ },
+ "collection-background-v1.png": {
+  "image": "assets/bg/collection.webp",
+  "width": 1536,
+  "height": 1024,
+  "bytes": 88516,
+  "sourceSha256": "113622409fb59dddceed8229b1b3d1219a083ddb71903c1859b207e5374a9925"
+ },
+ "ground-plate-v1.png": {
+  "image": "assets/bg/ground.webp",
+  "width": 1254,
+  "height": 1254,
+  "bytes": 87814,
+  "sourceSha256": "9c623da4b1a42a4da70b762f61a14e15652624822382e1fdf84fa809ee9fe2c7"
+ }
+}

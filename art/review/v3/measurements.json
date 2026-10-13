@@ -1,0 +1,290 @@
+[
+  {
+    "file": "art/source/character-bill-v3/master-candidate-a.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      254,
+      87,
+      993,
+      1250
+    ],
+    "subjectHeight": 1163,
+    "marginsPercent": {
+      "top": 6.9,
+      "bottom": 0.3,
+      "left": 20.3,
+      "right": 20.8
+    }
+  },
+  {
+    "file": "art/source/character-bill-v3/master-candidate-b.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      237,
+      84,
+      1010,
+      1254
+    ],
+    "subjectHeight": 1170,
+    "marginsPercent": {
+      "top": 6.7,
+      "bottom": 0.0,
+      "left": 18.9,
+      "right": 19.5
+    }
+  },
+  {
+    "file": "art/source/character-giganto-v3/master-candidate-a.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      21,
+      66,
+      1237,
+      1240
+    ],
+    "subjectHeight": 1174,
+    "marginsPercent": {
+      "top": 5.3,
+      "bottom": 1.1,
+      "left": 1.7,
+      "right": 1.4
+    }
+  },
+  {
+    "file": "art/source/character-giganto-v3/master-candidate-b.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      33,
+      100,
+      1205,
+      1182
+    ],
+    "subjectHeight": 1082,
+    "marginsPercent": {
+      "top": 8.0,
+      "bottom": 5.7,
+      "left": 2.6,
+      "right": 3.9
+    }
+  },
+  {
+    "file": "art/source/character-mazu-v3/master-candidate-a.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      56,
+      141,
+      1203,
+      1221
+    ],
+    "subjectHeight": 1080,
+    "marginsPercent": {
+      "top": 11.2,
+      "bottom": 2.6,
+      "left": 4.5,
+      "right": 4.1
+    }
+  },
+  {
+    "file": "art/source/character-mazu-v3/master-candidate-b.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      38,
+      116,
+      1197,
+      1203
+    ],
+    "subjectHeight": 1087,
+    "marginsPercent": {
+      "top": 9.3,
+      "bottom": 4.1,
+      "left": 3.0,
+      "right": 4.5
+    }
+  },
+  {
+    "file": "art/source/character-rocky-v3/master-candidate-a.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      292,
+      73,
+      1016,
+      1212
+    ],
+    "subjectHeight": 1139,
+    "marginsPercent": {
+      "top": 5.8,
+      "bottom": 3.3,
+      "left": 23.3,
+      "right": 19.0
+    }
+  },
+  {
+    "file": "art/source/character-rocky-v3/master-candidate-b.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      252,
+      51,
+      1030,
+      1226
+    ],
+    "subjectHeight": 1175,
+    "marginsPercent": {
+      "top": 4.1,
+      "bottom": 2.2,
+      "left": 20.1,
+      "right": 17.9
+    }
+  },
+  {
+    "file": "art/source/character-tiny-v3/master-candidate-a.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      105,
+      40,
+      1178,
+      1241
+    ],
+    "subjectHeight": 1201,
+    "marginsPercent": {
+      "top": 3.2,
+      "bottom": 1.0,
+      "left": 8.4,
+      "right": 6.1
+    }
+  },
+  {
+    "file": "art/source/character-tiny-v3/master-candidate-b.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      142,
+      62,
+      1185,
+      1246
+    ],
+    "subjectHeight": 1184,
+    "marginsPercent": {
+      "top": 4.9,
+      "bottom": 0.6,
+      "left": 11.3,
+      "right": 5.5
+    }
+  },
+  {
+    "file": "art/source/character-bill-v3/master-candidate-c.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      378,
+      72,
+      964,
+      1254
+    ],
+    "subjectHeight": 1182,
+    "marginsPercent": {
+      "top": 5.7,
+      "bottom": 0.0,
+      "left": 30.1,
+      "right": 23.1
+    }
+  },
+  {
+    "file": "art/source/character-mazu-v3/master-candidate-c.png",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "subjectBoundsAlpha40": [
+      142,
+      72,
+      1187,
+      1225
+    ],
+    "subjectHeight": 1153,
+    "marginsPercent": {
+      "top": 5.7,
+      "bottom": 2.3,
+      "left": 11.3,
+      "right": 5.3
+    }
+  }
+]

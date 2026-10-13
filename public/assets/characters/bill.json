@@ -1,0 +1,108 @@
+{
+ "id": "bill",
+ "source": "art/source/character-bill-v2.png",
+ "sourceSha256": "082ad59843e543a53f565a31ae20c5467f2d78a11f48b638bb5df38c6ae4b447",
+ "image": "assets/characters/bill.webp",
+ "frameWidth": 241,
+ "frameHeight": 283,
+ "spacing": 4,
+ "columns": 4,
+ "frames": 16,
+ "pivot": {
+  "x": 0.4896,
+  "y": 1.0
+ },
+ "content": {
+  "x": 0.112,
+  "y": 0.053,
+  "w": 0.7552,
+  "h": 0.947
+ },
+ "contentActive": {
+  "x": 0.0249,
+  "y": 0.0247,
+  "w": 0.9461,
+  "h": 0.9753
+ },
+ "sequences": {
+  "idle": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "drawing": [
+   4,
+   5,
+   6,
+   7
+  ],
+  "encouragement": [
+   8,
+   9,
+   10,
+   11
+  ],
+  "celebration": [
+   12,
+   13,
+   14,
+   15
+  ]
+ },
+ "measuredCells": {
+  "x": [
+   0,
+   333,
+   640,
+   949,
+   1254
+  ],
+  "y": [
+   0,
+   320,
+   629,
+   936,
+   1254
+  ]
+ },
+ "registrationShiftsX": [
+  0,
+  26,
+  40,
+  46,
+  -1,
+  31,
+  40,
+  45,
+  3,
+  23,
+  30,
+  36,
+  -14,
+  25,
+  13,
+  32
+ ],
+ "bottoms": [
+  304,
+  304,
+  304,
+  304,
+  294,
+  294,
+  294,
+  294,
+  292,
+  293,
+  293,
+  293,
+  292,
+  292,
+  292,
+  292
+ ],
+ "edgeTouchingFrames": [],
+ "bytes": 229488,
+ "decodedBytes": 4466176
+}

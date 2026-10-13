@@ -1,0 +1,110 @@
+# Dino Labirynty / Dino Mazes
+
+A warm, illustrated maze-drawing game for children aged 4–6 (private family use).
+A friend from the jungle asks for help; the child draws a path from the entrance to
+the treasure in the middle, celebrates, and collects the treasure.
+
+- Product contract: [PRD.md](PRD.md)
+- Implementation and art plan: [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)
+- Current status, test evidence and open items: [docs/STATUS.md](docs/STATUS.md)
+- Art sources and Codex QA: [art/README.md](art/README.md), runtime extraction QA: [art/review/RUNTIME_QA.md](art/review/RUNTIME_QA.md)
+- Next art request for Codex (high-res characters, double frame count, more 2D ideas): [art/CODEX_REQUEST_V3.md](art/CODEX_REQUEST_V3.md)
+- Interface polish review: [docs/UI_POLISH_REVIEW.md](docs/UI_POLISH_REVIEW.md)
+
+## Commands
+
+```bash
+npm install              # once
+npm run dev              # dev server on http://localhost:5173 (also on your LAN for real-device testing)
+npm run build            # type-check + production build into dist/ (includes the service worker)
+npm run preview          # serve dist/ on http://localhost:4173
+npm test                 # domain unit + property tests (Vitest)
+npm run test:e2e         # browser flows in Chromium and WebKit (Playwright)
+npm run test:offline     # builds, then checks offline relaunch through the service worker
+npm run lint             # ESLint
+npm run typecheck        # TypeScript strict
+npm run art              # re-extract runtime art from art/source (Python 3 + Pillow + numpy)
+python3 tools/art/make_v3_jobs.py          # regenerate the Codex v3 character job list
+node tools/dev/review-walkthrough.mjs      # screenshots: welcome, settings, intro, play, talk, hint, reward
+node tools/dev/review-friends.mjs <url> <out> <w> <h> <pl|en>  # intro/play/talk for every friend
+```
+
+Append `?debug` to the URL to see the maze seed, effective profile, metrics and
+storage status. `?test` exposes a test hook used by the Playwright suites.
+
+First-time Playwright setup: `npx playwright install chromium webkit`.
+
+## Architecture
+
+TypeScript (strict) + Vite + Phaser 4.2.1 (pinned). Plain DOM for all UI and text.
+Functional icons: Phosphor Icons 2.1.1 (MIT, `@phosphor-icons/core`, bold weight), inlined as SVG.
+UI font: Baloo 2 (OFL, `@fontsource/baloo-2`), declared in `src/fonts.css`; `tests/domain/fonts.test.ts` checks Polish glyph coverage.
+
+```text
+src/
+  domain/    pure, browser-free logic: seeded RNG, maze generator + validation,
+             capsule geometry, trail engine, quest selection, Giganto cadence, award
+  app/       controller: the single owner of game state (commands in, state/events out)
+  game/      Phaser scene (renderer only), board painter, character actor, audio, assets
+  input/     the single Pointer Events adapter (mouse, trackpad, pen, touch) + keyboard
+  ui/        accessible DOM overlay: welcome, quest intro, controls, collection, settings
+  data/      quests, characters, treasures, Polish/English strings, asset manifest
+  storage/   versioned save envelope, validation, migration, in-memory fallback
+  platform/  responsive layout + grid fitting, offline/service-worker registration
+tests/domain/   Vitest: generator (1,000 seeds per profile), collision, trail, progress, storage, layout
+tests/e2e/      Playwright flows (Chromium + WebKit)
+tests/offline/  Playwright offline relaunch against the production build
+tools/art/      extract.py: source art → optimized runtime derivatives + QA contact sheets
+tools/build/    service worker template (precache list generated at build time)
+```
+
+Key design points:
+
+- **Maze**: a seeded spanning tree over every cell except the centre, the centre
+  attached as a leaf, one boundary entrance. Connected + acyclic ⇒ exactly one route.
+  Candidates are measured (meaningful branch choices, solution length, dead-end depth)
+  and rejected until they match the difficulty profile; fixed fallbacks after 100 attempts.
+- **Geometry**: walkable space is the union of round-capped capsules around graph
+  edges. The same data drives rendering, collision and decoration placement.
+- **Drawing**: every movement is validated with exact line/capsule intersection
+  (no tunnelling, no corner cuts). The ink may only enter the current corridor and
+  the corridors ahead; it cannot reverse along the trail. Slight strays are pulled
+  back inside the *current* corridor; larger strays stop the ink until the child
+  returns to the endpoint. "Wróć" clears the whole attempt in the same maze.
+- **Rewards** are committed once, atomically with the session, before any animation.
+- **Art** is never gameplay: hedges are code-drawn continuous wall fills decorated
+  with Codex foliage stamps that are clipped away from every corridor.
+
+## Art: source vs runtime
+
+- `art/source/` — immutable Codex/GPT Imagegen sources. Never shipped.
+- `art/references/` — the user-supplied cast image (identity reference). Never shipped.
+- `public/assets/` — runtime derivatives generated by `npm run art`
+  (registered 4×4 character spritesheets, portraits, isolated treasures/foliage,
+  UI surfaces, WebP backgrounds) plus `manifest.json` with sizes and source hashes.
+- `art/review/runtime/` — contact sheets on light/dark, loop GIFs, extraction report.
+
+## Deployment
+
+Every push to `main` runs `.github/workflows/deploy.yml`: `npm ci`, `npm run check`
+(types, lint, domain tests), `npm run build`, then publishes `dist/` to GitHub Pages at
+https://artskw.github.io/dino-mazes/ . The build adds a Content-Security-Policy meta tag
+and a service worker, so the game also works offline after the first visit.
+
+`npm run build` produces a static site in `dist/` with relative paths, so it can be
+hosted from any sub-path over HTTPS (any static host works). Notes:
+
+- Service workers require HTTPS (or localhost).
+- An obscure URL is not access control. If the game must stay private, put it behind
+  real access restriction (host-level password / SSO / private network).
+- The Gigantosaurus characters belong to their rights holders; this build is for
+  private family use only. GitHub Pages is public (the page carries `noindex`, but anyone
+  with the link can open it); see reports/security_audit_20261013-1845.md.
+- Not in the repository (see `.gitignore`): `art/references/` (official show images),
+  `art/source/` and the large review images. Keep a backup of them outside Git.
+
+## Saved data
+
+Everything is stored on the device (`localStorage`, key `dino-mazes:save`):
+language, sound, motion preference, the treasure collection, progress (which sets the automatic difficulty), cadence
+counters and the active maze (seed + trail). Nothing is sent anywhere.

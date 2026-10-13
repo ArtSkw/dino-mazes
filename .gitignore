@@ -1,0 +1,19 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+.DS_Store
+*.log
+tools/art/__pycache__/
+
+# Kept on this computer only, never in the public repository:
+# official Gigantosaurus images used as identity references (copyright),
+art/references/
+# and the large source/review images (heavy binaries, and high-resolution copies of
+# the character art). The game ships its own optimised copies in public/assets.
+art/source/
+art/review/**/*.png
+art/review/**/*.gif
+
+# Local Claude Code session state
+.claude/

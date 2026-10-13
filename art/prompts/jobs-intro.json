@@ -1,0 +1,97 @@
+{
+ "schemaVersion": 1,
+ "request": "art/INTRO_ANIMATION_PLAN.md (concept A, recommended) — not approved yet",
+ "style": "Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo).",
+ "jobs": [
+  {
+   "id": "intro-leaf-curtain-left",
+   "output": "source/intro-leaf-curtain-left.png",
+   "size": "1024x1536",
+   "alpha": true,
+   "prompt": "Front view, extreme close-up of huge overlapping jungle leaves (monstera and banana) filling a tall portrait canvas like a theatre stage curtain. Deep emerald with lighter veins, soft shadows between the leaf layers. The right (inner) edge is organic and leafy; the leaves run off the top, bottom and left edges of the canvas. Transparent background only beyond the inner leaf edge."
+  },
+  {
+   "id": "intro-leaf-curtain-right",
+   "output": "source/intro-leaf-curtain-right.png",
+   "size": "1024x1536",
+   "alpha": true,
+   "prompt": "Mirror companion of intro-leaf-curtain-left: the same huge front-view jungle leaves, inner edge on the LEFT, leaves running off the top, bottom and right edges. Same palette and lighting so the two meet seamlessly in the middle."
+  },
+  {
+   "id": "intro-light-shafts",
+   "output": "source/intro-light-shafts.png",
+   "size": "2048x1365",
+   "alpha": true,
+   "prompt": "Gentle golden god-rays falling diagonally from the upper left, very soft and low opacity, a few tiny floating light specks, on a transparent background. No objects, no plants, no ground."
+  },
+  {
+   "id": "intro-giganto-peek",
+   "output": "source/intro-giganto-peek.png",
+   "size": "2048x1365",
+   "alpha": true,
+   "refs": ["references/gigantosaurus-cast.png", "review/runtime/giganto-frame0.png"],
+   "prompt": "Animation sprite sheet, exactly 6 frames in a uniform 3 columns by 2 rows grid, identical scale, camera and registration in every cell. GIGANTO (enormous moss-green Gigantosaurus, long broad crocodilian snout, raised brow ridges, small red-brown eyes, dark green mottling, pale cream jaw, small red back spikes) leaning in from the LEFT edge of each cell through jungle foliage; his body is cropped by the left cell edge in every frame and the same foliage sits in front of his neck at the same place. Frames: 1 only the snout tip visible; 2 half the head in view; 3 sniffing, nostrils flared; 4 eyes turned to the viewer; 5 friendly closed-mouth grin with a few teeth; 6 soft blink. Friendly, never roaring. Transparent between cells."
+  },
+  {
+   "id": "intro-friend-popup-bill",
+   "output": "source/intro-friend-popup-bill.png",
+   "size": "1536x1536",
+   "alpha": true,
+   "refs": ["references/gigantosaurus-cast.png", "source/character-bill-v3/master.png"],
+   "prompt": "Animation sprite sheet, exactly 4 frames in a uniform 2 by 2 grid, identical scale and registration. BILL (blue/slate teal long-necked brachiosaurus, long pale cream rectangular muzzle, two nostril dots, bright blue eyes, small pointed head plume) rising from behind the SAME round jungle bush that sits at the bottom of every cell. Frames: 1 only the top of his head above the bush; 2 half up, eyes peeking; 3 full bust; 4 signature pose: neck stretched up tall and proud with a big smile. Transparent background."
+  },
+  {
+   "id": "intro-friend-popup-tiny",
+   "output": "source/intro-friend-popup-tiny.png",
+   "size": "1536x1536",
+   "alpha": true,
+   "refs": ["references/gigantosaurus-cast.png", "source/character-tiny-v3/master.png"],
+   "prompt": "Animation sprite sheet, exactly 4 frames in a uniform 2 by 2 grid, identical scale and registration. TINY (bright green triceratops, rounded scalloped frill, two cream brow horns and a little nose horn, dark blue-gray beak, green eyes) rising from behind the SAME round jungle bush at the bottom of every cell. Frames: 1 only the frill tips above the bush; 2 half up, eyes peeking; 3 full bust; 4 signature pose: a happy little hop, frill bouncing, both arms up. Transparent background."
+  },
+  {
+   "id": "intro-friend-popup-mazu",
+   "output": "source/intro-friend-popup-mazu.png",
+   "size": "1536x1536",
+   "alpha": true,
+   "refs": ["references/gigantosaurus-cast.png", "source/character-mazu-v3/master.png"],
+   "prompt": "Animation sprite sheet, exactly 4 frames in a uniform 2 by 2 grid, identical scale and registration. MAZU (orange-brown compact ankylosaurus, large round eyes high on a spotted head, broad short muzzle, cream jaw and belly) rising from behind the SAME round jungle bush at the bottom of every cell. Frames: 1 only the top of her spotted head; 2 half up, big eyes peeking; 3 full bust; 4 signature pose: curled cheerfully into a round ball, eyes smiling. No horns, glasses or accessories. Transparent background."
+  },
+  {
+   "id": "intro-friend-popup-rocky",
+   "output": "source/intro-friend-popup-rocky.png",
+   "size": "1536x1536",
+   "alpha": true,
+   "refs": ["references/gigantosaurus-cast.png", "source/character-rocky-v3/master.png"],
+   "prompt": "Animation sprite sheet, exactly 4 frames in a uniform 2 by 2 grid, identical scale and registration. ROCKY (red/orange parasaurolophus, long cream narrow face, signature backward-swept cream crest, large eyes) rising from behind the SAME round jungle bush at the bottom of every cell. Frames: 1 only the crest tip above the bush; 2 half up, eyes peeking; 3 full bust; 4 signature pose: head tilted back, crest raised as if trumpeting a happy toot, eyes closed with joy. Transparent background."
+  },
+  {
+   "id": "intro-title-sign",
+   "output": "source/intro-title-sign.png",
+   "size": "2048x1024",
+   "alpha": true,
+   "prompt": "A wide honey-wood plank sign with a carved rounded border and a generous completely EMPTY centre for live text, two rope loops on top for hanging, a few small green leaves tucked at one upper corner. Same honey wood and painted grain as the game's wooden buttons. No text, no letters. Transparent background."
+  },
+  {
+   "id": "intro-vine",
+   "output": "source/intro-vine.png",
+   "size": "256x1536",
+   "alpha": true,
+   "prompt": "One hanging jungle vine, vertical, gently curving, with a few small leaves along it, ending in a loop at the bottom. Transparent background."
+  },
+  {
+   "id": "intro-sprout",
+   "output": "source/intro-sprout.png",
+   "size": "2048x512",
+   "alpha": true,
+   "refs": ["source/ui-surfaces-v1.png"],
+   "prompt": "Animation sprite sheet, exactly 4 frames in one row, identical baseline and registration: 1 a tiny seedling with two leaves; 2 a taller sprout unfurling; 3 a broad leaf opening sideways; 4 a wide rounded vivid green leaf shape that matches the green leaf button in the reference (same green, same rounded pill silhouette, lighter centre). No text. Transparent background."
+  },
+  {
+   "id": "intro-dust-puff",
+   "output": "source/intro-dust-puff.png",
+   "size": "1024x384",
+   "alpha": true,
+   "prompt": "Animation sprite sheet, exactly 3 frames in one row: a soft round cartoon dust cloud appearing, billowing, fading. Pale warm sand colour matching a sunny jungle clearing. Transparent background."
+  }
+ ]
+}

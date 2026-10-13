@@ -1,0 +1,510 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-12",
+  "scope": "Source artwork for Dino Mazes; game code not implemented",
+  "runtimeReady": false,
+  "selectedSourceCount": 12,
+  "generatedCharacterFrames": 80,
+  "assets": [
+    {
+      "id": "style-anchor",
+      "source": "source/style-anchor-v2.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "alphaRange": null,
+      "bytes": 3318626,
+      "sha256": "188387f70fe38f01bb598f12ee319bdd721431f8e538e3893c8d115b3e12fef1",
+      "status": "concept-only",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/style-anchor-v2.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "character-bill",
+      "source": "source/character-bill-v2.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bytes": 1291316,
+      "sha256": "082ad59843e543a53f565a31ae20c5467f2d78a11f48b638bb5df38c6ae4b447",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/character-bill.txt",
+        "prompts/character-bill-cleanup.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "frameCount": 16,
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 4,
+        "cellWidth": 313.5,
+        "cellHeight": 313.5,
+        "warning": "Not an extraction atlas. Measure frame bounds and registration; nominal cells are fractional."
+      },
+      "sequences": [
+        {
+          "name": "idle",
+          "nominalFrames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "drawing",
+          "nominalFrames": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "encouragement",
+          "nominalFrames": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "celebration",
+          "nominalFrames": [
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "identityReference": "references/gigantosaurus-cast.png",
+      "motionQA": "pending Claude extraction and loop preview"
+    },
+    {
+      "id": "character-tiny",
+      "source": "source/character-tiny-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bytes": 2241405,
+      "sha256": "0bfa3267adf071098a1d8c7703ad7021851e7bac7681dec8ddecf304bb0dba04",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/character-tiny-executed.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "frameCount": 16,
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 4,
+        "cellWidth": 313.5,
+        "cellHeight": 313.5,
+        "warning": "Not an extraction atlas. Measure frame bounds and registration; nominal cells are fractional."
+      },
+      "sequences": [
+        {
+          "name": "idle",
+          "nominalFrames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "drawing",
+          "nominalFrames": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "encouragement",
+          "nominalFrames": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "celebration",
+          "nominalFrames": [
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "identityReference": "references/gigantosaurus-cast.png",
+      "motionQA": "pending Claude extraction and loop preview"
+    },
+    {
+      "id": "character-mazu",
+      "source": "source/character-mazu-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bytes": 1956453,
+      "sha256": "58836374edc13fc0c201eefb0b737a21a9565dac6a3b1c81e3fc99f85e3e0f8d",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/character-mazu.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "frameCount": 16,
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 4,
+        "cellWidth": 313.5,
+        "cellHeight": 313.5,
+        "warning": "Not an extraction atlas. Measure frame bounds and registration; nominal cells are fractional."
+      },
+      "sequences": [
+        {
+          "name": "idle",
+          "nominalFrames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "drawing",
+          "nominalFrames": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "encouragement",
+          "nominalFrames": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "celebration",
+          "nominalFrames": [
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "identityReference": "references/gigantosaurus-cast.png",
+      "motionQA": "pending Claude extraction and loop preview"
+    },
+    {
+      "id": "character-rocky",
+      "source": "source/character-rocky-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bytes": 1596714,
+      "sha256": "44dfb213b4811510bfe6d99e8896abbc46ab108e4666cf87bbb3302837500b75",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/character-rocky.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "frameCount": 16,
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 4,
+        "cellWidth": 313.5,
+        "cellHeight": 313.5,
+        "warning": "Not an extraction atlas. Measure frame bounds and registration; nominal cells are fractional."
+      },
+      "sequences": [
+        {
+          "name": "idle",
+          "nominalFrames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "drawing",
+          "nominalFrames": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "encouragement",
+          "nominalFrames": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "celebration",
+          "nominalFrames": [
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "identityReference": "references/gigantosaurus-cast.png",
+      "motionQA": "pending Claude extraction and loop preview"
+    },
+    {
+      "id": "character-giganto",
+      "source": "source/character-giganto-v2.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bytes": 1994247,
+      "sha256": "af920d8a90c9ef9be3574aad8a68ee1a4b5c35eee3fbcd2f48b25c1b4a369444",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/character-giganto.txt",
+        "prompts/character-giganto-spacing.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex",
+      "frameCount": 16,
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 4,
+        "cellWidth": 313.5,
+        "cellHeight": 313.5,
+        "warning": "Not an extraction atlas. Measure frame bounds and registration; nominal cells are fractional."
+      },
+      "sequences": [
+        {
+          "name": "idle",
+          "nominalFrames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "drawing",
+          "nominalFrames": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "encouragement",
+          "nominalFrames": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "celebration",
+          "nominalFrames": [
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "identityReference": "references/gigantosaurus-cast.png",
+      "motionQA": "pending Claude extraction and loop preview"
+    },
+    {
+      "id": "treasure-kit",
+      "source": "source/treasure-kit-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        254
+      ],
+      "bytes": 2275501,
+      "sha256": "0924c46a2e1a64722d8f0badc1c7cdbc19e2ece2fd5641005d4a4fefaaf0fdd8",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/treasure-kit.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "jungle-backdrop",
+      "source": "source/jungle-backdrop-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "alphaRange": null,
+      "bytes": 2334690,
+      "sha256": "6a35073fa30257e07adf0dc74d7ea7ba556b7be819d0677806f8f5b2ef27ea74",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/jungle-backdrop.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "ground-plate",
+      "source": "source/ground-plate-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "alphaRange": null,
+      "bytes": 2148229,
+      "sha256": "9c623da4b1a42a4da70b762f61a14e15652624822382e1fdf84fa809ee9fe2c7",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/ground-plate.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "foliage-kit",
+      "source": "source/foliage-kit-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        254
+      ],
+      "bytes": 2311166,
+      "sha256": "a87e9a005f4654a349951f1cb6c8185b568810f1d76a33138e8cf3f923768e84",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/foliage-kit.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "collection-background",
+      "source": "source/collection-background-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "alphaRange": null,
+      "bytes": 2174235,
+      "sha256": "113622409fb59dddceed8229b1b3d1219a083ddb71903c1859b207e5374a9925",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/collection-background.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    },
+    {
+      "id": "ui-surfaces",
+      "source": "source/ui-surfaces-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "alphaRange": [
+        0,
+        254
+      ],
+      "bytes": 1855786,
+      "sha256": "c169b514afc0ba6b6ef2a69539b12d6d9ba28337d734c02abda9063c2299c4cc",
+      "status": "source-candidate-runtime-qa-pending",
+      "runtimePath": null,
+      "promptFiles": [
+        "prompts/ui-surfaces.txt"
+      ],
+      "generator": "built-in GPT Imagegen",
+      "owner": "Codex"
+    }
+  ],
+  "unselectedVariants": [
+    {
+      "path": "source/style-anchor-v1.png",
+      "reason": "Superseded tilted group composition and identity drift."
+    },
+    {
+      "path": "source/character-bill-v1.png",
+      "reason": "Earlier version before edge cleanup."
+    },
+    {
+      "path": "source/character-giganto-v1.png",
+      "reason": "Insufficient frame spacing; use v2."
+    },
+    {
+      "path": "source/treasure-kit-v2.png",
+      "reason": "Extraction attempt increased saturation; original v1 already has usable alpha."
+    }
+  ]
+}

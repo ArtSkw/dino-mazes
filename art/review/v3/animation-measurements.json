@@ -1,0 +1,562 @@
+[
+  {
+    "character": "bill",
+    "frame": "idle-00.png",
+    "bboxAlpha40": [
+      416,
+      165,
+      935,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "bill",
+    "frame": "idle-01.png",
+    "bboxAlpha40": [
+      412,
+      163,
+      939,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "bill",
+    "frame": "idle-02.png",
+    "bboxAlpha40": [
+      410,
+      157,
+      946,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "bill",
+    "frame": "idle-03.png",
+    "bboxAlpha40": [
+      406,
+      161,
+      947,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "bill",
+    "frame": "idle-04.png",
+    "bboxAlpha40": [
+      410,
+      156,
+      946,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "bill",
+    "frame": "idle-05.png",
+    "bboxAlpha40": [
+      408,
+      151,
+      947,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "bill",
+    "frame": "idle-06.png",
+    "bboxAlpha40": [
+      414,
+      161,
+      938,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "bill",
+    "frame": "idle-07.png",
+    "bboxAlpha40": [
+      412,
+      168,
+      938,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "tiny",
+    "frame": "idle-00.png",
+    "bboxAlpha40": [
+      210,
+      188,
+      1093,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "tiny",
+    "frame": "idle-01.png",
+    "bboxAlpha40": [
+      209,
+      180,
+      1094,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "tiny",
+    "frame": "idle-02.png",
+    "bboxAlpha40": [
+      211,
+      183,
+      1093,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "tiny",
+    "frame": "idle-03.png",
+    "bboxAlpha40": [
+      208,
+      186,
+      1093,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "tiny",
+    "frame": "idle-04.png",
+    "bboxAlpha40": [
+      210,
+      188,
+      1093,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "tiny",
+    "frame": "idle-05.png",
+    "bboxAlpha40": [
+      209,
+      186,
+      1094,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "tiny",
+    "frame": "idle-06.png",
+    "bboxAlpha40": [
+      210,
+      187,
+      1092,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "tiny",
+    "frame": "idle-07.png",
+    "bboxAlpha40": [
+      209,
+      215,
+      1093,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "mazu",
+    "frame": "idle-00.png",
+    "bboxAlpha40": [
+      186,
+      176,
+      1094,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "mazu",
+    "frame": "idle-01.png",
+    "bboxAlpha40": [
+      181,
+      178,
+      1100,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "mazu",
+    "frame": "idle-02.png",
+    "bboxAlpha40": [
+      180,
+      168,
+      1106,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "mazu",
+    "frame": "idle-03.png",
+    "bboxAlpha40": [
+      177,
+      170,
+      1109,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "mazu",
+    "frame": "idle-04.png",
+    "bboxAlpha40": [
+      179,
+      170,
+      1108,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "mazu",
+    "frame": "idle-05.png",
+    "bboxAlpha40": [
+      179,
+      175,
+      1107,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "mazu",
+    "frame": "idle-06.png",
+    "bboxAlpha40": [
+      182,
+      177,
+      1096,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "mazu",
+    "frame": "idle-07.png",
+    "bboxAlpha40": [
+      180,
+      179,
+      1097,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "rocky",
+    "frame": "idle-00.png",
+    "bboxAlpha40": [
+      340,
+      150,
+      946,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "rocky",
+    "frame": "idle-01.png",
+    "bboxAlpha40": [
+      339,
+      149,
+      951,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "rocky",
+    "frame": "idle-02.png",
+    "bboxAlpha40": [
+      337,
+      145,
+      955,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "rocky",
+    "frame": "idle-03.png",
+    "bboxAlpha40": [
+      338,
+      145,
+      956,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "rocky",
+    "frame": "idle-04.png",
+    "bboxAlpha40": [
+      337,
+      148,
+      956,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "rocky",
+    "frame": "idle-05.png",
+    "bboxAlpha40": [
+      337,
+      147,
+      957,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "rocky",
+    "frame": "idle-06.png",
+    "bboxAlpha40": [
+      340,
+      143,
+      950,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "rocky",
+    "frame": "idle-07.png",
+    "bboxAlpha40": [
+      340,
+      147,
+      949,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "giganto",
+    "frame": "idle-00.png",
+    "bboxAlpha40": [
+      129,
+      164,
+      1199,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "giganto",
+    "frame": "idle-01.png",
+    "bboxAlpha40": [
+      127,
+      160,
+      1205,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "giganto",
+    "frame": "idle-02.png",
+    "bboxAlpha40": [
+      127,
+      145,
+      1210,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "giganto",
+    "frame": "idle-03.png",
+    "bboxAlpha40": [
+      126,
+      144,
+      1211,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "giganto",
+    "frame": "idle-04.png",
+    "bboxAlpha40": [
+      126,
+      144,
+      1211,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "giganto",
+    "frame": "idle-05.png",
+    "bboxAlpha40": [
+      126,
+      147,
+      1213,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "giganto",
+    "frame": "idle-06.png",
+    "bboxAlpha40": [
+      125,
+      162,
+      1203,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  {
+    "character": "giganto",
+    "frame": "idle-07.png",
+    "bboxAlpha40": [
+      125,
+      163,
+      1206,
+      1254
+    ],
+    "size": [
+      1254,
+      1254
+    ]
+  }
+]

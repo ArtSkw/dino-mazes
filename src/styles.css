@@ -1,0 +1,1207 @@
+/* Dino Mazes — UI overlay styles. Painted surfaces come from Codex art (ui-surfaces);
+   all labels are live text. Hit targets ≥ 56 CSS px; visible focus; reduced motion.
+   Polish follows "make interfaces feel better": layered transparent shadows,
+   scale(0.96) press feedback on transitions (never `all`), staggered entrances
+   only for infrequent moments, soft exits, balanced/pretty text wrapping. */
+
+:root {
+  --cream: #fbf1d7;
+  --cream-2: #f4e3b5;
+  --ink: #3a240f;
+  --ink-soft: #6a4a26;
+  --leaf-ink: #10300a;
+  --wood-ink: #2e1a08;
+  --rim: #5a9a2c;
+  --focus: #ffd43b;
+  --danger: #a2321e;
+  /* Layered elevation: tight contact shadow + soft lift + ambient depth. */
+  --shadow: 0 1px 2px rgba(40, 30, 5, 0.22), 0 4px 10px rgba(40, 30, 5, 0.16), 0 10px 24px rgba(40, 30, 5, 0.12);
+  --shadow-lift: 0 2px 3px rgba(40, 30, 5, 0.22), 0 8px 16px rgba(40, 30, 5, 0.18), 0 18px 36px rgba(40, 30, 5, 0.14);
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  /* Baloo 2 covers every Polish letter (see src/fonts.css). Weights: 600 text, 700 labels, 800 titles. */
+  --font: 'Baloo 2', 'Nunito', 'Trebuchet MS', system-ui, sans-serif;
+  --fw-text: 600;
+  --fw-label: 700;
+  --fw-title: 800;
+  --btn: 60px;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #d9c38c;
+  font-family: var(--font);
+  font-weight: var(--fw-text);
+  line-height: 1.25;
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2 {
+  text-wrap: balance;
+  font-weight: var(--fw-title);
+  line-height: 1.1;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+#game {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+#game canvas {
+  display: block;
+}
+
+#ui {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#ui [hidden] {
+  display: none !important;
+}
+
+#ui button,
+#ui .panel,
+#ui .overlay,
+#ui .play-surface,
+#ui .toast {
+  pointer-events: auto;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+button:focus-visible,
+.play-surface:focus-visible {
+  outline: 4px solid var(--focus);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 7px rgba(58, 36, 15, 0.55);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.icon {
+  display: inline-flex;
+  flex: none;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.icon svg,
+.btn-round svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Painted surfaces (9-slice so corners never stretch) ---------- */
+
+.panel {
+  position: relative;
+  border-style: solid;
+  border-width: 34px;
+  border-image: var(--img-panel) 76 fill / 34px / 0 stretch;
+  filter: drop-shadow(0 8px 14px rgba(40, 30, 5, 0.3));
+}
+
+/* The leaf accent is its own decoration (it used to be baked into the 9-slice
+   frame, where it stretched along the edges and covered the close button).
+   It overhangs the outer corner and never takes pointer events. */
+.panel::after {
+  content: '';
+  position: absolute;
+  top: -44px;
+  right: -42px;
+  width: 64px;
+  height: 60px;
+  background: var(--img-leaf-deco) center / contain no-repeat;
+  pointer-events: none;
+}
+
+.btn {
+  border: none;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
+  min-height: 56px;
+  min-width: 56px;
+  padding: 0 1.1em;
+  font-weight: var(--fw-label);
+  font-size: 1.35rem;
+  line-height: 1.1;
+  border-style: solid;
+  border-width: 20px 40px;
+  transition-property: scale, filter;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+.btn:active {
+  scale: 0.96;
+  filter: brightness(0.96);
+}
+
+.btn-wood {
+  color: var(--wood-ink);
+  border-image: var(--img-wood) 100 160 fill / 20px 40px / 0 stretch;
+  text-shadow: 0 1px 0 rgba(255, 235, 190, 0.6);
+}
+
+.btn-leaf {
+  color: var(--leaf-ink);
+  border-image: var(--img-leaf) 100 170 fill / 22px 46px / 0 stretch;
+  text-shadow: 0 1px 0 rgba(230, 255, 190, 0.7);
+}
+
+.btn-danger {
+  color: #fff;
+  background: var(--danger);
+  border: 3px solid #6e1d10;
+  border-radius: 999px;
+  padding: 0 1.2em;
+}
+
+.btn.small {
+  font-size: 1.05rem;
+  min-height: 56px;
+  border-width: 14px 28px;
+}
+
+/* The danger pill is a plain surface, not a 9-slice: keep its thin rim. */
+.btn.btn-danger {
+  border: none;
+  border-image: none;
+  min-height: 56px;
+  padding: 0 1.4em;
+  box-shadow: 0 0 0 3px #6e1d10, var(--shadow);
+}
+
+.btn-round {
+  width: var(--btn);
+  height: var(--btn);
+  min-width: 56px;
+  min-height: 56px;
+  border-radius: 50%;
+  border: 4px solid var(--rim);
+  background: radial-gradient(circle at 35% 30%, #fffaf0, var(--cream) 55%, var(--cream-2));
+  box-shadow: var(--shadow), inset 0 -3px 0 rgba(120, 80, 20, 0.15);
+  color: #4a2c10;
+  padding: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition-property: scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+.btn-round .icon {
+  width: 100%;
+  height: 100%;
+}
+
+.btn-round:active {
+  scale: 0.96;
+}
+
+.segmented {
+  display: inline-flex;
+  padding: 5px;
+  gap: 4px;
+  border-radius: 999px;
+  background: var(--cream);
+  border: 4px solid var(--rim);
+  box-shadow: var(--shadow);
+}
+
+.seg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  min-width: 56px;
+  min-height: 46px;
+  padding: 0 0.85em;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  font-weight: var(--fw-label);
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  transition-property: background-color, color, scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+/* Optical balance: the icon side gets 2px less padding than the text side. */
+.seg .icon + .label {
+  margin-right: 2px;
+}
+
+.seg .icon {
+  margin-left: -2px;
+}
+
+.seg:active {
+  scale: 0.96;
+}
+
+.seg[aria-pressed='true'] {
+  background: linear-gradient(#78b83a, #4f8e22);
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.18);
+}
+
+/* ---------- Loading ---------- */
+
+.screen {
+  position: absolute;
+  inset: 0;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: radial-gradient(circle at 50% 40%, #f6e7bf, #d9c38c);
+  pointer-events: auto;
+}
+
+.leaf-spinner {
+  width: 64px;
+  height: 64px;
+  border-radius: 50% 0;
+  background: linear-gradient(135deg, #8fcf4a, #3f8a2e);
+  animation: spin 1.4s ease-in-out infinite;
+}
+
+.loading-text {
+  font-size: 1.4rem;
+  font-weight: var(--fw-label);
+}
+
+.load-error {
+  text-align: center;
+  max-width: 420px;
+  font-size: 1.2rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Welcome ---------- */
+
+/* Centred on the screen; ui.ts sets `top` so it never touches the cast or the cluster. */
+.welcome-card {
+  position: absolute;
+  left: 50%;
+  top: 30vh;
+  transform: translateX(-50%);
+  width: min(560px, 86vw);
+  text-align: center;
+  padding: 2px 10px 6px;
+  animation: card-rise 420ms var(--ease-out) both;
+}
+
+/* Infrequent staged entrance: title, tagline, button ~100 ms apart. */
+.welcome-card > * {
+  animation: rise 420ms var(--ease-out) both;
+}
+
+.welcome-card > :nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.welcome-card > :nth-child(3) {
+  animation-delay: 200ms;
+}
+
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+    filter: blur(4px);
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.2rem, 5.6vw, 3.6rem);
+  font-weight: var(--fw-title);
+  color: #4b7a1a;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 0 #fff6d9, 0 4px 0 rgba(90, 60, 10, 0.18);
+}
+
+.tagline {
+  margin: 4px 0 14px;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  color: var(--ink-soft);
+}
+
+.welcome-card > .btn-play {
+  font-size: clamp(1.7rem, 3.6vw, 2.3rem);
+  min-width: 240px;
+  min-height: 84px;
+  padding-left: calc(1.1em - 2px);
+  animation: rise 420ms var(--ease-out) 200ms both, breathe 2.6s ease-in-out 900ms infinite;
+}
+
+.btn-play .icon {
+  width: 0.95em;
+  height: 0.95em;
+  /* Play triangles look left-heavy; nudge right to centre optically. */
+  margin-left: 2px;
+}
+
+@keyframes breathe {
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.cast-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.cast-btn {
+  position: absolute;
+  border: none;
+  background: transparent;
+  border-radius: 40%;
+}
+
+/* ---------- Quest intro ---------- */
+
+.intro-card {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  padding: 0 8px;
+  animation: card-in 420ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.intro-card > .intro-prompt,
+.intro-card > .btn-go {
+  animation: rise 380ms var(--ease-out) 160ms both;
+}
+
+.intro-card > .btn-go {
+  animation-delay: 260ms;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+}
+
+.ribbon {
+  align-self: center;
+  background: linear-gradient(#e2573c, #b8381f);
+  color: #fff;
+  font-weight: var(--fw-label);
+  padding: 4px 18px;
+  border-radius: 999px;
+  font-size: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.intro-name {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: var(--fw-label);
+  color: var(--ink-soft);
+}
+
+.intro-treasure-wrap {
+  position: relative;
+  width: min(42%, 190px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.treasure-halo {
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 233, 150, 0.95), rgba(255, 220, 120, 0) 68%);
+  animation: halo 2.4s ease-in-out infinite;
+}
+
+.intro-treasure {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: bob 2.2s ease-in-out infinite;
+}
+
+@keyframes halo {
+  50% {
+    transform: scale(1.08);
+    opacity: 0.8;
+  }
+}
+
+@keyframes bob {
+  50% {
+    transform: translateY(-6px) rotate(-2deg);
+  }
+}
+
+.intro-treasure-name {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: var(--fw-label);
+}
+
+.intro-prompt {
+  text-wrap: balance;
+  margin: 4px 0 10px;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  line-height: 1.25;
+  font-weight: var(--fw-text);
+}
+
+.btn-go {
+  font-size: 1.8rem;
+  min-width: 220px;
+  min-height: 78px;
+}
+
+/* ---------- Play ---------- */
+
+.play-surface {
+  position: absolute;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  outline: none;
+  cursor: crosshair;
+  border-radius: 24px;
+}
+
+.hud {
+  position: absolute;
+  inset: 0;
+}
+
+/* The corner friend is tappable: it says a short line in a speech bubble. */
+.companion-btn {
+  position: absolute;
+  border: none;
+  background: transparent;
+  border-radius: 40% 40% 24px 24px;
+  padding: 0;
+}
+
+.companion-btn:focus-visible {
+  outline-offset: -4px;
+}
+
+.bubble {
+  --accent: var(--rim);
+  position: absolute;
+  z-index: 3;
+  background: #fffaf0;
+  border-radius: 22px;
+  padding: 12px 16px;
+  font-size: 1.2rem;
+  font-weight: var(--fw-text);
+  line-height: 1.3;
+  text-wrap: pretty;
+  box-shadow: 0 0 0 3px var(--accent), var(--shadow-lift);
+  pointer-events: none;
+}
+
+/* Tail: an SVG wedge from the bubble edge to the friend's head (ui.ts). */
+.bubble-tail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.bubble-tail .fill {
+  fill: #fffaf0;
+}
+
+.bubble-tail .edge {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.bubble-in {
+  animation: bubble-in 280ms var(--ease-out) both;
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+    scale: 0.94;
+    filter: blur(4px);
+  }
+}
+
+.bubble.leaving {
+  opacity: 0;
+  translate: 0 -6px;
+  transition-property: opacity, translate;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+/* Collection + settings: two equal round buttons, same place on every screen
+   (ui.ts sets top/right and --btn from clusterSpec in layout.ts). */
+.cluster {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--cluster-gap, 10px);
+  pointer-events: none;
+}
+
+.cluster.column {
+  flex-direction: column;
+  align-items: center;
+}
+
+.collection-btn .badge {
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  min-width: 26px;
+  height: 26px;
+  border-radius: 13px;
+  background: #e4572e;
+  color: #fff;
+  font-weight: var(--fw-label);
+  font-size: 0.95rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.btn-round.small {
+  --btn: 56px;
+}
+
+.home-btn {
+  position: absolute;
+}
+
+.reset-btn {
+  position: absolute;
+  flex-direction: column;
+  gap: 0;
+  font-size: 1.35rem;
+  padding: 0 0.6em;
+}
+
+.reset-btn .icon {
+  width: 1.7em;
+  height: 1.7em;
+}
+
+.hint-btn {
+  position: absolute;
+  padding: 7px;
+}
+
+/* The butterfly flies in (renderer); the button waits invisibly at the landing
+   spot beside the friend and settles in the moment it lands. */
+.hint-waiting {
+  opacity: 0;
+}
+
+.hint-arrive {
+  animation: hint-arrive 420ms var(--ease-out) both;
+}
+
+@keyframes hint-arrive {
+  from {
+    opacity: 0;
+    scale: 0.25;
+    filter: blur(4px);
+  }
+}
+
+.hint-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: flutter 3s ease-in-out infinite;
+}
+
+@keyframes flutter {
+  0%,
+  80%,
+  100% {
+    transform: scaleX(1);
+  }
+  85% {
+    transform: scaleX(0.45);
+  }
+  90% {
+    transform: scaleX(1);
+  }
+  95% {
+    transform: scaleX(0.5);
+  }
+}
+
+/* Wood, not leaf: it must stand out against the green hedges it floats over. */
+.next-btn {
+  position: absolute;
+  font-size: 1.6rem;
+  white-space: nowrap;
+  padding-right: calc(1.1em - 2px);
+  filter: drop-shadow(0 6px 10px rgba(40, 25, 5, 0.38)) drop-shadow(0 1px 2px rgba(40, 25, 5, 0.3));
+  animation: next-in 520ms cubic-bezier(0.2, 0.9, 0.3, 1.3) both, breathe 2.6s ease-in-out 600ms infinite;
+}
+
+@keyframes next-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.9);
+  }
+}
+
+.skip-layer {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.banner {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--cream);
+  border: 4px solid #e2a73b;
+  border-radius: 999px;
+  font-size: 1.4rem;
+  font-weight: var(--fw-label);
+  box-shadow: var(--shadow);
+  pointer-events: none;
+}
+
+.banner img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.banner-in {
+  animation: banner 2600ms ease both;
+}
+
+@keyframes banner {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.9);
+  }
+  12%,
+  82% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.pulse {
+  animation: pulse 900ms ease;
+}
+
+@keyframes pulse {
+  30% {
+    transform: scale(1.22);
+    box-shadow: 0 0 0 10px rgba(255, 214, 90, 0.55), var(--shadow);
+  }
+}
+
+.pulse-glow {
+  animation: glow 1100ms ease 2;
+}
+
+@keyframes glow {
+  50% {
+    filter: drop-shadow(0 0 14px rgba(255, 226, 120, 1)) brightness(1.08);
+    transform: scale(1.06);
+  }
+}
+
+.pop-in {
+  animation: card-in 300ms ease both;
+}
+
+/* ---------- Collection ---------- */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: rgba(40, 50, 20, 0.35);
+  display: grid;
+  place-items: center;
+  animation: fade 200ms ease-out both;
+}
+
+.settings-panel,
+.confirm-panel {
+  animation: panel-in 280ms var(--ease-out) both;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+}
+
+.collection-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.collection-inner {
+  position: relative;
+  width: min(86vw, 900px);
+  height: min(80vh, 640px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.collection h2,
+.settings h2 {
+  margin: 4px 0 10px;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: #4b7a1a;
+  text-shadow: 0 2px 0 #fff6d9;
+}
+
+.slots {
+  flex: 1;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: clamp(10px, 2.4vw, 26px);
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .slots {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+}
+
+.slot {
+  position: relative;
+  border: none;
+  background: none;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  place-items: center;
+  padding: 8px;
+  min-height: 56px;
+}
+
+.slot-nest {
+  position: absolute;
+  inset: 8% 10% 22%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 160, 90, 0.28), rgba(196, 160, 90, 0.08) 60%, transparent 72%);
+  border: 3px dashed rgba(140, 105, 50, 0.35);
+}
+
+.slot img {
+  position: relative;
+  width: 72%;
+  height: 72%;
+  max-height: 170px;
+  object-fit: contain;
+  filter: brightness(0) opacity(0.12);
+  transition: filter 400ms ease;
+}
+
+.slot.found .slot-nest {
+  border: 3px solid rgba(226, 167, 59, 0.55);
+  background: radial-gradient(circle, rgba(255, 230, 150, 0.85), rgba(255, 226, 140, 0.15) 62%, transparent 72%);
+}
+
+.slot.found img {
+  filter: drop-shadow(0 6px 8px rgba(60, 40, 5, 0.35));
+}
+
+.slot.just-found img {
+  animation: arrive 1100ms cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+}
+
+.slot.just-found .slot-nest {
+  animation: halo 1.6s ease-in-out 3;
+}
+
+@keyframes arrive {
+  from {
+    transform: scale(0.2) rotate(-30deg);
+    opacity: 0;
+  }
+}
+
+.slot-name {
+  position: relative;
+  font-size: 1.35rem;
+  font-weight: var(--fw-label);
+  min-height: 1.6em;
+}
+
+.slot-count {
+  position: absolute;
+  right: 14%;
+  top: 12%;
+  background: #e2a73b;
+  color: var(--wood-ink);
+  font-weight: var(--fw-label);
+  border-radius: 999px;
+  padding: 0 10px;
+  font-size: 1.1rem;
+  box-shadow: var(--shadow);
+  font-variant-numeric: tabular-nums;
+}
+
+.slot-count:empty {
+  display: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+/* Treasure signature motions (collection taps). */
+.motion-roll {
+  animation: m-roll 1s ease;
+}
+.motion-hop {
+  animation: m-hop 0.9s ease;
+}
+.motion-sway {
+  animation: m-sway 1s ease;
+  transform-origin: 50% 90%;
+}
+.motion-glint {
+  animation: m-glint 0.9s ease;
+}
+.motion-turn {
+  animation: m-turn 0.9s ease;
+}
+.motion-jiggle {
+  animation: m-jiggle 0.6s ease;
+}
+
+@keyframes m-roll {
+  20% { transform: rotate(-14deg); }
+  45% { transform: rotate(14deg); }
+  75% { transform: translateX(10%) rotate(100deg); }
+}
+@keyframes m-hop {
+  15% { transform: scale(1.1, 0.85); }
+  40% { transform: translateY(-22%) scale(0.94, 1.08); }
+  65% { transform: none; }
+  80% { transform: translateY(-9%); }
+}
+@keyframes m-sway {
+  25% { transform: rotate(-12deg); }
+  60% { transform: rotate(12deg); }
+}
+@keyframes m-glint {
+  40% { transform: scale(1.14); filter: brightness(1.35) drop-shadow(0 0 12px #fff8c8); }
+}
+@keyframes m-turn {
+  50% { transform: scaleX(-1) translateY(-5%); }
+}
+@keyframes m-jiggle {
+  20% { transform: scale(1.14, 0.88); }
+  40% { transform: scale(0.9, 1.12); }
+  60% { transform: scale(1.08, 0.94); }
+  80% { transform: scale(0.97, 1.04); }
+}
+
+/* ---------- Settings ---------- */
+
+.settings-panel {
+  width: min(660px, 92vw);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 6px;
+}
+
+/* Title and close sit in their own row inside the frame, clear of the
+   decorative corner leaf (which overhangs outside the panel). */
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 20px 0 0;
+  margin-bottom: 4px;
+}
+
+.settings h2 {
+  margin: 0;
+}
+
+.panel-head .close-btn {
+  position: static;
+  flex: none;
+}
+
+.settings-body {
+  overflow: auto;
+  overscroll-behavior: contain;
+  /* Room for focus rings inside the scroll box. */
+  padding: 4px 6px 6px;
+  margin: 0 -6px;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.setting-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: var(--fw-label);
+}
+
+.setting-label .icon {
+  color: var(--rim);
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.segmented .seg .icon {
+  width: 1.15em;
+  height: 1.15em;
+}
+
+.note {
+  margin: 2px 0 8px;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.note.indent {
+  margin-top: -4px;
+  padding-left: calc(1.3em + 10px);
+}
+
+.setting-row.easier {
+  flex-direction: column;
+  align-items: flex-start;
+  background: rgba(255, 220, 150, 0.4);
+  border-radius: 14px;
+  padding: 8px 12px;
+}
+
+.setting-row.actions {
+  margin-top: 16px;
+}
+
+.link-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  color: var(--danger);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 1.05rem;
+  min-height: 56px;
+  padding: 0 6px;
+}
+
+.link-danger .icon {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.confirm {
+  z-index: 30;
+}
+
+.confirm-panel {
+  position: relative;
+  width: min(480px, 90vw);
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Toasts & debug ---------- */
+
+/* Sits in the top bar, left of the control cluster, never over the board. */
+.toast {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  max-width: calc(100vw - 12px - var(--cluster-room, 170px));
+  min-height: 56px;
+  background: var(--cream);
+  border: 3px solid var(--rim);
+  border-radius: 999px;
+  padding: 4px 6px 4px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  line-height: 1.25;
+  box-shadow: var(--shadow);
+  text-wrap: pretty;
+}
+
+.toast-close {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: none;
+  padding: 10px;
+}
+
+.debug {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  margin: 0;
+  padding: 8px 10px;
+  background: rgba(20, 20, 20, 0.72);
+  color: #e8ffe0;
+  font: 11px/1.35 ui-monospace, monospace;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* ---------- Reduced motion ---------- */
+
+.reduced-motion *,
+.reduced-motion *::before,
+.reduced-motion *::after {
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+}
+
+.reduced-motion .next-btn,
+.reduced-motion .banner-in,
+.reduced-motion .intro-card,
+.reduced-motion .welcome-card {
+  animation: fade 200ms ease both !important;
+}
+
+.reduced-motion .btn:active,
+.reduced-motion .btn-round:active,
+.reduced-motion .seg:active {
+  scale: 1;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}

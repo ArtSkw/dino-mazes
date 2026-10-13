@@ -1,0 +1,516 @@
+{
+ "schemaVersion": 1,
+ "generatedBy": "tools/art/extract.py",
+ "characters": {
+  "bill": {
+   "image": "assets/characters/bill.webp",
+   "portrait": "assets/characters/bill-portrait.webp",
+   "frameWidth": 241,
+   "frameHeight": 283,
+   "spacing": 4,
+   "pivot": {
+    "x": 0.4896,
+    "y": 1.0
+   },
+   "content": {
+    "x": 0.112,
+    "y": 0.053,
+    "w": 0.7552,
+    "h": 0.947
+   },
+   "contentActive": {
+    "x": 0.0249,
+    "y": 0.0247,
+    "w": 0.9461,
+    "h": 0.9753
+   },
+   "sequences": {
+    "idle": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "drawing": [
+     4,
+     5,
+     6,
+     7
+    ],
+    "encouragement": [
+     8,
+     9,
+     10,
+     11
+    ],
+    "celebration": [
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   "bytes": 229488,
+   "decodedBytes": 4466176
+  },
+  "tiny": {
+   "image": "assets/characters/tiny.webp",
+   "portrait": "assets/characters/tiny-portrait.webp",
+   "frameWidth": 296,
+   "frameHeight": 304,
+   "spacing": 4,
+   "pivot": {
+    "x": 0.5118,
+    "y": 1.0
+   },
+   "content": {
+    "x": 0.0642,
+    "y": 0.0296,
+    "w": 0.8919,
+    "h": 0.9671
+   },
+   "contentActive": {
+    "x": 0.0236,
+    "y": 0.023,
+    "w": 0.9527,
+    "h": 0.977
+   },
+   "sequences": {
+    "idle": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "drawing": [
+     4,
+     5,
+     6,
+     7
+    ],
+    "encouragement": [
+     8,
+     9,
+     10,
+     11
+    ],
+    "celebration": [
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   "bytes": 403544,
+   "decodedBytes": 5874752
+  },
+  "mazu": {
+   "image": "assets/characters/mazu.webp",
+   "portrait": "assets/characters/mazu-portrait.webp",
+   "frameWidth": 305,
+   "frameHeight": 274,
+   "spacing": 4,
+   "pivot": {
+    "x": 0.482,
+    "y": 1.0
+   },
+   "content": {
+    "x": 0.0328,
+    "y": 0.062,
+    "w": 0.8951,
+    "h": 0.938
+   },
+   "contentActive": {
+    "x": 0.0197,
+    "y": 0.0255,
+    "w": 0.9115,
+    "h": 0.9745
+   },
+   "sequences": {
+    "idle": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "drawing": [
+     4,
+     5,
+     6,
+     7
+    ],
+    "encouragement": [
+     8,
+     9,
+     10,
+     11
+    ],
+    "celebration": [
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   "bytes": 336222,
+   "decodedBytes": 5460224
+  },
+  "rocky": {
+   "image": "assets/characters/rocky.webp",
+   "portrait": "assets/characters/rocky-portrait.webp",
+   "frameWidth": 257,
+   "frameHeight": 305,
+   "spacing": 4,
+   "pivot": {
+    "x": 0.5117,
+    "y": 1.0
+   },
+   "content": {
+    "x": 0.1479,
+    "y": 0.0262,
+    "w": 0.7276,
+    "h": 0.9705
+   },
+   "contentActive": {
+    "x": 0.0233,
+    "y": 0.0197,
+    "w": 0.9494,
+    "h": 0.9803
+   },
+   "sequences": {
+    "idle": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "drawing": [
+     4,
+     5,
+     6,
+     7
+    ],
+    "encouragement": [
+     8,
+     9,
+     10,
+     11
+    ],
+    "celebration": [
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   "bytes": 285062,
+   "decodedBytes": 5125120
+  },
+  "giganto": {
+   "image": "assets/characters/giganto.webp",
+   "portrait": "assets/characters/giganto-portrait.webp",
+   "frameWidth": 293,
+   "frameHeight": 255,
+   "spacing": 4,
+   "pivot": {
+    "x": 0.4898,
+    "y": 1.0
+   },
+   "content": {
+    "x": 0.0341,
+    "y": 0.051,
+    "w": 0.9113,
+    "h": 0.949
+   },
+   "contentActive": {
+    "x": 0.0239,
+    "y": 0.0314,
+    "w": 0.9556,
+    "h": 0.9686
+   },
+   "sequences": {
+    "idle": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "drawing": [
+     4,
+     5,
+     6,
+     7
+    ],
+    "encouragement": [
+     8,
+     9,
+     10,
+     11
+    ],
+    "celebration": [
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   "bytes": 364688,
+   "decodedBytes": 4887552
+  }
+ },
+ "treasures": {
+  "coconut": {
+   "image": "assets/treasures/coconut.webp",
+   "width": 320,
+   "height": 310,
+   "bytes": 48868,
+   "sourceBox": [
+    46,
+    66,
+    522,
+    530
+   ]
+  },
+  "nut": {
+   "image": "assets/treasures/nut.webp",
+   "width": 301,
+   "height": 320,
+   "bytes": 26974,
+   "sourceBox": [
+    598,
+    126,
+    942,
+    490
+   ]
+  },
+  "flower": {
+   "image": "assets/treasures/flower.webp",
+   "width": 313,
+   "height": 320,
+   "bytes": 35100,
+   "sourceBox": [
+    1042,
+    70,
+    1490,
+    526
+   ]
+  },
+  "stone": {
+   "image": "assets/treasures/stone.webp",
+   "width": 320,
+   "height": 279,
+   "bytes": 27686,
+   "sourceBox": [
+    66,
+    594,
+    478,
+    954
+   ]
+  },
+  "shell": {
+   "image": "assets/treasures/shell.webp",
+   "width": 315,
+   "height": 320,
+   "bytes": 30836,
+   "sourceBox": [
+    574,
+    558,
+    962,
+    954
+   ]
+  },
+  "berries": {
+   "image": "assets/treasures/berries.webp",
+   "width": 320,
+   "height": 314,
+   "bytes": 36544,
+   "sourceBox": [
+    1070,
+    562,
+    1490,
+    974
+   ]
+  }
+ },
+ "foliage": {
+  "hedge-a": {
+   "image": "assets/foliage/hedge-a.webp",
+   "width": 360,
+   "height": 373,
+   "bytes": 44284,
+   "sourceBox": [
+    14,
+    58,
+    394,
+    450
+   ]
+  },
+  "hedge-b": {
+   "image": "assets/foliage/hedge-b.webp",
+   "width": 349,
+   "height": 375,
+   "bytes": 45194,
+   "sourceBox": [
+    410,
+    54,
+    778,
+    450
+   ]
+  },
+  "rocks": {
+   "image": "assets/foliage/rocks.webp",
+   "width": 346,
+   "height": 321,
+   "bytes": 36280,
+   "sourceBox": [
+    798,
+    106,
+    1162,
+    446
+   ]
+  },
+  "flower-bush": {
+   "image": "assets/foliage/flower-bush.webp",
+   "width": 342,
+   "height": 369,
+   "bytes": 42832,
+   "sourceBox": [
+    1166,
+    78,
+    1526,
+    466
+   ]
+  },
+  "banana-plant": {
+   "image": "assets/foliage/banana-plant.webp",
+   "width": 311,
+   "height": 384,
+   "bytes": 47850,
+   "sourceBox": [
+    10,
+    454,
+    426,
+    962
+   ]
+  },
+  "fern": {
+   "image": "assets/foliage/fern.webp",
+   "width": 308,
+   "height": 384,
+   "bytes": 50668,
+   "sourceBox": [
+    406,
+    490,
+    794,
+    970
+   ]
+  },
+  "monstera": {
+   "image": "assets/foliage/monstera.webp",
+   "width": 373,
+   "height": 384,
+   "bytes": 37274,
+   "sourceBox": [
+    786,
+    522,
+    1226,
+    970
+   ]
+  },
+  "butterfly": {
+   "image": "assets/foliage/butterfly.webp",
+   "width": 306,
+   "height": 250,
+   "bytes": 21224,
+   "sourceBox": [
+    1206,
+    598,
+    1530,
+    866
+   ]
+  }
+ },
+ "ui": {
+  "wood-button": {
+   "image": "assets/ui/wood-button.webp",
+   "width": 720,
+   "height": 272,
+   "bytes": 30364,
+   "sourceBox": [
+    14,
+    110,
+    766,
+    406
+   ]
+  },
+  "leaf-button": {
+   "image": "assets/ui/leaf-button.webp",
+   "width": 720,
+   "height": 276,
+   "bytes": 40360,
+   "sourceBox": [
+    770,
+    106,
+    1526,
+    410
+   ]
+  },
+  "cream-pill": {
+   "image": "assets/ui/cream-pill.webp",
+   "width": 720,
+   "height": 262,
+   "bytes": 24304,
+   "sourceBox": [
+    14,
+    562,
+    802,
+    862
+   ]
+  },
+  "cream-panel": {
+   "image": "assets/ui/cream-panel.webp",
+   "width": 703,
+   "height": 462,
+   "bytes": 29084,
+   "sourceBox": [
+    806,
+    458,
+    1526,
+    938
+   ],
+   "leafRemoved": true
+  },
+  "panel-leaf": {
+   "image": "assets/ui/panel-leaf.webp",
+   "width": 135,
+   "height": 127,
+   "bytes": 4552,
+   "fromPanelRight": 12,
+   "fromPanelTop": 7
+  }
+ },
+ "backgrounds": {
+  "jungle": {
+   "image": "assets/bg/jungle.webp",
+   "width": 1536,
+   "height": 1024,
+   "bytes": 137316,
+   "sourceSha256": "6a35073fa30257e07adf0dc74d7ea7ba556b7be819d0677806f8f5b2ef27ea74"
+  },
+  "collection": {
+   "image": "assets/bg/collection.webp",
+   "width": 1536,
+   "height": 1024,
+   "bytes": 88516,
+   "sourceSha256": "113622409fb59dddceed8229b1b3d1219a083ddb71903c1859b207e5374a9925"
+  },
+  "ground": {
+   "image": "assets/bg/ground.webp",
+   "width": 1254,
+   "height": 1254,
+   "bytes": 87814,
+   "sourceSha256": "9c623da4b1a42a4da70b762f61a14e15652624822382e1fdf84fa809ee9fe2c7"
+  }
+ },
+ "totalBytes": 2592928
+}
