@@ -136,6 +136,48 @@ export function nodePos(maze: Maze, id: number): Point {
   return id === maze.entranceNode ? maze.entrance.outside : cellCenter(maze, id);
 }
 
+/**
+ * Wall corners are rounded with this radius. Half the hedge thickness between
+ * two passages, so the tip of a hedge between parallel passages becomes a
+ * semicircle, like the round dead ends of the corridors.
+ */
+export const WALL_ROUNDING = (1 - 2 * CORRIDOR_RADIUS) / 2;
+
+export interface InnerCorner {
+  /** Junction node position. */
+  node: Point;
+  /** Unit directions of the two perpendicular corridors leaving the node. */
+  a: Point;
+  b: Point;
+}
+
+/**
+ * Every place where two perpendicular corridors meet at a node: the walkable
+ * space has a sharp inside corner there (the hedge has a sharp outside corner)
+ * at node + r·(a + b). Used to round those hedge corners.
+ */
+export function innerCorners(maze: Maze): InnerCorner[] {
+  const out: InnerCorner[] = [];
+  for (let id = 0; id < maze.cells.length; id++) {
+    const node = nodePos(maze, id);
+    const dirs = nodeNeighbors(maze, id).map((m) => {
+      const p = nodePos(maze, m);
+      const dx = p.x - node.x;
+      const dy = p.y - node.y;
+      const l = Math.hypot(dx, dy) || 1;
+      return { x: dx / l, y: dy / l };
+    });
+    for (let i = 0; i < dirs.length; i++) {
+      for (let j = i + 1; j < dirs.length; j++) {
+        const a = dirs[i] as Point;
+        const b = dirs[j] as Point;
+        if (Math.abs(a.x * b.x + a.y * b.y) < 1e-6) out.push({ node, a, b });
+      }
+    }
+  }
+  return out;
+}
+
 /** Neighbours of a node including the entrance stub link. */
 export function nodeNeighbors(maze: Maze, id: number): number[] {
   if (id === maze.entranceNode) return [maze.entrance.insideCell];

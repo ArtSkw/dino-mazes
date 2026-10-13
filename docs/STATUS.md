@@ -52,6 +52,25 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner tablet test: sharp hedge corners (13 October 2026)
+
+Drawing by touch, the ink stuck at the sharp inside corners of turns. Cause: the ink moves
+towards the finger in a straight line, and a finger that cuts the inside of a turn drags that
+line across the hedge corner, so the ink stopped there until the finger came back.
+
+- **Corner assist** (`TrailEngine.turnCorner`): when the finger is already in the next
+  corridor but the straight line crosses the corner, the ink goes in two legs through a pivot
+  inside the junction (the inside corner of the turn, else nearer the node centre). Each leg
+  lies inside one convex capsule, so the ink still never enters a hedge or a passage that is
+  not adjacent to the head.
+- **Rounded hedge corners** (`innerCorners`, `WALL_ROUNDING` = 0.2 of a cell): every sharp
+  outside corner of the hedge is rounded and hedge tips between parallel passages become
+  semicircles. Purely visual; collision geometry is unchanged.
+- Tests: "a finger cutting the inside of a turn carries the ink round the corner" and "wide
+  curved swipes over hedge corners …" fail on the previous engine and pass now; a geometry
+  test checks the rounding never touches a corridor or approaches another passage. A
+  touch-emulated drag that cuts every corner solves the maze (`tools/dev/review-corners.mjs`).
+
 ## Deployment (13 October 2026)
 
 Live at https://artskw.github.io/dino-mazes/ from the public repository
@@ -78,7 +97,7 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 152 passed |
+| Domain unit + property | `npm test` | 155 passed |
 | Browser flows (Chromium + WebKit) | `npm run test:e2e` | 47 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |

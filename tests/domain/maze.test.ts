@@ -13,6 +13,9 @@ import {
   rebuildMaze,
   tryGenerate,
   nodePos,
+  innerCorners,
+  WALL_ROUNDING,
+  CORRIDOR_RADIUS,
 } from '../../src/domain/maze';
 import { distToSegment } from '../../src/domain/geometry';
 import type { Difficulty, GridSpec, Maze } from '../../src/domain/types';
@@ -151,5 +154,36 @@ describe('introductory maze', () => {
     expect(maze.metrics.solution.slice(0, 3)).toEqual([21, 16, 11]);
     expect(maze.cells[21]?.neighbors).toEqual([16]);
     expect(maze.cells[16]?.neighbors).toEqual([11, 21]);
+  });
+});
+
+describe('rounded hedge corners', () => {
+  it('only round hedge: never touch a corridor or open a gap toward another passage', () => {
+    const r = CORRIDOR_RADIUS;
+    const f = WALL_ROUNDING;
+    const mazes = [introMaze(), ...LEVELS.map((d, i) => generateMaze(`round-${i}`, profileFor(d, { cols: 7, rows: 7 })))];
+    for (const maze of mazes) {
+      const corners = innerCorners(maze);
+      expect(corners.length).toBeGreaterThan(0);
+      const segs = maze.corridors.map((c) => [nodePos(maze, c.from), nodePos(maze, c.to)] as const);
+      for (const { node, a, b } of corners) {
+        const O = { x: node.x + (r + f) * (a.x + b.x), y: node.y + (r + f) * (a.y + b.y) };
+        for (let i = 0; i <= 10; i++) {
+          for (let j = 0; j <= 10; j++) {
+            // Sample the rounding wedge: the f×f square at the corner minus the fillet circle.
+            const p = { x: node.x + (r + (f * i) / 10) * a.x + (r + (f * j) / 10) * b.x, y: node.y + (r + (f * i) / 10) * a.y + (r + (f * j) / 10) * b.y };
+            if (Math.hypot(p.x - O.x, p.y - O.y) < f) continue;
+            for (const [s0, s1] of segs) {
+              const d = distToSegment(p, s0, s1);
+              const incident = (s0.x === node.x && s0.y === node.y) || (s1.x === node.x && s1.y === node.y);
+              // It is hedge today (outside every corridor) …
+              expect(d).toBeGreaterThanOrEqual(r - 1e-9);
+              // … and stays well clear of passages that do not meet at this corner.
+              if (!incident) expect(d).toBeGreaterThanOrEqual(r + 0.19);
+            }
+          }
+        }
+      }
+    }
   });
 });

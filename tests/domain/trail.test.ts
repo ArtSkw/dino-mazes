@@ -267,6 +267,66 @@ describe('lift, resume and reversing', () => {
     }
   });
 
+  it('a finger cutting the inside of a turn carries the ink round the corner (touch comfort)', () => {
+    for (const maze of mazes()) {
+      const nodes = solutionNodes(maze);
+      const e = new TrailEngine(maze);
+      e.begin(maze.entrance.outside);
+      let turns = 0;
+      for (let i = 1; i < nodes.length - 1; i++) {
+        const a = nodePos(maze, nodes[i - 1] as number);
+        const b = nodePos(maze, nodes[i] as number);
+        const c = nodePos(maze, nodes[i + 1] as number);
+        const m1 = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+        const m2 = { x: (b.x + c.x) / 2, y: (b.y + c.y) / 2 };
+        const straight = Math.abs((b.x - a.x) * (c.x - b.x) + (b.y - a.y) * (c.y - b.y)) > 0.5;
+        e.move(m1);
+        // Diagonal straight over the hedge corner, as a hurried finger does.
+        e.move(m2);
+        if (!straight) {
+          turns++;
+          expect(e.connected).toBe(true);
+          expect(e.route).toContain(nodes[i + 1]);
+          expect(dist(e.endpoint!, m2)).toBeLessThan(1e-6);
+        }
+        e.move(c);
+      }
+      expect(turns).toBeGreaterThan(0);
+      expect(polylineInside(e.points, allCapsules(maze, e.collisionRadius))).toBe(true);
+    }
+  });
+
+  it('wide curved swipes over hedge corners never put ink in a hedge or skip a passage', () => {
+    const rnd = mulberry(29);
+    for (const maze of mazes()) {
+      const nodes = solutionNodes(maze);
+      const e = new TrailEngine(maze);
+      e.begin(maze.entrance.outside);
+      for (let i = 1; i < nodes.length - 1; i++) {
+        const a = nodePos(maze, nodes[i - 1] as number);
+        const b = nodePos(maze, nodes[i] as number);
+        const c = nodePos(maze, nodes[i + 1] as number);
+        // Quadratic curve that bulges over the inside corner by a random amount.
+        const bulge = 0.1 + rnd() * 0.35;
+        const ctrl = { x: b.x + (a.x - b.x) * bulge + (c.x - b.x) * bulge, y: b.y + (a.y - b.y) * bulge + (c.y - b.y) * bulge };
+        for (let k = 0; k <= 12; k++) {
+          const t = k / 12;
+          const s0 = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+          const s2 = { x: (b.x + c.x) / 2, y: (b.y + c.y) / 2 };
+          e.move({
+            x: (1 - t) ** 2 * s0.x + 2 * (1 - t) * t * ctrl.x + t * t * s2.x,
+            y: (1 - t) ** 2 * s0.y + 2 * (1 - t) * t * ctrl.y + t * t * s2.y,
+          });
+        }
+        if (!e.connected) e.begin(e.endpoint!);
+        e.move(c);
+      }
+      expect(polylineInside(e.points, allCapsules(maze, e.collisionRadius))).toBe(true);
+      for (let i = 1; i < e.route.length; i++) expect(nodeNeighbors(maze, e.route[i - 1] as number)).toContain(e.route[i]);
+      expect(e.solved).toBe(true);
+    }
+  });
+
   it('a wall touch stops ink at the last safe point', () => {
     const maze = introMaze();
     const e = new TrailEngine(maze);

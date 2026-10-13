@@ -7,7 +7,7 @@
  * foliage can never imply a false opening. Decoration uses its own seeded
  * stream, so art changes never alter routes.
  */
-import { CORRIDOR_RADIUS, FRAME_MARGIN, nodePos } from '../domain/maze';
+import { CORRIDOR_RADIUS, FRAME_MARGIN, WALL_ROUNDING, innerCorners, nodePos } from '../domain/maze';
 import { createRng } from '../domain/rng';
 import type { Maze, Point } from '../domain/types';
 
@@ -63,6 +63,37 @@ function corridorPath(g: CanvasRenderingContext2D, maze: Maze, toPx: (p: Point) 
     const b = toPx(nodePos(maze, c.to));
     g.moveTo(a.x, a.y);
     g.lineTo(b.x, b.y);
+  }
+}
+
+/**
+ * The rounding wedges at every inside corner of the walkable space: the square
+ * between the corner and the fillet circle, minus that circle. Cutting these
+ * out of the hedge rounds its sharp outside corners. `r` is the corridor
+ * half-width used for this layer, `f` the rounding radius; the circle centre
+ * node + (r + f)(a + b) stays the same for the darker rim (r + d, f − d).
+ * `overlap` pushes the straight sides that much into the corridors (already
+ * cut away), so two anti-aliased edges never meet and leave a faint seam.
+ */
+function filletPath(g: CanvasRenderingContext2D, maze: Maze, toPx: (p: Point) => Point, scale: number, r: number, f: number, overlap = 0): void {
+  g.beginPath();
+  const at = (node: Point, a: Point, b: Point, ka: number, kb: number): Point => toPx({ x: node.x + ka * a.x + kb * b.x, y: node.y + ka * a.y + kb * b.y });
+  for (const { node, a, b } of innerCorners(maze)) {
+    const e = r - overlap;
+    const start = at(node, a, b, e, e);
+    const q1 = at(node, a, b, r + f, e);
+    const p1 = at(node, a, b, r + f, r);
+    const q2 = at(node, a, b, e, r + f);
+    const o = at(node, a, b, r + f, r + f);
+    const t1 = Math.atan2(-b.y, -b.x);
+    const t2 = Math.atan2(-a.y, -a.x);
+    const turn = Math.atan2(Math.sin(t2 - t1), Math.cos(t2 - t1));
+    g.moveTo(start.x, start.y);
+    g.lineTo(q1.x, q1.y);
+    g.lineTo(p1.x, p1.y);
+    g.arc(o.x, o.y, f * scale, t1, t2, turn < 0);
+    g.lineTo(q2.x, q2.y);
+    g.closePath();
   }
 }
 
@@ -166,6 +197,10 @@ export function paintBoard(maze: Maze, images: BoardImages, pitchCss: number, dp
   hg.lineWidth = corridorWidth + u(0.07);
   corridorPath(hg, maze, toPx);
   hg.stroke();
+  // Rounded hedge corners (the rim follows the same rounding, 0.035 wider).
+  hg.fillStyle = 'rgba(22, 52, 18, 0.55)';
+  filletPath(hg, maze, toPx, scale, CORRIDOR_RADIUS + 0.035, WALL_ROUNDING - 0.035);
+  hg.fill();
   hg.beginPath();
   hg.arc(center.x, center.y, u(CLEARING_RADIUS + 0.035), 0, Math.PI * 2);
   hg.fillStyle = 'rgba(22, 52, 18, 0.55)';
@@ -175,6 +210,9 @@ export function paintBoard(maze: Maze, images: BoardImages, pitchCss: number, dp
   hg.lineWidth = corridorWidth;
   corridorPath(hg, maze, toPx);
   hg.stroke();
+  hg.fillStyle = '#000';
+  filletPath(hg, maze, toPx, scale, CORRIDOR_RADIUS, WALL_ROUNDING, 0.04);
+  hg.fill();
   hg.beginPath();
   hg.arc(center.x, center.y, u(CLEARING_RADIUS), 0, Math.PI * 2);
   hg.fill();

@@ -92,7 +92,7 @@ Core controls: “Wróć” / “Start over”, treasure collection, and a small
 9. Pointer cancellation, loss of capture, browser backgrounding, resize, or opening UI pauses input and preserves accepted points. Never connect a newly resumed pointer across a gap.
 10. Complete only when a continuous valid trail from the entrance reaches the treasure's goal region. The trail must have entered the central clearing through its valid opening. One completion event per session.
 
-Tolerance is ergonomic, not a shortcut. It may stabilize a gesture inside its current corridor, but never snap it through a wall, across a junction, or to a nonadjacent passage.
+Tolerance is ergonomic, not a shortcut. It may stabilize a gesture inside its current corridor, but never snap it through a wall, across a junction, or to a nonadjacent passage. A finger that cuts the inside of a turn is led round the corner through the junction (corner assist), and hedge corners are drawn rounded, so drawing never sticks on a corner (owner tablet test, 13 Oct 2026).
 
 The friend remains in its corner while the child draws, reacting gently. Its maximum display box starts at 140–180 CSS px wide on landscape tablets, adjusted to preserve maze space; long-necked characters must still fit the reserved margin. A small endpoint marker carries the drawing focus. During success the friend celebrates in its corner; the treasure travels to the collection. Do not add a second copy of the character moving through the maze.
 

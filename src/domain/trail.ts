@@ -191,11 +191,55 @@ export class TrailEngine {
     if (!near || near.distance > this.opts.tolerance) return 'lost';
     const E = this.endpoint as Point;
     const t = reachAlong(E, near.point, caps);
+    // A finger cutting the inside of a turn would drag the ink straight into the
+    // hedge corner and stop it there; lead it round the corner instead.
+    if (t < 1 - 1e-9 && this.turnCorner(E, near.point, caps[near.index] as Capsule, caps, result)) return 'ok';
     if (t <= 0) return 'ok';
     const q = lerp(E, near.point, t);
     if (dist(E, q) < this.opts.minStep) return 'ok';
     this.accept(q, caps, result);
     return 'ok';
+  }
+
+  /**
+   * Corner assist. When the pointer is in a corridor leaving the head node but
+   * the straight line from the ink to it crosses the hedge corner of the turn,
+   * the ink goes in two legs through a pivot inside the junction: first the
+   * inside corner of the turn (the tightest honest path), then nearer the node
+   * centre. Each leg lies inside one convex capsule (the head corridor, then the
+   * next one), so the ink can never leave the corridors or reach a passage that
+   * is not adjacent to the head; it only stops being blocked by the corner.
+   */
+  private turnCorner(E: Point, target: Point, into: Capsule, caps: Capsule[], result: MoveResult): boolean {
+    if (into.tag === undefined || into.tag < 0) return false;
+    const head = caps.find((c) => c.tag === -1);
+    if (!head) return false;
+    const node = into.a;
+    const unit = (p: Point, q: Point): Point => {
+      const l = dist(p, q) || 1;
+      return { x: (q.x - p.x) / l, y: (q.y - p.y) / l };
+    };
+    const dIn = unit(head.a, head.b);
+    const dOut = unit(into.a, into.b);
+    if (Math.abs(dIn.x * dOut.x + dIn.y * dOut.y) > 0.5) return false; // straight on: no corner
+    const R = this.collisionRadius - 0.01;
+    const inside = { x: dOut.x - dIn.x, y: dOut.y - dIn.y };
+    const pivots = [
+      { x: node.x + R * inside.x, y: node.y + R * inside.y },
+      { x: node.x + (R / Math.SQRT2) * inside.x, y: node.y + (R / Math.SQRT2) * inside.y },
+      node,
+    ];
+    for (const P of pivots) {
+      if (reachAlong(E, P, caps) < 1 - 1e-9) continue;
+      const t2 = reachAlong(P, target, caps);
+      if (t2 <= 0) continue;
+      if (dist(E, P) > 1e-6) this.accept(P, caps, result);
+      if (this.solved) return true;
+      const q = lerp(P, target, t2);
+      if (dist(P, q) >= this.opts.minStep) this.accept(q, caps, result);
+      return true;
+    }
+    return false;
   }
 
   private accept(q: Point, caps: Capsule[], result: MoveResult): void {
