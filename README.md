@@ -1,7 +1,5 @@
 # Dino Mazes
 
-*Dino Labirynty*
-
 A maze game for children aged 4 to 6, inspired by *Gigantosaurus*. In each
 round a friend from the jungle needs help reaching a treasure, and the child
 draws the way.
