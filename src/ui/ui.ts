@@ -4,7 +4,7 @@
  * The UI renders controller state and sends commands; it owns no game state.
  */
 import type { Controller, GameEvent, Reward } from '../app/controller';
-import { CHARACTERS, TREASURES, TREASURE_ORDER } from '../data/content';
+import { CHARACTERS, TREASURES, TREASURE_AGAIN, TREASURE_ORDER } from '../data/content';
 import type { StringKey } from '../data/i18n';
 import type { CharacterId, Lang, TreasureId } from '../domain/types';
 import { ASSETS, assetUrl, friendFrame } from '../game/assets';
@@ -813,7 +813,13 @@ export class Ui implements UiBridge {
     const lang = this.ctrl.lang;
     this.banner.replaceChildren(
       h('img', { src: assetUrl(ASSETS.treasures[reward.treasureId].image), alt: '' }),
-      h('span', {}, `${this.ctrl.tr(reward.firstFind ? 'newTreasure' : 'treasureAgain')} ${TREASURES[reward.treasureId].name[lang]}`),
+      h(
+        'span',
+        {},
+        reward.firstFind
+          ? this.ctrl.tr('newTreasure', { name: TREASURES[reward.treasureId].name[lang].toLocaleLowerCase(lang) })
+          : TREASURE_AGAIN[reward.treasureId][lang],
+      ),
     );
     if (reward.firstFind) this.lastNewTreasure = reward.treasureId;
     this.badgeHold = true;

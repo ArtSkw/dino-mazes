@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { STRINGS } from '../../src/data/i18n';
-import { ALL_QUESTS, CHARACTERS, FRIEND_LINES, KIND_LINES, TREASURES, INTRO_PROMPT } from '../../src/data/content';
+import { ALL_QUESTS, CHARACTERS, INTRO_PROMPT, TREASURES, TREASURE_AGAIN, VOICES } from '../../src/data/content';
+import type { Localized } from '../../src/domain/types';
+
+const voiceLines = (): Localized[] => Object.values(VOICES).flatMap((v) => [v.hello, ...v.lines, ...v.cheers]);
+const bubbleLines = (): Localized[] => [...voiceLines(), ...ALL_QUESTS.map((q) => q.ask)];
 
 describe('translations', () => {
   it('every UI string exists and is non-empty in Polish and English', () => {
@@ -30,14 +34,50 @@ describe('translations', () => {
     expect(CHARACTERS.rocky.name).toEqual({ pl: 'Czupur', en: 'Rocky' });
     expect(CHARACTERS.giganto.name).toEqual({ pl: 'Giganto', en: 'Giganto' });
     // No English name leaks into Polish text.
-    const pl = [...ALL_QUESTS.map((q) => q.prompt.pl), INTRO_PROMPT.pl, ...Object.values(FRIEND_LINES).flat().map((l) => l.pl)].join(' ');
+    const pl = [...ALL_QUESTS.map((q) => q.prompt.pl), INTRO_PROMPT.pl, ...bubbleLines().map((l) => l.pl)].join(' ');
     for (const name of ['Bill', 'Tiny', 'Mazu', 'Rocky']) expect(pl).not.toContain(name);
   });
 
   it('every companion line exists in both languages', () => {
-    for (const l of [...Object.values(FRIEND_LINES).flat(), ...KIND_LINES]) {
+    for (const l of [...bubbleLines(), ...Object.values(TREASURE_AGAIN)]) {
       expect(l.pl.trim()).not.toBe('');
       expect(l.en.trim()).not.toBe('');
+    }
+  });
+
+  it('every friend has its own hello, little things about itself and its own cheers', () => {
+    for (const [id, v] of Object.entries(VOICES)) {
+      expect(v.lines.length, id).toBeGreaterThanOrEqual(3);
+      expect(v.cheers.length, id).toBeGreaterThanOrEqual(2);
+    }
+    // Each regular friend introduces itself by its own name.
+    for (const id of ['bill', 'tiny', 'mazu', 'rocky'] as const) {
+      expect(VOICES[id].hello.pl).toContain(CHARACTERS[id].name.pl);
+      expect(VOICES[id].hello.en).toContain(CHARACTERS[id].name.en);
+    }
+  });
+
+  it('bubbles and quest cards stay short (two short sentences at most)', () => {
+    for (const l of bubbleLines()) for (const s of [l.pl, l.en]) expect(s.length, s).toBeLessThanOrEqual(72);
+    for (const q of ALL_QUESTS) for (const s of [q.prompt.pl, q.prompt.en]) expect(s.length, s).toBeLessThanOrEqual(80);
+  });
+
+  it('Polish never uses gendered past forms for the child (zrobiłeś / zrobiłaś)', () => {
+    const pl = [...bubbleLines().map((l) => l.pl), ...ALL_QUESTS.map((q) => q.prompt.pl), ...Object.values(STRINGS).map((v) => v.pl)];
+    for (const s of pl) expect(s, s).not.toMatch(/\p{L}+(łeś|łaś)(?!\p{L})/u);
+  });
+
+  it('nothing a friend says judges the route (PRD §4.3)', () => {
+    for (const l of bubbleLines()) {
+      expect(l.pl, l.pl).not.toMatch(/(?<!\p{L})(dobrze|źle|dobra droga|zła droga|pomyłka)(?!\p{L})/iu);
+      expect(l.en, l.en).not.toMatch(/\b(right|wrong|correct|mistake)\b/i);
+    }
+  });
+
+  it('lines match the art: Miłka / Tiny never counts three horns (she has two)', () => {
+    for (const l of [...VOICES.tiny.lines, VOICES.tiny.hello, ...VOICES.tiny.cheers]) {
+      expect(l.pl).not.toMatch(/trzy rogi/i);
+      expect(l.en).not.toMatch(/three horns/i);
     }
   });
 

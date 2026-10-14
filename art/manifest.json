@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-12",
-  "scope": "Source artwork inventory. Both V3 characters (180 frames, 25 GIFs) and concept A intro (12 PNGs, 29 sheet cells, 7 GIFs) are delivered. Runtime packing, registration and game QA remain Claude integration work.",
+  "scope": "Source artwork inventory. V3 character and intro source sets delivered. Six priority-1 motion masters await owner approval; no motion parts generated. Runtime integration QA remains pending.",
   "runtimeReady": false,
   "assets": [
     {
@@ -7691,6 +7691,242 @@
       },
       "preview": "review/intro/intro-dust-puff.gif",
       "previewFrameDurationMs": 180
+    },
+    {
+      "id": "motion-butterfly-master",
+      "path": "source/motion/butterfly/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        44,
+        221,
+        1210,
+        1034
+      ],
+      "bytes": 1262751,
+      "sha256": "23e73696e6f2849dda6cc0141e47991cb0960426bcd7d50828acbd99199e0b6b",
+      "status": "awaiting-owner-approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/motion-executed/motion-butterfly-master.txt"
+      ],
+      "requestedSize": [
+        1024,
+        1024
+      ],
+      "requestedSubjectExtentFraction": 0.7,
+      "actualSubjectExtentFraction": 0.9298,
+      "promptHashes": {
+        "prompts/motion-executed/motion-butterfly-master.txt": "c795a5321c47c8873d69a5da5e07e049aa2af15c050bb0d8ca81bb101c0e9906"
+      },
+      "sourcePath": "source/motion/butterfly/master.png",
+      "stage": "awaiting-owner-approval",
+      "runtimeReady": false,
+      "handoff": "CLAUDE_HANDOFF_MOTION.md"
+    },
+    {
+      "id": "motion-coconut-master",
+      "path": "source/motion/coconut/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        70,
+        78,
+        1199,
+        1158
+      ],
+      "bytes": 1990130,
+      "sha256": "dff68a4cf8997626d8a22a97d28e99376183547bcda1b25a030c957f255a9713",
+      "status": "awaiting-owner-approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/motion-executed/motion-coconut-master.txt"
+      ],
+      "requestedSize": [
+        1024,
+        1024
+      ],
+      "requestedSubjectExtentFraction": 0.7,
+      "actualSubjectExtentFraction": 0.9003,
+      "promptHashes": {
+        "prompts/motion-executed/motion-coconut-master.txt": "e98e1f13676e5231ca27b503931ebcfb052510f2f0b59746a20be2cf4edadca0"
+      },
+      "sourcePath": "source/motion/coconut/master.png",
+      "stage": "awaiting-owner-approval",
+      "runtimeReady": false,
+      "handoff": "CLAUDE_HANDOFF_MOTION.md"
+    },
+    {
+      "id": "motion-nut-master",
+      "path": "source/motion/nut/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        64,
+        160,
+        1212,
+        1118
+      ],
+      "bytes": 1397903,
+      "sha256": "3fe662f896392b602a8ab4b1d85f65904039d5c5e4e58f775a5579edd1e943ec",
+      "status": "awaiting-owner-approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/motion-executed/motion-nut-master.txt"
+      ],
+      "requestedSize": [
+        1024,
+        1024
+      ],
+      "requestedSubjectExtentFraction": 0.7,
+      "actualSubjectExtentFraction": 0.9155,
+      "promptHashes": {
+        "prompts/motion-executed/motion-nut-master.txt": "f06ca8e5d1d1bfdf8c8e93595f9c20bfb3b287f8e91de36cb76fe5d56dc3e4a5"
+      },
+      "sourcePath": "source/motion/nut/master.png",
+      "stage": "awaiting-owner-approval",
+      "runtimeReady": false,
+      "handoff": "CLAUDE_HANDOFF_MOTION.md"
+    },
+    {
+      "id": "motion-flower-master",
+      "path": "source/motion/flower/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        58,
+        76,
+        1192,
+        1209
+      ],
+      "bytes": 1565468,
+      "sha256": "e9b17ea098283f9bac976afed290c84ab68622803aa9815afdd4b66b58b4e7e8",
+      "status": "awaiting-owner-approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/motion-executed/motion-flower-master.txt"
+      ],
+      "requestedSize": [
+        1024,
+        1024
+      ],
+      "requestedSubjectExtentFraction": 0.7,
+      "actualSubjectExtentFraction": 0.9043,
+      "promptHashes": {
+        "prompts/motion-executed/motion-flower-master.txt": "82ac99cbd34c1c1f6c123c22fd7c4efc0a4999a19da75c91f97cead6dcf9810a"
+      },
+      "sourcePath": "source/motion/flower/master.png",
+      "stage": "awaiting-owner-approval",
+      "runtimeReady": false,
+      "handoff": "CLAUDE_HANDOFF_MOTION.md"
+    },
+    {
+      "id": "motion-berries-master",
+      "path": "source/motion/berries/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        146,
+        183,
+        1116,
+        1097
+      ],
+      "bytes": 1245563,
+      "sha256": "c3a4039d72bfac92a797c6ec6cad4d71a5d0a08eae9d1a37bd7b5e524901d60a",
+      "status": "awaiting-owner-approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/motion-executed/motion-berries-master-count-revision.txt",
+        "prompts/motion-executed/motion-berries-master.txt"
+      ],
+      "requestedSize": [
+        1024,
+        1024
+      ],
+      "requestedSubjectExtentFraction": 0.7,
+      "actualSubjectExtentFraction": 0.7735,
+      "promptHashes": {
+        "prompts/motion-executed/motion-berries-master-count-revision.txt": "12073e0f3a8c65ff0c3761135e2bc2726974efc6828881c0a3c4d7f59efb1047",
+        "prompts/motion-executed/motion-berries-master.txt": "8c0de06821dce90b51adbfe4694e2333cf8788c9d202c1c9612b056dbafba64b"
+      },
+      "sourcePath": "source/motion/berries/master.png",
+      "stage": "awaiting-owner-approval",
+      "runtimeReady": false,
+      "handoff": "CLAUDE_HANDOFF_MOTION.md"
+    },
+    {
+      "id": "motion-chest-master",
+      "path": "source/motion/chest/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        70,
+        186,
+        1212,
+        1140
+      ],
+      "bytes": 1586252,
+      "sha256": "fe73f3e82d3b64ccec5289c3af698887a19e5728f6a3a88b146cefe02b19e50e",
+      "status": "awaiting-owner-approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/motion-executed/motion-chest-master.txt"
+      ],
+      "requestedSize": [
+        1024,
+        1024
+      ],
+      "requestedSubjectExtentFraction": 0.7,
+      "actualSubjectExtentFraction": 0.9107,
+      "promptHashes": {
+        "prompts/motion-executed/motion-chest-master.txt": "14006700c147a6429be89649fa3ff5a79803184ee34b0c9d5a996c514b461202"
+      },
+      "sourcePath": "source/motion/chest/master.png",
+      "stage": "awaiting-owner-approval",
+      "runtimeReady": false,
+      "handoff": "CLAUDE_HANDOFF_MOTION.md"
     }
   ],
   "unselectedVariants": [
@@ -7772,5 +8008,16 @@
     "introPngAssets": 12,
     "introSheetCells": 29,
     "introPreviewGifs": 7
+  },
+  "motion": {
+    "stage": "awaiting-owner-approval",
+    "priority": 1,
+    "masterCount": 6,
+    "partsGenerated": 0,
+    "ownerApproved": false,
+    "handoff": "CLAUDE_HANDOFF_MOTION.md",
+    "review": "review/motion/index.html",
+    "measurements": "review/motion/master-measurements.json",
+    "framingStatus": "native originals retained; canonical 70% framing pending before parts"
   }
 }

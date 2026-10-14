@@ -52,6 +52,22 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 11 (14 October 2026): what the friends say
+
+The owner found generic lines and a factual slip (Miłka "has three horns"; the art has two).
+Research on the friends from the series is in [CHARACTER_VOICES.md](CHARACTER_VOICES.md).
+
+- **Quests:** every card is a tiny scene from the friend's character (Dudek sniffs out a coconut
+  but is scared to go alone, Rudzia builds a coconut phone, Czupur wants to break a record…), and
+  each quest has its own first speech bubble in the friend's voice (`ask`).
+- **Speech bubbles:** each friend has its own hello, three little things about itself and two
+  cheers of its own (`VOICES`), replacing the shared generic lines. Miłka tells jokes, written
+  separately in each language. Giganto roars and says a word or two, as in the cartoon.
+- **UI:** natural Polish and English per the miodkuj rules ("Gość specjalny", "na zwykłym
+  poziomie", "Spróbuj jeszcze raz", "W kolekcji: 3", "Znowu kokos!", a plainer parents' help).
+- **Guards (unit tests):** length limits, no gendered past forms for the child in Polish, nothing
+  judges the route, Miłka never counts three horns, each friend introduces itself by name.
+
 ## Owner review, round 10 (14 October 2026): the waist cut in the opening
 
 The friends are busts cut flat at the waist. Their springy rise (Back.easeOut) overshot and
@@ -203,7 +219,7 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 208 passed |
+| Domain unit + property | `npm test` | 213 passed |
 | Browser flows (Chromium + WebKit) | `npm run test:e2e` | 65 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |

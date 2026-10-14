@@ -8,7 +8,7 @@
  * drawing / paused) → solved + celebrating → reward → next intro.
  * Collection and settings are overlays and never create sessions.
  */
-import { ASK_FOR, CHARACTERS, FRIEND_LINES, GIGANTO_GENERIC, HELLO, INTRO_PROMPT, KIND_LINES, TREASURE_OBJECT, questById } from '../data/content';
+import { CHARACTERS, GIGANTO_GENERIC, INTRO_PROMPT, TREASURE_OBJECT, TREASURES, VOICES, questById } from '../data/content';
 import { t, type StringKey } from '../data/i18n';
 import { GENERATOR_VERSION, generateMaze, introMaze, profileFor, rebuildMaze } from '../domain/maze';
 import { award, levelFor, selectNextQuest, specialDifficulty } from '../domain/progress';
@@ -575,7 +575,7 @@ export class Controller {
     // renderer block the "Next adventure" button.
     window.clearTimeout(this.celebrationGuard);
     this.celebrationGuard = window.setTimeout(() => this.finishCelebration(), CELEBRATION_GUARD_MS);
-    this.announce(this.tr('srSolved', { treasure: this.treasureName(session.treasureId) }));
+    this.announce(this.tr('srSolved', { treasure: TREASURE_OBJECT[session.treasureId][this.lang] }));
   }
 
   treasureName(id: TreasureId): string {
@@ -683,19 +683,19 @@ export class Controller {
   /** Taps per friend on the welcome screen (first: hello, then their own lines). */
   private greetings = new Map<string, number>();
 
-  /** A tapped friend on the welcome screen introduces itself, then tells little facts. */
+  /** A tapped friend on the welcome screen says hello, then little things about itself. */
   greet(characterId: CharacterId): string {
     const n = this.greetings.get(characterId) ?? 0;
     this.greetings.set(characterId, n + 1);
-    if (n === 0) return HELLO[this.lang].replace('{name}', CHARACTERS[characterId].name[this.lang]);
-    const own = FRIEND_LINES[characterId];
-    return (own[(n - 1) % own.length] as Localized)[this.lang];
+    const voice = VOICES[characterId];
+    if (n === 0) return voice.hello[this.lang];
+    return (voice.lines[(n - 1) % voice.lines.length] as Localized)[this.lang];
   }
 
   /**
    * The child tapped the corner companion. The first tap of every maze is the
-   * quest in the friend's own voice; later taps alternate the friend's own
-   * lines with warm general ones, and the quest comes back every few taps.
+   * quest in the friend's own voice; later taps alternate little things about
+   * the friend with its own cheers, and the quest comes back every few taps.
    * Returns the line to show in the speech bubble.
    */
   talk(): string {
@@ -703,11 +703,11 @@ export class Controller {
     if (!session) return '';
     const n = this.talks++;
     this.sfx('wave');
-    const own = FRIEND_LINES[session.characterId];
-    const cycle = 2 * own.length + 1;
+    const { lines, cheers } = VOICES[session.characterId];
+    const cycle = lines.length + cheers.length + 1;
     const k = n % cycle;
     const i = Math.floor((k - 1) / 2);
-    const line = k === 0 ? null : (k - 1) % 2 === 0 ? own[i % own.length] : KIND_LINES[i % KIND_LINES.length];
+    const line = k === 0 ? null : (k - 1) % 2 === 0 ? lines[i % lines.length] : cheers[i % cheers.length];
     const text = line ? line[this.lang] : this.askLine(session);
     // Mouth poses for roughly the time it takes to read the line aloud.
     this.emit({ type: 'talk', characterId: session.characterId, ms: Math.min(3200, Math.max(1200, 600 + text.length * 40)) });
@@ -715,8 +715,8 @@ export class Controller {
   }
 
   private askLine(session: Session): string {
-    const template = ASK_FOR[session.characterId === 'giganto' ? 'giganto' : 'friend'][this.lang];
-    return template.replace('{treasure}', TREASURE_OBJECT[session.treasureId][this.lang]);
+    const quest = session.promptKey === 'giganto-generic' ? GIGANTO_GENERIC : (questById(session.questId) ?? GIGANTO_GENERIC);
+    return quest.ask[this.lang].replace('{treasure}', TREASURES[session.treasureId].name[this.lang]);
   }
 
   tapTreasure(treasureId: TreasureId): void {

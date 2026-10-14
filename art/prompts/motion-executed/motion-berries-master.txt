@@ -1,0 +1,5 @@
+Use case: stylized-concept
+Asset type: assembled 2D motion master for approval, not a parts sheet.
+Input images: Image 1 is treasure design reference; Image 2 is foliage/style reference; Image 3 is wooden UI material/style reference. Use references only; output a SINGLE requested asset.
+A small bunch of exactly FIVE round blue blueberries on a short green stem with two leaves, the same design as the berries treasure already in the game; each berry clearly separate. Square 1024x1024 canvas; the assembled object is centred and fills about 70% of the canvas, with generous transparent margins on every side. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.
+Keep all visible parts cleanly readable for later separate-layer rigging. No cast shadows between parts. Requested canvas: 1024 × 1024, genuine transparent RGBA.

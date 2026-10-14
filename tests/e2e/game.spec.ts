@@ -336,7 +336,7 @@ test.describe('special guest and settings', () => {
     await chooseLanguage(page, 'English');
     await expect(page.getByRole('heading', { name: 'Dino Mazes' })).toBeVisible();
     await page.getByRole('button', { name: 'Play' }).click({ force: true });
-    await expect(page.getByText("Bill is looking for a coconut. Let's find it together!")).toBeVisible();
+    await expect(page.getByText("Bill can smell a coconut. Let's find it together!")).toBeVisible();
     await page.getByRole('button', { name: "Let's look!" }).click({ force: true });
     await expect(page.getByRole('button', { name: 'Clear the path and go back to the start' })).toBeVisible();
     await expect(page.locator('.reset-btn .label')).toHaveText('Start over');
@@ -347,7 +347,7 @@ test.describe('special guest and settings', () => {
     await expect(page.getByRole('button', { name: 'Next adventure' })).toBeVisible({ timeout: 20_000 });
     await page.getByRole('button', { name: 'My treasures' }).click({ force: true });
     await expect(page.getByRole('heading', { name: 'My treasures' })).toBeVisible();
-    await expect(page.getByRole('button', { name: /Coconut\. Found: 1/ })).toBeVisible();
+    await expect(page.getByRole('button', { name: /Coconut\. In your collection: 1/ })).toBeVisible();
     await page.keyboard.press('Escape');
     await page.getByRole('button', { name: 'Settings' }).click({ force: true });
     await expect(page.getByRole('heading', { name: 'For parents' })).toBeVisible();
@@ -371,7 +371,7 @@ test.describe('owner review fixes (13 October 2026)', () => {
     for (const name of ['Dudek', 'Miłka', 'Rudzia', 'Czupur', 'Giganto']) await expect(page.getByRole('button', { name, exact: true })).toBeAttached();
     await startQuest(page);
     await expect(page.getByRole('button', { name: 'Dudek. Dotknij, żeby porozmawiać.' })).toBeVisible();
-    expect(await state<string>(page, 'c.questPrompt()')).toBe('Dudek szuka kokosa. Znajdźmy go razem!');
+    expect(await state<string>(page, 'c.questPrompt()')).toBe('Dudek wywęszył kokos. Znajdźmy go razem!');
   });
 
   test('the corner friend is the quest reminder: a tap shows a speech bubble', async ({ page }) => {
@@ -381,9 +381,9 @@ test.describe('owner review fixes (13 October 2026)', () => {
     const friend = page.getByRole('button', { name: /Dotknij, żeby porozmawiać/ });
     await friend.click();
     await expect(page.locator('.bubble')).toBeVisible();
-    await expect(page.locator('.bubble')).toHaveText('Pomożesz mi znaleźć kokos?');
+    await expect(page.locator('.bubble')).toHaveText('Czuję kokos! Ale boję się iść sam. Pójdziesz ze mną?');
     await friend.click();
-    await expect(page.locator('.bubble')).not.toHaveText('Pomożesz mi znaleźć kokos?');
+    await expect(page.locator('.bubble')).toHaveText('Mam najlepszy nos w dżungli. Wywęszę każdy owoc!');
     // Talking never touches the drawing.
     expect(await state<number>(page, 'c.engine.points.length')).toBe(0);
   });
@@ -669,15 +669,15 @@ test.describe('opening animation and V3 characters (14 October 2026)', () => {
 });
 
 test.describe('living world details (14 October 2026)', () => {
-  test('a tapped friend says hello on the welcome screen, then tells a little fact', async ({ page }) => {
+  test('a tapped friend says hello on the welcome screen in its own way, then more', async ({ page }) => {
     await boot(page);
     await page.waitForTimeout(300);
     const bubble = page.locator('.cast-bubble');
     await page.locator('.cast-btn[data-id="tiny"]').click({ force: true });
     await expect(bubble).toBeVisible();
-    await expect(bubble).toHaveText('Cześć! Jestem Miłka!');
+    await expect(bubble).toHaveText('Cześć, jestem Miłka! Chcesz usłyszeć dowcip?');
     await page.locator('.cast-btn[data-id="tiny"]').click({ force: true });
-    await expect(bubble).toHaveText('Mam trzy rogi. Policzysz je ze mną?');
+    await expect(bubble).toHaveText('Jak nazywa się śpiący dinozaur? Chrapozaur!');
     // "Graj" stays uncovered.
     const b = (await bubble.boundingBox())!;
     const play = (await page.locator('.btn-play').boundingBox())!;

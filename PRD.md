@@ -73,7 +73,7 @@ The first input unlocks browser audio when permitted. If audio is unavailable, c
 
 ### 4.2 Quest and maze
 
-Before revealing the maze, show only this quest's character, a treasure picture and a short invitation. Example: “Dudek szuka kokosa. Znajdźmy go razem!” / “Bill is looking for a coconut. Let's find it together!” A large “Szukajmy!” / “Let's look!” button reveals the board, with a gentle fade; do not require reading, narration or a timed wait. Returning children can tap immediately. This intro repeats briefly for each new quest.
+Before revealing the maze, show only this quest's character, a treasure picture and a short invitation. Example: “Dudek wywęszył kokos. Znajdźmy go razem!” / “Bill can smell a coconut. Let's find it together!” A large “Szukajmy!” / “Let's look!” button reveals the board, with a gentle fade; do not require reading, narration or a timed wait. Returning children can tap immediately. This intro repeats briefly for each new quest.
 
 Layout priorities: treasure and maze first, expressive friend second, controls third. Once the maze is revealed, its one host settles in a reserved lower-left or lower-right corner, outside the board and controls, drawn as large as that corner allows (Giganto larger than the four friends, as in the cartoon; on the welcome screen too). Choose the corner during layout, not continuously while drawing. The quest reminder is the host itself: tapping the corner friend shows a short speech bubble, first the quest in the friend's own voice, then friendly lines about the friend or the child's effort (never about whether the route is right). The friend is not shown a second time as a card. No group of dinosaurs on an active maze. Names are data-driven (Polish dub names in Polish, original names in English) in case the family prefers other names.
 
@@ -114,24 +114,24 @@ Opening and closing the collection while drawing restores the exact same maze an
 
 ## 5. Content and replayability
 
-Original quest scenarios for this game, inspired by the characters; not assertions about specific episodes.
+Original quest scenarios for this game, built on what each friend is like in the cartoon; not assertions about specific episodes. Each quest has a card text and the friend's first speech bubble; the full texts, the friends' other lines and the research behind them are in `src/data/content.ts` and [docs/CHARACTER_VOICES.md](docs/CHARACTER_VOICES.md) (owner review, 14 October 2026).
 
-| ID | Friend | Treasure | Polish | English |
+| ID | Friend | Treasure | Polish card | English card |
 |---|---|---|---|---|
-| bill-coconut | Bill | Coconut | Pomóż Billowi znaleźć kokos. | Help Bill find a coconut. |
-| bill-nut | Bill | Nut | Znajdź orzech dla Billa. | Find a nut for Bill. |
-| bill-berries | Bill | Berries | Pomóż Billowi znaleźć jagody na piknik. | Help Bill find berries for a picnic. |
-| tiny-flower | Tiny | Flower | Znajdź kwiatek dla Tiny. | Find a flower for Tiny. |
-| tiny-shell | Tiny | Shell | Pomóż Tiny znaleźć piękną muszelkę. | Help Tiny find a pretty shell. |
-| tiny-berries | Tiny | Berries | Znajdź jagody na piknik z Tiny. | Find berries for a picnic with Tiny. |
-| mazu-stone | Mazu | Shiny stone | Pomóż Mazu znaleźć błyszczący kamyk. | Help Mazu find a shiny stone. |
-| mazu-coconut | Mazu | Coconut | Znajdź kokos do wynalazku Mazu. | Find a coconut for Mazu's invention. |
-| mazu-shell | Mazu | Shell | Znajdź muszelkę do kolekcji Mazu. | Find a shell for Mazu's collection. |
-| rocky-nut | Rocky | Nut | Pomóż Rocky'emu znaleźć wielki orzech. | Help Rocky find a big nut. |
-| rocky-flower | Rocky | Flower | Znajdź z Rockym kwiatek dla przyjaciół. | Find a flower for friends with Rocky. |
-| rocky-stone | Rocky | Shiny stone | Pomóż Rocky'emu znaleźć niezwykły kamyk. | Help Rocky find a special stone. |
-| giganto-coconut | Giganto | Coconut | Giganto szuka kokosa. Znajdźmy go razem! | Giganto is looking for a coconut. Let's find it together! |
-| giganto-berries | Giganto | Berries | Znajdźmy jagody dla Giganto! | Let's find some berries for Giganto! |
+| bill-coconut | Bill | Coconut | Dudek wywęszył kokos, ale boi się iść sam. Pomożesz mu? | Bill can smell a coconut, but he's scared to go alone. Will you help? |
+| bill-nut | Bill | Nut | Dudkowi burczy w brzuchu. Gdzieś tu leży pyszny orzech! | Bill's tummy is rumbling. There's a tasty nut in here somewhere! |
+| bill-berries | Bill | Berries | Dudek gotuje obiad dla przyjaciół. Brakuje mu tylko jagód! | Bill is cooking dinner for his friends. He just needs some berries! |
+| tiny-flower | Tiny | Flower | Miłka maluje obrazek. Szuka kwiatka, który będzie jej pozował! | Tiny is painting a picture. She needs a flower to pose for her! |
+| tiny-shell | Tiny | Shell | Miłka gra na muszelkach. Pomożesz jej znaleźć nową? | Tiny makes music with shells. Can you help her find a new one? |
+| tiny-berries | Tiny | Berries | Miłka robi piknik. A jaki piknik bez jagód? | Tiny is having a picnic. And what's a picnic without berries? |
+| mazu-stone | Mazu | Shiny stone | Rudzia bada błyszczące kamyki. Ten mógł spaść z nieba! | Mazu studies shiny stones. This one might have fallen from the sky! |
+| mazu-coconut | Mazu | Coconut | Rudzia robi telefon z kokosa. Brakuje jej tylko kokosa! | Mazu is making a phone out of a coconut. She just needs the coconut! |
+| mazu-shell | Mazu | Shell | Rudzia zbiera muszelki. Takiej jeszcze nie ma! | Mazu collects shells. She doesn't have this one yet! |
+| rocky-nut | Rocky | Nut | Czupur chce pobić rekord. Szuka największego orzecha w dżungli! | Rocky wants to break a record. He's after the biggest nut in the jungle! |
+| rocky-flower | Rocky | Flower | Czupur chce dać przyjaciołom kwiatek. Najpierw musi go znaleźć! | Rocky wants to give his friends a flower. First he has to find one! |
+| rocky-stone | Rocky | Shiny stone | Czupur chce dać Giganto prezent. Może błyszczący kamyk? | Rocky wants to give Giganto a present. How about a shiny stone? |
+| giganto-coconut | Giganto | Coconut | Giganto zgubił kokos. Taki wielki, a nie może go znaleźć! | Giganto has lost his coconut. He's so big, and he still can't find it! |
+| giganto-berries | Giganto | Berries | Nawet Giganto lubi jagody. Znajdźmy mu kilka! | Even Giganto loves berries. Let's find him some! |
 
 Treasure names: Kokos / Coconut; Orzech / Nut; Kwiatek / Flower; Kamyk / Stone; Muszelka / Shell; Jagody / Berries. Ensure berry artwork reads as a small blue berry bunch, not grapes.
 
@@ -143,7 +143,7 @@ Working cadence: complete five ordinary mazes to unlock the first Giganto quest,
 
 Giganto quests request one level above the current automatic level, capped at the hardest supported profile and viewport corridor limits. Prefer one extra meaningful branch over shrinking the paths. Explain the special adventure with the character intro, not a warning. Provide “Łatwiejszy labirynt” / “Easier maze” in settings to restart this special quest at the current normal level without reward/progress penalty. Cadence and special-quest difficulty are explicit tunable defaults based on the user's four-to-five-maze suggestion.
 
-Preserve the first-six-unique-treasures rule: select Giganto's treasure from uncollected items when necessary and use a generic localized special-quest template (“Znajdźmy skarb dla Giganto!” / “Let's find a treasure for Giganto!”) with the pictured target. Do not force a duplicate just because his example quests list coconut and berries.
+Preserve the first-six-unique-treasures rule: select Giganto's treasure from uncollected items when necessary and use a generic localized special-quest template (“Giganto czeka na skarb. Poszukamy?” / “Giganto is waiting for a treasure. Shall we look?”) with the pictured target. Do not force a duplicate just because his example quests list coconut and berries.
 
 ### Automatic difficulty (owner decisions, 13 and 14 October 2026)
 

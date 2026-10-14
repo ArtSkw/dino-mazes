@@ -32,6 +32,8 @@ export interface Quest {
   characterId: CharacterId;
   treasureId: TreasureId;
   prompt: Localized;
+  /** The friend's first speech bubble in the maze, in its own voice. */
+  ask: Localized;
   /** Reserved for later recorded narration; absent in v1. */
   narration?: Partial<Record<Lang, string>>;
   special?: boolean;
