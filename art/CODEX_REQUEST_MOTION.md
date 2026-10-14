@@ -36,7 +36,11 @@ Never bake text, cast shadows between parts or floor shadows. True alpha only.
 ```text
 art/source/motion/<asset>/master.png
 art/source/motion/<asset>/<part>.png      (names as in the jobs file)
+art/CLAUDE_HANDOFF_MOTION.md              (what was made, revisions, anything off)
 ```
+
+Work in priority order: the six priority-1 masters first, then their parts once the owner has
+approved the masters; priorities 2 and 3 after that.
 
 | Priority | Asset | Parts | Extra | Motion in the game |
 |---|---|---|---|---|
@@ -69,7 +73,8 @@ art/source/motion/<asset>/<part>.png      (names as in the jobs file)
   treasure, butterfly, chest and confetti parts (≈ 2–4 MiB of GPU memory).
 - **Rig format**: a small JSON per asset (parts, draw order, pivots, rest pose) and one rig
   player for Phaser (containers) plus one for the DOM (collection screen, quest card), both driven
-  by the same motion tokens and a `spring(t, ζ, f)` that is a pure function of time.
+  by the same motion tokens and `spring(t, ζ, f)`, a pure function of time (already in
+  `src/game/motion.ts`, used by the friends' pop-up).
 - **Motions** as described in the table and in MOTION_PROPOSAL.md §4, with reduced motion
   showing the master as a still image.
 - **QA**: stills at named times, contact sheets and onion skins rendered by the Playwright tools,
