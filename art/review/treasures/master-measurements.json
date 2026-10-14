@@ -1,0 +1,180 @@
+{
+  "stage": "master-approved",
+  "masterCount": 4,
+  "partsGenerated": 21,
+  "approvedCopiesMade": 4,
+  "assets": [
+    {
+      "id": "treasure-feather-master",
+      "path": "source/motion/feather/master.png",
+      "approvedCopy": "source/treasures-v2/feather.png",
+      "kind": "classic",
+      "status": "master-approved",
+      "size": [
+        1616,
+        1616
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        247,
+        280,
+        1370,
+        1337
+      ],
+      "subjectExtentFraction": 0.6949,
+      "sha256": "b16322ec99b3bad8742299e062fe3f4f599c6a726b6307738ffa60fe4935b949",
+      "bytes": 1158984,
+      "nativePath": "review/treasures/native/feather.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "a2cd2b90fcabc87686cdd3665648af54b1aaed178174e22f768e5c95c45f0b3f",
+      "paddingOffset": [
+        146,
+        172
+      ],
+      "transform": "transparent padding only; original RGBA pixels unchanged",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-feather-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-feather-master.txt": "4dd5f65c8c3462659ddf93162dfd2645677560ea71b03bfb3be9bb3b64d47b1f"
+      }
+    },
+    {
+      "id": "treasure-amber-master",
+      "path": "source/motion/amber/master.png",
+      "approvedCopy": "source/treasures-v2/amber.png",
+      "kind": "giganto",
+      "status": "master-approved",
+      "size": [
+        1472,
+        1472
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        305,
+        221,
+        1166,
+        1250
+      ],
+      "subjectExtentFraction": 0.699,
+      "sha256": "7d14380fdc6442b41629f5a831378ec0d34d8202bdaf8a1fd71ebcf46d75b14b",
+      "bytes": 1316956,
+      "nativePath": "review/treasures/native/amber.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "97d8c24d90531bbe12d18f744891d997feb3669533b97c0e177c9f8e62fe9b08",
+      "paddingOffset": [
+        108,
+        108
+      ],
+      "transform": "transparent padding only; original RGBA pixels unchanged",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-amber-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-amber-master.txt": "8af1571c179e1f2f752b5ee3712662b7edbbaaccaf3e9eb57bc19032be1bb42c"
+      }
+    },
+    {
+      "id": "treasure-gigaflower-master",
+      "path": "source/motion/gigaflower/master.png",
+      "approvedCopy": "source/treasures-v2/gigaflower.png",
+      "kind": "giganto",
+      "status": "master-approved",
+      "size": [
+        1712,
+        1712
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        277,
+        258,
+        1435,
+        1455
+      ],
+      "subjectExtentFraction": 0.6992,
+      "sha256": "4ac389e9560f4d89889df165b8ac6b99b947f5a8df1eec1675cfea411917ac8f",
+      "bytes": 1850182,
+      "nativePath": "review/treasures/native/gigaflower.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "19c2dd7dc7edf769819604c90674af311b02e2cce467bd27f421ff8d6ae8db13",
+      "paddingOffset": [
+        210,
+        228
+      ],
+      "transform": "transparent padding only; original RGBA pixels unchanged",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-gigaflower-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-gigaflower-master.txt": "085e3617e42c6c1a56337cf27f5488da04daa691900ea9dde31ef010b519039c"
+      }
+    },
+    {
+      "id": "treasure-crystal-master",
+      "path": "source/motion/crystal/master.png",
+      "approvedCopy": "source/treasures-v2/crystal.png",
+      "kind": "giganto",
+      "status": "master-approved",
+      "size": [
+        1600,
+        1600
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        379,
+        243,
+        1220,
+        1357
+      ],
+      "subjectExtentFraction": 0.6963,
+      "sha256": "1377189e7b8e02d9e9ce3e117b978b9180c992f467a116ed9c1dc3744aa143e4",
+      "bytes": 1360235,
+      "nativePath": "review/treasures/native/crystal.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "3f06e1a16f2701e4d2766057e2883d6a7f3fd0c063236ff14d70977660b41caa",
+      "paddingOffset": [
+        156,
+        162
+      ],
+      "transform": "transparent padding only; original RGBA pixels unchanged",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-crystal-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-crystal-master.txt": "5b5d919efb64adea0571f2597b7d4170780618baa3c550af4014596d08a591c3"
+      }
+    }
+  ]
+}

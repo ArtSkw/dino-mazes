@@ -1,6 +1,6 @@
 # Motion artwork — priority 1 master approval checkpoint
 
-14 October 2026. **Six assembled master candidates generated; awaiting owner approval. No parts, alternate poses, priority-2 or priority-3 assets generated.** The owner explicitly requested this stopping point. Do not treat delivery as permission to generate parts.
+14 October 2026. **Six assembled master designs approved by the owner on 14 October 2026. No parts, alternate poses, priority-2 or priority-3 assets generated.** The owner next requested four new treasure masters; current work remains limited to that approval checkpoint.
 
 ## Delivered
 
@@ -35,6 +35,6 @@ Imagegen made five subjects fill approximately 90–93% of the canvas, rather th
 
 ## Gate and next work
 
-Wait for owner approval or requested design changes. Then use each approved, consistently framed master as the edit source for its listed parts. Paint hidden overlaps; keep position, scale, lighting and canvas consistent. Reconstruct and rotate-test parts on cream/dark green before handing off rigs. No overlap/stack/±20° rotation test is applicable yet because no parts exist.
+The six designs are approved. When resuming the parts work, use each approved, consistently framed master as the edit source for its listed parts. Paint hidden overlaps; keep position, scale, lighting and canvas consistent. Reconstruct and rotate-test parts on cream/dark green before handing off rigs. No overlap/stack/±20° rotation test is applicable yet because no parts exist.
 
 Claude Code owns extraction, pivots, packing and runtime motion. Existing game assets and implementation were not replaced in this checkpoint.

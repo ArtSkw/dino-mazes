@@ -104,7 +104,7 @@ Reactive animation uses four authored sprite sequences: quiet idle/blink, attent
 
 Suggested sequence: trail glows softly → treasure performs its signature motion → character changes to a delighted pose → treasure travels to its collection slot → next button appears. Target 2–3 seconds, skippable after the outcome is clear. Do not delay reward persistence until animation ends.
 
-Examples: coconut wobbles and rolls a little; nut makes a tiny hop; flower petals sway; shiny stone catches a soft glint; shell turns slightly; berry bunch jiggles. Use authored 2D transforms and approved poses. Do not attempt improvised character lip-sync or deform faces into smiles.
+Examples: coconut wobbles and rolls a little; nut makes a tiny hop; flower petals sway; shiny stone catches a soft glint; shell turns slightly; berry bunch jiggles. Treasures painted in parts move their parts (14 Oct 2026): the feather swings on its quill, the amber's light flares and its leaf sways, the giga flower closes and blooms petal by petal, the crystals light up one after another; with reduced motion they show their still image. Use authored 2D transforms and approved poses. Do not attempt improvised character lip-sync or deform faces into smiles.
 
 “Kolejna przygoda” / “Next adventure” is explicit; never advance automatically. “Moje skarby” / “My treasures” opens an illustrated collection: the seven classic treasures in two centred rows, and Giganto's three in a golden box (“Skarby Giganto”) beside them, or below them in portrait. First discoveries fill a slot with a warm arrival animation. Repeated treasures receive the same care, a soft slot pulse, and an updated internal count; there is no duplicate disappointment screen.
 

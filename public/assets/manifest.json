@@ -595,6 +595,34 @@
     1490,
     974
    ]
+  },
+  "feather": {
+   "image": "assets/treasures/feather.webp",
+   "width": 320,
+   "height": 301,
+   "bytes": 27844,
+   "sourceSha256": "b16322ec99b3bad8742299e062fe3f4f599c6a726b6307738ffa60fe4935b949"
+  },
+  "amber": {
+   "image": "assets/treasures/amber.webp",
+   "width": 268,
+   "height": 320,
+   "bytes": 28716,
+   "sourceSha256": "7d14380fdc6442b41629f5a831378ec0d34d8202bdaf8a1fd71ebcf46d75b14b"
+  },
+  "gigaflower": {
+   "image": "assets/treasures/gigaflower.webp",
+   "width": 309,
+   "height": 320,
+   "bytes": 37836,
+   "sourceSha256": "4ac389e9560f4d89889df165b8ac6b99b947f5a8df1eec1675cfea411917ac8f"
+  },
+  "crystal": {
+   "image": "assets/treasures/crystal.webp",
+   "width": 242,
+   "height": 320,
+   "bytes": 29326,
+   "sourceSha256": "1377189e7b8e02d9e9ce3e117b978b9180c992f467a116ed9c1dc3744aa143e4"
   }
  },
  "foliage": {
@@ -777,6 +805,269 @@
    "sourceSha256": "9c623da4b1a42a4da70b762f61a14e15652624822382e1fdf84fa809ee9fe2c7"
   }
  },
+ "treasureRigs": {
+  "atlas": "assets/treasures/rigs/treasure-parts.json",
+  "decodedBytes": 3682032,
+  "rigs": {
+   "feather": {
+    "canvas": [
+     460,
+     460
+    ],
+    "origin": [
+     230.38,
+     230.24
+    ],
+    "size": [
+     320.0,
+     301.48
+    ],
+    "parts": [
+     {
+      "name": "vane-left",
+      "frame": "feather/vane-left",
+      "pivot": [
+       138.2,
+       339.09
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "vane-right",
+      "frame": "feather/vane-right",
+      "pivot": [
+       138.2,
+       339.09
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "quill",
+      "frame": "feather/quill",
+      "pivot": [
+       136.78,
+       339.09
+      ],
+      "opacity": 1
+     }
+    ],
+    "atlas": "assets/treasures/rigs/treasure-parts.json"
+   },
+   "amber": {
+    "canvas": [
+     458,
+     458
+    ],
+    "origin": [
+     228.57,
+     228.73
+    ],
+    "size": [
+     268.07,
+     320.0
+    ],
+    "parts": [
+     {
+      "name": "body",
+      "frame": "amber/body",
+      "pivot": [
+       228.88,
+       228.88
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaf",
+      "frame": "amber/leaf",
+      "pivot": [
+       186.59,
+       338.97
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "glint",
+      "frame": "amber/glint",
+      "pivot": [
+       195.92,
+       155.49
+      ],
+      "opacity": 0.8
+     }
+    ],
+    "atlas": "assets/treasures/rigs/treasure-parts.json"
+   },
+   "gigaflower": {
+    "canvas": [
+     457,
+     457
+    ],
+    "origin": [
+     228.65,
+     228.91
+    ],
+    "size": [
+     309.32,
+     320.0
+    ],
+    "parts": [
+     {
+      "name": "stem",
+      "frame": "gigaflower/stem",
+      "pivot": [
+       228.38,
+       347.25
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaf-left",
+      "frame": "gigaflower/leaf-left",
+      "pivot": [
+       213.69,
+       336.56
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaf-right",
+      "frame": "gigaflower/leaf-right",
+      "pivot": [
+       227.05,
+       325.88
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "petal-1",
+      "frame": "gigaflower/petal-1",
+      "pivot": [
+       227.05,
+       232.39
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "petal-6",
+      "frame": "gigaflower/petal-6",
+      "pivot": [
+       227.05,
+       232.39
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "petal-2",
+      "frame": "gigaflower/petal-2",
+      "pivot": [
+       227.05,
+       232.39
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "petal-3",
+      "frame": "gigaflower/petal-3",
+      "pivot": [
+       227.05,
+       232.39
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "petal-4",
+      "frame": "gigaflower/petal-4",
+      "pivot": [
+       227.05,
+       232.39
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "petal-5",
+      "frame": "gigaflower/petal-5",
+      "pivot": [
+       227.05,
+       232.39
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "center",
+      "frame": "gigaflower/center",
+      "pivot": [
+       227.05,
+       232.39
+      ],
+      "opacity": 1
+     }
+    ],
+    "atlas": "assets/treasures/rigs/treasure-parts.json"
+   },
+   "crystal": {
+    "canvas": [
+     460,
+     460
+    ],
+    "origin": [
+     229.66,
+     229.8
+    ],
+    "size": [
+     242.15,
+     320.0
+    ],
+    "parts": [
+     {
+      "name": "crystal-2",
+      "frame": "crystal/crystal-2",
+      "pivot": [
+       275.76,
+       318.85
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "crystal-1",
+      "frame": "crystal/crystal-1",
+      "pivot": [
+       228.37,
+       318.85
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "crystal-3",
+      "frame": "crystal/crystal-3",
+      "pivot": [
+       229.8,
+       324.6
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "base",
+      "frame": "crystal/base",
+      "pivot": [
+       229.8,
+       359.07
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "glint",
+      "frame": "crystal/glint",
+      "pivot": [
+       229.8,
+       229.8
+      ],
+      "opacity": 0.25
+     }
+    ],
+    "atlas": "assets/treasures/rigs/treasure-parts.json"
+   }
+  }
+ },
  "intro": {
   "curtainLeft": {
    "image": "assets/intro/curtain-left.webp",
@@ -868,5 +1159,5 @@
    "bytes": 37908
   }
  },
- "totalBytes": 9225295
+ "totalBytes": 9349017
 }

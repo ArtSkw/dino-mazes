@@ -23,6 +23,7 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import rigs  # noqa: E402
 import v3  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -269,6 +270,8 @@ def main() -> int:
 
     manifest["treasures"] = export_items("treasure-kit-v1.png", ["coconut", "nut", "flower", "stone", "shell", "berries"], "treasures", 320, report)
     manifest["treasures"].update(export_single_treasures(320, report))
+    # Painted parts of the treasures that have them (art/CLAUDE_HANDOFF_TREASURES.md).
+    manifest["treasureRigs"] = rigs.process_treasure_rigs(ROOT, SRC, list(manifest["treasures"]), 320, clean_alpha, ALPHA_FLOOR, report)
     manifest["foliage"] = export_items(
         "foliage-kit-v1.png",
         ["hedge-a", "hedge-b", "rocks", "flower-bush", "banana-plant", "fern", "monstera", "butterfly"],

@@ -5,6 +5,7 @@
 import manifestJson from '../data/assetManifest.json';
 import type { CharacterId, TreasureId } from '../domain/types';
 import { FRIEND_SIZE, type FriendFrame } from '../platform/layout';
+import type { TreasureRigAsset } from './treasureRig';
 
 export type Reaction = 'idle' | 'drawing' | 'encouragement' | 'celebration' | 'talk';
 /** Corner-tier atlas groups (loaded and released independently) and the stage tier. */
@@ -64,9 +65,18 @@ interface Manifest {
   ui: Record<string, ItemAsset>;
   backgrounds: Record<'jungle' | 'collection' | 'ground', ItemAsset>;
   intro: IntroAssets;
+  /** Painted parts of the treasures that have them, one atlas (tools/art/rigs.py). */
+  treasureRigs?: { atlas?: string; decodedBytes?: number; rigs?: Partial<Record<TreasureId, Omit<TreasureRigAsset, 'atlas'>>> };
 }
 
 export const ASSETS = manifestJson as unknown as Manifest;
+
+/** The treasure's rig, when its painted parts exist. */
+export function treasureRig(id: TreasureId): TreasureRigAsset | null {
+  const r = ASSETS.treasureRigs;
+  const rig = r?.rigs?.[id];
+  return rig && r?.atlas ? { ...rig, atlas: r.atlas } : null;
+}
 
 /** Size and painted area of a friend's frame, for layout. */
 export function friendFrame(id: CharacterId): FriendFrame {

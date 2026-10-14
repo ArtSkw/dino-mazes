@@ -1,0 +1,995 @@
+{
+  "count": 21,
+  "assets": [
+    {
+      "id": "treasure-feather-vane-left",
+      "path": "source/motion/feather/vane-left.png",
+      "size": [
+        1616,
+        1616
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        400,
+        280,
+        1370,
+        1330
+      ],
+      "sha256": "276fb7440eb28ede346c989ab85065a7f747b4f5df510edfb58b915b77208797",
+      "bytes": 944662,
+      "nativePath": "review/treasures/parts-native/feather/vane-left.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "d3ede9aaebf277c3cff23ce660958d1043f68349408149fdcd63c74b7f755955",
+      "transform": [
+        1.029723991507431,
+        0,
+        0,
+        1.0960334029227556,
+        190.9660297239915,
+        102.44258872651358
+      ],
+      "pivot": [
+        485,
+        1190
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-feather-vane-left-overlap-revision.txt",
+        "prompts/treasures-executed/treasure-feather-vane-left-shaft-removal.txt",
+        "prompts/treasures-executed/treasure-feather-vane-left.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-feather-vane-left-overlap-revision.txt": "7d5450e0ff1a8700a94560f08c3277300abdf628d153659aa09344b2ac7db862",
+        "prompts/treasures-executed/treasure-feather-vane-left-shaft-removal.txt": "faf21398549668211680ac76435b48fad58ca9f6b76986454c78dd3a2bd7ed46",
+        "prompts/treasures-executed/treasure-feather-vane-left.txt": "5f202eb34639ce39f7d5ee367e6e5618d31a27d311783237185932eb8cc045d5"
+      }
+    },
+    {
+      "id": "treasure-feather-vane-right",
+      "path": "source/motion/feather/vane-right.png",
+      "size": [
+        1616,
+        1616
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        400,
+        280,
+        1371,
+        1330
+      ],
+      "sha256": "6811cb99d3da32322dbb8ea39b5e63f186f42973600f9627797bf3b0898154de",
+      "bytes": 852314,
+      "nativePath": "review/treasures/parts-native/feather/vane-right.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "616d63bae957a16a472ef8d623730b040e51e71d8405afcae7dd90341a389b0b",
+      "transform": [
+        1.2278481012658229,
+        0,
+        0,
+        1.2180974477958237,
+        23.05063291139237,
+        3.4918793503480288
+      ],
+      "pivot": [
+        485,
+        1190
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-feather-vane-right-overlap-revision.txt",
+        "prompts/treasures-executed/treasure-feather-vane-right-shaft-removal.txt",
+        "prompts/treasures-executed/treasure-feather-vane-right.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-feather-vane-right-overlap-revision.txt": "87a4ab60ed1c4728662ad27d3270db0976212faf48b36c4704c8f91799530941",
+        "prompts/treasures-executed/treasure-feather-vane-right-shaft-removal.txt": "fed785eb933d789df697f3e515dde82ed42467d54f120a3040e8935c2cd5ad57",
+        "prompts/treasures-executed/treasure-feather-vane-right.txt": "4355e06cfbf02c901f386d766015c8480bbc4ffaf55e71e14fab149e9b5a9904"
+      }
+    },
+    {
+      "id": "treasure-feather-quill",
+      "path": "source/motion/feather/quill.png",
+      "size": [
+        1616,
+        1616
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        246,
+        359,
+        1300,
+        1336
+      ],
+      "sha256": "a10f6a519ae80b22d362fb76e45aff37c4713445ae77b9b2917f85ea1f2245c9",
+      "bytes": 193142,
+      "nativePath": "review/treasures/parts-native/feather/quill.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "be5f26e6a04a5b96ed6d2d75bd5ea3f665e9afe50fe660e388495ff55f92d069",
+      "transform": [
+        1.2936117936117937,
+        0,
+        0,
+        1.2889182058047493,
+        -11.722358722358763,
+        -29.25329815303428
+      ],
+      "pivot": [
+        480,
+        1190
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-feather-quill.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-feather-quill.txt": "db61ba201b6c8ef5e3e636228ef53997a738d8132a72815b716a5af5bdde05cd"
+      }
+    },
+    {
+      "id": "treasure-amber-body",
+      "path": "source/motion/amber/body.png",
+      "size": [
+        1472,
+        1472
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        305,
+        221,
+        1166,
+        1250
+      ],
+      "sha256": "ca97f06f3972827d4bd8cba2eb33f14fc638538b2c8f43111a01846b7e829750",
+      "bytes": 1129632,
+      "nativePath": "review/treasures/parts-native/amber/body.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "c8a7a664f72e29dda4994737dbe4d408f3ed5a5ecad3fa038ce5b7e048ec0889",
+      "transform": [
+        1.169836956521739,
+        0,
+        0,
+        1.1733181299885975,
+        2.0122282608696196,
+        -0.7571265678449208
+      ],
+      "pivot": [
+        736,
+        736
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-amber-body.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-amber-body.txt": "31316decc73365f951fb35723d7057e17432ffd407260a7374d3ed7a64ce45ec"
+      }
+    },
+    {
+      "id": "treasure-amber-leaf",
+      "path": "source/motion/amber/leaf.png",
+      "size": [
+        1472,
+        1472
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        547,
+        555,
+        947,
+        1118
+      ],
+      "sha256": "b6ed5988b51be3e50c66fc9857361cad6bf96e0059aeb45d520096bff5323376",
+      "bytes": 342974,
+      "nativePath": "review/treasures/parts-native/amber/leaf.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "20f8171c68a314158f5ff3da09ce0470643109a4bda7d001442f5fab908a8b11",
+      "transform": [
+        1.1700879765395895,
+        0,
+        0,
+        1.1584362139917694,
+        3.909090909090878,
+        15.168724279835487
+      ],
+      "pivot": [
+        600,
+        1090
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-amber-leaf.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-amber-leaf.txt": "cd924fff6e273b9481da3a3e642f22de160ec1efae2f38a864427ba4994a6e34"
+      }
+    },
+    {
+      "id": "treasure-amber-glint",
+      "path": "source/motion/amber/glint.png",
+      "size": [
+        1472,
+        1472
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        495,
+        375,
+        820,
+        625
+      ],
+      "sha256": "88fe0c634edf3965a67f756e44a8586f432b83761724582fc49f34434494a726",
+      "bytes": 121951,
+      "nativePath": "review/treasures/parts-native/amber/glint.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "6c673ba67d962d8438beed05fbd16bc2572c7934cb11a28307bb5ea6fe5766ef",
+      "transform": [
+        0.8441558441558441,
+        0,
+        0,
+        0.7621951219512195,
+        207.98701298701303,
+        153.2012195121951
+      ],
+      "pivot": [
+        630,
+        500
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-amber-glint.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-amber-glint.txt": "b2572c8b27145ce1d84eb2729c0eb90cd03d61d69a9d2bfab27521fa54359be1"
+      }
+    },
+    {
+      "id": "treasure-gigaflower-stem",
+      "path": "source/motion/gigaflower/stem.png",
+      "size": [
+        1712,
+        1712
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        730,
+        760,
+        910,
+        1380
+      ],
+      "sha256": "04935db05a5d79a04bd8eb3acda4368b4bb909f65db32382c940beb85bd3d8ac",
+      "bytes": 126063,
+      "nativePath": "review/treasures/parts-native/gigaflower/stem.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "ab648d28c91773dfb4150537459c1b354b4bb97de800453ca1d89b170bb5ed4d",
+      "transform": [
+        0.6766917293233082,
+        0,
+        0,
+        1.0580204778156996,
+        378.1203007518797,
+        251.0921501706485
+      ],
+      "pivot": [
+        855,
+        1300
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-gigaflower-stem.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-gigaflower-stem.txt": "05707a8f3d7577f5d17d0dd72ee97cda5aeaa9d9ffe14b37dbeb60ff8ba1bae3"
+      }
+    },
+    {
+      "id": "treasure-gigaflower-leaf-left",
+      "path": "source/motion/gigaflower/leaf-left.png",
+      "size": [
+        1712,
+        1712
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        277,
+        965,
+        850,
+        1285
+      ],
+      "sha256": "d1d99a9c7b1d9844903587457c10456739cfbed844c319753ca67c87ee9db4e8",
+      "bytes": 260731,
+      "nativePath": "review/treasures/parts-native/gigaflower/leaf-left.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "c862aa8959c5f44bc6430750e10b8536ba1971c9a683b4230bf0da1b54cd245d",
+      "transform": [
+        1.0123674911660778,
+        0,
+        0,
+        0.8815426997245179,
+        92.74911660777383,
+        356.7355371900826
+      ],
+      "pivot": [
+        800,
+        1260
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-gigaflower-leaf-left-isolation-revision.txt",
+        "prompts/treasures-executed/treasure-gigaflower-leaf-left.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-gigaflower-leaf-left-isolation-revision.txt": "d6013d84998410c405b9a8b354b286edec8545f0752ca429a793a66823e85b8f",
+        "prompts/treasures-executed/treasure-gigaflower-leaf-left.txt": "5b81c990a326fc16f0a09b32f1dfae6b00c0952d0ba7206bf376fa470b10c646"
+      }
+    },
+    {
+      "id": "treasure-gigaflower-leaf-right",
+      "path": "source/motion/gigaflower/leaf-right.png",
+      "size": [
+        1712,
+        1712
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        810,
+        1060,
+        1415,
+        1455
+      ],
+      "sha256": "7148266160447c76a8a6d8b7302f3f65096bdb3e4647f3a0cea1733e78502a2d",
+      "bytes": 329708,
+      "nativePath": "review/treasures/parts-native/gigaflower/leaf-right.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "9e3b3d18e3a6bebbea3e93f6a8bf2418906694283ebdff5a67fbd9a10beb7d38",
+      "transform": [
+        1.048526863084922,
+        0,
+        0,
+        0.9825870646766169,
+        233.3102253032929,
+        330.9203980099502
+      ],
+      "pivot": [
+        850,
+        1220
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-gigaflower-leaf-right-isolation-revision.txt",
+        "prompts/treasures-executed/treasure-gigaflower-leaf-right.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-gigaflower-leaf-right-isolation-revision.txt": "c8dc13e286686b36ec9b047f5102d6fe0ec69c6fffaa1ccce12d70ad69320361",
+        "prompts/treasures-executed/treasure-gigaflower-leaf-right.txt": "380e9ba9aaa25f6a13eea199edd4aa141a4b03a21b3541b773c8d03d2e4b63fb"
+      }
+    },
+    {
+      "id": "treasure-gigaflower-petal-1",
+      "path": "source/motion/gigaflower/petal-1.png",
+      "size": [
+        1712,
+        1712
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        755,
+        258,
+        1100,
+        925
+      ],
+      "sha256": "a58be3e26f5e104ee27f519a431f3994f02e0da43067c5c5d6450f4426a11926",
+      "bytes": 314254,
+      "nativePath": "review/treasures/parts-native/gigaflower/petal-1.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "63ecead65ba218935daf5767da28bf2ca5dba28fe82b9076fe76201cb0f01d6c",
+      "transform": [
+        0.6571428571428571,
+        0,
+        0,
+        0.9881481481481481,
+        463.22857142857146,
+        91.00296296296298
+      ],
+      "pivot": [
+        850,
+        870
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-gigaflower-petal-1.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-gigaflower-petal-1.txt": "45c00bdac36d16a9d28ceb0bd1792ee46740e5c214a3854ab3a74bb0044358e1"
+      }
+    },
+    {
+      "id": "treasure-gigaflower-petal-6",
+      "path": "source/motion/gigaflower/petal-6.png",
+      "size": [
+        1712,
+        1712
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        345,
+        450,
+        880,
+        920
+      ],
+      "sha256": "d677f1378cbb2505589ff4f68e465ef35faaa07661944a2060d7669475f35d74",
+      "bytes": 372890,
+      "nativePath": "review/treasures/parts-native/gigaflower/petal-6.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "72aef706a2bd456f46be85eae58614808c909648dca4aa984697ffda9ea664e0",
+      "transform": [
+        0.8451816745655608,
+        0,
+        0,
+        0.9591836734693877,
+        171.73775671406003,
+        123.87755102040819
+      ],
+      "pivot": [
+        850,
+        870
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-gigaflower-petal-6.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-gigaflower-petal-6.txt": "747cc03b43590309735f55f55490006ece2edca40bb8df039706f8768688a3ea"
+      }
+    },
+    {
+      "id": "treasure-gigaflower-petal-2",
+      "path": "source/motion/gigaflower/petal-2.png",
+      "size": [
+        1712,
+        1712
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        810,
+        570,
+        1435,
+        925
+      ],
+      "sha256": "99bb92ce4ea7ef9de7221dc52cfa9737470ece6f514d5dc466e1f18c3e78858e",
+      "bytes": 327083,
+      "nativePath": "review/treasures/parts-native/gigaflower/petal-2.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "3a70b1c2b2c692b946229cdfad7d6fda521dc7710f3ca26212b4bde3e80512f7",
+      "transform": [
+        0.7200460829493087,
+        0,
+        0,
+        0.6339285714285714,
+        599.0264976958525,
+        366.50892857142856
+      ],
+      "pivot": [
+        850,
+        870
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-gigaflower-petal-2.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-gigaflower-petal-2.txt": "ef14798fd1dd7342efe044c5becb1d822ca9953381ee9bb832ea0edb6a51b87a"
+      }
+    },
+    {
+      "id": "treasure-gigaflower-petal-3",
+      "path": "source/motion/gigaflower/petal-3.png",
+      "size": [
+        1712,
+        1712
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        810,
+        825,
+        1330,
+        1100
+      ],
+      "sha256": "943c8d20f66d1d6327f6de292e3ec6b85088b8ddbcee8e3e82f937fb0da50fcf",
+      "bytes": 200188,
+      "nativePath": "review/treasures/parts-native/gigaflower/petal-3.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "c13fe3b2763a272b7a80d6cedd85b3cce71f6a7042db588b0d0f2ab22c98aa48",
+      "transform": [
+        0.8201892744479495,
+        0,
+        0,
+        0.7834757834757835,
+        397.4447949526814,
+        380.7692307692308
+      ],
+      "pivot": [
+        850,
+        870
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-gigaflower-petal-3-isolation-revision.txt",
+        "prompts/treasures-executed/treasure-gigaflower-petal-3.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-gigaflower-petal-3-isolation-revision.txt": "7fdb151be3f45001b7877e1d1406ec2931417a676ebb6c7147d0a93f761c6d26",
+        "prompts/treasures-executed/treasure-gigaflower-petal-3.txt": "14c3790b2263bc3165ff5d8d2286af00d1b030e8c6bb22db7a423f893dff0fff"
+      }
+    },
+    {
+      "id": "treasure-gigaflower-petal-4",
+      "path": "source/motion/gigaflower/petal-4.png",
+      "size": [
+        1712,
+        1712
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        820,
+        845,
+        1085,
+        1200
+      ],
+      "sha256": "c96d44f1ac1007fcea6fd3d324f760236f73b1e4a6dc2a808684619990f80569",
+      "bytes": 123392,
+      "nativePath": "review/treasures/parts-native/gigaflower/petal-4.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "1488a0d908b4c7b5d028e120ee69c58339db41ebc1f12dd6176013f94d6fb2c4",
+      "transform": [
+        0.655940594059406,
+        0,
+        0,
+        0.6419529837251357,
+        549.7524752475247,
+        551.627486437613
+      ],
+      "pivot": [
+        850,
+        870
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-gigaflower-petal-4-isolation-revision.txt",
+        "prompts/treasures-executed/treasure-gigaflower-petal-4.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-gigaflower-petal-4-isolation-revision.txt": "d381fa1a7fdde224412755b1a28c7247dcdd71f415b961677ab5153bb6839107",
+        "prompts/treasures-executed/treasure-gigaflower-petal-4.txt": "79c435236bec49d64cf9834089eda69414d15b8ba2d711af11824c75b39f467c"
+      }
+    },
+    {
+      "id": "treasure-gigaflower-petal-5",
+      "path": "source/motion/gigaflower/petal-5.png",
+      "size": [
+        1712,
+        1712
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        310,
+        710,
+        880,
+        1015
+      ],
+      "sha256": "e1b4d248dfd7d7d83b46a91c01285ce143b5b9186654039d612d02a5f11e3f0a",
+      "bytes": 265555,
+      "nativePath": "review/treasures/parts-native/gigaflower/petal-5.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "c0607aea2d3aa0df289df0dd6109115f503a0432fcaab78aab065786bf6ddf26",
+      "transform": [
+        0.7298335467349552,
+        0,
+        0,
+        0.6979405034324943,
+        210.01280409731115,
+        367.31121281464533
+      ],
+      "pivot": [
+        850,
+        870
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-gigaflower-petal-5.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-gigaflower-petal-5.txt": "d1aca90f5f39694f0090405204c191a668b429e6ddcde8978f978334b8c10859"
+      }
+    },
+    {
+      "id": "treasure-gigaflower-center",
+      "path": "source/motion/gigaflower/center.png",
+      "size": [
+        1712,
+        1712
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        715,
+        555,
+        1040,
+        900
+      ],
+      "sha256": "16d6a74f7b5464d8ae7de4d5a6b79e3db9fa664b8b1338bf4c4687934eb98ad7",
+      "bytes": 238760,
+      "nativePath": "review/treasures/parts-native/gigaflower/center.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "b9b73836d567472bad513e3bcd595484597d60cdacdc0f9bbc8f7bca0e1c5da7",
+      "transform": [
+        0.6063432835820896,
+        0,
+        0,
+        0.7232704402515723,
+        476.10074626865674,
+        264.24528301886795
+      ],
+      "pivot": [
+        850,
+        870
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-gigaflower-center.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-gigaflower-center.txt": "82b80d7c108b58c2770515dfa7056aa5bcf8fed5a24e0d4d79ef24abacc855cb"
+      }
+    },
+    {
+      "id": "treasure-crystal-crystal-2",
+      "path": "source/motion/crystal/crystal-2.png",
+      "size": [
+        1600,
+        1600
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        900,
+        440,
+        1220,
+        1130
+      ],
+      "sha256": "0617210bd4c76fe77e28d23a35a85bcc0a4a21817bba31b7f7837ade379610bd",
+      "bytes": 298806,
+      "nativePath": "review/treasures/parts-native/crystal/crystal-2.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "401e12d63a91dc9e7fbb4d2d0658b3514d1ef81874f0de9e6bae5b21e10fb189",
+      "transform": [
+        0.8268733850129198,
+        0,
+        0,
+        0.971830985915493,
+        417.9328165374677,
+        107.63380281690138
+      ],
+      "pivot": [
+        960,
+        1110
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-crystal-crystal-2-isolation-revision.txt",
+        "prompts/treasures-executed/treasure-crystal-crystal-2.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-crystal-crystal-2-isolation-revision.txt": "32faa2579a1076b83e7a3fc142dc7a396946705a3d28187a65414306f64a77f0",
+        "prompts/treasures-executed/treasure-crystal-crystal-2.txt": "d3fbb345cf824b3f31421eb847342036e32301d9317bda63818517e2d341b54c"
+      }
+    },
+    {
+      "id": "treasure-crystal-crystal-1",
+      "path": "source/motion/crystal/crystal-1.png",
+      "size": [
+        1600,
+        1600
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        527,
+        243,
+        934,
+        1110
+      ],
+      "sha256": "1f622749212d47d2091992e56a9bc0c7be1c2c52511583f71f304fd51cbaddce",
+      "bytes": 479828,
+      "nativePath": "review/treasures/parts-native/crystal/crystal-1.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "33249cb8dc1052e534cbcaf7c1f02f0acb3cee30b6e2dc1aed23095f2ce9976f",
+      "transform": [
+        0.9783653846153846,
+        0,
+        0,
+        0.9919908466819222,
+        148.3725961538462,
+        53.529748283752866
+      ],
+      "pivot": [
+        795,
+        1110
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-crystal-crystal-1.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-crystal-crystal-1.txt": "6599f78466187e5fc077970febeb6703667abaf3141e053263399c538541ea29"
+      }
+    },
+    {
+      "id": "treasure-crystal-crystal-3",
+      "path": "source/motion/crystal/crystal-3.png",
+      "size": [
+        1600,
+        1600
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        455,
+        775,
+        1095,
+        1175
+      ],
+      "sha256": "94cceecee97092d338355811c1502193e98c8063ff130a430837fed650d37b39",
+      "bytes": 318061,
+      "nativePath": "review/treasures/parts-native/crystal/crystal-3.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "de312f609637cd01f10d07725ddbe0518e50734092f4af973e4a99f804a10f3a",
+      "transform": [
+        1.1327433628318584,
+        0,
+        0,
+        1.0050251256281406,
+        60.80530973451329,
+        167.9648241206031
+      ],
+      "pivot": [
+        800,
+        1130
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-crystal-crystal-3-isolation-revision.txt",
+        "prompts/treasures-executed/treasure-crystal-crystal-3.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-crystal-crystal-3-isolation-revision.txt": "f3fe5349f5f8740c74395644b4d4473e8290c1d78737e02c775c9d3d22f87d13",
+        "prompts/treasures-executed/treasure-crystal-crystal-3.txt": "1fa0dd077d55051ca52e56c176496668cf38a2c77b8645d76e061ef4c2731c9a"
+      }
+    },
+    {
+      "id": "treasure-crystal-base",
+      "path": "source/motion/crystal/base.png",
+      "size": [
+        1600,
+        1600
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        379,
+        995,
+        1190,
+        1357
+      ],
+      "sha256": "6a598504f31cd38f30003d3caccc048833e7d82d978424efc89ca58dcf4cdf4e",
+      "bytes": 509609,
+      "nativePath": "review/treasures/parts-native/crystal/base.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "bb12d172834e12dd4e97e173cacbd50f1c723f38a27032f1076140d029554c5d",
+      "transform": [
+        0.9631828978622328,
+        0,
+        0,
+        0.900497512437811,
+        170.95249406175773,
+        323.2288557213931
+      ],
+      "pivot": [
+        800,
+        1250
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-crystal-base-overlap-revision.txt",
+        "prompts/treasures-executed/treasure-crystal-base.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-crystal-base-overlap-revision.txt": "6b5431f0214754cbb153ae44a81f619e13507b2f5ae8359eee9de6641353feb2",
+        "prompts/treasures-executed/treasure-crystal-base.txt": "46283d1de10cd1f5c7a132be3d240ceb6ca645cea8967b6cab377370b13fbb28"
+      }
+    },
+    {
+      "id": "treasure-crystal-glint",
+      "path": "source/motion/crystal/glint.png",
+      "size": [
+        1600,
+        1600
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        253
+      ],
+      "boundsAlpha40": [
+        514,
+        285,
+        1155,
+        1087
+      ],
+      "sha256": "8902cd40d34a31b194762888e88ef4ad2ef078bf86dcb52ba87d30035186ff51",
+      "bytes": 257278,
+      "nativePath": "review/treasures/parts-native/crystal/glint.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "36be3532cebc5748d2833a7f8a3cf65057f173e64861d2628f7d7099296e40fb",
+      "transform": [
+        1.2768924302788844,
+        0,
+        0,
+        1.275039745627981,
+        -0.5876494023904115,
+        0.3910969793322465
+      ],
+      "pivot": [
+        800,
+        800
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/treasures-executed/treasure-crystal-glint-isolation-revision.txt",
+        "prompts/treasures-executed/treasure-crystal-glint.txt"
+      ],
+      "promptHashes": {
+        "prompts/treasures-executed/treasure-crystal-glint-isolation-revision.txt": "f89c8e5db2bbce08df823e22436ef9d6b62f2aaa46a2a8fc9b823574bd4939d4",
+        "prompts/treasures-executed/treasure-crystal-glint.txt": "26a5a6b3d1dad2d851ced13a66bdb2c08cf537ca8f2adc1decbb25804a1dbb52"
+      }
+    }
+  ]
+}

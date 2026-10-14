@@ -244,7 +244,7 @@ test.describe('storage', () => {
 });
 
 test.describe('reliability', () => {
-  test('twenty completions: one reward each, Giganto at 6/11/16, all six treasures', async ({ page }) => {
+  test('twenty completions: one reward each, Giganto at 6/11/16 with his own three, all ten treasures', async ({ page }) => {
     test.setTimeout(300_000);
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await boot(page);
@@ -267,7 +267,9 @@ test.describe('reliability', () => {
     }
     expect(specials).toEqual([6, 11, 16]);
     const counts = await state<Record<string, { count: number }>>(page, 's.get().collection');
-    expect(Object.keys(counts).sort()).toEqual(['berries', 'coconut', 'flower', 'nut', 'shell', 'stone']);
+    // Seventeen friends' mazes bring all seven classic treasures; Giganto's three bring his own.
+    expect(Object.keys(counts).sort()).toEqual(['amber', 'berries', 'coconut', 'crystal', 'feather', 'flower', 'gigaflower', 'nut', 'shell', 'stone']);
+    for (const g of ['amber', 'gigaflower', 'crystal']) expect(counts[g]?.count, g).toBe(1);
     expect(Object.values(counts).reduce((a, b) => a + b.count, 0)).toBe(20);
     // Live resources stay bounded: old board textures are released.
     await page.waitForTimeout(600);
@@ -665,6 +667,40 @@ test.describe('opening animation and V3 characters (14 October 2026)', () => {
       const k = (window as never as { __dino: { game: { textures: { getTextureKeys(): string[] } } } }).__dino.game.textures.getTextureKeys().filter((x) => x.startsWith('char-')).sort().join(',');
       return k === 'char-bill-idle,char-giganto-idle,char-mazu-idle,char-rocky-idle,char-tiny-idle';
     }, null, { timeout: 5_000 });
+  });
+});
+
+test.describe('living treasures (14 October 2026)', () => {
+  const rigState = (page: Page): Promise<{ rig: boolean; parts: number; standHidden: boolean }> =>
+    state(page, "(() => { const g = d.game.scene.getScene('game'); return { rig: !!g.treasureRig, parts: g.treasureRig ? g.treasureRig.container.list.length : 0, standHidden: (g.treasure.cameraFilter & g.cameras.main.id) !== 0 }; })()");
+  const host = async (page: Page, treasureId: string, questId: string): Promise<void> => {
+    await page.evaluate(([t, q]) => {
+      const c = (window as never as { __dino: { ctrl: { state: { session: object }; newSession(o: object): void } } }).__dino.ctrl;
+      c.newSession({ keepQuestOf: { ...c.state.session, characterId: 'giganto', questId: q, treasureId: t, intro: false, special: true }, difficultyOverride: 'hard' });
+    }, [treasureId, questId]);
+    await page.waitForTimeout(400);
+  };
+
+  test("Giganto's giga flower is drawn from its painted parts; the still stays as an invisible stand-in", async ({ page }) => {
+    await boot(page);
+    await startQuest(page);
+    await host(page, 'gigaflower', 'giganto-gigaflower');
+    const r = await rigState(page);
+    expect(r.rig).toBe(true);
+    // Ten parts plus the centre's light.
+    expect(r.parts).toBe(11);
+    expect(r.standHidden).toBe(true);
+    // A classic treasure without parts stays a still image.
+    await host(page, 'coconut', 'giganto-coconut');
+    expect(await rigState(page)).toEqual({ rig: false, parts: 0, standHidden: false });
+  });
+
+  test('reduced motion shows the still image instead of the rig', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await boot(page);
+    await startQuest(page);
+    await host(page, 'crystal', 'giganto-crystal');
+    expect(await rigState(page)).toEqual({ rig: false, parts: 0, standHidden: false });
   });
 });
 

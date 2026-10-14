@@ -196,7 +196,77 @@
     1490,
     974
    ]
+  },
+  "feather": {
+   "image": "assets/treasures/feather.webp",
+   "width": 320,
+   "height": 301,
+   "bytes": 27844,
+   "sourceSha256": "b16322ec99b3bad8742299e062fe3f4f599c6a726b6307738ffa60fe4935b949"
+  },
+  "amber": {
+   "image": "assets/treasures/amber.webp",
+   "width": 268,
+   "height": 320,
+   "bytes": 28716,
+   "sourceSha256": "7d14380fdc6442b41629f5a831378ec0d34d8202bdaf8a1fd71ebcf46d75b14b"
+  },
+  "gigaflower": {
+   "image": "assets/treasures/gigaflower.webp",
+   "width": 309,
+   "height": 320,
+   "bytes": 37836,
+   "sourceSha256": "4ac389e9560f4d89889df165b8ac6b99b947f5a8df1eec1675cfea411917ac8f"
+  },
+  "crystal": {
+   "image": "assets/treasures/crystal.webp",
+   "width": 242,
+   "height": 320,
+   "bytes": 29326,
+   "sourceSha256": "1377189e7b8e02d9e9ce3e117b978b9180c992f467a116ed9c1dc3744aa143e4"
   }
+ },
+ "treasures-v2": {
+  "feather": {
+   "image": "assets/treasures/feather.webp",
+   "width": 320,
+   "height": 301,
+   "bytes": 27844,
+   "sourceSha256": "b16322ec99b3bad8742299e062fe3f4f599c6a726b6307738ffa60fe4935b949"
+  },
+  "amber": {
+   "image": "assets/treasures/amber.webp",
+   "width": 268,
+   "height": 320,
+   "bytes": 28716,
+   "sourceSha256": "7d14380fdc6442b41629f5a831378ec0d34d8202bdaf8a1fd71ebcf46d75b14b"
+  },
+  "gigaflower": {
+   "image": "assets/treasures/gigaflower.webp",
+   "width": 309,
+   "height": 320,
+   "bytes": 37836,
+   "sourceSha256": "4ac389e9560f4d89889df165b8ac6b99b947f5a8df1eec1675cfea411917ac8f"
+  },
+  "crystal": {
+   "image": "assets/treasures/crystal.webp",
+   "width": 242,
+   "height": 320,
+   "bytes": 29326,
+   "sourceSha256": "1377189e7b8e02d9e9ce3e117b978b9180c992f467a116ed9c1dc3744aa143e4"
+  }
+ },
+ "treasure-rigs": {
+  "assets": [
+   "amber",
+   "crystal",
+   "feather",
+   "gigaflower"
+  ],
+  "parts": 21,
+  "pages": 1,
+  "bytes": 162799,
+  "decodedBytes": 3682032
  },
  "foliage-kit-v1.png": {
   "hedge-a": {

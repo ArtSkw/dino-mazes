@@ -52,6 +52,27 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Codex delivery: four treasures with parts (14 October 2026)
+
+- **All ten treasures are in the game.** `npm run art` exported Piórko, Bursztyn, Gigakwiat and
+  Kryształ from the approved masters (`art/source/treasures-v2/`), so quests, the maze, the
+  celebration and the collection with Giganto's golden box now use them. Total runtime download
+  9.35 MB (budget 12 MB).
+- **Living treasures** (`src/game/treasureRig.ts`, `src/game/rigMotion.ts`): the 21 painted parts
+  are packed into one atlas (`tools/art/rigs.py`, 159 KB, 3.5 MiB on the GPU) with Codex's draw
+  order, pivots and opacity (`art/review/treasures/registration.json`). In the maze the treasure
+  is drawn from its parts; the still stays as an invisible stand-in that all existing motion
+  animates, and the rig follows it. Idle motion stays within Codex's reviewed amplitudes (feather
+  vanes ±2.5° against the quill, petals ±3°, glints as pulses); on find the feather swings, the
+  amber flares, the giga flower closes and blooms petal by petal, the crystals light up one after
+  another. Reduced motion keeps the still. Collection and quest card show the stills.
+- Tests: rig assets and motion limits (unit), no jump at the start or end of a celebration, the
+  bloom finished before the flight to the collection, rig vs still in the browser and with
+  reduced motion; the twenty-maze run now collects all ten treasures.
+- **Still open:** the six approved motion masters (butterfly, coconut, nut, flower, berries,
+  chest) have no parts yet, so their animations wait for Codex; the optional Giganto badge was
+  not generated (a drawn footprint is used).
+
 ## Owner review, round 12 (14 October 2026): one corner for the friend, ten treasures
 
 - **The friend always at the lower left, "Wróć" always at the lower right** (`FRIEND_CORNER`), so
@@ -240,8 +261,8 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 218 passed |
-| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 65 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
+| Domain unit + property | `npm test` | 224 passed |
+| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 69 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
 

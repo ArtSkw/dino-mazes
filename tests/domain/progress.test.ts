@@ -3,7 +3,7 @@ import { LEVEL_EVERY, award, isGigantoDue, levelFor, selectNextQuest, specialDif
 import { createRng } from '../../src/domain/rng';
 import { defaultSave } from '../../src/storage/save';
 import { GENERATOR_VERSION } from '../../src/domain/maze';
-import { GIGANTO_TREASURE_ORDER, TREASURES, TREASURE_ORDER, treasureHasArt } from '../../src/data/content';
+import { ALL_TREASURE_IDS, GIGANTO_TREASURE_ORDER, ORDINARY_QUESTS, TREASURES, TREASURE_ORDER, treasureHasArt } from '../../src/data/content';
 import type { SaveV1, Session } from '../../src/domain/types';
 
 function sessionFor(_save: SaveV1, id: string, choice: ReturnType<typeof selectNextQuest>['choice']): Session {
@@ -26,8 +26,10 @@ function sessionFor(_save: SaveV1, id: string, choice: ReturnType<typeof selectN
   };
 }
 
-/** Every treasure has art (the game once Codex delivers the new four). */
+/** Every treasure has art (the game since Codex delivered the new four). */
 const ALL_READY: TreasureReady = () => true;
+/** Only the six original treasures have art (the game before that delivery). */
+const ORIGINAL_SIX: TreasureReady = (id) => ['coconut', 'nut', 'flower', 'stone', 'shell', 'berries'].includes(id);
 
 /** Simulate a child completing `n` mazes in a row. */
 function play(n: number, seed = 'play', ready: TreasureReady = treasureHasArt): { save: SaveV1; log: Array<ReturnType<typeof selectNextQuest>['choice']> } {
@@ -76,10 +78,11 @@ describe('quest selection', () => {
     }
   });
 
-  it('offers every ordinary quest over a long run', () => {
+  it('offers every ordinary quest whose treasure has art over a long run', () => {
     const { log } = play(80, 'variety');
     const ids = new Set(log.filter((c) => !c.special).map((c) => c.quest.id));
-    expect(ids.size).toBe(12);
+    expect(ids.size).toBe(ORDINARY_QUESTS.filter((q) => treasureHasArt(q.treasureId)).length);
+    expect(new Set(play(80, 'variety', ORIGINAL_SIX).log.filter((c) => !c.special).map((c) => c.quest.id)).size).toBe(12);
   });
 
   it('first Giganto quest is maze six, then one after every four ordinary', () => {
@@ -88,7 +91,7 @@ describe('quest selection', () => {
     expect(specials).toEqual([6, 11, 16, 21, 26]);
   });
 
-  it('Giganto keeps the uncollected-treasure-first rule with a pictured generic quest', () => {
+  it("until his own treasures have art, Giganto keeps the uncollected-first rule with a pictured generic quest", () => {
     const rng = createRng('generic');
     const save: SaveV1 = {
       ...defaultSave(),
@@ -96,15 +99,21 @@ describe('quest selection', () => {
       ordinaryCompletionsSinceGiganto: 5,
       collection: { coconut: { count: 2, firstFoundAt: 'x' }, berries: { count: 1, firstFoundAt: 'x' }, nut: { count: 1, firstFoundAt: 'x' } },
     };
-    const sel = selectNextQuest(save, rng, []);
+    const sel = selectNextQuest(save, rng, [], ORIGINAL_SIX);
     expect(sel.choice.special).toBe(true);
     expect(sel.choice.promptKey).toBe('giganto-generic');
-    expect(uncollected(save)).toContain(sel.choice.treasureId);
+    expect(uncollected(save, ['coconut', 'nut', 'flower', 'stone', 'shell', 'berries'])).toContain(sel.choice.treasureId);
   });
 
-  it('treasures without art never appear (the new four wait for Codex)', () => {
+  it('treasures without art never appear', () => {
     const { log } = play(80, 'art-gate');
     for (const c of log) expect(treasureHasArt(c.treasureId), c.treasureId).toBe(true);
+    for (const c of play(40, 'art-gate', ORIGINAL_SIX).log) expect(ORIGINAL_SIX(c.treasureId), c.treasureId).toBe(true);
+  });
+
+  it('all ten treasures have art now (Codex delivery, 14 Oct 2026)', () => {
+    for (const id of ALL_TREASURE_IDS) expect(treasureHasArt(id), id).toBe(true);
+    expect(TREASURES.amber.kind).toBe('giganto');
   });
 
   describe('with all ten treasures in the game', () => {
@@ -178,7 +187,7 @@ describe('award', () => {
 
   it('repeat finds increase the count without a disappointment state', () => {
     const { save } = play(12, 'repeat');
-    const total = TREASURE_ORDER.reduce((s, t) => s + (save.collection[t]?.count ?? 0), 0);
+    const total = ALL_TREASURE_IDS.reduce((s, t) => s + (save.collection[t]?.count ?? 0), 0);
     expect(total).toBe(12);
     expect(uncollected(save)).toHaveLength(0);
   });

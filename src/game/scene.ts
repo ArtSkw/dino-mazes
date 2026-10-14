@@ -11,11 +11,12 @@ import type { Hint } from '../domain/trail';
 import type { CharacterId, Point, TreasureId } from '../domain/types';
 import { castSlots, introCharacterRect, toScreen, type Rect } from '../platform/layout';
 import { CharacterActor } from './actor';
-import { ASSETS, CAST_SCALE, assetUrl, baseHidden, friendFrame, grainTexture, handTexture, pawTexture, leafTexture, ringTexture, sparkTexture, starTexture } from './assets';
+import { ASSETS, CAST_SCALE, assetUrl, baseHidden, friendFrame, treasureRig, grainTexture, handTexture, pawTexture, leafTexture, ringTexture, sparkTexture, starTexture } from './assets';
 import { AmbientWorld } from './ambient';
 import { footprint, paintBoard } from './boardPainter';
 import { CharacterTextures, type AtlasRef } from './characterTextures';
 import { popUp } from './motion';
+import { RIG_ATLAS_KEY, TreasureRig } from './treasureRig';
 import { OpeningDirector, preloadOpening, type OpeningStep } from './opening';
 
 export interface UiBridge {
@@ -68,6 +69,7 @@ export class GameScene extends Phaser.Scene {
   private ring!: Phaser.GameObjects.Image;
   private treasure: Phaser.GameObjects.Image | null = null;
   private treasureGlow: Phaser.GameObjects.Image | null = null;
+  private treasureRig: TreasureRig | null = null;
   private treasureFlown = false;
   private companion: CharacterActor | null = null;
   private companionPlants: Phaser.GameObjects.Image[] = [];
@@ -113,6 +115,8 @@ export class GameScene extends Phaser.Scene {
     this.load.image('ground', assetUrl(ASSETS.backgrounds.ground.image));
     for (const [name, item] of Object.entries(ASSETS.foliage)) this.load.image(`fol-${name}`, assetUrl(item.image));
     for (const [id, item] of Object.entries(ASSETS.treasures)) this.load.image(`tr-${id}`, assetUrl(item.image));
+    const rigAtlas = ASSETS.treasureRigs?.atlas;
+    if (rigAtlas) this.load.multiatlas(RIG_ATLAS_KEY, assetUrl(rigAtlas), assetUrl(rigAtlas.slice(0, rigAtlas.lastIndexOf('/') + 1)));
     this.load.image('amb-leaf', assetUrl(ASSETS.ui['panel-leaf']?.image ?? ''));
     // Only what the first screen shows: every friend's corner idle frames
     // (other atlases load on demand; see characterTextures.ts).
@@ -210,12 +214,16 @@ export class GameScene extends Phaser.Scene {
       if (this.companion?.isSleeping) this.wakeCompanion();
     }
     switch (e.type) {
-      case 'state':
+      case 'state': {
         this.applyScreen();
+        // Reduced motion switched: the treasure goes back to its still (or to its rig).
+        const id = this.ctrl.state.session?.treasureId;
+        if (this.treasure && id && (!this.reduced && !!treasureRig(id)) !== !!this.treasureRig) this.refreshTreasureRig();
         this.companion?.setReduced(this.reduced);
         for (const a of this.cast) a.setReduced(this.reduced);
         this.updateHandDemo();
         break;
+      }
       case 'maze':
         this.buildMaze();
         break;
@@ -350,6 +358,8 @@ export class GameScene extends Phaser.Scene {
     }
     this.treasure?.destroy();
     this.treasureGlow?.destroy();
+    this.treasureRig?.destroy();
+    this.treasureRig = null;
     this.treasure = null;
     this.treasureGlow = null;
     this.treasureFlown = this.ctrl.state.screen === 'reward';
@@ -376,6 +386,7 @@ export class GameScene extends Phaser.Scene {
     const tr = TREASURES[session.treasureId];
     this.treasureGlow = this.add.image(0, 0, 'spark').setDepth(D.treasureGlow).setBlendMode(Phaser.BlendModes.ADD).setTint(Phaser.Display.Color.HexStringToColor(tr.glow).color).setAlpha(0.75);
     this.treasure = this.add.image(0, 0, `tr-${session.treasureId}`).setDepth(D.treasure);
+    this.refreshTreasureRig();
     this.placeTreasure();
     this.drawTrail();
     this.shownScreen = 'rebuilding';
@@ -412,6 +423,25 @@ export class GameScene extends Phaser.Scene {
     const p = toScreen(layout.transform, painted.origin);
     this.board.setPosition(p.x, p.y);
     this.board.setDisplaySize(painted.size.w * layout.transform.pitch, painted.size.h * layout.transform.pitch);
+  }
+
+  /**
+   * Draw the treasure from its painted parts when it has them (and motion is
+   * not reduced). The still image stays as the invisible stand-in that every
+   * treasure motion animates; the rig follows it (treasureRig.ts).
+   */
+  private refreshTreasureRig(): void {
+    this.treasureRig?.destroy();
+    this.treasureRig = null;
+    const stand = this.treasure;
+    const session = this.ctrl.state.session;
+    if (!stand || !session) return;
+    stand.cameraFilter = 0;
+    const asset = treasureRig(session.treasureId);
+    if (!asset || this.reduced || !this.textures.exists(RIG_ATLAS_KEY)) return;
+    this.treasureRig = new TreasureRig(this, session.treasureId, asset, D.treasure);
+    this.cameras.main.ignore(stand);
+    this.treasureRig.sync(stand, this.time.now);
   }
 
   private placeTreasure(): void {
@@ -1220,7 +1250,12 @@ export class GameScene extends Phaser.Scene {
     const treasure = this.treasure;
     later(650, () => {
       this.tweens.killTweensOf(treasure);
-      this.signatureMotion(reward.treasureId, treasure, layout.transform.pitch);
+      if (this.treasureRig) {
+        // A rigged treasure performs with its parts, held a little larger.
+        const s = treasure.getData('baseScale') as number;
+        this.treasureRig.celebrate(this.time.now);
+        this.tweens.add({ targets: treasure, scale: s * 1.3, duration: 320, hold: 520, yoyo: true, ease: 'Sine.easeInOut' });
+      } else this.signatureMotion(reward.treasureId, treasure, layout.transform.pitch);
       this.bursts.forEach((b, i) => b.explode(i === 0 ? 10 : 8, treasure.x, treasure.y));
       this.sparkle.explode(12, treasure.x, treasure.y);
     });
@@ -1526,6 +1561,8 @@ export class GameScene extends Phaser.Scene {
   // ---------------------------------------------------------------------------
 
   override update(time: number): void {
+    // Scene clock (not the loop's time): it is the clock the celebration starts on.
+    if (this.treasureRig && this.treasure) this.treasureRig.sync(this.treasure, this.time.now);
     this.ambient.update(time);
     this.distantFootsteps(time);
     this.sleepyFriend(time);

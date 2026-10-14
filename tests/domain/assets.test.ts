@@ -68,7 +68,9 @@ describe('GPU memory per screen (PRD §9: ≤ 96 MiB)', () => {
     img(manifest.backgrounds.jungle) +
     img(manifest.backgrounds.ground) +
     Object.values(manifest.foliage).reduce((a, v) => a + img(v), 0) +
-    Object.values(manifest.treasures).reduce((a, v) => a + img(v), 0);
+    Object.values(manifest.treasures).reduce((a, v) => a + img(v), 0) +
+    // The treasures' painted parts (one atlas, loaded at boot).
+    ((manifest as { treasureRigs?: { decodedBytes?: number } }).treasureRigs?.decodedBytes ?? 0);
   const BOARD = 2048 * 2048 * 4; // painted maze texture, capped at 2048 px
   const ids = Object.keys(chars);
   const sum = (id: string, groups: Array<'idle' | 'wave' | 'more' | 'stage'>): number => groups.reduce((a, g) => a + (chars[id]?.decodedBytes[g] ?? 0), 0);

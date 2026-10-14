@@ -1,5 +1,5 @@
 {
-  "stage": "awaiting-owner-approval",
+  "stage": "master-designs-approved-parts-not-started",
   "masterCount": 6,
   "expectedMasterCount": 6,
   "partsGenerated": 0,
@@ -24,7 +24,7 @@
       ],
       "bytes": 1262751,
       "sha256": "23e73696e6f2849dda6cc0141e47991cb0960426bcd7d50828acbd99199e0b6b",
-      "status": "awaiting-owner-approval",
+      "status": "master-design-approved",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-butterfly-master.txt"
@@ -59,7 +59,7 @@
       ],
       "bytes": 1990130,
       "sha256": "dff68a4cf8997626d8a22a97d28e99376183547bcda1b25a030c957f255a9713",
-      "status": "awaiting-owner-approval",
+      "status": "master-design-approved",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-coconut-master.txt"
@@ -94,7 +94,7 @@
       ],
       "bytes": 1397903,
       "sha256": "3fe662f896392b602a8ab4b1d85f65904039d5c5e4e58f775a5579edd1e943ec",
-      "status": "awaiting-owner-approval",
+      "status": "master-design-approved",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-nut-master.txt"
@@ -129,7 +129,7 @@
       ],
       "bytes": 1565468,
       "sha256": "e9b17ea098283f9bac976afed290c84ab68622803aa9815afdd4b66b58b4e7e8",
-      "status": "awaiting-owner-approval",
+      "status": "master-design-approved",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-flower-master.txt"
@@ -164,7 +164,7 @@
       ],
       "bytes": 1245563,
       "sha256": "c3a4039d72bfac92a797c6ec6cad4d71a5d0a08eae9d1a37bd7b5e524901d60a",
-      "status": "awaiting-owner-approval",
+      "status": "master-design-approved",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-berries-master-count-revision.txt",
@@ -201,7 +201,7 @@
       ],
       "bytes": 1586252,
       "sha256": "fe73f3e82d3b64ccec5289c3af698887a19e5728f6a3a88b146cefe02b19e50e",
-      "status": "awaiting-owner-approval",
+      "status": "master-design-approved",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-chest-master.txt"
@@ -216,5 +216,6 @@
         "prompts/motion-executed/motion-chest-master.txt": "14006700c147a6429be89649fa3ff5a79803184ee34b0c9d5a996c514b461202"
       }
     }
-  ]
+  ],
+  "ownerApprovalDate": "2026-10-14"
 }
