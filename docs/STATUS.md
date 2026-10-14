@@ -52,6 +52,13 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Sound plan (15 October 2026)
+
+[SOUND_PLAN.md](SOUND_PLAN.md): effects, music and fully voiced friends in Polish and English with
+the owner's ElevenLabs account; generated offline (the API key only in `.env.local`, now ignored by
+git), mastered with ffmpeg, played by a new Web Audio player with effects / music / voices
+switches. Waiting for the owner's go and the pilot.
+
 ## Codex plan: the last polish (15 October 2026)
 
 [../art/CODEX_REQUEST_POLISH.md](../art/CODEX_REQUEST_POLISH.md): the motion plan's priorities 2

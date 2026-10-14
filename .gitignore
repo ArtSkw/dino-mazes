@@ -17,3 +17,9 @@ art/review/**/*.gif
 
 # Local Claude Code session state
 .claude/
+
+# Local secrets (ElevenLabs API key) and generated audio takes: never committed
+.env
+.env.local
+.env.*.local
+art/source/audio/
