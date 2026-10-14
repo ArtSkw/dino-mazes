@@ -149,15 +149,15 @@ Preserve the first-six-unique-treasures rule: select Giganto's treasure from unc
 
 There is no difficulty setting. The first maze is the fixed tutorial; generated mazes start
 clearly harder than the old "medium" (owner, 14 Oct: the first levels felt too easy) and step
-up one level every three completed mazes, capped at the last level. "Zacznij grę od nowa"
+up one level every four completed mazes (owner, 14 Oct; was three), capped at the last level. "Zacznij grę od nowa"
 starts the climb again.
 
 | Level | Mazes (after the tutorial) | Grid on a 1180 × 820 tablet | Larger screens | Meaningful branch choices (7 × 7) | Minimum route (7 × 7) |
 |---|---|---|---|---|---|
-| hard | 1–3 | 7 × 7 | 9 × 7 / 9 × 9 | 5–8 | 18 |
-| expert | 4–6 | 7 × 7 | 9 × 7 / 9 × 9 | 6–8 | 20 |
-| master | 7–9 | 7 × 7 | up to 11 × 9 | 6–9 | 22 |
-| grand | 10+ | 7 × 7 | up to 11 × 9 | 7–9 | 22 |
+| hard | 1–4 | 7 × 7 | 9 × 7 / 9 × 9 | 5–8 | 18 |
+| expert | 5–8 | 7 × 7 | 9 × 7 / 9 × 9 | 6–8 | 20 |
+| master | 9–12 | 7 × 7 | up to 11 × 9 | 6–9 | 22 |
+| grand | 13+ | 7 × 7 | up to 11 × 9 | 7–9 | 22 |
 
 Measured averages on 7 × 7: 5.4 → 7.2 branch choices and a 22–25-cell route (the old
 starting level: 3.9 and 19). A bigger grid is used only where corridors stay ≥ 48 px **and**

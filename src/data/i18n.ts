@@ -80,8 +80,8 @@ export const STRINGS = {
   skip: { pl: 'Pomiń', en: 'Skip' },
   waveHello: { pl: '{name} macha do ciebie!', en: '{name} waves hello!' },
   parentHelp: {
-    pl: 'Dziecko rysuje drogę palcem lub myszką. „Wróć” czyści ścieżkę w tym samym labiryncie. Po trzech takich próbach przylatuje motylek, który pokazuje dwa kolejne ruchy. Dotknięcie przyjaciela w rogu przypomina zadanie. Labirynty same stają się trudniejsze co trzy przygody.',
-    en: 'Your child draws the path with a finger or mouse. "Start over" clears the path in the same maze. After three fresh starts a butterfly comes and shows the next two moves. Tapping the friend in the corner repeats the quest. Mazes get a little harder every three adventures.',
+    pl: 'Dziecko rysuje drogę palcem lub myszką. „Wróć” czyści ścieżkę w tym samym labiryncie. Po trzech takich próbach przylatuje motylek, który pokazuje dwa kolejne ruchy. Dotknięcie przyjaciela w rogu przypomina zadanie. Labirynty same stają się trudniejsze co cztery przygody.',
+    en: 'Your child draws the path with a finger or mouse. "Start over" clears the path in the same maze. After three fresh starts a butterfly comes and shows the next two moves. Tapping the friend in the corner repeats the quest. Mazes get a little harder every four adventures.',
   },
   privacyNote: {
     pl: 'Postępy zapisują się tylko na tym urządzeniu.',

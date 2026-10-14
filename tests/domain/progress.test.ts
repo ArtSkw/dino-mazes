@@ -159,5 +159,9 @@ describe('automatic difficulty', () => {
     expect(at(1 + 2 * LEVEL_EVERY)).toBe('master');
     expect(at(1 + 3 * LEVEL_EVERY)).toBe('grand');
     expect(at(500)).toBe('grand');
+    expect(LEVEL_EVERY).toBe(4);
+    // The fourth generated maze is still 'hard'; the fifth is the first 'expert'.
+    expect(at(1 + 3)).toBe('hard');
+    expect(at(1 + 4)).toBe('expert');
   });
 });

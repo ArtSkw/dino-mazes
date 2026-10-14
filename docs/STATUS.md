@@ -52,6 +52,13 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 7 (14 October 2026)
+
+- Difficulty now steps up every **4** generated mazes (was 3): hard 1–4, expert 5–8,
+  master 9–12, grand 13+ (`LEVEL_EVERY` in `src/domain/progress.ts`; parent help text updated).
+- Research on living, high-fidelity small assets (samyost1/3dicon, the "Opus 5.5 Motion Lab"
+  article) and a place-by-place proposal: [MOTION_PROPOSAL.md](MOTION_PROPOSAL.md). Not built yet.
+
 ## Owner review, round 6 (14 October 2026)
 
 | # | Request | What changed | Evidence |

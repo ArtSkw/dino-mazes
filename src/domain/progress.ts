@@ -39,7 +39,8 @@ export function isGigantoDue(save: Pick<SaveV1, 'gigantoCompleted' | 'ordinaryCo
 }
 
 /** Generated mazes step up one difficulty level every this many completed mazes. */
-export const LEVEL_EVERY = 3;
+/** Owner decision (14 Oct 2026): a new level every 4 mazes (was 3). */
+export const LEVEL_EVERY = 4;
 
 /**
  * The difficulty for the next generated maze, from progress alone (no parent
