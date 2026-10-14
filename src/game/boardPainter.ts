@@ -98,7 +98,7 @@ function filletPath(g: CanvasRenderingContext2D, maze: Maze, toPx: (p: Point) =>
 }
 
 /** Three-toed dino footprint, pointing along `angle`. */
-function footprint(g: CanvasRenderingContext2D, x: number, y: number, size: number, angle: number): void {
+export function footprint(g: CanvasRenderingContext2D, x: number, y: number, size: number, angle: number): void {
   g.save();
   g.translate(x, y);
   g.rotate(angle + Math.PI / 2);

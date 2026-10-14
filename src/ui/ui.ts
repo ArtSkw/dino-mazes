@@ -31,6 +31,10 @@ export class Ui implements UiBridge {
   /** Screen rect of the companion's frame (from the renderer), or null when hidden. */
   private companionRect: Rect | null = null;
   private castBoxes: Rect[] = [];
+  private castIds: CharacterId[] = [];
+  private castBubble!: HTMLElement;
+  private castBubbleText!: HTMLElement;
+  private castBubbleTimer = 0;
   private shownScreen = '';
   surface!: HTMLDivElement;
 
@@ -176,7 +180,9 @@ export class Ui implements UiBridge {
     );
     this.sproutImgs = ASSETS.intro.sprout.stages.map((src) => h('img', { class: 'sprout', src: assetUrl(src), alt: '', hidden: true, draggable: 'false' }));
     this.welcomeCard = h('div', { class: 'welcome-card' }, this.signEl, h('div', { class: 'play-wrap' }, ...this.sproutImgs, this.playBtn));
-    this.welcome = h('div', { class: 'screen welcome' }, this.castLayer, this.welcomeCard);
+    this.castBubbleText = h('span');
+    this.castBubble = h('div', { class: 'cast-bubble', hidden: true, 'aria-hidden': 'true' }, this.castBubbleText);
+    this.welcome = h('div', { class: 'screen welcome' }, this.castLayer, this.welcomeCard, this.castBubble);
 
     // Opening: closed leaf curtains (also the loading screen) and a tap-to-skip layer.
     const curtain = (side: 'left' | 'right'): HTMLImageElement => {
@@ -668,7 +674,10 @@ export class Ui implements UiBridge {
   setCastRects(rects: Array<{ id: CharacterId; rect: Rect }>): void {
     this.castLayer.replaceChildren(
       ...rects.map(({ id, rect }) => {
-        const b = this.button('cast-btn', () => this.ctrl.wave(id));
+        const b = this.button('cast-btn', () => {
+          this.ctrl.wave(id);
+          this.castSay(id);
+        });
         b.dataset['id'] = id;
         b.setAttribute('aria-label', CHARACTERS[id].name[this.ctrl.lang]);
         // Hit area: the painted upper body, not the foliage strip.
@@ -678,11 +687,50 @@ export class Ui implements UiBridge {
       }),
     );
     // Painted boxes of the cast (sprites sit 8px below their slots).
+    this.castIds = rects.map(({ id }) => id);
+    if (!rects.length) show(this.castBubble, false);
     this.castBoxes = rects.map(({ id, rect }) => {
       const c = ASSETS.characters[id].content;
       return { x: rect.x + rect.w * c.x, y: rect.y + 8 + rect.h * c.y, w: rect.w * c.w, h: rect.h * c.h };
     });
     this.placeWelcomeCard();
+  }
+
+  /** A tapped friend on the welcome screen says hello in a bubble above its head. */
+  private castSay(id: CharacterId): void {
+    const i = this.castIds.indexOf(id);
+    const box = this.castBoxes[i];
+    if (!box) return;
+    const text = this.ctrl.greet(id);
+    const b = this.castBubble;
+    this.castBubbleText.textContent = text;
+    show(b, true);
+    b.style.width = 'max-content';
+    b.style.maxWidth = '260px';
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const w = b.offsetWidth;
+    const h = b.offsetHeight;
+    const headX = box.x + box.w * 0.5;
+    let left = Math.min(vw - w - 12, Math.max(12, headX - w / 2));
+    let top = box.y - h - 18;
+    // Keep "Graj" visible: first tuck the bubble just under the button (it may
+    // touch the friend's forehead), only then slide it sideways.
+    const play = this.playBtn.getBoundingClientRect();
+    const hits = (): boolean => left < play.right + 6 && left + w > play.left - 6 && top < play.bottom + 4 && top + h > play.top;
+    if (hits()) top = Math.max(top, play.bottom + 8);
+    if (hits() || top + h > box.y + box.h * 0.2) {
+      top = box.y - h - 18;
+      left = headX < play.left + play.width / 2 ? Math.max(12, play.left - 8 - w) : Math.min(vw - w - 12, play.right + 8);
+    }
+    b.style.left = `${Math.round(left)}px`;
+    b.style.top = `${Math.round(Math.max(8, Math.min(top, vh - h - 8)))}px`;
+    b.style.setProperty('--tail-x', `${Math.round(Math.min(w - 22, Math.max(22, headX - left)))}px`);
+    b.style.setProperty('--accent', CHARACTERS[id].accent);
+    flash(b, 'bubble-in', 320);
+    window.clearTimeout(this.castBubbleTimer);
+    this.castBubbleTimer = window.setTimeout(() => show(b, false), Math.min(6000, Math.max(3000, 1800 + text.length * 55)));
+    this.announce(`${CHARACTERS[id].name[this.ctrl.lang]}: ${text}`);
   }
 
   hintLanded(): void {

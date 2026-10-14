@@ -140,3 +140,30 @@ six treasures, the butterfly and the chest fit in roughly one 2048 px atlas, ≈
 Not recommended now: replacing treasures with 3dicon loops (weight, style, reduced motion,
 external paid API), or moving to Rive/Lottie (authoring tools we cannot drive from code, extra
 runtime, CSP change).
+
+## 6. Living-world details built on 14 October 2026 (code only, no new art)
+
+The owner asked for subtle details that make the game feel like stepping into the cartoon,
+without pulling attention from the maze. Built in `src/game/ambient.ts` and `src/game/scene.ts`;
+all of it stays outside the board (or on the solved path) and is off with reduced motion.
+
+| Detail | What happens |
+|---|---|
+| Wind | One breeze moves every plant on screen; every 9–16 s a gust ripples across from left to right and settles with a damped wobble (replaces the plants' separate sine yoyos). |
+| Sun spots | Five small soft spots of sunlight drift on the sand and brighten when a gust shakes the canopy. Small sprites on purpose: two full-screen light layers measured 33 → 83 ms per frame in software GL; the spots cost almost nothing on a GPU. |
+| Falling leaves | Every 14–26 s a painted leaf tumbles down, flipping as it falls (in a side rail during play). |
+| Butterflies | Fly on curved paths with a fast down-stroke and slow up-stroke, lift a little on each beat, and perch on plants where they rest with slowly opening wings. |
+| Daylight | The backdrop's colour follows the local time: cool morning, neutral day, golden evening, soft dusk. |
+| Treasure twinkle | Every few seconds a star glints on the treasure in the clearing. |
+| Sand under the tip | A few grains of sand puff up behind the drawing tip (rate-limited). |
+| Paw prints | After a solve, the friend's prints trot along the drawn path on the sand beside it (bigger for Giganto). |
+| Friends say hello | On the welcome screen a tapped friend introduces itself in a bubble ("Cześć! Jestem Miłka!"), then tells its little facts; its neighbours give a small hop. |
+| Giganto nearby | Every 45–80 s on the welcome screen two soft distant footsteps: the plants shiver, the view trembles slightly, Giganto bounces. |
+| Sleepy friend | After 50 s without any input on a maze, the host closes its eyes and little "z" letters float up; a tap or drawing wakes it with a wave. |
+
+Further ideas that need new art or an owner decision (not built):
+
+- hidden critters in the hedges (ladybug, snail, frog) that hide when tapped — Codex art, never on corridors;
+- treasures "living" in their collection nests (the per-object motion from section 4);
+- a very quiet synthesized jungle (an occasional bird call on the welcome screen only) — the PRD defers music, so this is the owner's call;
+- seasonal touches (snow in December, a birthday cake on the child's birthday).

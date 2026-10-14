@@ -8,13 +8,13 @@
  * drawing / paused) → solved + celebrating → reward → next intro.
  * Collection and settings are overlays and never create sessions.
  */
-import { ASK_FOR, CHARACTERS, FRIEND_LINES, GIGANTO_GENERIC, INTRO_PROMPT, KIND_LINES, TREASURE_OBJECT, questById } from '../data/content';
+import { ASK_FOR, CHARACTERS, FRIEND_LINES, GIGANTO_GENERIC, HELLO, INTRO_PROMPT, KIND_LINES, TREASURE_OBJECT, questById } from '../data/content';
 import { t, type StringKey } from '../data/i18n';
 import { GENERATOR_VERSION, generateMaze, introMaze, profileFor, rebuildMaze } from '../domain/maze';
 import { award, levelFor, selectNextQuest, specialDifficulty } from '../domain/progress';
 import { createRng, freshSeed } from '../domain/rng';
 import { TrailEngine, computeHint, type Dir, type Hint } from '../domain/trail';
-import type { Difficulty, Lang, Localized, Maze, Point, SaveV1, Session, Settings, TreasureId } from '../domain/types';
+import type { CharacterId, Difficulty, Lang, Localized, Maze, Point, SaveV1, Session, Settings, TreasureId } from '../domain/types';
 import { friendFrame } from '../game/assets';
 import type { SoundBoard, Sfx } from '../game/audio';
 import { computeLayout, fitGrid, type Layout } from '../platform/layout';
@@ -678,6 +678,18 @@ export class Controller {
   wave(characterId: string): void {
     this.sfx('wave');
     this.emit({ type: 'wave', characterId });
+  }
+
+  /** Taps per friend on the welcome screen (first: hello, then their own lines). */
+  private greetings = new Map<string, number>();
+
+  /** A tapped friend on the welcome screen introduces itself, then tells little facts. */
+  greet(characterId: CharacterId): string {
+    const n = this.greetings.get(characterId) ?? 0;
+    this.greetings.set(characterId, n + 1);
+    if (n === 0) return HELLO[this.lang].replace('{name}', CHARACTERS[characterId].name[this.lang]);
+    const own = FRIEND_LINES[characterId];
+    return (own[(n - 1) % own.length] as Localized)[this.lang];
   }
 
   /**

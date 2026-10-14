@@ -105,6 +105,26 @@ export function sparkTexture(): HTMLCanvasElement {
   return c;
 }
 
+/** A small three-toed paw print (pointing up), drawn with the board's footprint shape. */
+export function pawTexture(draw: (g: CanvasRenderingContext2D, x: number, y: number, size: number, angle: number) => void): HTMLCanvasElement {
+  const [c, g] = canvas(64, 64);
+  g.fillStyle = 'rgba(120, 76, 32, 0.62)';
+  draw(g, 32, 34, 52, -Math.PI / 2);
+  return c;
+}
+
+/** A soft grain of sand (tinted at runtime) for the puffs under the drawing tip. */
+export function grainTexture(): HTMLCanvasElement {
+  const [c, g] = canvas(16, 16);
+  const grad = g.createRadialGradient(8, 8, 0, 8, 8, 8);
+  grad.addColorStop(0, 'rgba(255,255,255,1)');
+  grad.addColorStop(0.6, 'rgba(255,255,255,0.7)');
+  grad.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = grad;
+  g.fillRect(0, 0, 16, 16);
+  return c;
+}
+
 /** Four-point glint star. */
 export function starTexture(): HTMLCanvasElement {
   const [c, g] = canvas(64, 64);

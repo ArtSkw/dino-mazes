@@ -631,3 +631,49 @@ test.describe('opening animation and V3 characters (14 October 2026)', () => {
     }, null, { timeout: 5_000 });
   });
 });
+
+test.describe('living world details (14 October 2026)', () => {
+  test('a tapped friend says hello on the welcome screen, then tells a little fact', async ({ page }) => {
+    await boot(page);
+    await page.waitForTimeout(300);
+    const bubble = page.locator('.cast-bubble');
+    await page.locator('.cast-btn[data-id="tiny"]').click({ force: true });
+    await expect(bubble).toBeVisible();
+    await expect(bubble).toHaveText('Cześć! Jestem Miłka!');
+    await page.locator('.cast-btn[data-id="tiny"]').click({ force: true });
+    await expect(bubble).toHaveText('Mam trzy rogi. Policzysz je ze mną?');
+    // "Graj" stays uncovered.
+    const b = (await bubble.boundingBox())!;
+    const play = (await page.locator('.btn-play').boundingBox())!;
+    expect(b.x < play.x + play.width && play.x < b.x + b.width && b.y < play.y + play.height && play.y < b.y + b.height).toBe(false);
+    expect(await state<string>(page, 'c.state.screen')).toBe('welcome');
+  });
+
+  test('after a long quiet spell the friend dozes off; a tap wakes it', async ({ page }) => {
+    await boot(page);
+    await startQuest(page);
+    await page.waitForTimeout(1500);
+    await page.evaluate(() => { const g = (window as never as { __dino: { game: { scene: { getScene(k: string): { lastActivity: number; time: { now: number } } } } } }).__dino.game.scene.getScene('game'); g.lastActivity = g.time.now - 60_000; });
+    await page.waitForFunction(() => (window as never as { __dino: { game: { scene: { getScene(k: string): { companion: { isSleeping: boolean } } } } } }).__dino.game.scene.getScene('game').companion.isSleeping, null, { timeout: 3_000 });
+    await page.getByRole('button', { name: /Dotknij, żeby porozmawiać/ }).click();
+    expect(await state<boolean>(page, "d.game.scene.getScene('game').companion.isSleeping")).toBe(false);
+  });
+
+  test('after a solve the friend leaves paw prints along the path (not with reduced motion)', async ({ page, browser }) => {
+    await boot(page);
+    await startQuest(page);
+    await solveByKeyboard(page);
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { screen: string } } } }).__dino.ctrl.state.screen === 'reward', null, { timeout: 15_000 });
+    await page.waitForTimeout(800);
+    expect(await state<number>(page, "d.game.scene.getScene('game').prints.length")).toBeGreaterThan(3);
+    const context = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 1180, height: 820 }, locale: 'en-US' });
+    const calm = await context.newPage();
+    await boot(calm);
+    await startQuest(calm);
+    await solveByKeyboard(calm);
+    await calm.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { screen: string } } } }).__dino.ctrl.state.screen === 'reward', null, { timeout: 15_000 });
+    await calm.waitForTimeout(800);
+    expect(await state<number>(calm, "d.game.scene.getScene('game').prints.length")).toBe(0);
+    await context.close();
+  });
+});

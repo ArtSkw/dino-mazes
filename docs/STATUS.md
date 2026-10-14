@@ -52,6 +52,15 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 8 (14 October 2026)
+
+Living-world details built in code (no new art): wind, sun spots, falling leaves, perching
+butterflies, daylight colour, treasure twinkle, sand under the drawing tip, paw prints after a
+solve, friends saying hello on the welcome screen, Giganto's distant footsteps, and a sleepy
+friend after a long pause. All outside the board or on the solved path, off with reduced motion.
+Details and further ideas: [MOTION_PROPOSAL.md](MOTION_PROPOSAL.md) §6. New e2e tests: greeting
+bubble (does not cover "Graj"), paw prints (none with reduced motion), sleepy friend wakes on tap.
+
 ## Owner review, round 7 (14 October 2026)
 
 - Difficulty now steps up every **4** generated mazes (was 3): hard 1–4, expert 5–8,

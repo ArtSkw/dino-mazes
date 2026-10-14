@@ -4,7 +4,7 @@
  * and suspends while the page is hidden. No error buzzers, no continuous sound
  * while drawing, no music.
  */
-export type Sfx = 'tap' | 'pickup' | 'success' | 'wave' | 'flutter' | 'pop' | 'whoosh' | 'bum' | 'toot' | 'sparkle';
+export type Sfx = 'tap' | 'pickup' | 'success' | 'wave' | 'flutter' | 'pop' | 'whoosh' | 'bum' | 'bumFar' | 'toot' | 'sparkle';
 
 export class SoundBoard {
   private ctx: AudioContext | null = null;
@@ -88,6 +88,10 @@ export class SoundBoard {
         // A soft, friendly footstep: low thump, never a scary boom.
         this.sweep(120, 48, t, 0.32, 'sine', 0.42);
         this.noise(t, 0.12, 180, 0.12);
+        break;
+      case 'bumFar':
+        // Giganto somewhere in the jungle: a soft, low, distant thud.
+        this.sweep(90, 42, t, 0.4, 'sine', 0.16);
         break;
       case 'toot':
         // Czupur's crest: a short, round two-note toot.

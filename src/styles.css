@@ -773,7 +773,8 @@ button:focus-visible,
   outline-offset: -4px;
 }
 
-.bubble {
+.bubble,
+.cast-bubble {
   --accent: var(--rim);
   position: absolute;
   z-index: 3;
@@ -809,6 +810,23 @@ button:focus-visible,
   stroke-width: 3;
   stroke-linejoin: round;
   stroke-linecap: round;
+}
+
+/* Welcome-screen greeting: a simple downward tail towards the friend's head. */
+.cast-bubble {
+  z-index: 4;
+}
+
+.cast-bubble::after {
+  content: '';
+  position: absolute;
+  left: var(--tail-x, 50%);
+  bottom: -9px;
+  width: 18px;
+  height: 18px;
+  background: #fffaf0;
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: 3px 3px 0 0 var(--accent);
 }
 
 .bubble-in {

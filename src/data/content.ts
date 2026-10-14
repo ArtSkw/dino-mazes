@@ -150,6 +150,9 @@ export const FRIEND_LINES: Record<CharacterId, Localized[]> = {
   ],
 };
 
+/** What a friend says when tapped on the welcome screen the first time. */
+export const HELLO: Localized = { pl: 'Cześć! Jestem {name}!', en: "Hi! I'm {name}!" };
+
 export const KIND_LINES: Localized[] = [
   { pl: 'Świetnie ci idzie!', en: "You're doing great!" },
   { pl: 'Spokojnie, krok po kroku.', en: 'Nice and easy, step by step.' },

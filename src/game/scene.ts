@@ -11,8 +11,9 @@ import type { Hint } from '../domain/trail';
 import type { CharacterId, Point, TreasureId } from '../domain/types';
 import { castSlots, introCharacterRect, toScreen, type Rect } from '../platform/layout';
 import { CharacterActor } from './actor';
-import { ASSETS, CAST_SCALE, assetUrl, friendFrame, handTexture, leafTexture, ringTexture, sparkTexture, starTexture } from './assets';
-import { paintBoard } from './boardPainter';
+import { ASSETS, CAST_SCALE, assetUrl, friendFrame, grainTexture, handTexture, pawTexture, leafTexture, ringTexture, sparkTexture, starTexture } from './assets';
+import { AmbientWorld } from './ambient';
+import { footprint, paintBoard } from './boardPainter';
 import { CharacterTextures, type AtlasRef } from './characterTextures';
 import { OpeningDirector, preloadOpening, type OpeningStep } from './opening';
 
@@ -76,7 +77,15 @@ export class GameScene extends Phaser.Scene {
   private hintFly: Phaser.GameObjects.Image | null = null;
   /** Pollen dots the hint butterfly leaves along the next two moves. */
   private hintDots!: Phaser.GameObjects.Graphics;
-  private ambientFlies: Phaser.GameObjects.Image[] = [];
+  private ambient!: AmbientWorld;
+  /** Paw prints the host leaves along the solved path (reward screen). */
+  private prints: Phaser.GameObjects.Image[] = [];
+  private sand!: Phaser.GameObjects.Particles.ParticleEmitter;
+  private lastPuff = { t: 0, x: 0, y: 0 };
+  private nextFootsteps = 0;
+  /** Last time the child did anything on the maze screen (for the sleepy friend). */
+  private lastActivity = 0;
+  private zTimer: Phaser.Time.TimerEvent | null = null;
   private bursts: Phaser.GameObjects.Particles.ParticleEmitter[] = [];
   private sparkle!: Phaser.GameObjects.Particles.ParticleEmitter;
   private celebration: { timers: Phaser.Time.TimerEvent[]; flyer: Phaser.GameObjects.Image | null; done: boolean } | null = null;
@@ -103,6 +112,7 @@ export class GameScene extends Phaser.Scene {
     this.load.image('ground', assetUrl(ASSETS.backgrounds.ground.image));
     for (const [name, item] of Object.entries(ASSETS.foliage)) this.load.image(`fol-${name}`, assetUrl(item.image));
     for (const [id, item] of Object.entries(ASSETS.treasures)) this.load.image(`tr-${id}`, assetUrl(item.image));
+    this.load.image('amb-leaf', assetUrl(ASSETS.ui['panel-leaf']?.image ?? ''));
     // Only what the first screen shows: every friend's corner idle frames
     // (other atlases load on demand; see characterTextures.ts).
     this.chars = new CharacterTextures(this);
@@ -154,7 +164,37 @@ export class GameScene extends Phaser.Scene {
 
     this.cameras.main.setOrigin(0, 0);
     this.handleResize(true);
-    this.createAmbient();
+    this.textures.addCanvas('paw', pawTexture(footprint));
+    this.textures.addCanvas('grain', grainTexture());
+    this.sand = this.add.particles(0, 0, 'grain', {
+      speed: { min: 14, max: 46 },
+      angle: { min: 200, max: 340 },
+      lifespan: { min: 380, max: 620 },
+      scale: { start: 0.8, end: 0.2 },
+      alpha: { start: 0.85, end: 0 },
+      gravityY: 70,
+      tint: [0xb88a4a, 0xa77a3c, 0xc99a55],
+      emitting: false,
+    }).setDepth(D.marker - 1);
+    this.ambient = new AmbientWorld({
+      scene: this,
+      vw: () => this.vw,
+      vh: () => this.vh,
+      reduced: () => this.reduced,
+      mode: () => {
+        const st = this.ctrl.state;
+        return { screen: st.screen, drawing: st.drawing, celebrating: st.celebrating, opening: !!st.opening, overlay: !!st.overlay };
+      },
+      board: () => {
+        const st = this.ctrl.state;
+        return (st.screen === 'play' || st.screen === 'reward') && st.layout ? st.layout.board : null;
+      },
+      plants: () => [...this.castPlants, ...this.companionPlants],
+      treasure: () => (this.treasure && !this.treasureFlown ? this.treasure : null),
+      depth: { light: D.ambient - 1, flies: D.ambient, leaves: D.ambient, twinkle: D.treasure + 1 },
+      backdrop: this.bg,
+    });
+    this.nextFootsteps = this.time.now + 40000;
     this.unsubscribe = this.ctrl.on((e) => this.onEvent(e));
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.unsubscribe?.());
     this.ctrl.ready();
@@ -164,6 +204,10 @@ export class GameScene extends Phaser.Scene {
   // Events from the controller
 
   private onEvent(e: GameEvent): void {
+    if (e.type === 'trail' || e.type === 'drawing-start' || e.type === 'talk' || e.type === 'hint' || e.type === 'trail-reset' || e.type === 'maze' || e.type === 'reveal' || e.type === 'solved') {
+      this.lastActivity = this.time.now;
+      if (this.companion?.isSleeping) this.wakeCompanion();
+    }
     switch (e.type) {
       case 'state':
         this.applyScreen();
@@ -176,6 +220,7 @@ export class GameScene extends Phaser.Scene {
         break;
       case 'trail':
         this.drawTrail();
+        this.sandPuff();
         break;
       case 'trail-reset':
         this.companion?.react('encouragement');
@@ -209,6 +254,11 @@ export class GameScene extends Phaser.Scene {
         const actor = this.cast.find((a) => a.id === e.characterId) ?? (this.companion?.id === e.characterId ? this.companion : null);
         this.boop(actor?.sprite);
         actor?.react('encouragement', true);
+        // The neighbours notice: a small hop each, one after the other.
+        const i = actor ? this.cast.indexOf(actor) : -1;
+        if (i >= 0 && !this.reduced) {
+          [this.cast[i - 1], this.cast[i + 1]].forEach((n, k) => n && this.time.delayedCall(140 + k * 90, () => this.hop(n.sprite, 0.035)));
+        }
         // The wave atlas is loaded for this tap only; let it go again afterwards.
         this.scheduleRelease(6000);
         break;
@@ -278,6 +328,9 @@ export class GameScene extends Phaser.Scene {
     if (!maze || !session) return;
     this.clearHint();
     this.cancelCelebration();
+    this.clearPrints();
+    this.zTimer?.remove();
+    this.zTimer = null;
     // Old objects drift away gently.
     const oldBoard = this.board;
     const oldKey = this.boardKey;
@@ -427,11 +480,10 @@ export class GameScene extends Phaser.Scene {
       const fw = Math.max(70, box.w * 0.5);
       fern.setScale(fw / fern.width).setPosition(outer + inward * fw * 0.32, this.vh + fw * 0.12).setFlipX(layout.corner === 'right');
       leaf.setScale((box.w * 0.42) / leaf.width).setPosition(box.x + box.w / 2 + inward * box.w * 0.42, this.vh + box.w * 0.14).setFlipX(layout.corner === 'left').setAngle(inward * -8);
-      for (const p of this.companionPlants) {
-        p.setVisible(!intro);
-        this.tweens.killTweensOf(p);
-        if (!this.reduced) this.tweens.add({ targets: p, angle: p.angle + 2.5, duration: 2600 + Math.random() * 900, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
-      }
+      // The breeze (ambient.ts) moves them around their resting angles.
+      fern.setData('baseAngle', 0).setData('flex', 1.1);
+      leaf.setData('baseAngle', inward * -8).setData('flex', 1.4);
+      for (const p of this.companionPlants) p.setVisible(!intro);
     }
   }
 
@@ -537,7 +589,6 @@ export class GameScene extends Phaser.Scene {
    * destroyed so its atlases can be released (GPU budget).
    */
   private setCastVisible(visible: boolean): void {
-    for (const f of this.ambientFlies) f.setVisible(true);
     if (!visible) {
       this.castSerial++;
       for (const a of this.cast) a.destroy();
@@ -607,9 +658,7 @@ export class GameScene extends Phaser.Scene {
       p.setScale(w / p.width);
       p.setPosition(seams[i % seams.length] as number, this.vh + w * 0.32);
       p.setFlipX(i % 2 === 1);
-      this.tweens.killTweensOf(p);
-      p.setAngle(0);
-      if (!this.reduced) this.tweens.add({ targets: p, angle: i % 2 ? 2.5 : -2.5, duration: 2400 + i * 300, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+      p.setData('baseAngle', 0).setData('flex', 0.9 + (i % 3) * 0.25);
     });
     this.ui.setCastRects(this.castRects());
   }
@@ -1293,73 +1342,173 @@ export class GameScene extends Phaser.Scene {
     }
     this.drawTrail(false);
     this.ctrl.finishCelebration();
+    // The friend's paw prints trot along the path the child drew.
+    if (!this.reduced) this.time.delayedCall(skipped ? 100 : 350, () => this.walkPrints());
   }
 
   // ---------------------------------------------------------------------------
-  // Ambient life (outside the board; removed with reduced motion)
+  // Small living details (owner request, 14 Oct 2026)
 
-  private createAmbient(): void {
-    for (let i = 0; i < 2; i++) {
-      const f = this.add.image(-100, -100, 'fol-butterfly').setDepth(D.ambient).setScale(0.12).setAlpha(0.95);
-      f.setData('base', 0.12);
-      this.ambientFlies.push(f);
-      this.time.delayedCall(800 + i * 1800, () => this.wander(f));
-    }
+  /** Sand kicked up under the drawing tip (a few grains, rate-limited). */
+  private sandPuff(): void {
+    const { layout, drawing } = this.ctrl.state;
+    const end = this.ctrl.engine?.endpoint;
+    if (!drawing || !layout || !end || this.reduced) return;
+    const p = toScreen(layout.transform, end);
+    const now = this.time.now;
+    if (now - this.lastPuff.t < 90 || Math.hypot(p.x - this.lastPuff.x, p.y - this.lastPuff.y) < 14) return;
+    this.lastPuff = { t: now, x: p.x, y: p.y };
+    this.sand.emitParticleAt(p.x, p.y, 3);
   }
 
-  private freeSpot(): Point {
-    const { screen, layout } = this.ctrl.state;
-    const w = this.vw;
-    const h = this.vh;
-    if ((screen === 'play' || screen === 'reward') && layout) {
-      const left = Math.random() < 0.5;
-      const railW = layout.boardArea.x;
-      const x = left ? railW * (0.2 + Math.random() * 0.6) : w - railW * (0.2 + Math.random() * 0.6);
-      return { x, y: h * (0.3 + Math.random() * 0.25) };
-    }
-    return { x: w * (0.05 + Math.random() * 0.9), y: h * (0.08 + Math.random() * 0.35) };
-  }
-
-  private wander(f: Phaser.GameObjects.Image): void {
-    if (!f.active) return;
-    if (this.reduced) {
-      f.setVisible(false);
-      this.time.delayedCall(3000, () => this.wander(f));
-      return;
-    }
-    const screen = this.ctrl.state.screen;
-    const show = screen === 'welcome' || screen === 'play' || screen === 'reward';
-    if (!show) {
-      f.setVisible(false);
-      this.time.delayedCall(2000, () => this.wander(f));
-      return;
-    }
-    if (!f.visible || f.x < 0) {
-      const s = this.freeSpot();
-      f.setPosition(s.x, s.y).setVisible(true);
-    }
-    const target = this.freeSpot();
-    const d = Math.hypot(target.x - f.x, target.y - f.y);
-    const base = f.getData('base') as number;
-    this.tweens.killTweensOf(f);
-    this.tweens.add({ targets: f, scaleX: base * 0.35, duration: 140, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
-    this.tweens.add({
-      targets: f,
-      x: target.x,
-      y: target.y,
-      duration: Math.max(1800, (d / 45) * 1000),
-      ease: 'Sine.easeInOut',
-      onComplete: () => {
-        this.tweens.killTweensOf(f);
-        f.setScale(base);
-        this.time.delayedCall(1200 + Math.random() * 2500, () => this.wander(f));
-      },
+  /** A quick hop with squash and stretch (springy landing). */
+  private hop(sprite: Phaser.GameObjects.Sprite, height: number): void {
+    const y = sprite.y;
+    const sx = sprite.scaleX;
+    const sy = sprite.scaleY;
+    const h = sprite.displayHeight * height;
+    this.tweens.chain({
+      targets: sprite,
+      tweens: [
+        { scaleX: sx * 1.04, scaleY: sy * 0.95, duration: 90, ease: 'Sine.easeOut' },
+        { y: y - h, scaleX: sx * 0.97, scaleY: sy * 1.04, duration: 170, ease: 'Quad.easeOut' },
+        { y, scaleX: sx, scaleY: sy, duration: 160, ease: 'Quad.easeIn' },
+        { scaleX: sx * 1.03, scaleY: sy * 0.97, duration: 70, yoyo: true, ease: 'Sine.easeOut' },
+      ],
     });
+  }
+
+  private clearPrints(): void {
+    for (const p of this.prints) {
+      this.tweens.killTweensOf(p);
+      p.destroy();
+    }
+    this.prints = [];
+  }
+
+  /** Paw prints trotting along the solved path, from the entrance to the treasure. */
+  private walkPrints(): void {
+    const { layout, session, screen } = this.ctrl.state;
+    if (!layout || !session || screen !== 'reward') return;
+    this.clearPrints();
+    const pts = this.trailPointsOnScreen();
+    if (pts.length < 2) return;
+    const pitch = layout.transform.pitch;
+    const big = session.characterId === 'giganto';
+    // Prints walk on the sand just beside the golden trail, alternating feet.
+    const step = pitch * (big ? 0.5 : 0.42);
+    const size = pitch * (big ? 0.3 : 0.24);
+    const side = pitch * 0.15;
+    const stamps: Array<{ x: number; y: number; a: number }> = [];
+    let carry = step * 0.5;
+    let n = 0;
+    for (let i = 1; i < pts.length; i++) {
+      const a = pts[i - 1] as Point;
+      const b = pts[i] as Point;
+      const len = Math.hypot(b.x - a.x, b.y - a.y);
+      const dir = Math.atan2(b.y - a.y, b.x - a.x);
+      let d = carry;
+      while (d <= len) {
+        const k = d / len;
+        const s = n++ % 2 === 0 ? 1 : -1;
+        stamps.push({ x: a.x + (b.x - a.x) * k - Math.sin(dir) * side * s, y: a.y + (b.y - a.y) * k + Math.cos(dir) * side * s, a: dir });
+        d += step;
+      }
+      carry = d - len;
+    }
+    const gap = Math.min(70, 1600 / Math.max(1, stamps.length));
+    stamps.forEach((st, i) => {
+      const img = this.add.image(st.x, st.y, 'paw').setDepth(D.trail + 1).setRotation(st.a + Math.PI / 2).setAlpha(0);
+      const scale = size / img.width;
+      img.setScale(scale * 1.4);
+      this.prints.push(img);
+      this.tweens.add({ targets: img, alpha: 0.95, scale, duration: 180, delay: i * gap, ease: 'Back.easeOut' });
+    });
+  }
+
+  /**
+   * The sleepy friend: after a long quiet spell on the maze, the host closes its
+   * eyes and little "z" letters float up; any tap or drawing wakes it with a wave.
+   */
+  private sleepyFriend(time: number): void {
+    const st = this.ctrl.state;
+    const c = this.companion;
+    if (!c || c.currentTier !== 'corner' || c.isSleeping) return;
+    if (st.screen !== 'play' || st.drawing || st.celebrating || st.overlay) {
+      this.lastActivity = Math.max(this.lastActivity, time - 30000);
+      return;
+    }
+    if (time - this.lastActivity < 50000) return;
+    c.sleep();
+    if (this.reduced) return;
+    this.zTimer = this.time.addEvent({ delay: 1500, loop: true, callback: () => this.floatZ(), callbackScope: this });
+    this.floatZ();
+  }
+
+  private floatZ(): void {
+    const L = this.ctrl.state.layout;
+    if (!L || !this.companion?.isSleeping) return;
+    const v = L.friendVisible;
+    const x = v.x + v.w * (L.corner === 'left' ? 0.7 : 0.3);
+    const y = v.y + v.h * 0.12;
+    const z = this.add
+      .text(x, y, 'z', { fontFamily: '"Baloo 2", sans-serif', fontStyle: '800', fontSize: `${Math.round(Math.max(18, v.h * 0.09))}px`, color: '#fff8e6', stroke: '#6a4a26', strokeThickness: 4 })
+      .setOrigin(0.5)
+      .setDepth(D.companion + 1)
+      .setAlpha(0)
+      .setScale(0.6);
+    const dir = L.corner === 'left' ? 1 : -1;
+    this.tweens.add({ targets: z, alpha: { from: 0, to: 1 }, duration: 300 });
+    this.tweens.add({
+      targets: z,
+      y: y - v.h * 0.35,
+      x: x + dir * v.w * 0.18,
+      scale: 1.15,
+      angle: dir * 12,
+      duration: 2400,
+      ease: 'Sine.easeOut',
+      onComplete: () => z.destroy(),
+    });
+    this.tweens.add({ targets: z, alpha: 0, delay: 1700, duration: 700 });
+  }
+
+  private wakeCompanion(): void {
+    this.zTimer?.remove();
+    this.zTimer = null;
+    const c = this.companion;
+    if (!c) return;
+    c.wake();
+    if (!this.reduced) this.hop(c.sprite, 0.03);
+  }
+
+  /** Now and then on the welcome screen, Giganto stomps somewhere nearby. */
+  private distantFootsteps(time: number): void {
+    const st = this.ctrl.state;
+    const idle = st.screen === 'welcome' && !st.opening && !st.overlay && !this.reduced;
+    if (!idle) {
+      this.nextFootsteps = Math.max(this.nextFootsteps, time + 20000);
+      return;
+    }
+    if (time < this.nextFootsteps) return;
+    this.nextFootsteps = time + 45000 + Math.random() * 35000;
+    const giganto = this.cast.find((a) => a.id === 'giganto');
+    [0, 520].forEach((delay) =>
+      this.time.delayedCall(delay, () => {
+        if (this.ctrl.state.screen !== 'welcome') return;
+        this.ctrl.sfx('bumFar');
+        this.cameras.main.shake(140, 0.0018);
+        this.ambient.shiver(2.6);
+        if (giganto) this.hop(giganto.sprite, 0.02);
+      }),
+    );
   }
 
   // ---------------------------------------------------------------------------
 
   override update(time: number): void {
+    this.ambient.update(time);
+    this.distantFootsteps(time);
+    this.sleepyFriend(time);
     this.companion?.update(time);
     for (const a of this.cast) if (a.sprite.visible) a.update(time);
     if (this.ring.visible) {

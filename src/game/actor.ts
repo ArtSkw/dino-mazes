@@ -50,6 +50,7 @@ export class CharacterActor {
   private last: Partial<Record<Reaction, number>> = {};
   private holdTimer: Phaser.Time.TimerEvent | null = null;
   private talkUntil = 0;
+  private sleeping = false;
 
   constructor(scene: Phaser.Scene, id: CharacterId, reduced: boolean, textures: CharacterTextures, tier: Tier = 'corner') {
     this.scene = scene;
@@ -101,6 +102,7 @@ export class CharacterActor {
   /** Request a reaction; respects priority and cooldowns. Returns true if it plays (or will, once loaded). */
   react(kind: Reaction, force = false): boolean {
     if (this.destroyed) return false;
+    this.sleeping = false;
     const now = this.scene.time.now;
     if (!force) {
       if (this.busy && PRIORITY[this.current] > PRIORITY[kind]) return false;
@@ -223,6 +225,31 @@ export class CharacterActor {
       if (anim) this.sprite.play(anim);
       this.nextIdleAt = Infinity;
     }
+  }
+
+  /** Doze off: eyes closed (the blink pose), held until woken. */
+  sleep(): void {
+    if (this.destroyed || this.tier !== 'corner') return;
+    this.holdTimer?.remove();
+    this.holdTimer = null;
+    this.sprite.stop();
+    this.current = 'idle';
+    this.busy = true;
+    this.sleeping = true;
+    const key = this.keyFor('idle-04');
+    if (this.scene.textures.exists(key)) this.sprite.setTexture(key, 'idle-04');
+  }
+
+  get isSleeping(): boolean {
+    return this.sleeping;
+  }
+
+  /** Wake up with a little wave. */
+  wake(): void {
+    if (!this.sleeping) return;
+    this.sleeping = false;
+    this.busy = false;
+    this.react('encouragement', true);
   }
 
   destroy(): void {
