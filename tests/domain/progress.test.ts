@@ -111,17 +111,17 @@ describe('quest selection', () => {
     for (const c of play(40, 'art-gate', ORIGINAL_SIX).log) expect(ORIGINAL_SIX(c.treasureId), c.treasureId).toBe(true);
   });
 
-  it('all ten treasures have art now (Codex delivery, 14 Oct 2026)', () => {
-    for (const id of ALL_TREASURE_IDS) expect(treasureHasArt(id), id).toBe(true);
+  it('every treasure but the strawberry has art (it waits for art/CODEX_REQUEST_FINISH.md)', () => {
+    for (const id of ALL_TREASURE_IDS) expect(treasureHasArt(id), id).toBe(id !== 'strawberry');
     expect(TREASURES.amber.kind).toBe('giganto');
   });
 
-  describe('with all ten treasures in the game', () => {
-    it('friends bring the seven classic treasures before any repeats; Giganto only his own', () => {
+  describe('with all eleven treasures in the game', () => {
+    it('friends bring the eight classic treasures before any repeats; Giganto only his own', () => {
       for (const seed of ['a', 'b', 'c', 'd', 'e', 'f']) {
         const { log } = play(30, seed, ALL_READY);
         const ordinary = log.filter((c) => !c.special).map((c) => c.treasureId);
-        expect(new Set(ordinary.slice(0, 7)).size, seed).toBe(7);
+        expect(new Set(ordinary.slice(0, 8)).size, seed).toBe(8);
         for (const t of ordinary) expect(TREASURES[t].kind).toBe('classic');
         const giganto = log.filter((c) => c.special).map((c) => c.treasureId);
         for (const t of giganto) expect(GIGANTO_TREASURE_ORDER).toContain(t);
@@ -137,16 +137,23 @@ describe('quest selection', () => {
       }
     });
 
-    it('offers all fourteen ordinary quests over a long run, feather ones included', () => {
-      const { log } = play(120, 'variety-10', ALL_READY);
+    it('offers all sixteen ordinary quests over a long run, feather and strawberry ones included', () => {
+      const { log } = play(140, 'variety-10', ALL_READY);
       const ids = new Set(log.filter((c) => !c.special).map((c) => c.quest.id));
-      expect(ids.size).toBe(14);
-      expect(ids.has('tiny-feather') && ids.has('rocky-feather')).toBe(true);
+      expect(ids.size).toBe(16);
+      for (const q of ['tiny-feather', 'rocky-feather', 'bill-strawberry', 'mazu-strawberry']) expect(ids.has(q), q).toBe(true);
     });
 
-    it('classic and Giganto treasures add up to ten', () => {
-      expect(TREASURE_ORDER).toHaveLength(7);
+    it('eight classic treasures (4 + 4 in the collection) and three of Giganto', () => {
+      expect(TREASURE_ORDER).toHaveLength(8);
       expect(GIGANTO_TREASURE_ORDER).toHaveLength(3);
+    });
+
+    it('every friend has four quests and every classic treasure two', () => {
+      const by = (key: 'characterId' | 'treasureId'): Record<string, number> =>
+        ORDINARY_QUESTS.reduce<Record<string, number>>((a, q) => ({ ...a, [q[key]]: (a[q[key]] ?? 0) + 1 }), {});
+      expect(Object.values(by('characterId'))).toEqual([4, 4, 4, 4]);
+      for (const t of TREASURE_ORDER) expect(by('treasureId')[t], t).toBe(2);
     });
   });
 

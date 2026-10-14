@@ -46,7 +46,7 @@ Audio/narration scope, difficulty numbers, and content quantities below are prac
 
 - One polished jungle habitat, with bounded variation in foliage, flowers, and background dressing.
 - Four regular friends: Bill, Tiny, Mazu, and Rocky, plus Giganto as an occasional special quest host. Quest selection rotates them; no character-selection screen required.
-- Ten collectible treasures (owner request, 14 Oct 2026): seven classic ones found with the friends and three found only with Giganto; fourteen regular quests and three Giganto quests. A treasure joins the game once its art exists ([art/CODEX_REQUEST_TREASURES.md](art/CODEX_REQUEST_TREASURES.md)).
+- Eleven collectible treasures (owner requests, 14 Oct 2026): eight classic ones found with the friends (shown 4 + 4) and three found only with Giganto; sixteen regular quests (four per friend, two per classic treasure) and three Giganto quests. A treasure joins the game once its art exists ([art/CODEX_REQUEST_TREASURES.md](art/CODEX_REQUEST_TREASURES.md)).
 - Five character animation sprite sheets covering idle, drawing reaction, encouragement/reset, and celebration.
 - Seeded generated mazes that grow harder automatically (four levels, starting hard), a small fixed introductory maze, and validated fallback layouts.
 - Persistent drawn trail, explicit start-over, optional one-step hint, complete celebration and collection flow.
@@ -106,9 +106,9 @@ Suggested sequence: trail glows softly → treasure performs its signature motio
 
 Examples: coconut wobbles and rolls a little; nut makes a tiny hop; flower petals sway; shiny stone catches a soft glint; shell turns slightly; berry bunch jiggles. Treasures painted in parts move their parts (14 Oct 2026): the feather swings on its quill, the amber's light flares and its leaf sways, the giga flower closes and blooms petal by petal, the crystals light up one after another; with reduced motion they show their still image. Use authored 2D transforms and approved poses. Do not attempt improvised character lip-sync or deform faces into smiles.
 
-“Kolejna przygoda” / “Next adventure” is explicit; never advance automatically. “Moje skarby” / “My treasures” opens an illustrated collection: the seven classic treasures in two centred rows, and Giganto's three in a golden box (“Skarby Giganto”) beside them, or below them in portrait. First discoveries fill a slot with a warm arrival animation. Repeated treasures receive the same care, a soft slot pulse, and an updated internal count; there is no duplicate disappointment screen.
+“Kolejna przygoda” / “Next adventure” is explicit; never advance automatically. “Moje skarby” / “My treasures” opens an illustrated collection: the eight classic treasures in two rows of four, and Giganto's three in a golden box (“Skarby Giganto”) beside them, or below them in portrait. First discoveries fill a slot with a warm arrival animation. Repeated treasures receive the same care, a soft slot pulse, and an updated internal count; there is no duplicate disappointment screen.
 
-Collect all seven classic treasures before deliberately repeating one in the normal rotation; Giganto's quests bring his own three, unfound ones first. After that, endless new mazes continue. No rarity tiers or locked-looking shop tiles. Tapping a found treasure replays its small animation.
+Collect all eight classic treasures before deliberately repeating one in the normal rotation; Giganto's quests bring his own three, unfound ones first. After that, endless new mazes continue. No rarity tiers or locked-looking shop tiles. Tapping a found treasure replays its small animation.
 
 Opening and closing the collection while drawing restores the exact same maze and trail. Collection visits never count as new sessions or completions.
 
@@ -132,13 +132,15 @@ Original quest scenarios for this game, built on what each friend is like in the
 | rocky-stone | Rocky | Shiny stone | Czupur chce dać Giganto prezent. Może błyszczący kamyk? | Rocky wants to give Giganto a present. How about a shiny stone? |
 | tiny-feather | Tiny | Feather | Miłce rozpadł się pędzel. Z piórka zrobi nowy! | Tiny's paintbrush fell apart. She can make a new one from a feather! |
 | rocky-feather | Rocky | Feather | Czupur chce latać jak ptak. Na początek wystarczy mu piórko! | Rocky wants to fly like a bird. A feather will do for a start! |
+| bill-strawberry | Bill | Strawberry | Dudek wywęszył coś słodkiego. Pachnie jak truskawka! | Bill can smell something sweet. It smells like a strawberry! |
+| mazu-strawberry | Mazu | Strawberry | Rudzia chce zbadać, czemu truskawka nosi pestki na wierzchu! | Mazu wants to find out why a strawberry wears its seeds outside! |
 | giganto-amber | Giganto | Amber | Giganto szuka bursztynu. W środku śpi maleńki listek! | Giganto is looking for amber. A tiny leaf sleeps inside it! |
 | giganto-gigaflower | Giganto | Giga flower | Gigakwiat kwitnie bardzo rzadko. Giganto chce go powąchać! | The giga flower hardly ever blooms. Giganto wants to smell it! |
 | giganto-crystal | Giganto | Crystal | W jaskini Giganto coś błyszczy. Może to kryształ? | Something sparkles in Giganto's cave. Could it be a crystal? |
 
 Until Giganto's own treasures have art, his earlier quests stay in use: giganto-coconut (“Giganto zgubił kokos. Taki wielki, a nie może go znaleźć!”) and giganto-berries (“Nawet Giganto lubi jagody. Znajdźmy mu kilka!”).
 
-Treasure names: Kokos / Coconut; Orzech / Nut; Kwiatek / Flower; Kamyk / Stone; Muszelka / Shell; Jagody / Berries; Piórko / Feather (classic); Bursztyn / Amber, Gigakwiat / Giga flower, Kryształ / Crystal (Giganto's own). Ensure berry artwork reads as a small blue berry bunch, not grapes.
+Treasure names: Kokos / Coconut; Orzech / Nut; Kwiatek / Flower; Kamyk / Stone; Muszelka / Shell; Jagody / Berries; Piórko / Feather, Truskawka / Strawberry (classic); Bursztyn / Amber, Gigakwiat / Giga flower, Kryształ / Crystal (Giganto's own). Ensure berry artwork reads as a small blue berry bunch, not grapes.
 
 Selection uses a shuffled content bag and recent-history exclusion. Do not show the same quest or normalized maze layout immediately twice. Reset retains the current maze. Next creates a new session with a new seed. Cosmetic randomness uses its own seed stream so art changes do not change routes.
 

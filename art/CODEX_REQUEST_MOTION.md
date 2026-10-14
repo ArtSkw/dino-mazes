@@ -1,5 +1,8 @@
 # Codex art request: rigged "living" small assets
 
+> Status, 14 October 2026: the six priority-1 masters are **approved**; their parts are requested
+> in [CODEX_REQUEST_FINISH.md](CODEX_REQUEST_FINISH.md) (framing, registration, stress tests).
+
 14 October 2026, Claude Code, after the owner approved the motion proposal
 ([../docs/MOTION_PROPOSAL.md](../docs/MOTION_PROPOSAL.md)). Execute with the built-in
 **GPT Imagegen** skill. Machine-readable jobs: [prompts/jobs-motion.json](prompts/jobs-motion.json)

@@ -50,13 +50,15 @@ export const TREASURES: Record<TreasureId, TreasureInfo> = {
   berries: { id: 'berries', name: { pl: 'Jagody', en: 'Berries' }, motion: 'jiggle', glow: '#b9c8ff', kind: 'classic' },
   // Owner request, 14 Oct 2026: seven classic treasures and three of Giganto's own.
   feather: { id: 'feather', name: { pl: 'Piórko', en: 'Feather' }, motion: 'sway', glow: '#ffe2a8', kind: 'classic' },
+  // Owner request, 14 Oct 2026: an eighth classic treasure, so the collection is 4 + 4.
+  strawberry: { id: 'strawberry', name: { pl: 'Truskawka', en: 'Strawberry' }, motion: 'hop', glow: '#ffb3bd', kind: 'classic' },
   amber: { id: 'amber', name: { pl: 'Bursztyn', en: 'Amber' }, motion: 'glint', glow: '#ffbe3d', kind: 'giganto' },
   gigaflower: { id: 'gigaflower', name: { pl: 'Gigakwiat', en: 'Giga flower' }, motion: 'sway', glow: '#d9b8ff', kind: 'giganto' },
   crystal: { id: 'crystal', name: { pl: 'Kryształ', en: 'Crystal' }, motion: 'glint', glow: '#b6dcff', kind: 'giganto' },
 };
 
 /** Classic treasures, in collection order. */
-export const TREASURE_ORDER: TreasureId[] = ['coconut', 'nut', 'flower', 'stone', 'shell', 'berries', 'feather'];
+export const TREASURE_ORDER: TreasureId[] = ['coconut', 'nut', 'flower', 'stone', 'shell', 'berries', 'feather', 'strawberry'];
 /** Giganto's own treasures, found only on his quests. */
 export const GIGANTO_TREASURE_ORDER: TreasureId[] = ['amber', 'gigaflower', 'crystal'];
 export const ALL_TREASURE_IDS: TreasureId[] = [...TREASURE_ORDER, ...GIGANTO_TREASURE_ORDER];
@@ -199,6 +201,22 @@ export const ORDINARY_QUESTS: Quest[] = [
     { pl: 'Czupur chce latać jak ptak. Na początek wystarczy mu piórko!', en: 'Rocky wants to fly like a bird. A feather will do for a start!' },
     { pl: 'Z piórkiem na pewno polecę! No… może trochę.', en: "With a feather I'll fly for sure! Well… maybe a bit." },
   ),
+  // The strawberry: Dudek's nose finds anything sweet; Rudzia studies why it
+  // wears its seeds on the outside. With it every friend has four quests.
+  q(
+    'bill-strawberry',
+    'bill',
+    'strawberry',
+    { pl: 'Dudek wywęszył coś słodkiego. Pachnie jak truskawka!', en: 'Bill can smell something sweet. It smells like a strawberry!' },
+    { pl: 'Mmm, truskawka! Gdzie ona się schowała?', en: 'Mmm, a strawberry! Where is it hiding?' },
+  ),
+  q(
+    'mazu-strawberry',
+    'mazu',
+    'strawberry',
+    { pl: 'Rudzia chce zbadać, czemu truskawka nosi pestki na wierzchu!', en: 'Mazu wants to find out why a strawberry wears its seeds outside!' },
+    { pl: 'Pestki na zewnątrz? To trzeba zbadać!', en: 'Seeds on the outside? I have to study that!' },
+  ),
 ];
 
 /** Giganto's quests for his own three treasures (owner request, 14 Oct 2026). */
@@ -287,6 +305,7 @@ export const TREASURE_OBJECT: Record<TreasureId, Localized> = {
   shell: { pl: 'muszelkę', en: 'a shell' },
   berries: { pl: 'jagody', en: 'some berries' },
   feather: { pl: 'piórko', en: 'a feather' },
+  strawberry: { pl: 'truskawkę', en: 'a strawberry' },
   amber: { pl: 'bursztyn', en: 'a piece of amber' },
   gigaflower: { pl: 'gigakwiat', en: 'a giga flower' },
   crystal: { pl: 'kryształ', en: 'a crystal' },
@@ -301,6 +320,7 @@ export const TREASURE_AGAIN: Record<TreasureId, Localized> = {
   shell: { pl: 'Znowu muszelka!', en: 'Another shell!' },
   berries: { pl: 'Znowu jagody!', en: 'More berries!' },
   feather: { pl: 'Znowu piórko!', en: 'Another feather!' },
+  strawberry: { pl: 'Znowu truskawka!', en: 'Another strawberry!' },
   amber: { pl: 'Znowu bursztyn!', en: 'More amber!' },
   gigaflower: { pl: 'Znowu gigakwiat!', en: 'Another giga flower!' },
   crystal: { pl: 'Znowu kryształ!', en: 'Another crystal!' },

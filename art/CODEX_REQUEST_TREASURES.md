@@ -1,5 +1,9 @@
 # Codex art request: four new treasures
 
+> Status, 14 October 2026: **delivered and in the game** (art/CLAUDE_HANDOFF_TREASURES.md). The
+> eighth classic treasure (strawberry) and Giganto's badge continue in
+> [CODEX_REQUEST_FINISH.md](CODEX_REQUEST_FINISH.md).
+
 14 October 2026, Claude Code, after the owner asked for ten treasures: **seven classic ones** found
 with the friends and **three of Giganto's own**, found only on his quests. Execute with the built-in
 **GPT Imagegen** skill. Machine-readable jobs: [prompts/jobs-treasures.json](prompts/jobs-treasures.json)

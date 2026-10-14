@@ -24,8 +24,9 @@ character and episode pages of the [Gigantosaurus fan wiki](https://gigantosauru
 
 ## Treasures and their stories
 
-Seven classic treasures are found with the friends, three only with Giganto (owner request,
-14 October 2026). The new ones tie into the series: Miłka's favourite paintbrush once fell apart
+Eight classic treasures are found with the friends, three only with Giganto (owner requests,
+14 October 2026). The strawberry is Dudek's sweet find and Rudzia's little science question
+(why does it wear its seeds outside?). The new ones tie into the series: Miłka's favourite paintbrush once fell apart
 (so she makes one from a feather), Arek / Archie is a bird who cannot fly (Czupur wants to try with
 a feather), and the rare Giga Flower blooms in the series; amber with a leaf inside and a crystal
 from his cave make Giganto's set feel old and precious.

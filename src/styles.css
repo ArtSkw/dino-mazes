@@ -1070,6 +1070,12 @@ button:focus-visible,
   height: 100%;
 }
 
+.giganto-title .emblem {
+  width: 1.9em;
+  height: 1.9em;
+  object-fit: contain;
+}
+
 @media (max-height: 480px) {
   /* Phones: clear of the close button on the right. */
   .collection-inner {

@@ -14,6 +14,7 @@
    ],
    "alpha": true,
    "priority": 1,
+   "status": "done",
    "kind": "classic",
    "names": {
     "pl": "Piórko",
@@ -21,6 +22,27 @@
    },
    "lore": "Miłka/Tiny paints with it when her brush falls apart; Czupur/Rocky wants to fly with it.",
    "motion": "Floats down and lands with a little flutter; in the collection it sways and its barbs ruffle."
+  },
+  {
+   "id": "treasure-strawberry-master",
+   "output": "source/motion/strawberry/master.png",
+   "approvedCopy": "source/treasures-v2/strawberry.png",
+   "prompt": "One ripe, glossy red strawberry, plump and gently heart-shaped, tilted a little to the right: tiny golden seeds dotted over its surface, a fresh green leafy cap (calyx) of five pointed leaves on top and a short curled green stem, a soft highlight on the upper left. Juicy and friendly, clearly a strawberry at 80 px. It joins the existing treasure set (coconut, hazelnut, coral hibiscus flower, turquoise pebble, peach spiral shell, blueberry bunch) and must look like part of the same painted kit: same outline weight, softness, light and scale of detail. Its silhouette must read clearly at 80 px and differ from every existing treasure, because unfound treasures are shown as a flat silhouette in the collection. Square 1024x1024 canvas; the assembled object is centred and fills about 70% of the canvas, with generous transparent margins on every side. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
+   "refs": [
+    "source/treasure-kit-v1.png",
+    "source/motion/coconut/master.png",
+    "source/motion/flower/master.png"
+   ],
+   "alpha": true,
+   "priority": 1,
+   "status": "todo",
+   "kind": "classic",
+   "names": {
+    "pl": "Truskawka",
+    "en": "Strawberry"
+   },
+   "lore": "Dudek's nose finds anything sweet; Rudzia studies why it wears its seeds on the outside.",
+   "motion": "Crouches, hops with a stretch and lands with a squash; the leafy cap lags and flutters; the highlight stays put."
   },
   {
    "id": "treasure-amber-master",
@@ -34,6 +56,7 @@
    ],
    "alpha": true,
    "priority": 1,
+   "status": "done",
    "kind": "giganto",
    "names": {
     "pl": "Bursztyn",
@@ -54,6 +77,7 @@
    ],
    "alpha": true,
    "priority": 1,
+   "status": "done",
    "kind": "giganto",
    "names": {
     "pl": "Gigakwiat",
@@ -74,6 +98,7 @@
    ],
    "alpha": true,
    "priority": 1,
+   "status": "done",
    "kind": "giganto",
    "names": {
     "pl": "Kryształ",
@@ -88,7 +113,8 @@
    "edit": "source/motion/feather/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the cream quill (shaft), continued slightly where the vane covered it. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-feather-vane-left",
@@ -96,7 +122,8 @@
    "edit": "source/motion/feather/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the vane on the left/upper side of the quill, its root continued slightly under the quill. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-feather-vane-right",
@@ -104,7 +131,35 @@
    "edit": "source/motion/feather/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the vane on the right/lower side of the quill, its root continued slightly under the quill. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
+  },
+  {
+   "id": "treasure-strawberry-body",
+   "output": "source/motion/strawberry/body.png",
+   "edit": "source/motion/strawberry/master.png",
+   "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: the red berry WITHOUT its highlight and WITHOUT the leafy cap: evenly painted where they were, the top continued a little under the cap. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
+   "alpha": true,
+   "priority": 2,
+   "status": "todo"
+  },
+  {
+   "id": "treasure-strawberry-cap",
+   "output": "source/motion/strawberry/cap.png",
+   "edit": "source/motion/strawberry/master.png",
+   "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the green leafy cap and stem, the leaf bases continued slightly onto where the berry was. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
+   "alpha": true,
+   "priority": 2,
+   "status": "todo"
+  },
+  {
+   "id": "treasure-strawberry-glint",
+   "output": "source/motion/strawberry/glint.png",
+   "edit": "source/motion/strawberry/master.png",
+   "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: ONLY the soft highlight as a separate translucent white-cream shape, everything else transparent. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
+   "alpha": true,
+   "priority": 2,
+   "status": "todo"
   },
   {
    "id": "treasure-amber-body",
@@ -112,7 +167,8 @@
    "edit": "source/motion/amber/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: the amber WITHOUT its highlight and WITHOUT the leaf: evenly painted translucent honey where they were. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-amber-leaf",
@@ -120,7 +176,8 @@
    "edit": "source/motion/amber/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: ONLY the tiny fern leaf inside, as it appears through the amber, everything else transparent. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-amber-glint",
@@ -128,7 +185,8 @@
    "edit": "source/motion/amber/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: ONLY the bright highlight as a separate soft translucent white-cream shape, everything else transparent. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-gigaflower-center",
@@ -136,7 +194,8 @@
    "edit": "source/motion/gigaflower/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the glowing golden centre. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-gigaflower-petal-1",
@@ -144,7 +203,8 @@
    "edit": "source/motion/gigaflower/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only petal 1 counting clockwise from the top petal; continue its base under the centre. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-gigaflower-petal-2",
@@ -152,7 +212,8 @@
    "edit": "source/motion/gigaflower/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only petal 2 counting clockwise from the top petal; continue its base under the centre. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-gigaflower-petal-3",
@@ -160,7 +221,8 @@
    "edit": "source/motion/gigaflower/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only petal 3 counting clockwise from the top petal; continue its base under the centre. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-gigaflower-petal-4",
@@ -168,7 +230,8 @@
    "edit": "source/motion/gigaflower/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only petal 4 counting clockwise from the top petal; continue its base under the centre. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-gigaflower-petal-5",
@@ -176,7 +239,8 @@
    "edit": "source/motion/gigaflower/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only petal 5 counting clockwise from the top petal; continue its base under the centre. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-gigaflower-petal-6",
@@ -184,7 +248,8 @@
    "edit": "source/motion/gigaflower/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only petal 6 counting clockwise from the top petal; continue its base under the centre. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-gigaflower-stem",
@@ -192,7 +257,8 @@
    "edit": "source/motion/gigaflower/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the stem; continue its top under the flower head. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-gigaflower-leaf-left",
@@ -200,7 +266,8 @@
    "edit": "source/motion/gigaflower/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the left leaf; continue its base into the stem. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-gigaflower-leaf-right",
@@ -208,7 +275,8 @@
    "edit": "source/motion/gigaflower/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the right leaf; continue its base into the stem. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-crystal-base",
@@ -216,7 +284,8 @@
    "edit": "source/motion/crystal/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the grey stone base, continued under the crystals. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-crystal-crystal-1",
@@ -224,7 +293,8 @@
    "edit": "source/motion/crystal/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the tallest crystal, its foot continued slightly into the base. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-crystal-crystal-2",
@@ -232,7 +302,8 @@
    "edit": "source/motion/crystal/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the second tallest crystal, its foot continued slightly into the base. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-crystal-crystal-3",
@@ -240,7 +311,8 @@
    "edit": "source/motion/crystal/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the two short crystals together, their feet continued slightly into the base. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "treasure-crystal-glint",
@@ -248,17 +320,19 @@
    "edit": "source/motion/crystal/master.png",
    "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: ONLY the bright glints and sparkles as separate translucent white shapes, everything else transparent. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "alpha": true,
-   "priority": 2
+   "priority": 2,
+   "status": "done"
   },
   {
    "id": "ui-giganto-emblem",
    "output": "source/ui/giganto-emblem.png",
-   "prompt": "A small round painted badge for 'Giganto's treasures': Giganto's big three-toed footprint pressed into warm golden sand inside a rounded honey-wood ring with soft gold trim. No text. Square 1024x1024 canvas, the badge centred and filling about 80%. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
+   "prompt": "A small round painted badge for 'Giganto's treasures': Giganto's big three-toed footprint pressed into warm golden sand inside a rounded honey-wood ring with soft gold trim. It must read clearly at 40 px, so keep it bold and simple. No text. Square 1024x1024 canvas, the badge centred and filling about 80%. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
    "refs": [
     "source/ui-surfaces-v1.png"
    ],
    "alpha": true,
-   "priority": 3
+   "priority": 1,
+   "status": "todo"
   }
  ]
 }

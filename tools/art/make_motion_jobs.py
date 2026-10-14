@@ -181,6 +181,10 @@ ASSETS: list[dict] = [
 ]
 
 
+# Owner-approved masters (art/CLAUDE_HANDOFF_MOTION.md); their parts are to do.
+APPROVED_MASTERS = {"butterfly", "coconut", "nut", "flower", "berries", "chest"}
+
+
 def main() -> None:
     jobs = []
     for a in ASSETS:
@@ -192,6 +196,7 @@ def main() -> None:
             "refs": ["source/treasure-kit-v1.png", "source/foliage-kit-v1.png", "source/ui-surfaces-v1.png"],
             "alpha": True,
             "priority": a["priority"],
+            "status": "done" if a["id"] in APPROVED_MASTERS else "todo",
             "motion": a["motion"],
         })
         for name, what in a["parts"].items():
@@ -202,6 +207,7 @@ def main() -> None:
                 "prompt": f"{PART_RULES}The part to keep: {what}. {STYLE}",
                 "alpha": True,
                 "priority": a["priority"],
+                "status": "todo",
             })
         for name, what in a.get("extra", {}).items():
             jobs.append({
@@ -211,6 +217,7 @@ def main() -> None:
                 "prompt": f"Edit image 1. {what} {STYLE}",
                 "alpha": True,
                 "priority": a["priority"],
+                "status": "todo",
             })
     with open(OUT, "w") as fh:
         json.dump({"schemaVersion": 1, "request": "art/CODEX_REQUEST_MOTION.md", "jobs": jobs}, fh, indent=1, ensure_ascii=False)

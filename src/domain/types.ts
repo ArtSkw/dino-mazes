@@ -11,8 +11,8 @@
 export type Lang = 'pl' | 'en';
 export type Localized = Record<Lang, string>;
 export type CharacterId = 'bill' | 'tiny' | 'mazu' | 'rocky' | 'giganto';
-/** Seven classic treasures found with the friends, three found only with Giganto. */
-export type TreasureId = 'coconut' | 'nut' | 'flower' | 'stone' | 'shell' | 'berries' | 'feather' | 'amber' | 'gigaflower' | 'crystal';
+/** Eight classic treasures found with the friends, three found only with Giganto. */
+export type TreasureId = 'coconut' | 'nut' | 'flower' | 'stone' | 'shell' | 'berries' | 'feather' | 'strawberry' | 'amber' | 'gigaflower' | 'crystal';
 /**
  * Maze difficulty. 'easy' is only the fixed first (tutorial) maze; generated
  * mazes start at 'hard' and step up automatically (see LEVELS in maze.ts).

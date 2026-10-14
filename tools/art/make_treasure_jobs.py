@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """
-Writes art/prompts/jobs-treasures.json: the GPT Imagegen jobs for the four new
-treasures in art/CODEX_REQUEST_TREASURES.md (owner request, 14 Oct 2026:
-seven classic treasures found with the friends, three only with Giganto).
+Writes art/prompts/jobs-treasures.json: the GPT Imagegen jobs for the new
+treasures (owner requests, 14 Oct 2026: eight classic treasures found with the
+friends, three only with Giganto). Requests: art/CODEX_REQUEST_TREASURES.md
+(feather, amber, giga flower, crystal: delivered) and art/CODEX_REQUEST_FINISH.md
+(strawberry and Giganto's badge: to do). Each job carries a `status`.
 Run: python3 tools/art/make_treasure_jobs.py
 
 Same method as the motion request (tools/art/make_motion_jobs.py): one
@@ -39,6 +41,19 @@ TREASURES: list[dict] = [
             "vane-right": "only the vane on the right/lower side of the quill, its root continued slightly under the quill",
         },
         "motion": "Floats down and lands with a little flutter; in the collection it sways and its barbs ruffle.",
+    },
+    {
+        "id": "strawberry",
+        "kind": "classic",
+        "names": {"pl": "Truskawka", "en": "Strawberry"},
+        "lore": "Dudek's nose finds anything sweet; Rudzia studies why it wears its seeds on the outside.",
+        "master": "One ripe, glossy red strawberry, plump and gently heart-shaped, tilted a little to the right: tiny golden seeds dotted over its surface, a fresh green leafy cap (calyx) of five pointed leaves on top and a short curled green stem, a soft highlight on the upper left. Juicy and friendly, clearly a strawberry at 80 px.",
+        "parts": {
+            "body": "the red berry WITHOUT its highlight and WITHOUT the leafy cap: evenly painted where they were, the top continued a little under the cap",
+            "cap": "only the green leafy cap and stem, the leaf bases continued slightly onto where the berry was",
+            "glint": "ONLY the soft highlight as a separate translucent white-cream shape, everything else transparent",
+        },
+        "motion": "Crouches, hops with a stretch and lands with a squash; the leafy cap lags and flutters; the highlight stays put.",
     },
     {
         "id": "amber",
@@ -87,8 +102,11 @@ TREASURES: list[dict] = [
 
 EMBLEM = {
     "id": "giganto-emblem",
-    "master": "A small round painted badge for 'Giganto's treasures': Giganto's big three-toed footprint pressed into warm golden sand inside a rounded honey-wood ring with soft gold trim. No text.",
+    "master": "A small round painted badge for 'Giganto's treasures': Giganto's big three-toed footprint pressed into warm golden sand inside a rounded honey-wood ring with soft gold trim. It must read clearly at 40 px, so keep it bold and simple. No text.",
 }
+
+# Delivered and approved (art/CLAUDE_HANDOFF_TREASURES.md); everything else is to do.
+DONE = {"feather", "amber", "gigaflower", "crystal"}
 
 
 def main() -> None:
@@ -103,6 +121,7 @@ def main() -> None:
             "refs": ["source/treasure-kit-v1.png", "source/motion/coconut/master.png", "source/motion/flower/master.png"],
             "alpha": True,
             "priority": 1,
+            "status": "done" if t["id"] in DONE else "todo",
             "kind": t["kind"],
             "names": t["names"],
             "lore": t["lore"],
@@ -118,6 +137,7 @@ def main() -> None:
                 "prompt": f"{PART_RULES}The part to keep: {what}. {STYLE}",
                 "alpha": True,
                 "priority": 2,
+                "status": "done" if t["id"] in DONE else "todo",
             })
     jobs.append({
         "id": f"ui-{EMBLEM['id']}",
@@ -125,14 +145,13 @@ def main() -> None:
         "prompt": f"{EMBLEM['master']} Square 1024x1024 canvas, the badge centred and filling about 80%. {STYLE}",
         "refs": ["source/ui-surfaces-v1.png"],
         "alpha": True,
-        "priority": 3,
+        "priority": 1,
+        "status": "todo",
     })
     with open(OUT, "w") as fh:
         json.dump({"schemaVersion": 1, "request": "art/CODEX_REQUEST_TREASURES.md", "jobs": jobs}, fh, indent=1, ensure_ascii=False)
-    by: dict = {}
-    for j in jobs:
-        by[j["priority"]] = by.get(j["priority"], 0) + 1
-    print(f"wrote {len(jobs)} jobs to {os.path.relpath(OUT, ROOT)} (by priority: {dict(sorted(by.items()))})")
+    todo = [j for j in jobs if j["status"] == "todo"]
+    print(f"wrote {len(jobs)} jobs to {os.path.relpath(OUT, ROOT)} ({len(todo)} to do: {', '.join(j['id'] for j in todo)})")
 
 
 if __name__ == "__main__":

@@ -176,7 +176,7 @@ def export_items(src_name: str, names_in_reading_order: list[str], folder: str, 
 # New treasures (owner request, 14 Oct 2026; art/CODEX_REQUEST_TREASURES.md):
 # one transparent PNG each, delivered by Codex. A missing file is skipped, and
 # the game leaves that treasure out until it exists (treasureHasArt).
-NEW_TREASURES = ["feather", "amber", "gigaflower", "crystal"]
+NEW_TREASURES = ["feather", "strawberry", "amber", "gigaflower", "crystal"]
 NEW_TREASURE_DIR = os.path.join(SRC, "treasures-v2")
 
 
@@ -202,6 +202,24 @@ def export_single_treasures(max_side: int, report: dict) -> dict:
         out[name] = {"image": rel, "width": img.width, "height": img.height, "bytes": nbytes, "sourceSha256": sha256(path)}
     report["treasures-v2"] = out
     return out
+
+
+def export_emblem(ui: dict, report: dict, max_side: int = 192) -> None:
+    """Giganto's footprint badge for the collection (art/CODEX_REQUEST_FINISH.md), when delivered."""
+    path = os.path.join(SRC, "ui", "giganto-emblem.png")
+    if not os.path.exists(path):
+        print("giganto-emblem: no art yet, the game draws a footprint")
+        return
+    rgba = clean_alpha(np.array(Image.open(path).convert("RGBA")))
+    ys, xs = np.nonzero(rgba[:, :, 3] >= ALPHA_FLOOR)
+    img = Image.fromarray(np.ascontiguousarray(rgba[ys.min() : ys.max() + 1, xs.min() : xs.max() + 1]))
+    scale = min(1.0, max_side / max(img.size))
+    if scale < 1:
+        img = premul_resize(img, (round(img.width * scale), round(img.height * scale)))
+    rel = "assets/ui/giganto-emblem.webp"
+    nbytes = save_webp(img, os.path.join(ROOT, "public", rel), quality=88)
+    ui["giganto-emblem"] = {"image": rel, "width": img.width, "height": img.height, "bytes": nbytes, "sourceSha256": sha256(path)}
+    report["giganto-emblem"] = ui["giganto-emblem"]
 
 
 def split_panel_leaf(ui: dict, report: dict) -> None:
@@ -281,6 +299,7 @@ def main() -> int:
     )
     manifest["ui"] = export_items("ui-surfaces-v1.png", ["wood-button", "leaf-button", "cream-pill", "cream-panel"], "ui", 720, report)
     split_panel_leaf(manifest["ui"], report)
+    export_emblem(manifest["ui"], report)
     manifest["backgrounds"]["jungle"] = export_background("jungle-backdrop-v1.png", "assets/bg/jungle.webp", 80, report)
     manifest["backgrounds"]["collection"] = export_background("collection-background-v1.png", "assets/bg/collection.webp", 80, report)
     manifest["backgrounds"]["ground"] = export_background("ground-plate-v1.png", "assets/bg/ground.webp", 82, report)

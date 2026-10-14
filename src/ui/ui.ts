@@ -295,7 +295,15 @@ export class Ui implements UiBridge {
       gigantoBox = h(
         'section',
         { class: 'giganto-box', 'aria-labelledby': 'giganto-title' },
-        h('h3', { class: 'giganto-title', id: 'giganto-title' }, h('span', { class: 'footprint', 'aria-hidden': 'true', html: FOOTPRINT_SVG }), this.tr(h('span'), 'gigantoTreasures')),
+        h(
+          'h3',
+          { class: 'giganto-title', id: 'giganto-title' },
+          // Codex's painted badge once delivered; a drawn footprint until then.
+          ASSETS.ui['giganto-emblem']
+            ? h('img', { class: 'footprint emblem', src: assetUrl(ASSETS.ui['giganto-emblem'].image), alt: '', draggable: 'false' })
+            : h('span', { class: 'footprint', 'aria-hidden': 'true', html: FOOTPRINT_SVG }),
+          this.tr(h('span'), 'gigantoTreasures'),
+        ),
         this.gigantoSlots,
       );
     }
@@ -1013,7 +1021,8 @@ export class Ui implements UiBridge {
     // Giganto's three stand in a column beside them, or in a row below.
     const landscape = window.innerWidth >= window.innerHeight;
     const n = this.classicSlots.children.length;
-    gridSlots(this.classicSlots, landscape ? (n > 6 || this.gigantoSlots ? 4 : 3) : n > 6 || this.gigantoSlots ? 3 : 2);
+    // Eight classic treasures: 4 + 4 in both orientations.
+    gridSlots(this.classicSlots, landscape ? (n > 6 || this.gigantoSlots ? 4 : 3) : n >= 8 ? 4 : n > 6 || this.gigantoSlots ? 3 : 2);
     if (this.gigantoSlots) gridSlots(this.gigantoSlots, landscape ? 1 : this.gigantoSlots.children.length);
     for (const slot of this.slots) {
       const count = save.collection[slot.id]?.count ?? 0;

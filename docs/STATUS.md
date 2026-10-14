@@ -52,6 +52,20 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 13 (14 October 2026): an eighth classic treasure, the Codex plan
+
+- **Truskawka / Strawberry** joins the classic treasures, so the collection reads 4 + 4 (in
+  portrait too). It is the only red one and has its own silhouette; quests: Dudek sniffs out
+  something sweet, Rudzia studies why it wears its seeds outside. Every friend now has four
+  quests and every classic treasure two (unit test). Like the others it switches on once its
+  approved art exists; today the game shows seven classic treasures.
+- **Giganto's badge** is ready in code: the art export picks up `art/source/ui/giganto-emblem.png`
+  and the collection shows it instead of the drawn footprint.
+- **One plan for Codex:** [../art/CODEX_REQUEST_FINISH.md](../art/CODEX_REQUEST_FINISH.md) covers the
+  strawberry (master, approval, parts, registration), the badge and the parts of the six approved
+  motion masters (padding first, registration in the treasures' format, stress tests that match
+  the planned motion). Both jobs files now carry a `status`: 35 jobs to do.
+
 ## Codex delivery: four treasures with parts (14 October 2026)
 
 - **All ten treasures are in the game.** `npm run art` exported Piórko, Bursztyn, Gigakwiat and
@@ -261,7 +275,7 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 224 passed |
+| Domain unit + property | `npm test` | 225 passed |
 | Browser flows (Chromium + WebKit) | `npm run test:e2e` | 69 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
