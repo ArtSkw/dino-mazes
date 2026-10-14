@@ -12,7 +12,10 @@ NATIVE = HERE / 'native'
 NATIVE.mkdir(exist_ok=True)
 delivery = json.loads((ART/'manifest.json').read_text()).get('treasuresV2', {})
 approved = delivery.get('ownerApproved', False)
-jobs = [j for j in json.loads((ART / 'prompts/jobs-treasures.json').read_text())['jobs'] if j['priority'] == 1 and j['id'].endswith('-master')]
+# This gallery owns the original four approved masters. Strawberry has its own
+# finish checkpoint and must not inherit their collective approval flag.
+approved_set = {'treasure-'+name+'-master' for name in ('feather','amber','gigaflower','crystal')}
+jobs = [j for j in json.loads((ART / 'prompts/jobs-treasures.json').read_text())['jobs'] if j['id'] in approved_set]
 inputs = []
 for j in jobs:
     name = Path(j['output']).parent.name

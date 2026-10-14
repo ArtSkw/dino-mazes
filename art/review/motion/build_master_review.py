@@ -7,6 +7,8 @@ from PIL import Image
 
 HERE = Path(__file__).resolve().parent
 ART = HERE.parents[1]
+if (HERE / 'padded-master-measurements.json').exists():
+    raise SystemExit('Approved padded master records already exist. Use build_parts_review.py and finalize_delivery.py; the historical approval builder must not reset them.')
 jobs = json.loads((ART / 'prompts/jobs-motion.json').read_text())['jobs']
 jobs = [j for j in jobs if j['priority'] == 1 and j['id'].endswith('-master')]
 labels = dict(butterfly='Motyl', coconut='Kokos', nut='Orzech', flower='Kwiat', berries='Jagody', chest='Skrzynia')

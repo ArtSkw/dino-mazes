@@ -527,38 +527,23 @@
   "coconut": {
    "image": "assets/treasures/coconut.webp",
    "width": 320,
-   "height": 310,
-   "bytes": 48868,
-   "sourceBox": [
-    46,
-    66,
-    522,
-    530
-   ]
+   "height": 306,
+   "bytes": 47982,
+   "sourceSha256": "a66c7e6ad5a92edb00f670e07f821092c97101c3b99cb24dedc5c613177e3a7c"
   },
   "nut": {
    "image": "assets/treasures/nut.webp",
-   "width": 301,
-   "height": 320,
-   "bytes": 26974,
-   "sourceBox": [
-    598,
-    126,
-    942,
-    490
-   ]
+   "width": 320,
+   "height": 267,
+   "bytes": 28804,
+   "sourceSha256": "2d2a276303e5732e037e735d06ea4f27bc78c1aa2279d3b57111304609075f0a"
   },
   "flower": {
    "image": "assets/treasures/flower.webp",
-   "width": 313,
+   "width": 320,
    "height": 320,
-   "bytes": 35100,
-   "sourceBox": [
-    1042,
-    70,
-    1490,
-    526
-   ]
+   "bytes": 34206,
+   "sourceSha256": "60e591fcdb7f0701f171228b3b56e8d3155a72c1c5f8c7c0b73ea06e2e0e2ea9"
   },
   "stone": {
    "image": "assets/treasures/stone.webp",
@@ -587,14 +572,9 @@
   "berries": {
    "image": "assets/treasures/berries.webp",
    "width": 320,
-   "height": 314,
-   "bytes": 36544,
-   "sourceBox": [
-    1070,
-    562,
-    1490,
-    974
-   ]
+   "height": 301,
+   "bytes": 35000,
+   "sourceSha256": "7b1800a9dbc4ea41a2e57e77bade192b86539da5ded0e64ac89aab7ae36218ce"
   },
   "feather": {
    "image": "assets/treasures/feather.webp",
@@ -602,6 +582,13 @@
    "height": 301,
    "bytes": 27844,
    "sourceSha256": "b16322ec99b3bad8742299e062fe3f4f599c6a726b6307738ffa60fe4935b949"
+  },
+  "strawberry": {
+   "image": "assets/treasures/strawberry.webp",
+   "width": 280,
+   "height": 320,
+   "bytes": 30134,
+   "sourceSha256": "6905f132ec9b25d04a77d6f98009ccfbe1b58e96a6b235b7270afdc5a6ba3c04"
   },
   "amber": {
    "image": "assets/treasures/amber.webp",
@@ -712,15 +699,10 @@
   },
   "butterfly": {
    "image": "assets/foliage/butterfly.webp",
-   "width": 306,
-   "height": 250,
-   "bytes": 21224,
-   "sourceBox": [
-    1206,
-    598,
-    1530,
-    866
-   ]
+   "width": 320,
+   "height": 223,
+   "bytes": 27956,
+   "sourceSha256": "1581a97275df3be840aac3f14669ff416e79e90255d4b2ae0dda4c8b764ff807"
   }
  },
  "ui": {
@@ -780,6 +762,13 @@
    "bytes": 4552,
    "fromPanelRight": 12,
    "fromPanelTop": 7
+  },
+  "giganto-emblem": {
+   "image": "assets/ui/giganto-emblem.webp",
+   "width": 192,
+   "height": 191,
+   "bytes": 16818,
+   "sourceSha256": "d8fb74fef129d9891fce66121b83110a90cc4deeef3e81298b4ab7c8302c38bd"
   }
  },
  "backgrounds": {
@@ -805,10 +794,263 @@
    "sourceSha256": "9c623da4b1a42a4da70b762f61a14e15652624822382e1fdf84fa809ee9fe2c7"
   }
  },
- "treasureRigs": {
-  "atlas": "assets/treasures/rigs/treasure-parts.json",
-  "decodedBytes": 3682032,
-  "rigs": {
+ "rigs": {
+  "atlas": "assets/rigs/rig-parts.json",
+  "decodedBytes": 8739900,
+  "assets": {
+   "coconut": {
+    "canvas": [
+     458,
+     458
+    ],
+    "origin": [
+     229.16,
+     229.16
+    ],
+    "size": [
+     320.0,
+     306.4
+    ],
+    "parts": [
+     {
+      "name": "body",
+      "frame": "coconut/body",
+      "pivot": [
+       229.02,
+       240.92
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "tuft",
+      "frame": "coconut/tuft",
+      "pivot": [
+       227.6,
+       120.46
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "highlight",
+      "frame": "coconut/highlight",
+      "pivot": [
+       179.98,
+       164.39
+      ],
+      "opacity": 0.32
+     }
+    ]
+   },
+   "nut": {
+    "canvas": [
+     459,
+     459
+    ],
+    "origin": [
+     229.63,
+     229.49
+    ],
+    "size": [
+     320.0,
+     266.81
+    ],
+    "parts": [
+     {
+      "name": "nut",
+      "frame": "nut/nut",
+      "pivot": [
+       233.94,
+       300.78
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "cup",
+      "frame": "nut/cup",
+      "pivot": [
+       233.94,
+       300.78
+      ],
+      "opacity": 1
+     }
+    ]
+   },
+   "flower": {
+    "canvas": [
+     461,
+     461
+    ],
+    "origin": [
+     230.26,
+     230.41
+    ],
+    "size": [
+     320.0,
+     319.72
+    ],
+    "parts": [
+     {
+      "name": "stem",
+      "frame": "flower/stem",
+      "pivot": [
+       229.42,
+       375.31
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaf-left",
+      "frame": "flower/leaf-left",
+      "pivot": [
+       209.95,
+       324.51
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaf-right",
+      "frame": "flower/leaf-right",
+      "pivot": [
+       220.11,
+       338.62
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "petal-1",
+      "frame": "flower/petal-1",
+      "pivot": [
+       234.78,
+       229.98
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "petal-2",
+      "frame": "flower/petal-2",
+      "pivot": [
+       234.78,
+       229.98
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "petal-3",
+      "frame": "flower/petal-3",
+      "pivot": [
+       234.78,
+       229.98
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "petal-4",
+      "frame": "flower/petal-4",
+      "pivot": [
+       234.78,
+       229.98
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "petal-5",
+      "frame": "flower/petal-5",
+      "pivot": [
+       234.78,
+       229.98
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "center",
+      "frame": "flower/center",
+      "pivot": [
+       235.34,
+       229.42
+      ],
+      "opacity": 1
+     }
+    ]
+   },
+   "berries": {
+    "canvas": [
+     458,
+     458
+    ],
+    "origin": [
+     229.14,
+     229.3
+    ],
+    "size": [
+     320.0,
+     301.23
+    ],
+    "parts": [
+     {
+      "name": "stem",
+      "frame": "berries/stem",
+      "pivot": [
+       232.1,
+       230.45
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaves",
+      "frame": "berries/leaves",
+      "pivot": [
+       233.74,
+       227.16
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "berry-1",
+      "frame": "berries/berry-1",
+      "pivot": [
+       197.53,
+       237.04
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "berry-2",
+      "frame": "berries/berry-2",
+      "pivot": [
+       261.07,
+       241.65
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "berry-4",
+      "frame": "berries/berry-4",
+      "pivot": [
+       170.53,
+       285.1
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "berry-5",
+      "frame": "berries/berry-5",
+      "pivot": [
+       283.46,
+       291.69
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "berry-3",
+      "frame": "berries/berry-3",
+      "pivot": [
+       229.14,
+       300.25
+      ],
+      "opacity": 1
+     }
+    ]
+   },
    "feather": {
     "canvas": [
      460,
@@ -850,8 +1092,50 @@
       ],
       "opacity": 1
      }
+    ]
+   },
+   "strawberry": {
+    "canvas": [
+     460,
+     460
     ],
-    "atlas": "assets/treasures/rigs/treasure-parts.json"
+    "origin": [
+     229.81,
+     230.11
+    ],
+    "size": [
+     279.85,
+     320.0
+    ],
+    "parts": [
+     {
+      "name": "body",
+      "frame": "strawberry/body",
+      "pivot": [
+       203.75,
+       383.52
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "cap",
+      "frame": "strawberry/cap",
+      "pivot": [
+       255.58,
+       163.0
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "glint",
+      "frame": "strawberry/glint",
+      "pivot": [
+       148.31,
+       185.77
+      ],
+      "opacity": 0.55
+     }
+    ]
    },
    "amber": {
     "canvas": [
@@ -894,8 +1178,7 @@
       ],
       "opacity": 0.8
      }
-    ],
-    "atlas": "assets/treasures/rigs/treasure-parts.json"
+    ]
    },
    "gigaflower": {
     "canvas": [
@@ -1001,8 +1284,7 @@
       ],
       "opacity": 1
      }
-    ],
-    "atlas": "assets/treasures/rigs/treasure-parts.json"
+    ]
    },
    "crystal": {
     "canvas": [
@@ -1063,10 +1345,84 @@
       ],
       "opacity": 0.25
      }
+    ]
+   },
+   "butterfly": {
+    "canvas": [
+     460,
+     460
     ],
-    "atlas": "assets/treasures/rigs/treasure-parts.json"
+    "origin": [
+     230.14,
+     230.0
+    ],
+    "size": [
+     320.0,
+     222.74
+    ],
+    "parts": [
+     {
+      "name": "wing-left-hind",
+      "frame": "butterfly/wing-left-hind",
+      "pivot": [
+       227.95,
+       230.14
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "wing-right-hind",
+      "frame": "butterfly/wing-right-hind",
+      "pivot": [
+       232.33,
+       230.14
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "wing-left-fore",
+      "frame": "butterfly/wing-left-fore",
+      "pivot": [
+       227.67,
+       229.04
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "wing-right-fore",
+      "frame": "butterfly/wing-right-fore",
+      "pivot": [
+       232.6,
+       229.04
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "body",
+      "frame": "butterfly/body",
+      "pivot": [
+       230.14,
+       224.66
+      ],
+      "opacity": 1
+     }
+    ],
+    "poses": {
+     "perched": "butterfly/perched"
+    }
    }
   }
+ },
+ "chest": {
+  "width": 192,
+  "height": 186,
+  "base": "assets/ui/chest-base.webp",
+  "lid": "assets/ui/chest-lid.webp",
+  "open": "assets/ui/chest-open.webp",
+  "lidPivot": [
+   0.9166,
+   0.4244
+  ]
  },
  "intro": {
   "curtainLeft": {
@@ -1159,5 +1515,5 @@
    "bytes": 37908
   }
  },
- "totalBytes": 9349017
+ "totalBytes": 9401207
 }

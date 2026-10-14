@@ -1,15 +1,15 @@
 {
-  "stage": "master-designs-approved-parts-not-started",
+  "stage": "priority-1-source-complete",
   "masterCount": 6,
   "expectedMasterCount": 6,
-  "partsGenerated": 0,
+  "partsGenerated": 28,
   "assets": [
     {
       "id": "motion-butterfly-master",
       "path": "source/motion/butterfly/master.png",
       "size": [
-        1254,
-        1254
+        1680,
+        1680
       ],
       "mode": "RGBA",
       "alphaRange": [
@@ -17,14 +17,14 @@
         255
       ],
       "boundsAlpha40": [
-        44,
-        221,
-        1210,
-        1034
+        257,
+        433,
+        1423,
+        1246
       ],
-      "bytes": 1262751,
-      "sha256": "23e73696e6f2849dda6cc0141e47991cb0960426bcd7d50828acbd99199e0b6b",
-      "status": "master-design-approved",
+      "bytes": 1333225,
+      "sha256": "1581a97275df3be840aac3f14669ff416e79e90255d4b2ae0dda4c8b764ff807",
+      "status": "master-approved-padded",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-butterfly-master.txt"
@@ -34,17 +34,31 @@
         1024
       ],
       "requestedSubjectExtentFraction": 0.7,
-      "actualSubjectExtentFraction": 0.9298,
+      "actualSubjectExtentFraction": 0.694,
       "promptHashes": {
         "prompts/motion-executed/motion-butterfly-master.txt": "c795a5321c47c8873d69a5da5e07e049aa2af15c050bb0d8ca81bb101c0e9906"
-      }
+      },
+      "width": 1680,
+      "height": 1680,
+      "hasAlpha": true,
+      "nativePath": "review/motion/native-approved/butterfly.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "23e73696e6f2849dda6cc0141e47991cb0960426bcd7d50828acbd99199e0b6b",
+      "paddingOffset": [
+        213,
+        212
+      ],
+      "transform": "transparent padding only; approved RGBA pixels unchanged"
     },
     {
       "id": "motion-coconut-master",
       "path": "source/motion/coconut/master.png",
       "size": [
-        1254,
-        1254
+        1616,
+        1616
       ],
       "mode": "RGBA",
       "alphaRange": [
@@ -52,14 +66,14 @@
         255
       ],
       "boundsAlpha40": [
-        70,
-        78,
-        1199,
-        1158
+        244,
+        268,
+        1373,
+        1348
       ],
-      "bytes": 1990130,
-      "sha256": "dff68a4cf8997626d8a22a97d28e99376183547bcda1b25a030c957f255a9713",
-      "status": "master-design-approved",
+      "bytes": 1978846,
+      "sha256": "a66c7e6ad5a92edb00f670e07f821092c97101c3b99cb24dedc5c613177e3a7c",
+      "status": "master-approved-padded",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-coconut-master.txt"
@@ -69,17 +83,31 @@
         1024
       ],
       "requestedSubjectExtentFraction": 0.7,
-      "actualSubjectExtentFraction": 0.9003,
+      "actualSubjectExtentFraction": 0.6986,
       "promptHashes": {
         "prompts/motion-executed/motion-coconut-master.txt": "e98e1f13676e5231ca27b503931ebcfb052510f2f0b59746a20be2cf4edadca0"
-      }
+      },
+      "width": 1616,
+      "height": 1616,
+      "hasAlpha": true,
+      "nativePath": "review/motion/native-approved/coconut.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "dff68a4cf8997626d8a22a97d28e99376183547bcda1b25a030c957f255a9713",
+      "paddingOffset": [
+        174,
+        190
+      ],
+      "transform": "transparent padding only; approved RGBA pixels unchanged"
     },
     {
       "id": "motion-nut-master",
       "path": "source/motion/nut/master.png",
       "size": [
-        1254,
-        1254
+        1648,
+        1648
       ],
       "mode": "RGBA",
       "alphaRange": [
@@ -87,14 +115,14 @@
         255
       ],
       "boundsAlpha40": [
-        64,
-        160,
-        1212,
-        1118
+        250,
+        345,
+        1398,
+        1303
       ],
-      "bytes": 1397903,
-      "sha256": "3fe662f896392b602a8ab4b1d85f65904039d5c5e4e58f775a5579edd1e943ec",
-      "status": "master-design-approved",
+      "bytes": 1442401,
+      "sha256": "2d2a276303e5732e037e735d06ea4f27bc78c1aa2279d3b57111304609075f0a",
+      "status": "master-approved-padded",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-nut-master.txt"
@@ -104,17 +132,31 @@
         1024
       ],
       "requestedSubjectExtentFraction": 0.7,
-      "actualSubjectExtentFraction": 0.9155,
+      "actualSubjectExtentFraction": 0.6966,
       "promptHashes": {
         "prompts/motion-executed/motion-nut-master.txt": "f06ca8e5d1d1bfdf8c8e93595f9c20bfb3b287f8e91de36cb76fe5d56dc3e4a5"
-      }
+      },
+      "width": 1648,
+      "height": 1648,
+      "hasAlpha": true,
+      "nativePath": "review/motion/native-approved/nut.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "3fe662f896392b602a8ab4b1d85f65904039d5c5e4e58f775a5579edd1e943ec",
+      "paddingOffset": [
+        186,
+        185
+      ],
+      "transform": "transparent padding only; approved RGBA pixels unchanged"
     },
     {
       "id": "motion-flower-master",
       "path": "source/motion/flower/master.png",
       "size": [
-        1254,
-        1254
+        1632,
+        1632
       ],
       "mode": "RGBA",
       "alphaRange": [
@@ -122,14 +164,14 @@
         255
       ],
       "boundsAlpha40": [
-        58,
-        76,
-        1192,
-        1209
+        249,
+        250,
+        1383,
+        1383
       ],
-      "bytes": 1565468,
-      "sha256": "e9b17ea098283f9bac976afed290c84ab68622803aa9815afdd4b66b58b4e7e8",
-      "status": "master-design-approved",
+      "bytes": 1660276,
+      "sha256": "60e591fcdb7f0701f171228b3b56e8d3155a72c1c5f8c7c0b73ea06e2e0e2ea9",
+      "status": "master-approved-padded",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-flower-master.txt"
@@ -139,17 +181,31 @@
         1024
       ],
       "requestedSubjectExtentFraction": 0.7,
-      "actualSubjectExtentFraction": 0.9043,
+      "actualSubjectExtentFraction": 0.6949,
       "promptHashes": {
         "prompts/motion-executed/motion-flower-master.txt": "82ac99cbd34c1c1f6c123c22fd7c4efc0a4999a19da75c91f97cead6dcf9810a"
-      }
+      },
+      "width": 1632,
+      "height": 1632,
+      "hasAlpha": true,
+      "nativePath": "review/motion/native-approved/flower.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "e9b17ea098283f9bac976afed290c84ab68622803aa9815afdd4b66b58b4e7e8",
+      "paddingOffset": [
+        191,
+        174
+      ],
+      "transform": "transparent padding only; approved RGBA pixels unchanged"
     },
     {
       "id": "motion-berries-master",
       "path": "source/motion/berries/master.png",
       "size": [
-        1254,
-        1254
+        1392,
+        1392
       ],
       "mode": "RGBA",
       "alphaRange": [
@@ -157,14 +213,14 @@
         255
       ],
       "boundsAlpha40": [
-        146,
-        183,
-        1116,
-        1097
+        211,
+        239,
+        1181,
+        1153
       ],
-      "bytes": 1245563,
-      "sha256": "c3a4039d72bfac92a797c6ec6cad4d71a5d0a08eae9d1a37bd7b5e524901d60a",
-      "status": "master-design-approved",
+      "bytes": 1308310,
+      "sha256": "7b1800a9dbc4ea41a2e57e77bade192b86539da5ded0e64ac89aab7ae36218ce",
+      "status": "master-approved-padded",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-berries-master-count-revision.txt",
@@ -175,18 +231,32 @@
         1024
       ],
       "requestedSubjectExtentFraction": 0.7,
-      "actualSubjectExtentFraction": 0.7735,
+      "actualSubjectExtentFraction": 0.6968,
       "promptHashes": {
         "prompts/motion-executed/motion-berries-master-count-revision.txt": "12073e0f3a8c65ff0c3761135e2bc2726974efc6828881c0a3c4d7f59efb1047",
         "prompts/motion-executed/motion-berries-master.txt": "8c0de06821dce90b51adbfe4694e2333cf8788c9d202c1c9612b056dbafba64b"
-      }
+      },
+      "width": 1392,
+      "height": 1392,
+      "hasAlpha": true,
+      "nativePath": "review/motion/native-approved/berries.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "c3a4039d72bfac92a797c6ec6cad4d71a5d0a08eae9d1a37bd7b5e524901d60a",
+      "paddingOffset": [
+        65,
+        56
+      ],
+      "transform": "transparent padding only; approved RGBA pixels unchanged"
     },
     {
       "id": "motion-chest-master",
       "path": "source/motion/chest/master.png",
       "size": [
-        1254,
-        1254
+        1632,
+        1632
       ],
       "mode": "RGBA",
       "alphaRange": [
@@ -194,14 +264,14 @@
         255
       ],
       "boundsAlpha40": [
-        70,
-        186,
-        1212,
-        1140
+        245,
+        339,
+        1387,
+        1293
       ],
-      "bytes": 1586252,
-      "sha256": "fe73f3e82d3b64ccec5289c3af698887a19e5728f6a3a88b146cefe02b19e50e",
-      "status": "master-design-approved",
+      "bytes": 1597357,
+      "sha256": "c7b3e13f5e0a4a37f6fe6791d76b01e011bce8de296c5b346f689c21c6cbee6e",
+      "status": "master-approved-padded",
       "generator": "built-in GPT Imagegen",
       "promptFiles": [
         "prompts/motion-executed/motion-chest-master.txt"
@@ -211,11 +281,26 @@
         1024
       ],
       "requestedSubjectExtentFraction": 0.7,
-      "actualSubjectExtentFraction": 0.9107,
+      "actualSubjectExtentFraction": 0.6998,
       "promptHashes": {
         "prompts/motion-executed/motion-chest-master.txt": "14006700c147a6429be89649fa3ff5a79803184ee34b0c9d5a996c514b461202"
-      }
+      },
+      "width": 1632,
+      "height": 1632,
+      "hasAlpha": true,
+      "nativePath": "review/motion/native-approved/chest.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "fe73f3e82d3b64ccec5289c3af698887a19e5728f6a3a88b146cefe02b19e50e",
+      "paddingOffset": [
+        175,
+        153
+      ],
+      "transform": "transparent padding only; approved RGBA pixels unchanged"
     }
   ],
-  "ownerApprovalDate": "2026-10-14"
+  "ownerApprovalDate": "2026-10-14",
+  "extraPosesGenerated": 2
 }

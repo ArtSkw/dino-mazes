@@ -14,7 +14,7 @@ rig = json.loads((HERE/'registration.json').read_text())
 measurements = []
 sheet = Image.new('RGB', (1600, 4*440), '#203f35')
 draw = ImageDraw.Draw(sheet)
-for row, (name, asset) in enumerate(rig['assets'].items()):
+for row, (name, asset) in enumerate((k, v) for k, v in rig['assets'].items() if k != 'strawberry'):
     size = tuple(asset['canvas'])
     layers = []
     for part in asset['parts']:

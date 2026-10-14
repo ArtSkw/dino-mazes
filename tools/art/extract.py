@@ -173,11 +173,29 @@ def export_items(src_name: str, names_in_reading_order: list[str], folder: str, 
     return out
 
 
-# New treasures (owner request, 14 Oct 2026; art/CODEX_REQUEST_TREASURES.md):
-# one transparent PNG each, delivered by Codex. A missing file is skipped, and
-# the game leaves that treasure out until it exists (treasureHasArt).
+# New treasures (owner requests, 14 Oct 2026; art/CODEX_REQUEST_TREASURES.md,
+# art/CODEX_REQUEST_FINISH.md): one approved transparent PNG each in
+# source/treasures-v2/. A missing file is skipped, and the game leaves that
+# treasure out until it exists (treasureHasArt).
 NEW_TREASURES = ["feather", "strawberry", "amber", "gigaflower", "crystal"]
 NEW_TREASURE_DIR = os.path.join(SRC, "treasures-v2")
+# The approved motion masters replace the kit drawings of these stills, so the
+# still and its rig show the same design (art/CLAUDE_HANDOFF_MOTION.md).
+MOTION_MASTER_STILLS = {"treasures": ["coconut", "nut", "flower", "berries"], "foliage": ["butterfly"]}
+
+
+def export_still(path: str, rel: str, max_side: int) -> dict:
+    """One transparent image trimmed to its alpha box and scaled to `max_side`."""
+    rgba = clean_alpha(np.array(Image.open(path).convert("RGBA")))
+    ys, xs = np.nonzero(rgba[:, :, 3] >= ALPHA_FLOOR)
+    if len(xs) == 0:
+        raise RuntimeError(f"{path}: empty image")
+    img = Image.fromarray(np.ascontiguousarray(rgba[ys.min() : ys.max() + 1, xs.min() : xs.max() + 1]))
+    scale = min(1.0, max_side / max(img.size))
+    if scale < 1:
+        img = premul_resize(img, (round(img.width * scale), round(img.height * scale)))
+    nbytes = save_webp(img, os.path.join(ROOT, "public", rel), quality=88)
+    return {"image": rel, "width": img.width, "height": img.height, "bytes": nbytes, "sourceSha256": sha256(path)}
 
 
 def export_single_treasures(max_side: int, report: dict) -> dict:
@@ -187,20 +205,18 @@ def export_single_treasures(max_side: int, report: dict) -> dict:
         if not os.path.exists(path):
             print(f"treasure {name}: no art yet ({os.path.relpath(path, ROOT)}), left out of the game")
             continue
-        rgba = clean_alpha(np.array(Image.open(path).convert("RGBA")))
-        a = rgba[:, :, 3]
-        ys, xs = np.nonzero(a >= ALPHA_FLOOR)
-        if len(xs) == 0:
-            raise RuntimeError(f"{path}: empty image")
-        crop = rgba[ys.min() : ys.max() + 1, xs.min() : xs.max() + 1]
-        img = Image.fromarray(np.ascontiguousarray(crop))
-        scale = min(1.0, max_side / max(img.size))
-        if scale < 1:
-            img = premul_resize(img, (round(img.width * scale), round(img.height * scale)))
-        rel = f"assets/treasures/{name}.webp"
-        nbytes = save_webp(img, os.path.join(ROOT, "public", rel), quality=88)
-        out[name] = {"image": rel, "width": img.width, "height": img.height, "bytes": nbytes, "sourceSha256": sha256(path)}
+        out[name] = export_still(path, f"assets/treasures/{name}.webp", max_side)
     report["treasures-v2"] = out
+    return out
+
+
+def export_motion_master_stills(folder: str, max_side: int, report: dict) -> dict:
+    out: dict = {}
+    for name in MOTION_MASTER_STILLS[folder]:
+        path = os.path.join(SRC, "motion", name, "master.png")
+        if os.path.exists(path):
+            out[name] = export_still(path, f"assets/{folder}/{name}.webp", max_side)
+    report[f"motion-master-stills-{folder}"] = out
     return out
 
 
@@ -287,9 +303,8 @@ def main() -> int:
     manifest["characters"] = v3.process_characters(SRC, os.path.join(ROOT, "public"), REVIEW, report)
 
     manifest["treasures"] = export_items("treasure-kit-v1.png", ["coconut", "nut", "flower", "stone", "shell", "berries"], "treasures", 320, report)
+    manifest["treasures"].update(export_motion_master_stills("treasures", 320, report))
     manifest["treasures"].update(export_single_treasures(320, report))
-    # Painted parts of the treasures that have them (art/CLAUDE_HANDOFF_TREASURES.md).
-    manifest["treasureRigs"] = rigs.process_treasure_rigs(ROOT, SRC, list(manifest["treasures"]), 320, clean_alpha, ALPHA_FLOOR, report)
     manifest["foliage"] = export_items(
         "foliage-kit-v1.png",
         ["hedge-a", "hedge-b", "rocks", "flower-bush", "banana-plant", "fern", "monstera", "butterfly"],
@@ -297,6 +312,11 @@ def main() -> int:
         384,
         report,
     )
+    manifest["foliage"].update(export_motion_master_stills("foliage", 320, report))
+    # Painted parts (art/CLAUDE_HANDOFF_TREASURES.md, art/CLAUDE_HANDOFF_MOTION.md):
+    # every treasure that has them, and the butterfly; the chest goes to the DOM.
+    manifest["rigs"] = rigs.process_rigs(ROOT, SRC, [*manifest["treasures"], "butterfly"], 320, clean_alpha, ALPHA_FLOOR, report)
+    manifest["chest"] = rigs.export_chest(ROOT, SRC, clean_alpha, ALPHA_FLOOR, save_webp, report)
     manifest["ui"] = export_items("ui-surfaces-v1.png", ["wood-button", "leaf-button", "cream-pill", "cream-panel"], "ui", 720, report)
     split_panel_leaf(manifest["ui"], report)
     export_emblem(manifest["ui"], report)

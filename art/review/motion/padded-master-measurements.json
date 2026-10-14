@@ -1,0 +1,164 @@
+[
+  {
+    "asset": "butterfly",
+    "path": "source/motion/butterfly/master.png",
+    "size": [
+      1680,
+      1680
+    ],
+    "nativePath": "review/motion/native-approved/butterfly.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "paddingOffset": [
+      213,
+      212
+    ],
+    "boundsAlpha40": [
+      257,
+      433,
+      1423,
+      1246
+    ],
+    "nativeSha256": "23e73696e6f2849dda6cc0141e47991cb0960426bcd7d50828acbd99199e0b6b",
+    "sha256": "1581a97275df3be840aac3f14669ff416e79e90255d4b2ae0dda4c8b764ff807",
+    "transform": "transparent padding only; approved RGBA pixels unchanged",
+    "ownerApproved": true
+  },
+  {
+    "asset": "coconut",
+    "path": "source/motion/coconut/master.png",
+    "size": [
+      1616,
+      1616
+    ],
+    "nativePath": "review/motion/native-approved/coconut.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "paddingOffset": [
+      174,
+      190
+    ],
+    "boundsAlpha40": [
+      244,
+      268,
+      1373,
+      1348
+    ],
+    "nativeSha256": "dff68a4cf8997626d8a22a97d28e99376183547bcda1b25a030c957f255a9713",
+    "sha256": "a66c7e6ad5a92edb00f670e07f821092c97101c3b99cb24dedc5c613177e3a7c",
+    "transform": "transparent padding only; approved RGBA pixels unchanged",
+    "ownerApproved": true
+  },
+  {
+    "asset": "nut",
+    "path": "source/motion/nut/master.png",
+    "size": [
+      1648,
+      1648
+    ],
+    "nativePath": "review/motion/native-approved/nut.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "paddingOffset": [
+      186,
+      185
+    ],
+    "boundsAlpha40": [
+      250,
+      345,
+      1398,
+      1303
+    ],
+    "nativeSha256": "3fe662f896392b602a8ab4b1d85f65904039d5c5e4e58f775a5579edd1e943ec",
+    "sha256": "2d2a276303e5732e037e735d06ea4f27bc78c1aa2279d3b57111304609075f0a",
+    "transform": "transparent padding only; approved RGBA pixels unchanged",
+    "ownerApproved": true
+  },
+  {
+    "asset": "flower",
+    "path": "source/motion/flower/master.png",
+    "size": [
+      1632,
+      1632
+    ],
+    "nativePath": "review/motion/native-approved/flower.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "paddingOffset": [
+      191,
+      174
+    ],
+    "boundsAlpha40": [
+      249,
+      250,
+      1383,
+      1383
+    ],
+    "nativeSha256": "e9b17ea098283f9bac976afed290c84ab68622803aa9815afdd4b66b58b4e7e8",
+    "sha256": "60e591fcdb7f0701f171228b3b56e8d3155a72c1c5f8c7c0b73ea06e2e0e2ea9",
+    "transform": "transparent padding only; approved RGBA pixels unchanged",
+    "ownerApproved": true
+  },
+  {
+    "asset": "berries",
+    "path": "source/motion/berries/master.png",
+    "size": [
+      1392,
+      1392
+    ],
+    "nativePath": "review/motion/native-approved/berries.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "paddingOffset": [
+      65,
+      56
+    ],
+    "boundsAlpha40": [
+      211,
+      239,
+      1181,
+      1153
+    ],
+    "nativeSha256": "c3a4039d72bfac92a797c6ec6cad4d71a5d0a08eae9d1a37bd7b5e524901d60a",
+    "sha256": "7b1800a9dbc4ea41a2e57e77bade192b86539da5ded0e64ac89aab7ae36218ce",
+    "transform": "transparent padding only; approved RGBA pixels unchanged",
+    "ownerApproved": true
+  },
+  {
+    "asset": "chest",
+    "path": "source/motion/chest/master.png",
+    "size": [
+      1632,
+      1632
+    ],
+    "nativePath": "review/motion/native-approved/chest.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "paddingOffset": [
+      175,
+      153
+    ],
+    "boundsAlpha40": [
+      245,
+      339,
+      1387,
+      1293
+    ],
+    "nativeSha256": "fe73f3e82d3b64ccec5289c3af698887a19e5728f6a3a88b146cefe02b19e50e",
+    "sha256": "c7b3e13f5e0a4a37f6fe6791d76b01e011bce8de296c5b346f689c21c6cbee6e",
+    "transform": "transparent padding only; approved RGBA pixels unchanged",
+    "ownerApproved": true
+  }
+]

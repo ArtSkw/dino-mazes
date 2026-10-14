@@ -244,7 +244,7 @@ test.describe('storage', () => {
 });
 
 test.describe('reliability', () => {
-  test('twenty completions: one reward each, Giganto at 6/11/16 with his own three, all ten treasures', async ({ page }) => {
+  test('twenty completions: one reward each, Giganto at 6/11/16 with his own three, all eleven treasures', async ({ page }) => {
     test.setTimeout(300_000);
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await boot(page);
@@ -267,8 +267,8 @@ test.describe('reliability', () => {
     }
     expect(specials).toEqual([6, 11, 16]);
     const counts = await state<Record<string, { count: number }>>(page, 's.get().collection');
-    // Seventeen friends' mazes bring all seven classic treasures; Giganto's three bring his own.
-    expect(Object.keys(counts).sort()).toEqual(['amber', 'berries', 'coconut', 'crystal', 'feather', 'flower', 'gigaflower', 'nut', 'shell', 'stone']);
+    // Seventeen friends' mazes bring all eight classic treasures; Giganto's three bring his own.
+    expect(Object.keys(counts).sort()).toEqual(['amber', 'berries', 'coconut', 'crystal', 'feather', 'flower', 'gigaflower', 'nut', 'shell', 'stone', 'strawberry']);
     for (const g of ['amber', 'gigaflower', 'crystal']) expect(counts[g]?.count, g).toBe(1);
     expect(Object.values(counts).reduce((a, b) => a + b.count, 0)).toBe(20);
     // Live resources stay bounded: old board textures are released.
@@ -690,9 +690,21 @@ test.describe('living treasures (14 October 2026)', () => {
     // Ten parts plus the centre's light.
     expect(r.parts).toBe(11);
     expect(r.standHidden).toBe(true);
-    // A classic treasure without parts stays a still image.
-    await host(page, 'coconut', 'giganto-coconut');
+    // A treasure without parts (the stone) stays a still image.
+    await host(page, 'stone', 'mazu-stone');
     expect(await rigState(page)).toEqual({ rig: false, parts: 0, standHidden: false });
+  });
+
+  test('butterflies flap real wings; the collection button is a painted chest', async ({ page }) => {
+    await boot(page);
+    await page.waitForFunction(() => (window as never as { __dino: { game: { scene: { getScene(k: string): { followers: unknown[] } } } } }).__dino.game.scene.getScene('game').followers.length >= 3);
+    const flies = await state<{ rigs: number; wings: number }>(
+      page,
+      "(() => { const g = d.game.scene.getScene('game'); const f = g.followers.filter((x) => x.stand.texture.key === 'fol-butterfly'); return { rigs: f.length, wings: f[0].rig.container.list.length }; })()",
+    );
+    // Three wandering butterflies, each a body, four wings and the perched pose.
+    expect(flies).toEqual({ rigs: 3, wings: 6 });
+    await expect(page.locator('.collection-btn .chest img')).toHaveCount(3);
   });
 
   test('reduced motion shows the still image instead of the rig', async ({ page }) => {

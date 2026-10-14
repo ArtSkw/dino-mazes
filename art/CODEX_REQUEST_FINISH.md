@@ -1,5 +1,8 @@
 # Codex art request: finish the outstanding art
 
+> Status, 15 October 2026: **delivered and in the game** (art/CLAUDE_HANDOFF_MOTION.md,
+> art/CLAUDE_HANDOFF_TREASURES.md). Priority 2 and 3 of the motion plan remain for later.
+
 14 October 2026, Claude Code, after the owner asked for an eighth classic treasure (so the
 collection reads 4 + 4), Giganto's badge and the parts of the six approved motion masters.
 Execute with the built-in **GPT Imagegen** skill. Every job carries a `status`; do only the

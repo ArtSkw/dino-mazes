@@ -128,38 +128,23 @@
   "coconut": {
    "image": "assets/treasures/coconut.webp",
    "width": 320,
-   "height": 310,
-   "bytes": 48868,
-   "sourceBox": [
-    46,
-    66,
-    522,
-    530
-   ]
+   "height": 306,
+   "bytes": 47982,
+   "sourceSha256": "a66c7e6ad5a92edb00f670e07f821092c97101c3b99cb24dedc5c613177e3a7c"
   },
   "nut": {
    "image": "assets/treasures/nut.webp",
-   "width": 301,
-   "height": 320,
-   "bytes": 26974,
-   "sourceBox": [
-    598,
-    126,
-    942,
-    490
-   ]
+   "width": 320,
+   "height": 267,
+   "bytes": 28804,
+   "sourceSha256": "2d2a276303e5732e037e735d06ea4f27bc78c1aa2279d3b57111304609075f0a"
   },
   "flower": {
    "image": "assets/treasures/flower.webp",
-   "width": 313,
+   "width": 320,
    "height": 320,
-   "bytes": 35100,
-   "sourceBox": [
-    1042,
-    70,
-    1490,
-    526
-   ]
+   "bytes": 34206,
+   "sourceSha256": "60e591fcdb7f0701f171228b3b56e8d3155a72c1c5f8c7c0b73ea06e2e0e2ea9"
   },
   "stone": {
    "image": "assets/treasures/stone.webp",
@@ -188,14 +173,9 @@
   "berries": {
    "image": "assets/treasures/berries.webp",
    "width": 320,
-   "height": 314,
-   "bytes": 36544,
-   "sourceBox": [
-    1070,
-    562,
-    1490,
-    974
-   ]
+   "height": 301,
+   "bytes": 35000,
+   "sourceSha256": "7b1800a9dbc4ea41a2e57e77bade192b86539da5ded0e64ac89aab7ae36218ce"
   },
   "feather": {
    "image": "assets/treasures/feather.webp",
@@ -203,6 +183,13 @@
    "height": 301,
    "bytes": 27844,
    "sourceSha256": "b16322ec99b3bad8742299e062fe3f4f599c6a726b6307738ffa60fe4935b949"
+  },
+  "strawberry": {
+   "image": "assets/treasures/strawberry.webp",
+   "width": 280,
+   "height": 320,
+   "bytes": 30134,
+   "sourceSha256": "6905f132ec9b25d04a77d6f98009ccfbe1b58e96a6b235b7270afdc5a6ba3c04"
   },
   "amber": {
    "image": "assets/treasures/amber.webp",
@@ -224,6 +211,36 @@
    "height": 320,
    "bytes": 29326,
    "sourceSha256": "1377189e7b8e02d9e9ce3e117b978b9180c992f467a116ed9c1dc3744aa143e4"
+  }
+ },
+ "motion-master-stills-treasures": {
+  "coconut": {
+   "image": "assets/treasures/coconut.webp",
+   "width": 320,
+   "height": 306,
+   "bytes": 47982,
+   "sourceSha256": "a66c7e6ad5a92edb00f670e07f821092c97101c3b99cb24dedc5c613177e3a7c"
+  },
+  "nut": {
+   "image": "assets/treasures/nut.webp",
+   "width": 320,
+   "height": 267,
+   "bytes": 28804,
+   "sourceSha256": "2d2a276303e5732e037e735d06ea4f27bc78c1aa2279d3b57111304609075f0a"
+  },
+  "flower": {
+   "image": "assets/treasures/flower.webp",
+   "width": 320,
+   "height": 320,
+   "bytes": 34206,
+   "sourceSha256": "60e591fcdb7f0701f171228b3b56e8d3155a72c1c5f8c7c0b73ea06e2e0e2ea9"
+  },
+  "berries": {
+   "image": "assets/treasures/berries.webp",
+   "width": 320,
+   "height": 301,
+   "bytes": 35000,
+   "sourceSha256": "7b1800a9dbc4ea41a2e57e77bade192b86539da5ded0e64ac89aab7ae36218ce"
   }
  },
  "treasures-v2": {
@@ -234,6 +251,13 @@
    "bytes": 27844,
    "sourceSha256": "b16322ec99b3bad8742299e062fe3f4f599c6a726b6307738ffa60fe4935b949"
   },
+  "strawberry": {
+   "image": "assets/treasures/strawberry.webp",
+   "width": 280,
+   "height": 320,
+   "bytes": 30134,
+   "sourceSha256": "6905f132ec9b25d04a77d6f98009ccfbe1b58e96a6b235b7270afdc5a6ba3c04"
+  },
   "amber": {
    "image": "assets/treasures/amber.webp",
    "width": 268,
@@ -255,18 +279,6 @@
    "bytes": 29326,
    "sourceSha256": "1377189e7b8e02d9e9ce3e117b978b9180c992f467a116ed9c1dc3744aa143e4"
   }
- },
- "treasure-rigs": {
-  "assets": [
-   "amber",
-   "crystal",
-   "feather",
-   "gigaflower"
-  ],
-  "parts": 21,
-  "pages": 1,
-  "bytes": 162799,
-  "decodedBytes": 3682032
  },
  "foliage-kit-v1.png": {
   "hedge-a": {
@@ -355,16 +367,49 @@
   },
   "butterfly": {
    "image": "assets/foliage/butterfly.webp",
-   "width": 306,
-   "height": 250,
-   "bytes": 21224,
-   "sourceBox": [
-    1206,
-    598,
-    1530,
-    866
-   ]
+   "width": 320,
+   "height": 223,
+   "bytes": 27956,
+   "sourceSha256": "1581a97275df3be840aac3f14669ff416e79e90255d4b2ae0dda4c8b764ff807"
   }
+ },
+ "motion-master-stills-foliage": {
+  "butterfly": {
+   "image": "assets/foliage/butterfly.webp",
+   "width": 320,
+   "height": 223,
+   "bytes": 27956,
+   "sourceSha256": "1581a97275df3be840aac3f14669ff416e79e90255d4b2ae0dda4c8b764ff807"
+  }
+ },
+ "rigs": {
+  "assets": [
+   "amber",
+   "berries",
+   "butterfly",
+   "coconut",
+   "crystal",
+   "feather",
+   "flower",
+   "gigaflower",
+   "nut",
+   "strawberry"
+  ],
+  "frames": 51,
+  "pages": 1,
+  "bytes": 385665,
+  "decodedBytes": 8739900
+ },
+ "chest": {
+  "width": 192,
+  "height": 186,
+  "base": "assets/ui/chest-base.webp",
+  "lid": "assets/ui/chest-lid.webp",
+  "open": "assets/ui/chest-open.webp",
+  "lidPivot": [
+   0.9166,
+   0.4244
+  ]
  },
  "ui-surfaces-v1.png": {
   "wood-button": {
@@ -423,6 +468,13 @@
    "bytes": 4552,
    "fromPanelRight": 12,
    "fromPanelTop": 7
+  },
+  "giganto-emblem": {
+   "image": "assets/ui/giganto-emblem.webp",
+   "width": 192,
+   "height": 191,
+   "bytes": 16818,
+   "sourceSha256": "d8fb74fef129d9891fce66121b83110a90cc4deeef3e81298b4ab7c8302c38bd"
   }
  },
  "panel-leaf": {
@@ -432,6 +484,13 @@
   "bytes": 4552,
   "fromPanelRight": 12,
   "fromPanelTop": 7
+ },
+ "giganto-emblem": {
+  "image": "assets/ui/giganto-emblem.webp",
+  "width": 192,
+  "height": 191,
+  "bytes": 16818,
+  "sourceSha256": "d8fb74fef129d9891fce66121b83110a90cc4deeef3e81298b4ab7c8302c38bd"
  },
  "jungle-backdrop-v1.png": {
   "image": "assets/bg/jungle.webp",

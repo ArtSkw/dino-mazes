@@ -52,6 +52,26 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Codex delivery: strawberry, badge, parts of the six (15 October 2026)
+
+- **All eleven treasures in the game**, each but the stone and the shell drawn from its painted
+  parts. New stills from the approved masters: the nut now sits in its leafy cup, the berries are
+  five; the strawberry joins (collection 4 + 4). Giganto's badge replaces the drawn footprint.
+- **Rigs** (`src/game/rig.ts`, `src/game/rigMotion.ts`, `tools/art/rigs.py`): one atlas for nine
+  treasures and the butterfly (51 frames, 377 KB, 8.3 MiB on the GPU, counted in the budget test).
+  Parts can ride on other parts (the coconut's tuft on the husk, the strawberry's cap on the
+  berry). Motion within Codex's limits: husk ±3° (on find ≤ ±10°) under a still sheen, tuft ≤ ±5°,
+  the nut hops out of its cup by ≤ 6 % and lands with a squash, flower petals ±2.5° and a bloom,
+  berries jiggle one by one within 85–115 %, the strawberry hops as a whole while its cap swings
+  ≤ ±6°. The flying treasure keeps its parts, so a rig never switches to a still mid-celebration.
+- **Butterflies** are rigs that follow the existing flight code: its narrowed width becomes wings
+  narrowing toward the body (never below 20 %, never mirrored); a perched butterfly fades to the
+  folded side pose. The hint button shows the new butterfly.
+- **Collection button:** the painted chest; when a treasure arrives it pops open (the open pose),
+  then the lid snaps shut on a little spring about its right-hand hinge.
+- Reduced motion keeps every still. Tests: rig assets, each motion limit, no jump at the start or
+  end of a celebration, blooms finished before the flight, butterflies and chest in the browser.
+
 ## Owner review, round 13 (14 October 2026): an eighth classic treasure, the Codex plan
 
 - **Truskawka / Strawberry** joins the classic treasures, so the collection reads 4 + 4 (in
@@ -275,8 +295,8 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 225 passed |
-| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 69 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
+| Domain unit + property | `npm test` | 231 passed |
+| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 71 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
 

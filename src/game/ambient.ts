@@ -157,6 +157,8 @@ export class AmbientWorld {
 
     // Butterflies: asymmetric wing beats (fast down-stroke), slow breathing at rest.
     for (const f of this.flies) {
+      // A perched butterfly folds its wings (the rig shows its side pose).
+      f.img.setData('perched', f.state === 'rest');
       if (f.state === 'hidden') continue;
       const dt = this.host.scene.game.loop.delta / 1000;
       if (f.state === 'fly') {
@@ -306,6 +308,11 @@ export class AmbientWorld {
         { scale: 0, angle: 90, duration: 380, ease: 'Sine.easeIn', onComplete: () => star.destroy() },
       ],
     });
+  }
+
+  /** The butterflies' still images (rigs follow them; see rig.ts). */
+  flierImages(): Phaser.GameObjects.Image[] {
+    return this.flies.map((f) => f.img);
   }
 
   /** Hide everything at once (e.g. reduced motion switched on). */

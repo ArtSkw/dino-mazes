@@ -1,0 +1,1548 @@
+{
+  "count": 33,
+  "assets": [
+    {
+      "id": "motion-butterfly-wing-left-hind",
+      "path": "source/motion/butterfly/wing-left-hind.png",
+      "size": [
+        1680,
+        1680
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        385,
+        820,
+        850,
+        1246
+      ],
+      "sha256": "25e8e804a0b6225d7515fd2d73e518b880ea91b5fde67467b550f88e68f8abe3",
+      "bytes": 297712,
+      "nativePath": "review/motion/parts-native/butterfly/wing-left-hind.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "e294b22f9dbc0ceb1d4b67d8918e3a31954c9293c93a1f3b02fe6db962b6a5fc",
+      "transform": [
+        0.739268680445151,
+        0,
+        0,
+        0.7539823008849558,
+        202.40063593004768,
+        436.2230088495575
+      ],
+      "pivot": [
+        832,
+        840
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-butterfly-wing-left-hind.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-butterfly-wing-left-hind.txt": "9d4a498c071a4de6c4aa869b9a72095c7044861530f3e407a929dc39bd520110"
+      }
+    },
+    {
+      "id": "motion-butterfly-wing-right-hind",
+      "path": "source/motion/butterfly/wing-right-hind.png",
+      "size": [
+        1680,
+        1680
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        830,
+        820,
+        1295,
+        1246
+      ],
+      "sha256": "b4b732152413082e7974a309087db5487d471b0f79c66bd3899c67648777b717",
+      "bytes": 296184,
+      "nativePath": "review/motion/parts-native/butterfly/wing-right-hind.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "b7e7bbba79934f061c807b43995be92cf81aac0287c2dc882beee4b84942fc22",
+      "transform": [
+        0.7962328767123288,
+        0,
+        0,
+        0.841897233201581,
+        470.1027397260274,
+        440.30434782608694
+      ],
+      "pivot": [
+        848,
+        840
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-butterfly-wing-right-hind.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-butterfly-wing-right-hind.txt": "ced8036f16c5076c7f3eb1b9c3349459369ff6135e53caf00e12d405e17d5690"
+      }
+    },
+    {
+      "id": "motion-butterfly-wing-left-fore",
+      "path": "source/motion/butterfly/wing-left-fore.png",
+      "size": [
+        1680,
+        1680
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        257,
+        433,
+        853,
+        898
+      ],
+      "sha256": "3f87bb9aea8e23df18e198f824275901adf4ef51dc441dfca3ccda34d65cbffb",
+      "bytes": 419196,
+      "nativePath": "review/motion/parts-native/butterfly/wing-left-fore.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "009ffd157b08abea7e301f820fc3afaa874b891a5bd04bd4a644bda44086beec",
+      "transform": [
+        0.9297971918876755,
+        0,
+        0,
+        0.8579335793357934,
+        31.989079563182514,
+        172.18819188191878
+      ],
+      "pivot": [
+        831,
+        836
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-butterfly-wing-left-fore.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-butterfly-wing-left-fore.txt": "2864a956b54a37a7af1ec9e5f2281fc6e5502f8b5dc0ce1c192a3b51ccaa7850"
+      }
+    },
+    {
+      "id": "motion-butterfly-wing-right-fore",
+      "path": "source/motion/butterfly/wing-right-fore.png",
+      "size": [
+        1680,
+        1680
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        827,
+        433,
+        1423,
+        898
+      ],
+      "sha256": "fca4cad3370d974a2e579d89c6e69a4cd3d041053e91eb7999fef1de1205bff7",
+      "bytes": 401232,
+      "nativePath": "review/motion/parts-native/butterfly/wing-right-fore.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "dbc4db16a9ca76384114bfe7385ea090ad81ff9227aa3791d4939b488aa9e42d",
+      "transform": [
+        0.7154861944777912,
+        0,
+        0,
+        0.6633380884450785,
+        606.6302521008404,
+        307.6291012838802
+      ],
+      "pivot": [
+        849,
+        836
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-butterfly-wing-right-fore.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-butterfly-wing-right-fore.txt": "041ac519425c296d1e1644ff22aea556de5601f22eca7e6b36f0f90f198e7a6a"
+      }
+    },
+    {
+      "id": "motion-butterfly-body",
+      "path": "source/motion/butterfly/body.png",
+      "size": [
+        1680,
+        1680
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        681,
+        432,
+        1001,
+        1105
+      ],
+      "sha256": "b3c59265c76b12844a5f6c29f73c67d7d596ef5b00af1d0c4e4b413715511fcd",
+      "bytes": 129001,
+      "nativePath": "review/motion/parts-native/butterfly/body.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "17a1d979bed2ab2c4f8791b9e00be8ff4dd94bb67011c1493f8495794c4310b6",
+      "transform": [
+        0.5574912891986062,
+        0,
+        0,
+        0.6974093264248704,
+        491.45296167247386,
+        318.32227979274614
+      ],
+      "pivot": [
+        840,
+        820
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-butterfly-body-revision-2.txt",
+        "prompts/finish-executed/motion-butterfly-body.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-butterfly-body-revision-2.txt": "41a2317192cf20e4a2a0130c7fdd2de77dcb8866fdf62e366886acd5694b34c6",
+        "prompts/finish-executed/motion-butterfly-body.txt": "edfbef96b666f5b206ef9bade1dfbe22f4d78e8cb30e89e93f13e6d6380c58c4"
+      }
+    },
+    {
+      "id": "motion-coconut-body",
+      "path": "source/motion/coconut/body.png",
+      "size": [
+        1616,
+        1616
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        244,
+        383,
+        1373,
+        1348
+      ],
+      "sha256": "d916902026179e0ca043bd6a8b76ad805e798400be41ee632adcd23b7d34f70c",
+      "bytes": 1671789,
+      "nativePath": "review/motion/parts-native/coconut/body.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "93ed3c0067bff17da92f97784101d514946bac37bae3fb7b5da6e62d2fa38ca7",
+      "transform": [
+        1.285876993166287,
+        0,
+        0,
+        1.2416452442159382,
+        0.9692482915717449,
+        47.99742930591259
+      ],
+      "pivot": [
+        808,
+        850
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-coconut-body.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-coconut-body.txt": "08f57fca8cc99bb7f0f3e51a7660e9da0fa677a3543756b9aab4972048abf677"
+      }
+    },
+    {
+      "id": "motion-coconut-tuft",
+      "path": "source/motion/coconut/tuft.png",
+      "size": [
+        1616,
+        1616
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        422,
+        268,
+        1170,
+        526
+      ],
+      "sha256": "0961233ec83f493f8a50a797f07836fe415bf9693c5688ffae06cfc846a32aae",
+      "bytes": 176885,
+      "nativePath": "review/motion/parts-native/coconut/tuft.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "530a4b822bc08b6c4403c3237a261ef51edaac6a3b6a250c1bdb73fd703e0d3a",
+      "transform": [
+        0.9739583333333334,
+        0,
+        0,
+        0.7938461538461539,
+        161.953125,
+        105.26153846153846
+      ],
+      "pivot": [
+        803,
+        425
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-coconut-tuft.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-coconut-tuft.txt": "aabfd8b1508312b1c41c4ef824ff800b44a2814fef371fb71a30f33e90b0bf33"
+      }
+    },
+    {
+      "id": "motion-coconut-highlight",
+      "path": "source/motion/coconut/highlight.png",
+      "size": [
+        1616,
+        1616
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        253
+      ],
+      "boundsAlpha40": [
+        430,
+        425,
+        840,
+        735
+      ],
+      "sha256": "5acfd5953de617934be9c45d505b0c5ae401c714b95b0be08b67297cb69c3831",
+      "bytes": 346196,
+      "nativePath": "review/motion/parts-native/coconut/highlight.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "eeb7524cdb9961c338a6f2f41d6d56fb5717db27fd84fd11bf4c0d75296294e4",
+      "transform": [
+        0.9468822170900693,
+        0,
+        0,
+        0.96875,
+        234.94226327944574,
+        203.15625
+      ],
+      "pivot": [
+        635,
+        580
+      ],
+      "opacity": 0.32,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-coconut-highlight-revision-2.txt",
+        "prompts/finish-executed/motion-coconut-highlight.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-coconut-highlight-revision-2.txt": "45fa663bf94602019b9cf18ad8492ef1601cd9f883a1de16cc38efca6d7fe244",
+        "prompts/finish-executed/motion-coconut-highlight.txt": "607b8efa4dcd6789c61fca586651a2ebff14301de2681606b4b576d3734f5206"
+      }
+    },
+    {
+      "id": "motion-nut-nut",
+      "path": "source/motion/nut/nut.png",
+      "size": [
+        1648,
+        1648
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        485,
+        344,
+        1210,
+        1151
+      ],
+      "sha256": "1fb662b7324cd3f94b3bede03f3b6d56ccb144de2625b663e8734445501f37a2",
+      "bytes": 731677,
+      "nativePath": "review/motion/parts-native/nut/nut.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "a99acf7342cb0daf45097e73c0293b28ba56dfcb5368ce6212b76bf5ecc8cc28",
+      "transform": [
+        1.0661764705882353,
+        0,
+        0,
+        1.151645207439199,
+        176.875,
+        45.57224606580826
+      ],
+      "pivot": [
+        840,
+        1080
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-nut-nut.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-nut-nut.txt": "e90c1b804d372a3aca901498f25328b9a29297ef74dbbc1db9cc06fbf83065fa"
+      }
+    },
+    {
+      "id": "motion-nut-cup",
+      "path": "source/motion/nut/cup.png",
+      "size": [
+        1648,
+        1648
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        250,
+        425,
+        1398,
+        1303
+      ],
+      "sha256": "0526ffd5304c0c6188d63e03b54abeb1dbbace3fa1ec51fa56fa1828ae3bf62c",
+      "bytes": 982009,
+      "nativePath": "review/motion/parts-native/nut/cup.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "db86be21b34e19ebd35c12409601e46a0e11450b9d7f6e076e88978e807d4e83",
+      "transform": [
+        0.940983606557377,
+        0,
+        0,
+        1.001140250855188,
+        234.94426229508196,
+        152.68985176738886
+      ],
+      "pivot": [
+        840,
+        1080
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-nut-cup-revision-2.txt",
+        "prompts/finish-executed/motion-nut-cup.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-nut-cup-revision-2.txt": "897b62a05c6a300ae0035bc9bcf6320c5166ffa81a4e951e15972a322a31c310",
+        "prompts/finish-executed/motion-nut-cup.txt": "405d3b0887b4dafa9ecf5ff7f9ddc19e00339f16d832e6aad4e346df5966f220"
+      }
+    },
+    {
+      "id": "motion-flower-stem",
+      "path": "source/motion/flower/stem.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        680,
+        770,
+        846,
+        1358
+      ],
+      "sha256": "d38e298bab3d934fcfd402de6ef79a13e3d42fa8de59ad02350790108e7b47d4",
+      "bytes": 106333,
+      "nativePath": "review/motion/parts-native/flower/stem.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "4e6d8508205e8b09279bcad9687c125ad696f73884096eec5b2c1a88347da7ce",
+      "transform": [
+        0.9325842696629213,
+        0,
+        0,
+        1.3394077448747153,
+        186.66292134831463,
+        1.1799544419134236
+      ],
+      "pivot": [
+        813,
+        1330
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-flower-stem.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-flower-stem.txt": "a7d7b2532794b5c50e23885af200215c300305035ccfa004d2bf76775e288ea4"
+      }
+    },
+    {
+      "id": "motion-flower-leaf-left",
+      "path": "source/motion/flower/leaf-left.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        249,
+        870,
+        766,
+        1175
+      ],
+      "sha256": "b1fac82cfa1d7312535037de333db69492fc0d123af9c227560045dd06d705e3",
+      "bytes": 173071,
+      "nativePath": "review/motion/parts-native/flower/leaf-left.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "52728b1309786e15f2991e76e40c4b5b03988455b3a07cd4cff30f6336fdfa4a",
+      "transform": [
+        0.6274271844660194,
+        0,
+        0,
+        0.511744966442953,
+        159.27791262135923,
+        672.9781879194632
+      ],
+      "pivot": [
+        744,
+        1150
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-flower-leaf-left.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-flower-leaf-left.txt": "41dd66d24e4e44bb6c91737f8409f67647a8d3aa39aff5c8c15bd6bf0ebb9983"
+      }
+    },
+    {
+      "id": "motion-flower-leaf-right",
+      "path": "source/motion/flower/leaf-right.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        771,
+        1068,
+        1355,
+        1383
+      ],
+      "sha256": "191561cb09294df766843471c3529338ab7cef8e59517da6599dd33cdc54eed2",
+      "bytes": 266512,
+      "nativePath": "review/motion/parts-native/flower/leaf-right.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "377651542ac847d843ae4dd4c07207756c7bcef72efb4b6c244b35405c2b75f3",
+      "transform": [
+        0.8307254623044097,
+        0,
+        0,
+        0.824607329842932,
+        512.6443812233285,
+        597.9738219895288
+      ],
+      "pivot": [
+        780,
+        1200
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-flower-leaf-right.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-flower-leaf-right.txt": "05cf32b886f424da6f8c3c21967ab02a15c55db812227d48221d9e95f5b311b8"
+      }
+    },
+    {
+      "id": "motion-flower-petal-1",
+      "path": "source/motion/flower/petal-1.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        496,
+        250,
+        1026,
+        845
+      ],
+      "sha256": "8cf58e427793e3575c361045c37bcc6568b25704ba93f2f5aa17f38ac0529f93",
+      "bytes": 365627,
+      "nativePath": "review/motion/parts-native/flower/petal-1.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "38bc86e9987579e5cbeb764da306ff6e518cacba036102c89b003a2c07493973",
+      "transform": [
+        0.6127167630057804,
+        0,
+        0,
+        0.7465495608531995,
+        378.97109826589593,
+        102.92973651191971
+      ],
+      "pivot": [
+        832,
+        815
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-flower-petal-1.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-flower-petal-1.txt": "277ad8159afafeb2335d6efee497780ff6b6bfa69ea42bfae239ca5891a84eb7"
+      }
+    },
+    {
+      "id": "motion-flower-petal-2",
+      "path": "source/motion/flower/petal-2.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        816,
+        435,
+        1383,
+        845
+      ],
+      "sha256": "61f160c30215ab3937f1b0a6557e9feb6e157cb36220b9bdb7f56da5aff50b2e",
+      "bytes": 337907,
+      "nativePath": "review/motion/parts-native/flower/petal-2.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "e92b094a132d71fc2e1dfb543aa3f776cf95d3ec4c0eb36a12aa2b1e9aa6d1e3",
+      "transform": [
+        0.801980198019802,
+        0,
+        0,
+        0.7536764705882353,
+        486.38613861386136,
+        204.375
+      ],
+      "pivot": [
+        832,
+        815
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-flower-petal-2.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-flower-petal-2.txt": "f9aaeb03b88fb17265704bb765fb41c8d81981d791370545b8b5a3b404cf8479"
+      }
+    },
+    {
+      "id": "motion-flower-petal-3",
+      "path": "source/motion/flower/petal-3.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        816,
+        738,
+        1360,
+        1055
+      ],
+      "sha256": "db54426e61b3fb988add2a407d5e3ac5afdb0275be0997bf768fea7845115b14",
+      "bytes": 215611,
+      "nativePath": "review/motion/parts-native/flower/petal-3.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "759a8a189fbca76d4b641bb700f7812a82ed62b3db0b1bb844e0e795b3c962c8",
+      "transform": [
+        0.5849462365591398,
+        0,
+        0,
+        0.4204244031830239,
+        666.8387096774194,
+        626.5875331564987
+      ],
+      "pivot": [
+        832,
+        815
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-flower-petal-3-revision-2.txt",
+        "prompts/finish-executed/motion-flower-petal-3.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-flower-petal-3-revision-2.txt": "6511d9634cc5a58a4e00dd7c57241fc2fd05a5a30eee36f4d4c9ae49106f70ba",
+        "prompts/finish-executed/motion-flower-petal-3.txt": "762819e01f2e18dba8ce960996dd0f5495787ca6cfdacb2e7c5b88aecba5c320"
+      }
+    },
+    {
+      "id": "motion-flower-petal-4",
+      "path": "source/motion/flower/petal-4.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        715,
+        778,
+        1115,
+        1128
+      ],
+      "sha256": "6892b50fa09482f0a388245751131bcb309a278e542b51a6995276bee569ed17",
+      "bytes": 212467,
+      "nativePath": "review/motion/parts-native/flower/petal-4.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "210e785ff576d77ca2653d003747056d2ebbf057251cf75f908564f0d204a5e6",
+      "transform": [
+        0.5167958656330749,
+        0,
+        0,
+        0.445859872611465,
+        571.8475452196383,
+        659.4012738853503
+      ],
+      "pivot": [
+        832,
+        815
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-flower-petal-4-revision-2.txt",
+        "prompts/finish-executed/motion-flower-petal-4.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-flower-petal-4-revision-2.txt": "d47c642c37871c1089bdbde8e539cd2c9fc60ef409b65aa8f8f2e0a534a04534",
+        "prompts/finish-executed/motion-flower-petal-4.txt": "d25731707a801567a602ffd90a1e5d49569e6e6e5bbd663a83b9547bd28d42ff"
+      }
+    },
+    {
+      "id": "motion-flower-petal-5",
+      "path": "source/motion/flower/petal-5.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        284,
+        489,
+        865,
+        898
+      ],
+      "sha256": "465429702cb4a77330f4f7cac520bd82d1cbf5d6cf7ece07e2a9f20b8c71aeff",
+      "bytes": 305011,
+      "nativePath": "review/motion/parts-native/flower/petal-5.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "7f8c36a9455cdb65858f9191c4316d4a5b82b39de934e2fb8e2e9bf01c9dc701",
+      "transform": [
+        0.8736842105263158,
+        0,
+        0,
+        0.6481774960380349,
+        98.77894736842103,
+        361.95721077654514
+      ],
+      "pivot": [
+        832,
+        815
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-flower-petal-5.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-flower-petal-5.txt": "355ad1104c81009b16101b2a79f7108caf2117b7183a92343609cb043c94460b"
+      }
+    },
+    {
+      "id": "motion-flower-center",
+      "path": "source/motion/flower/center.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        816,
+        486,
+        991,
+        840
+      ],
+      "sha256": "9560367ecd9187fc3e38460ae688e892b5c4abf364b728cf19dd44ed6fef183e",
+      "bytes": 91316,
+      "nativePath": "review/motion/parts-native/flower/center.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "2ff466355272ee113cbe1ddc88b1c1d482ea366075e480a9dc2b4a35225c3d11",
+      "transform": [
+        0.6386861313868614,
+        0,
+        0,
+        0.6641651031894934,
+        459.6131386861314,
+        246.90056285178238
+      ],
+      "pivot": [
+        834,
+        813
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-flower-center.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-flower-center.txt": "c4df0997fd3700b50b3e689b67cdbdb9174007da17906a5e96af2dc83346f766"
+      }
+    },
+    {
+      "id": "motion-berries-stem",
+      "path": "source/motion/berries/stem.png",
+      "size": [
+        1392,
+        1392
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        610,
+        380,
+        853,
+        946
+      ],
+      "sha256": "9057f4f5f1426f08857e85739cfa1b8b55362444ba27a97ed539632f86c411fa",
+      "bytes": 126671,
+      "nativePath": "review/motion/parts-native/berries/stem.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "161407f3f7c55c5e7874d8fb42d34bc0b701526c3cb0f0870e1a223915a99aee",
+      "transform": [
+        0.9959016393442623,
+        0,
+        0,
+        0.9658703071672355,
+        83.16803278688519,
+        50.63822525597266
+      ],
+      "pivot": [
+        705,
+        700
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-berries-stem.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-berries-stem.txt": "23467096c3e6b92f1ea8db39a697a5294a7617c1285eaf3b238bbac3f8c499c0"
+      }
+    },
+    {
+      "id": "motion-berries-leaves",
+      "path": "source/motion/berries/leaves.png",
+      "size": [
+        1392,
+        1392
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        273,
+        239,
+        1171,
+        772
+      ],
+      "sha256": "279d4d482d104e31758f8fe28138ae739b15c5b37b45ec3b9c75f065a6e5fd0f",
+      "bytes": 527162,
+      "nativePath": "review/motion/parts-native/berries/leaves.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "4fb00b42713a79afaaad963fe3c9d6d0a79daf635d0a19ec57c519c8383c2ae9",
+      "transform": [
+        0.9286452947259566,
+        0,
+        0,
+        1.0,
+        121.63081695966909,
+        18.0
+      ],
+      "pivot": [
+        710,
+        690
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-berries-leaves.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-berries-leaves.txt": "eaf6ce224779c30e76b7ad4d14c30c02bdb7b6359e88f23595557a2a168cef16"
+      }
+    },
+    {
+      "id": "motion-berries-berry-1",
+      "path": "source/motion/berries/berry-1.png",
+      "size": [
+        1392,
+        1392
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        350,
+        540,
+        730,
+        946
+      ],
+      "sha256": "240244606d24cb721d5e47acb4f416851a2b90b5fd2728425da8470d88014f48",
+      "bytes": 276040,
+      "nativePath": "review/motion/parts-native/berries/berry-1.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "19d7e1772100adb10224db5c4aba11621866dc6b86409f68b7473b8799a8bbd6",
+      "transform": [
+        0.7645875251509054,
+        0,
+        0,
+        0.810379241516966,
+        180.261569416499,
+        181.81237524950103
+      ],
+      "pivot": [
+        600,
+        720
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-berries-berry-1.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-berries-berry-1.txt": "4c780a4680e914fa9b9ecbaae4ab70ed2c2c222dcf25a03de757d7c2f4b61a5f"
+      }
+    },
+    {
+      "id": "motion-berries-berry-2",
+      "path": "source/motion/berries/berry-2.png",
+      "size": [
+        1392,
+        1392
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        690,
+        580,
+        1060,
+        970
+      ],
+      "sha256": "487d4ffca98cf759b90db5db20ec1907952814b652245391a13245d78713b9dc",
+      "bytes": 268475,
+      "nativePath": "review/motion/parts-native/berries/berry-2.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "cfe3f678e0ebee041476c3bfa80955fbad26fb163ceb1c2e031747849c2be230",
+      "transform": [
+        0.7370517928286853,
+        0,
+        0,
+        0.8041237113402062,
+        398.1274900398406,
+        221.36082474226805
+      ],
+      "pivot": [
+        793,
+        734
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-berries-berry-2.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-berries-berry-2.txt": "fd1ee939c42a5526559c31f63689d5b2e9e67c266467ea9265028b2f84a65c7d"
+      }
+    },
+    {
+      "id": "motion-berries-berry-4",
+      "path": "source/motion/berries/berry-4.png",
+      "size": [
+        1392,
+        1392
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        210,
+        778,
+        590,
+        1115
+      ],
+      "sha256": "b2fb196ff4bec2cf2e60f589bfa75bbc09266648a441ab540efe61b8a71f798b",
+      "bytes": 232814,
+      "nativePath": "review/motion/parts-native/berries/berry-4.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "9c7677de793ed9bdb2ec63225e019a6e01cbc65e98b972f8c0799394dbd89b5a",
+      "transform": [
+        1.0133689839572193,
+        0,
+        0,
+        0.9083557951482479,
+        35.68716577540107,
+        141.24258760107818
+      ],
+      "pivot": [
+        518,
+        866
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-berries-berry-4.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-berries-berry-4.txt": "bc19685a56f716aa615309e095331ae8cdbc1613383f8bbd764449cb509b0f46"
+      }
+    },
+    {
+      "id": "motion-berries-berry-5",
+      "path": "source/motion/berries/berry-5.png",
+      "size": [
+        1392,
+        1392
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        826,
+        800,
+        1181,
+        1134
+      ],
+      "sha256": "cc44f2c80e5ffa52772e2f49627aaaf7b63bd62c41c7498cdf6212834d171b12",
+      "bytes": 217558,
+      "nativePath": "review/motion/parts-native/berries/berry-5.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "83d5db01254c9f9c6f3a35f9e350aa6576cfc7c7503c088779ace05c577055f8",
+      "transform": [
+        0.9125964010282777,
+        0,
+        0,
+        0.8697916666666666,
+        189.92030848329046,
+        183.31770833333337
+      ],
+      "pivot": [
+        861,
+        886
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-berries-berry-5.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-berries-berry-5.txt": "5cc7096d975134b149511804e1148b8b48ca97cfe9c7268ccbcf1130947b9e9e"
+      }
+    },
+    {
+      "id": "motion-berries-berry-3",
+      "path": "source/motion/berries/berry-3.png",
+      "size": [
+        1392,
+        1392
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        493,
+        755,
+        891,
+        1153
+      ],
+      "sha256": "b8c4506a9f4e39fc1f55f75a20d57cfd536131c88fa026973b33c51ceb17ef08",
+      "bytes": 280862,
+      "nativePath": "review/motion/parts-native/berries/berry-3.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "55e97ab830889bd64c006f105573cf15a30fb69221079b92ec8b1efee023876c",
+      "transform": [
+        0.738404452690167,
+        0,
+        0,
+        0.7467166979362101,
+        228.65120593692023,
+        374.92120075046904
+      ],
+      "pivot": [
+        696,
+        912
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-berries-berry-3.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-berries-berry-3.txt": "6e46e1317811884e358d90a5266dedf14669b48789a56d7698960adf966a0694"
+      }
+    },
+    {
+      "id": "motion-chest-base",
+      "path": "source/motion/chest/base.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        245,
+        525,
+        1387,
+        1293
+      ],
+      "sha256": "3493cb348289da68ffc819c961f18a68e8d734cef5e321ed4ed284d573cacac9",
+      "bytes": 1154420,
+      "nativePath": "review/motion/parts-native/chest/base.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "28d986a819522a4fa0d92aca72788153a3456f4c7b1c52d71eefae9b4b27c09c",
+      "transform": [
+        1.115234375,
+        0,
+        0,
+        1.080168776371308,
+        98.904296875,
+        164.22362869198315
+      ],
+      "pivot": [
+        815,
+        1190
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-chest-base-revision-2.txt",
+        "prompts/finish-executed/motion-chest-base.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-chest-base-revision-2.txt": "cc32bc4929180b48cf5825bc3649ff380806ffbfb0972b7b6de24839bc7036b9",
+        "prompts/finish-executed/motion-chest-base.txt": "9188d53834d7968783fd8862073ee245c471a6f1485a34db3f8b3f561ed2bbfe"
+      }
+    },
+    {
+      "id": "motion-chest-lid",
+      "path": "source/motion/chest/lid.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        245,
+        339,
+        1387,
+        890
+      ],
+      "sha256": "ca4043fd24e33478b85be2977741c72d0aeebd75394ce1b700e2624cde225ee3",
+      "bytes": 802372,
+      "nativePath": "review/motion/parts-native/chest/lid.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "7510e7fab1983479d9321dc894855c46eadc73cd5044e162f29a88caf10742e8",
+      "transform": [
+        1.1351888667992047,
+        0,
+        0,
+        1.0575815738963532,
+        80.39761431411532,
+        43.93474088291748
+      ],
+      "pivot": [
+        1295,
+        655
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-chest-lid.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-chest-lid.txt": "6bb35630bc18837464b2c9569ef622698992e67b91d6d4e080f9db21c0018fe3"
+      }
+    },
+    {
+      "id": "treasure-strawberry-body",
+      "path": "source/motion/strawberry/body.png",
+      "size": [
+        1536,
+        1536
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        301,
+        466,
+        1152,
+        1301
+      ],
+      "sha256": "b6e214cb9f906613adc9318cc100680a2d800df5f2908fe0b81c9b9050e8025f",
+      "bytes": 973830,
+      "nativePath": "review/treasures/parts-native/strawberry/body.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "1f21b6d4aa8b5b14308a631e637a6d67f71cc1428e47ee4386533c2887923526",
+      "transform": [
+        1.1803051317614424,
+        0,
+        0,
+        1.2014388489208634,
+        17.726768377253848,
+        19.064748201438817
+      ],
+      "pivot": [
+        680,
+        1280
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/treasure-strawberry-body.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/treasure-strawberry-body.txt": "d398abcf52894c8569d8d47c9c2272de1d165e7300e9e7ebe90d56fa92f85115"
+      }
+    },
+    {
+      "id": "treasure-strawberry-cap",
+      "path": "source/motion/strawberry/cap.png",
+      "size": [
+        1536,
+        1536
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        554,
+        234,
+        1234,
+        789
+      ],
+      "sha256": "a5640b89fbfdcad63e5de95ba67d2ad6d5845535f6d6195251faea9662d5574b",
+      "bytes": 380715,
+      "nativePath": "review/treasures/parts-native/strawberry/cap.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "bf63cb8cf81880d1b0f4383f2008c57d21172596ba7ca78158786f0396fb9a08",
+      "transform": [
+        0.7807118254879449,
+        0,
+        0,
+        0.7928571428571428,
+        328.3742824339839,
+        88.90714285714287
+      ],
+      "pivot": [
+        853,
+        544
+      ],
+      "opacity": 1,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/treasure-strawberry-cap.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/treasure-strawberry-cap.txt": "986e3192abc4b44b753cdd3ad32265f1fbfc81723024965c37a2575cfede1eb0"
+      }
+    },
+    {
+      "id": "treasure-strawberry-glint",
+      "path": "source/motion/strawberry/glint.png",
+      "size": [
+        1536,
+        1536
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        253
+      ],
+      "boundsAlpha40": [
+        412,
+        556,
+        575,
+        688
+      ],
+      "sha256": "f2ba2d9d5a4993350d9d0d4a8be21d83ae63195f5016c2aefa93c9d9abb13105",
+      "bytes": 87515,
+      "nativePath": "review/treasures/parts-native/strawberry/glint.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "e6b249de1af9670bd0e85a235e5e86106168c744c414be3c29fbf56103ca00ae",
+      "transform": [
+        0.8232323232323232,
+        0,
+        0,
+        0.88,
+        121.3989898989899,
+        173.2
+      ],
+      "pivot": [
+        495,
+        620
+      ],
+      "opacity": 0.55,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/treasure-strawberry-glint-revision-2.txt",
+        "prompts/finish-executed/treasure-strawberry-glint.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/treasure-strawberry-glint-revision-2.txt": "c53c8be745e1369e2f4d0405895a8eedef6f0ed9046a1795f2a8612625ebd139",
+        "prompts/finish-executed/treasure-strawberry-glint.txt": "46a88bec14d7b8be6e18f7d5e0211bb9b61601070f451b7dac21b4062aee66be"
+      }
+    },
+    {
+      "id": "motion-butterfly-perched",
+      "path": "source/motion/butterfly/perched.png",
+      "size": [
+        1680,
+        1680
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "sha256": "5ef4c72219e0df28948de8c023dca473bc63f1fcd9eff4814520fec460f093ad",
+      "bytes": 704454,
+      "nativePath": "review/motion/parts-native/butterfly/perched.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "4173cc6337cde1f7db3c7f9d3d953190bbd2c43f241086338383f8cb240eb64a",
+      "transform": [
+        1.0,
+        0,
+        0,
+        1.0,
+        181.0,
+        193.0
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-butterfly-perched.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-butterfly-perched.txt": "830041756104373d2c3247ff8d320be72ca0560fb4e7daf959ece74ea9297dc9"
+      }
+    },
+    {
+      "id": "motion-chest-open",
+      "path": "source/motion/chest/open.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "sha256": "8155f093421c96ab3fa7dfa81eba40e425d2c0efc1cb965d50c682188db088f2",
+      "bytes": 1614197,
+      "nativePath": "review/motion/parts-native/chest/open.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "nativeSha256": "3810a8fe71c58491b7f9dc9ed661e6e966b5f06b44fe6983388dbd46031cb37f",
+      "transform": [
+        1.254945054945055,
+        0,
+        0,
+        1.256235827664399,
+        -4.734065934065939,
+        -68.75963718820859
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/motion-chest-open.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/motion-chest-open.txt": "557de09c189349b160cf2d8b7fbc2414f94f4eee8dc8e691184be4f144fbb2e9"
+      }
+    }
+  ]
+}

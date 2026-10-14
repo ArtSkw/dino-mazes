@@ -11,12 +11,13 @@ import type { Hint } from '../domain/trail';
 import type { CharacterId, Point, TreasureId } from '../domain/types';
 import { castSlots, introCharacterRect, toScreen, type Rect } from '../platform/layout';
 import { CharacterActor } from './actor';
-import { ASSETS, CAST_SCALE, assetUrl, baseHidden, friendFrame, treasureRig, grainTexture, handTexture, pawTexture, leafTexture, ringTexture, sparkTexture, starTexture } from './assets';
+import { ASSETS, CAST_SCALE, assetUrl, baseHidden, friendFrame, rigFor, grainTexture, handTexture, pawTexture, leafTexture, ringTexture, sparkTexture, starTexture } from './assets';
 import { AmbientWorld } from './ambient';
 import { footprint, paintBoard } from './boardPainter';
 import { CharacterTextures, type AtlasRef } from './characterTextures';
 import { popUp } from './motion';
-import { RIG_ATLAS_KEY, TreasureRig } from './treasureRig';
+import { PartRig, RIG_ATLAS_KEY } from './rig';
+import { HOPPERS } from './rigMotion';
 import { OpeningDirector, preloadOpening, type OpeningStep } from './opening';
 
 export interface UiBridge {
@@ -69,7 +70,9 @@ export class GameScene extends Phaser.Scene {
   private ring!: Phaser.GameObjects.Image;
   private treasure: Phaser.GameObjects.Image | null = null;
   private treasureGlow: Phaser.GameObjects.Image | null = null;
-  private treasureRig: TreasureRig | null = null;
+  private treasureRig: PartRig | null = null;
+  /** Rigs that follow other stand-ins: butterflies, the flying treasure. */
+  private followers: Array<{ stand: Phaser.GameObjects.Image; rig: PartRig }> = [];
   private treasureFlown = false;
   private companion: CharacterActor | null = null;
   private companionPlants: Phaser.GameObjects.Image[] = [];
@@ -115,7 +118,7 @@ export class GameScene extends Phaser.Scene {
     this.load.image('ground', assetUrl(ASSETS.backgrounds.ground.image));
     for (const [name, item] of Object.entries(ASSETS.foliage)) this.load.image(`fol-${name}`, assetUrl(item.image));
     for (const [id, item] of Object.entries(ASSETS.treasures)) this.load.image(`tr-${id}`, assetUrl(item.image));
-    const rigAtlas = ASSETS.treasureRigs?.atlas;
+    const rigAtlas = ASSETS.rigs?.atlas;
     if (rigAtlas) this.load.multiatlas(RIG_ATLAS_KEY, assetUrl(rigAtlas), assetUrl(rigAtlas.slice(0, rigAtlas.lastIndexOf('/') + 1)));
     this.load.image('amb-leaf', assetUrl(ASSETS.ui['panel-leaf']?.image ?? ''));
     // Only what the first screen shows: every friend's corner idle frames
@@ -199,6 +202,7 @@ export class GameScene extends Phaser.Scene {
       depth: { light: D.ambient - 1, flies: D.ambient, leaves: D.ambient, twinkle: D.treasure + 1 },
       backdrop: this.bg,
     });
+    this.followAmbientFliers();
     this.nextFootsteps = this.time.now + 40000;
     this.unsubscribe = this.ctrl.on((e) => this.onEvent(e));
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.unsubscribe?.());
@@ -218,7 +222,8 @@ export class GameScene extends Phaser.Scene {
         this.applyScreen();
         // Reduced motion switched: the treasure goes back to its still (or to its rig).
         const id = this.ctrl.state.session?.treasureId;
-        if (this.treasure && id && (!this.reduced && !!treasureRig(id)) !== !!this.treasureRig) this.refreshTreasureRig();
+        if (this.treasure && id && (!this.reduced && !!rigFor(id)) !== !!this.treasureRig) this.refreshTreasureRig();
+        if (!this.reduced) this.followAmbientFliers();
         this.companion?.setReduced(this.reduced);
         for (const a of this.cast) a.setReduced(this.reduced);
         this.updateHandDemo();
@@ -426,6 +431,35 @@ export class GameScene extends Phaser.Scene {
   }
 
   /**
+   * Draw `stand` from its painted parts (rig.ts) for as long as it lives: the
+   * camera stops drawing the still, the rig follows it. Not with reduced motion.
+   */
+  private follow(stand: Phaser.GameObjects.Image, id: string, kind: 'treasure' | 'flier'): void {
+    const asset = rigFor(id);
+    if (!asset || this.reduced || !this.textures.exists(RIG_ATLAS_KEY) || this.followers.some((f) => f.stand === stand)) return;
+    const rig = new PartRig(this, id, asset, stand.depth, kind);
+    this.cameras.main.ignore(stand);
+    rig.sync(stand, this.time.now);
+    this.followers.push({ stand, rig });
+  }
+
+  private followAmbientFliers(): void {
+    for (const img of this.ambient.flierImages()) this.follow(img, 'butterfly', 'flier');
+  }
+
+  private syncFollowers(): void {
+    const now = this.time.now;
+    this.followers = this.followers.filter(({ stand, rig }) => {
+      if (stand.active) {
+        rig.sync(stand, now);
+        return true;
+      }
+      rig.destroy();
+      return false;
+    });
+  }
+
+  /**
    * Draw the treasure from its painted parts when it has them (and motion is
    * not reduced). The still image stays as the invisible stand-in that every
    * treasure motion animates; the rig follows it (treasureRig.ts).
@@ -437,9 +471,9 @@ export class GameScene extends Phaser.Scene {
     const session = this.ctrl.state.session;
     if (!stand || !session) return;
     stand.cameraFilter = 0;
-    const asset = treasureRig(session.treasureId);
+    const asset = rigFor(session.treasureId);
     if (!asset || this.reduced || !this.textures.exists(RIG_ATLAS_KEY)) return;
-    this.treasureRig = new TreasureRig(this, session.treasureId, asset, D.treasure);
+    this.treasureRig = new PartRig(this, session.treasureId, asset, D.treasure);
     this.cameras.main.ignore(stand);
     this.treasureRig.sync(stand, this.time.now);
   }
@@ -992,6 +1026,7 @@ export class GameScene extends Phaser.Scene {
     const fly = this.add.image(first.x, first.y, 'fol-butterfly').setDepth(o.depth);
     const base = o.size / fly.width;
     fly.setScale(base);
+    this.follow(fly, 'butterfly', 'flier');
     const pts = points.length >= 2 ? points : [first, first];
     const curve = new Phaser.Curves.Spline(pts.map((p) => new Phaser.Math.Vector2(p.x, p.y)));
     const length = Math.max(1, curve.getLength());
@@ -1251,10 +1286,24 @@ export class GameScene extends Phaser.Scene {
     later(650, () => {
       this.tweens.killTweensOf(treasure);
       if (this.treasureRig) {
-        // A rigged treasure performs with its parts, held a little larger.
+        // A rigged treasure performs with its parts, held a little larger;
+        // a hopper jumps as a whole (its parts squash on landing).
         const s = treasure.getData('baseScale') as number;
         this.treasureRig.celebrate(this.time.now);
         this.tweens.add({ targets: treasure, scale: s * 1.3, duration: 320, hold: 520, yoyo: true, ease: 'Sine.easeInOut' });
+        if (HOPPERS.has(reward.treasureId)) {
+          const y = treasure.getData('baseY') as number;
+          const p = layout.transform.pitch;
+          this.tweens.chain({
+            targets: treasure,
+            tweens: [
+              { y: y - p * 0.26, duration: 190, ease: 'Quad.easeOut' },
+              { y, duration: 170, ease: 'Quad.easeIn' },
+              { y: y - p * 0.07, duration: 120, ease: 'Quad.easeOut' },
+              { y, duration: 120, ease: 'Quad.easeIn' },
+            ],
+          });
+        }
       } else this.signatureMotion(reward.treasureId, treasure, layout.transform.pitch);
       this.bursts.forEach((b, i) => b.explode(i === 0 ? 10 : 8, treasure.x, treasure.y));
       this.sparkle.explode(12, treasure.x, treasure.y);
@@ -1335,6 +1384,8 @@ export class GameScene extends Phaser.Scene {
     const flyer = this.add.image(from.x, from.y, `tr-${reward.treasureId}`).setDepth(D.fly);
     const s0 = this.treasure.scaleX;
     flyer.setScale(s0);
+    // A rigged treasure keeps its parts in flight: no switch to the still image.
+    if (this.treasureRig) this.follow(flyer, reward.treasureId, 'treasure');
     c.flyer = flyer;
     this.treasure.setVisible(false);
     this.treasureGlow?.setVisible(false);
@@ -1563,6 +1614,7 @@ export class GameScene extends Phaser.Scene {
   override update(time: number): void {
     // Scene clock (not the loop's time): it is the clock the celebration starts on.
     if (this.treasureRig && this.treasure) this.treasureRig.sync(this.treasure, this.time.now);
+    this.syncFollowers();
     this.ambient.update(time);
     this.distantFootsteps(time);
     this.sleepyFriend(time);

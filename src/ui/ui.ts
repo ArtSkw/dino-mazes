@@ -131,6 +131,25 @@ export class Ui implements UiBridge {
     return b;
   }
 
+  /**
+   * The painted chest on the collection button (art/CLAUDE_HANDOFF_MOTION.md):
+   * base and lid closed, the open pose on top for the moment a treasure drops
+   * in (styles.css, .collection-btn.pulse). The icon until the art exists.
+   */
+  private chestOrIcon(): HTMLElement {
+    const c = ASSETS.chest;
+    if (!c?.base || !c.lid || !c.open || !c.width || !c.height) return this.icon('chest');
+    const [hx, hy] = c.lidPivot ?? [0.8, 0.4];
+    const img = (cls: string, src: string): HTMLImageElement => h('img', { class: cls, src: assetUrl(src), alt: '', draggable: 'false' });
+    return h(
+      'span',
+      { class: 'chest', 'aria-hidden': 'true', style: `aspect-ratio:${c.width}/${c.height};--hinge:${(hx * 100).toFixed(1)}% ${(hy * 100).toFixed(1)}%` },
+      img('chest-base', c.base),
+      img('chest-lid', c.lid),
+      img('chest-open', c.open),
+    );
+  }
+
   private icon(name: IconName): HTMLElement {
     return h('span', { class: 'icon', html: ICONS[name] });
   }
@@ -243,7 +262,7 @@ export class Ui implements UiBridge {
     this.collectionBtn = this.button('btn-round collection-btn', () => {
       c.sfx('tap');
       this.openOverlay('collection');
-    }, this.icon('chest'), this.badge);
+    }, this.chestOrIcon(), this.badge);
     this.tr(this.collectionBtn, 'myTreasures', 'aria-label');
     this.settingsBtn = this.button('btn-round settings-btn', () => {
       c.sfx('tap');

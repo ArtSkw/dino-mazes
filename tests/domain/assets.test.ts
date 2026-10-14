@@ -62,6 +62,10 @@ describe('character atlases (V3)', () => {
 });
 
 describe('GPU memory per screen (PRD §9: ≤ 96 MiB)', () => {
+  it('counts the parts atlas', () => {
+    expect((manifest as { rigs?: { decodedBytes?: number } }).rigs?.decodedBytes).toBeGreaterThan(0);
+  });
+
   const img = (v: { width: number; height: number }): number => v.width * v.height * 4;
   // Phaser textures that live for the whole session (the collection backdrop is DOM).
   const baseline =
@@ -69,8 +73,8 @@ describe('GPU memory per screen (PRD §9: ≤ 96 MiB)', () => {
     img(manifest.backgrounds.ground) +
     Object.values(manifest.foliage).reduce((a, v) => a + img(v), 0) +
     Object.values(manifest.treasures).reduce((a, v) => a + img(v), 0) +
-    // The treasures' painted parts (one atlas, loaded at boot).
-    ((manifest as { treasureRigs?: { decodedBytes?: number } }).treasureRigs?.decodedBytes ?? 0);
+    // The painted parts of the treasures and the butterfly (one atlas, loaded at boot).
+    ((manifest as { rigs?: { decodedBytes?: number } }).rigs?.decodedBytes ?? 0);
   const BOARD = 2048 * 2048 * 4; // painted maze texture, capped at 2048 px
   const ids = Object.keys(chars);
   const sum = (id: string, groups: Array<'idle' | 'wave' | 'more' | 'stage'>): number => groups.reduce((a, g) => a + (chars[id]?.decodedBytes[g] ?? 0), 0);

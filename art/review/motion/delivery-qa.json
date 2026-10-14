@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-15",
+  "newGeneratedOutputs": 33,
+  "registeredParts": 31,
+  "extraPoses": 2,
+  "allFinalPngsTrueAlpha": true,
+  "masterPixelsPreserved": true,
+  "strawberryApprovedCopyByteIdentical": true,
+  "sampledPhasesPerGif": 32,
+  "reviewBackgrounds": [
+    "cream #fff3d4",
+    "dark green #203f35"
+  ],
+  "browserLoadedRigs": 7,
+  "browserConsoleErrorsWarnings": [],
+  "qaScope": "Visual art review and measured source invariants, not runtime integration or arbitrary simultaneous pose guarantee. See handoffs for fidelity and motion limits.",
+  "gifs": [
+    {
+      "path": "review/motion/berries-stress.gif",
+      "size": [
+        720,
+        360
+      ],
+      "actualFrames": 32,
+      "sha256": "69f5cf49346c744971e07245186bf4e71f50b0f86455c65e04e0ea2bae8e6c43"
+    },
+    {
+      "path": "review/motion/butterfly-stress.gif",
+      "size": [
+        720,
+        360
+      ],
+      "actualFrames": 32,
+      "sha256": "7c67964fee97b205eedf866668ab2fbbc56c3805e1f98eb74122512a1a55012b"
+    },
+    {
+      "path": "review/motion/chest-stress.gif",
+      "size": [
+        720,
+        360
+      ],
+      "actualFrames": 32,
+      "sha256": "eefd34f43aa595f8ade457ead9292b3c9afac1c6110489e6085faea3a2ab8124"
+    },
+    {
+      "path": "review/motion/coconut-stress.gif",
+      "size": [
+        720,
+        360
+      ],
+      "actualFrames": 32,
+      "sha256": "8f259064089caa8fb3594249bd6703daa1e721ff480c846f33014a7e5fe110e0"
+    },
+    {
+      "path": "review/motion/flower-stress.gif",
+      "size": [
+        720,
+        360
+      ],
+      "actualFrames": 32,
+      "sha256": "aa6caf31ef4c4046fac413a8b9a3780cdf9a45d63f587f2476fa0b7367b5d36e"
+    },
+    {
+      "path": "review/motion/nut-stress.gif",
+      "size": [
+        720,
+        360
+      ],
+      "actualFrames": 32,
+      "sha256": "e7d99b670a920659d8aa55ff61afbf280a16fb83e076e30f451263531d1e93f3"
+    },
+    {
+      "path": "review/motion/strawberry-stress.gif",
+      "size": [
+        720,
+        360
+      ],
+      "actualFrames": 32,
+      "sha256": "f149ef3f3661423e5dc207db91986efa1bbff9b8707101ffac0c213bfff8083d"
+    },
+    {
+      "path": "review/motion/flower-bloom.gif",
+      "size": [
+        720,
+        360
+      ],
+      "actualFrames": 32,
+      "sha256": "6916963980cb97b648038c52a0b88f24870ad6fc0dd4246396b3f57944c70927"
+    }
+  ]
+}

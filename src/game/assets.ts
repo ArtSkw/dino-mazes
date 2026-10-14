@@ -5,7 +5,7 @@
 import manifestJson from '../data/assetManifest.json';
 import type { CharacterId, TreasureId } from '../domain/types';
 import { FRIEND_SIZE, type FriendFrame } from '../platform/layout';
-import type { TreasureRigAsset } from './treasureRig';
+import type { RigAsset } from './rig';
 
 export type Reaction = 'idle' | 'drawing' | 'encouragement' | 'celebration' | 'talk';
 /** Corner-tier atlas groups (loaded and released independently) and the stage tier. */
@@ -65,17 +65,17 @@ interface Manifest {
   ui: Record<string, ItemAsset>;
   backgrounds: Record<'jungle' | 'collection' | 'ground', ItemAsset>;
   intro: IntroAssets;
-  /** Painted parts of the treasures that have them, one atlas (tools/art/rigs.py). */
-  treasureRigs?: { atlas?: string; decodedBytes?: number; rigs?: Partial<Record<TreasureId, Omit<TreasureRigAsset, 'atlas'>>> };
+  /** Painted parts of the treasures and the butterfly, one atlas (tools/art/rigs.py). */
+  rigs?: { atlas?: string; decodedBytes?: number; assets?: Record<string, RigAsset> };
+  /** The chest on the collection button: closed layers, open pose, lid hinge (fractions). */
+  chest?: { base?: string; lid?: string; open?: string; width?: number; height?: number; lidPivot?: [number, number] };
 }
 
 export const ASSETS = manifestJson as unknown as Manifest;
 
-/** The treasure's rig, when its painted parts exist. */
-export function treasureRig(id: TreasureId): TreasureRigAsset | null {
-  const r = ASSETS.treasureRigs;
-  const rig = r?.rigs?.[id];
-  return rig && r?.atlas ? { ...rig, atlas: r.atlas } : null;
+/** A treasure's or the butterfly's rig, when its painted parts exist. */
+export function rigFor(id: string): RigAsset | null {
+  return (ASSETS.rigs?.atlas && ASSETS.rigs.assets?.[id]) || null;
 }
 
 /** Size and painted area of a friend's frame, for layout. */

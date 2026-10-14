@@ -111,8 +111,8 @@ describe('quest selection', () => {
     for (const c of play(40, 'art-gate', ORIGINAL_SIX).log) expect(ORIGINAL_SIX(c.treasureId), c.treasureId).toBe(true);
   });
 
-  it('every treasure but the strawberry has art (it waits for art/CODEX_REQUEST_FINISH.md)', () => {
-    for (const id of ALL_TREASURE_IDS) expect(treasureHasArt(id), id).toBe(id !== 'strawberry');
+  it('all eleven treasures have art (Codex deliveries, 14 and 15 Oct 2026)', () => {
+    for (const id of ALL_TREASURE_IDS) expect(treasureHasArt(id), id).toBe(true);
     expect(TREASURES.amber.kind).toBe('giganto');
   });
 

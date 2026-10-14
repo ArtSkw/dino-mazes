@@ -1,0 +1,96 @@
+{
+  "stage": "complete-approved-source-delivery",
+  "assets": [
+    {
+      "id": "treasure-strawberry-master",
+      "path": "source/motion/strawberry/master.png",
+      "status": "master-approved",
+      "size": [
+        1536,
+        1536
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        301,
+        234,
+        1234,
+        1301
+      ],
+      "subjectExtentFraction": 0.6947,
+      "nativePath": "review/treasures/finish-native/treasure-strawberry-master.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "paddingOffset": [
+        92,
+        138
+      ],
+      "transform": "transparent padding only; original RGBA pixels unchanged",
+      "sha256": "6905f132ec9b25d04a77d6f98009ccfbe1b58e96a6b235b7270afdc5a6ba3c04",
+      "nativeSha256": "de604d7ee21bd4bd419a0b4c95a61ee52a3c5b59af57902e261c6c5822a74323",
+      "bytes": 1357407,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/treasure-strawberry-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/treasure-strawberry-master.txt": "adfa23d9f29d044d6c8acf7c655ac392963bb47a3fa6e578b0ac42e8632e32ff"
+      },
+      "runtimeReady": false,
+      "ownerApproved": true,
+      "approvalStatus": "approved",
+      "approvedCopy": "source/treasures-v2/strawberry.png"
+    },
+    {
+      "id": "ui-giganto-emblem",
+      "path": "source/ui/giganto-emblem.png",
+      "status": "source-delivered",
+      "size": [
+        1520,
+        1520
+      ],
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        156,
+        160,
+        1364,
+        1359
+      ],
+      "subjectExtentFraction": 0.7947,
+      "nativePath": "review/treasures/finish-native/ui-giganto-emblem.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "paddingOffset": [
+        132,
+        134
+      ],
+      "transform": "transparent padding only; original RGBA pixels unchanged",
+      "sha256": "d8fb74fef129d9891fce66121b83110a90cc4deeef3e81298b4ab7c8302c38bd",
+      "nativeSha256": "537e351ab70fe12e55c1c80122fa1defb5b90171ea6b75817ff616d61babfa56",
+      "bytes": 2397756,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/finish-executed/ui-giganto-emblem.txt"
+      ],
+      "promptHashes": {
+        "prompts/finish-executed/ui-giganto-emblem.txt": "628cc3d90e1eff662ecf9ed997d1f831571a6b54284b78e7c602e50335bd036b"
+      },
+      "runtimeReady": false,
+      "ownerApproved": false
+    }
+  ],
+  "partsGeneratedThisRound": 0,
+  "completedDate": "2026-10-15",
+  "partsMeasurements": "review/motion/parts-measurements.json"
+}

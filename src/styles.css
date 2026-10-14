@@ -956,6 +956,75 @@ button:focus-visible,
   animation: pulse 900ms ease;
 }
 
+/* The painted chest on the collection button. When a treasure arrives the
+   chest pops open, the treasure drops in, and the lid snaps shut with a
+   little spring (Codex: lid −5 to −15° about its right-hand hinge). */
+.collection-btn .chest {
+  position: relative;
+  display: block;
+  width: 116%;
+  margin: -4% -8% 0;
+}
+
+.collection-btn .chest img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.collection-btn .chest-lid {
+  transform-origin: var(--hinge);
+}
+
+.collection-btn .chest-open {
+  opacity: 0;
+}
+
+.collection-btn.pulse .chest {
+  animation: chest-pop 900ms ease both;
+}
+
+.collection-btn.pulse .chest-open {
+  animation: chest-open 900ms linear both;
+}
+
+.collection-btn.pulse .chest-base {
+  animation: chest-closed 900ms linear both;
+}
+
+.collection-btn.pulse .chest-lid {
+  animation: chest-closed 900ms linear both, chest-snap 900ms ease both;
+}
+
+@keyframes chest-pop {
+  0% { transform: scale(1, 1); }
+  8% { transform: scale(1.12, 1.08); }
+  40% { transform: scale(1.06, 1.06); }
+  52% { transform: scale(1.04, 0.92); }
+  66% { transform: scale(0.98, 1.03); }
+  100% { transform: scale(1, 1); }
+}
+
+/* The open and closed chest swap at once (no see-through blend). */
+@keyframes chest-open {
+  0%, 46% { opacity: 1; }
+  46.01%, 100% { opacity: 0; }
+}
+
+@keyframes chest-closed {
+  0%, 46% { opacity: 0; }
+  46.01%, 100% { opacity: 1; }
+}
+
+@keyframes chest-snap {
+  0%, 46% { transform: rotate(-12deg); }
+  58% { transform: rotate(2deg); }
+  70% { transform: rotate(-3deg); }
+  82% { transform: rotate(0.8deg); }
+  100% { transform: rotate(0deg); }
+}
+
 @keyframes pulse {
   30% {
     transform: scale(1.22);
