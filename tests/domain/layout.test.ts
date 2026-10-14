@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { FRIEND_SIZE, MIN_CONTROL_PX, MIN_CORRIDOR_PX, castSlots, clusterSpec, computeLayout, fitGrid, introLayout, toLogical, toScreen, type Rect } from '../../src/platform/layout';
 import type { Difficulty } from '../../src/domain/types';
+import { LEVELS, entranceAxes } from '../../src/domain/maze';
 import { friendFrame } from '../../src/game/assets';
 
 const VIEWPORTS: Array<[number, number]> = [
@@ -17,7 +18,7 @@ const inside = (a: Rect, vw: number, vh: number): boolean => a.x >= -0.5 && a.y 
 
 describe('grid fitting', () => {
   for (const [vw, vh] of VIEWPORTS) {
-    for (const d of ['easy', 'medium', 'harder'] as Difficulty[]) {
+    for (const d of ['easy', 'medium', 'harder', ...LEVELS] as Difficulty[]) {
       it(`${d} at ${vw}x${vh} keeps corridors ≥ ${MIN_CORRIDOR_PX}px`, () => {
         const fit = fitGrid(d, vw, vh);
         expect(fit.meetsMinimum).toBe(true);
@@ -25,6 +26,27 @@ describe('grid fitting', () => {
       });
     }
   }
+
+  it('bigger grids where they fit without shrinking the friend', () => {
+    // A 1180×820 tablet: 9×7 would squeeze the friend's strip, so 7×7 with harder topology.
+    for (const d of LEVELS) expect(fitGrid(d, 1180, 820).grid).toEqual({ cols: 7, rows: 7 });
+    expect(fitGrid('hard', 1366, 768).grid).toEqual({ cols: 9, rows: 7 });
+    expect(fitGrid('hard', 1440, 900).grid).toEqual({ cols: 9, rows: 9 });
+    expect(fitGrid('master', 1440, 900).grid).toEqual({ cols: 9, rows: 9 });
+    expect(fitGrid('master', 1920, 1080).grid).toEqual({ cols: 11, rows: 9 });
+  });
+
+  it('the friend keeps at least 85 % of its size at the old starting level, at every level', () => {
+    for (const [vw, vh] of [...VIEWPORTS, [1920, 1080] as [number, number], [1280, 800] as [number, number]].filter(([w, h]) => w / h >= 1.12)) {
+      for (const id of ['rocky', 'giganto'] as const) {
+        const at = (grid: { cols: number; rows: number }): number =>
+          computeLayout({ vw, vh, grid, entranceSide: 'bottom', entranceX: 0.7, friend: friendFrame(id), ...(id === 'giganto' ? { forceCorner: 'left' as const } : {}) }).friendVisible.h;
+        // Baseline: the old starting level's grid on this screen (7×7, or smaller where 7×7 does not fit).
+        const base = at(fitGrid('medium', vw, vh).grid);
+        for (const d of LEVELS) expect(at(fitGrid(d, vw, vh).grid), `${vw}x${vh} ${d} ${id}`).toBeGreaterThanOrEqual(base * 0.85);
+      }
+    }
+  });
 
   it('uses the nominal 9x9 grid only when space permits', () => {
     expect(fitGrid('harder', 1440, 900).grid).toEqual({ cols: 9, rows: 9 });
@@ -36,12 +58,15 @@ describe('layout', () => {
   for (const [vw, vh] of VIEWPORTS) {
     for (const [side, id] of [['bottom', 'bill'], ['left', 'tiny'], ['right', 'mazu'], ['bottom', 'rocky'], ['left', 'giganto'], ['right', 'giganto']] as const) {
       it(`${vw}x${vh} entrance ${side}, ${id}: board, friend and controls do not collide`, () => {
-        const fit = fitGrid(id === 'giganto' ? 'harder' : 'medium', vw, vh);
+        const fit = fitGrid(id === 'giganto' ? 'expert' : 'hard', vw, vh);
+        // Only the sides the generator can open for this grid (entranceAxes).
+        const axes = entranceAxes(fit.grid);
+        const usable = (side === 'bottom' && !axes.vertical) || (side !== 'bottom' && !axes.horizontal) ? (axes.horizontal ? 'left' : 'bottom') : side;
         const L = computeLayout({
           vw,
           vh,
           grid: fit.grid,
-          entranceSide: side,
+          entranceSide: usable,
           entranceX: 0.3,
           friend: friendFrame(id),
           ...(id === 'giganto' ? { forceCorner: 'left' as const } : {}),

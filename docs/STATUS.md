@@ -52,6 +52,14 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 6 (14 October 2026)
+
+| # | Request | What changed | Evidence |
+|---|---|---|---|
+| 1 | Start harder; first levels still too easy | Levels are now hard → expert → master → grand (one step every 3 mazes); `GENERATOR_VERSION` 3. On a 1180×820 tablet the first mazes average 5.4 branch choices and a 22-cell route (was 3.9 / 19), climbing to 7.2 branches. Wider screens get 9×7, 9×9 or 11×9. Non-square grids open on one axis only, which is what lets 9×7 fit with ≥ 48 px corridors. A grid is used only if the friend keeps ≥ 85 % of its old size (9×7 on the tablet would have cut it by a third) | maze tests (1,000 seeds per profile and grid, < 1 % fallbacks; worst case ≈ 6 ms per maze); layout tests for grid choice and friend size |
+| 2 | No friend name on the quest card | Removed (the friend is right next to it; the "Specjalny gość" ribbon stays for Giganto) | screenshots |
+| 3 | Loader should be a real textured leaf | The loading screen and the closed-curtain loader show the painted seedling growing through three stages (popping in on the same soil mound) and swaying. Sprout stages are now aligned on the soil in the pipeline, and the "Graj" sprout stays within the button's height | `tools/dev/review-loader.mjs` |
+
 ## V3 characters and the opening animation (14 October 2026)
 
 Codex delivered 180 character frames (36 per friend, 1254 px each) and 12 intro assets
@@ -150,7 +158,7 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 170 passed |
+| Domain unit + property | `npm test` | 197 passed |
 | Browser flows (Chromium + WebKit) | `npm run test:e2e` | 57 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |

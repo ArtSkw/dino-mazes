@@ -306,12 +306,76 @@ button:focus-visible,
   pointer-events: auto;
 }
 
-.leaf-spinner {
-  width: 64px;
-  height: 64px;
-  border-radius: 50% 0;
-  background: linear-gradient(135deg, #8fcf4a, #3f8a2e);
-  animation: spin 1.4s ease-in-out infinite;
+/* Loader: the painted seedling grows (three stages, each popping in on the
+   same soil mound) and sways from its roots. */
+.sprout-loader {
+  position: relative;
+  width: 150px;
+  aspect-ratio: var(--sprout-ar, 376 / 311);
+  translate: calc(50% - var(--soil-x, 50%)) 0;
+  transform-origin: var(--soil-x, 50%) var(--soil-y, 90%);
+  animation: loader-sway 2.4s ease-in-out infinite;
+}
+
+.sprout-loader .stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform-origin: var(--soil-x, 50%) var(--soil-y, 90%);
+  user-select: none;
+  animation: loader-stage 2.4s ease-out infinite;
+}
+
+.sprout-loader .s1 {
+  animation-delay: 0.8s;
+}
+
+.sprout-loader .s2 {
+  animation-delay: 1.6s;
+}
+
+/* Each stage owns one third of the cycle: pop in, settle, then hand over. */
+@keyframes loader-stage {
+  0% {
+    opacity: 1;
+    scale: 0.86;
+  }
+  9% {
+    scale: 1.05;
+  }
+  18% {
+    scale: 1;
+  }
+  33.2% {
+    opacity: 1;
+  }
+  33.4%,
+  100% {
+    opacity: 0;
+    scale: 1;
+  }
+}
+
+@keyframes loader-sway {
+  0%,
+  100% {
+    rotate: -3deg;
+  }
+  50% {
+    rotate: 3deg;
+  }
+}
+
+/* Reduced motion: one still seedling. */
+.reduced-motion .sprout-loader,
+.reduced-motion .sprout-loader .stage {
+  animation: none !important;
+}
+
+.reduced-motion .sprout-loader .s2 {
+  opacity: 1;
 }
 
 .loading-text {
@@ -323,12 +387,6 @@ button:focus-visible,
   text-align: center;
   max-width: 420px;
   font-size: 1.2rem;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /* ---------- Welcome ---------- */
@@ -344,7 +402,7 @@ button:focus-visible,
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 12px;
   text-align: center;
   animation: card-rise 420ms var(--ease-out) both;
 }
@@ -425,13 +483,16 @@ button:focus-visible,
   place-items: center;
 }
 
-/* The seedling grows inside the button's footprint (never over the sign). */
+/* The seedling grows inside the button's footprint (never over the sign),
+   its soil mound on the button's centre. */
 .sprout {
   position: absolute;
   left: 50%;
-  bottom: 2px;
-  width: min(190px, 40vw);
-  translate: -50% 0;
+  bottom: 0;
+  height: calc(100% + 10px);
+  width: auto;
+  aspect-ratio: var(--sprout-ar, 376 / 311);
+  translate: calc(-1 * var(--soil-x, 50%)) 0;
   pointer-events: none;
   user-select: none;
 }
@@ -536,7 +597,7 @@ button:focus-visible,
   position: absolute;
   left: 50%;
   top: 50%;
-  translate: -50% -50%;
+  translate: calc(-1 * var(--soil-x, 50%)) -50%;
   transition-property: opacity;
   transition-duration: 200ms;
 }
@@ -623,13 +684,6 @@ button:focus-visible,
   border-radius: 999px;
   font-size: 1rem;
   box-shadow: var(--shadow);
-}
-
-.intro-name {
-  margin: 0;
-  font-size: 1.3rem;
-  font-weight: var(--fw-label);
-  color: var(--ink-soft);
 }
 
 .intro-treasure-wrap {

@@ -318,13 +318,13 @@ test.describe('special guest and settings', () => {
     await boot(page);
     await startQuest(page);
     expect(await state<string>(page, 'c.state.session.characterId')).toBe('giganto');
-    expect(await state<string>(page, 'c.state.session.effectiveDifficulty')).toBe('harder');
+    expect(await state<string>(page, 'c.state.session.effectiveDifficulty')).toBe('master');
     expect(await state<string>(page, 'c.state.layout.corner')).toBe('left');
     const quest = await state<string>(page, 'c.state.session.questId');
     await drag(page, (await solutionPoints(page)).slice(0, 3));
     await page.getByRole('button', { name: 'Ustawienia' }).click({ force: true });
     await page.getByRole('button', { name: 'Łatwiejszy labirynt' }).click({ force: true });
-    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { session: { effectiveDifficulty: string } } } } }).__dino.ctrl.state.session.effectiveDifficulty === 'medium-plus');
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { session: { effectiveDifficulty: string } } } } }).__dino.ctrl.state.session.effectiveDifficulty === 'expert');
     expect(await state<string>(page, 'c.state.session.questId')).toBe(quest);
     expect(await state<number>(page, 'c.engine.points.length')).toBe(0);
     expect(await state<string>(page, 'c.state.screen')).toBe('play');

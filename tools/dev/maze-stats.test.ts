@@ -4,9 +4,10 @@ import type { Difficulty } from '../../src/domain/types';
 
 test('stats', () => {
   const combos: Array<[Difficulty, number, number]> = [
-    ['easy', 5, 5], ['medium', 7, 7], ['medium', 7, 5],
-    ['medium-plus', 9, 7], ['medium-plus', 7, 7], ['harder', 9, 9], ['harder', 7, 7],
-    ['hard', 9, 9], ['hard', 7, 7], ['hard', 7, 5], ['expert', 9, 9], ['expert', 7, 7], ['expert', 7, 5],
+    ['hard', 9, 9], ['hard', 9, 7], ['hard', 7, 9], ['hard', 7, 7], ['hard', 7, 5],
+    ['expert', 9, 9], ['expert', 9, 7], ['expert', 7, 7], ['expert', 7, 5],
+    ['master', 11, 9], ['master', 9, 11], ['master', 9, 9], ['master', 9, 7], ['master', 7, 7], ['master', 7, 5],
+    ['grand', 11, 9], ['grand', 9, 9], ['grand', 9, 7], ['grand', 7, 7], ['grand', 7, 5], ['grand', 5, 5],
   ];
   for (const [d, c, r] of combos) {
     const p = profileFor(d, { cols: c, rows: r });

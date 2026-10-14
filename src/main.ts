@@ -21,6 +21,10 @@ rootStyle.setProperty('--img-panel', cssImage(ASSETS.ui['cream-panel']?.image));
 rootStyle.setProperty('--img-wood', cssImage(ASSETS.ui['wood-button']?.image));
 rootStyle.setProperty('--img-leaf', cssImage(ASSETS.ui['leaf-button']?.image));
 rootStyle.setProperty('--img-leaf-deco', cssImage(ASSETS.ui['panel-leaf']?.image));
+// Seedling art: where the soil mound sits (loader and "Graj" sprout grow from it).
+rootStyle.setProperty('--soil-x', `${(ASSETS.intro.sprout.soil.x * 100).toFixed(2)}%`);
+rootStyle.setProperty('--soil-y', `${(ASSETS.intro.sprout.soil.y * 100).toFixed(2)}%`);
+rootStyle.setProperty('--sprout-ar', `${ASSETS.intro.sprout.width} / ${ASSETS.intro.sprout.height}`);
 
 const storage = probeStorage(() => window.localStorage);
 const store = new SaveStore(storage);

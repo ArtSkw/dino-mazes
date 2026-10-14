@@ -828,8 +828,12 @@
     "assets/intro/sprout-2.webp",
     "assets/intro/sprout-3.webp"
    ],
-   "width": 336,
-   "height": 261
+   "width": 376,
+   "height": 311,
+   "soil": {
+    "x": 0.2633,
+    "y": 0.8266
+   }
   },
   "titleSign": {
    "image": "assets/intro/title-sign.webp",

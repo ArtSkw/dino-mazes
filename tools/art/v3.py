@@ -320,25 +320,36 @@ def process_intro(src_root: str, public_root: str, measurements_path: str, cell_
     info = pack_atlas(packed, out_dir, "dust", public_root, quality=85)
     m["dust"] = {"atlas": info["json"], "frames": ["dust-0", "dust-1", "dust-2"], "bytes": info["bytes"], "decodedBytes": info["decodedBytes"]}
 
-    # Sprout (DOM): four stages on one common canvas, soil baseline aligned.
+    # Sprout (DOM): four stages on one common canvas. Each stage is aligned on
+    # its soil mound (centre of the brown pixels, bottom of the mound), so the
+    # seedling grows in place in the loader and in the "Graj" sprout.
     rects = json.load(open(cell_rects_path))["intro-sprout"]
     sprout_src = src("intro-sprout")
     stages = []
     for r, c in zip(rects, meas["intro-sprout"]["cells"]):
         cell = Image.fromarray(_floor_alpha(np.array(sprout_src.crop(tuple(r)))))
         b = c["boundsAlpha40"]
-        stages.append((cell.crop((b[0], b[1], b[2], b[3])), b))
-    cw = max(s[0].width for s in stages) + 8
-    chh = max(s[0].height for s in stages) + 8
+        im = cell.crop((b[0], b[1], b[2], b[3]))
+        arr = np.array(im).astype(int)
+        soil = (arr[:, :, 3] > 128) & (arr[:, :, 0] > arr[:, :, 1] + 15) & (arr[:, :, 0] > 70)
+        sx = float(np.nonzero(soil)[1].mean()) if soil.any() else im.width / 2
+        sy = int(np.nonzero(soil.any(axis=1))[0].max()) if soil.any() else im.height - 1
+        stages.append((im, sx, sy))
+    left = max(sx for _, sx, _ in stages)
+    right = max(im.width - sx for im, sx, _ in stages)
+    up = max(sy for _, _, sy in stages)
+    down = max(im.height - sy for im, _, sy in stages)
+    cw, chh = int(left + right) + 8, int(up + down) + 8
     m["sprout"] = {"stages": [], "width": 0, "height": 0}
-    for i, (im, _) in enumerate(stages):
+    for i, (im, sx, sy) in enumerate(stages):
         canvas = Image.new("RGBA", (cw, chh), (0, 0, 0, 0))
-        canvas.paste(im, ((cw - im.width) // 2, chh - 4 - im.height), im)
+        canvas.paste(im, (int(round(4 + left - sx)), int(round(4 + up - sy))), im)
         canvas = _premul_resize(canvas, (round(cw * 0.6), round(chh * 0.6)))
         path = os.path.join(out_dir, f"sprout-{i}.webp")
         _save_webp(canvas, path, 88)
         m["sprout"]["stages"].append(rel(path))
         m["sprout"]["width"], m["sprout"]["height"] = canvas.width, canvas.height
+    m["sprout"]["soil"] = {"x": round((4 + left) / cw, 4), "y": round((4 + up) / chh, 4)}
 
     # Title sign (DOM): crop, then record rope loops and the plank text area.
     sign = Image.fromarray(_floor_alpha(np.array(src("intro-title-sign"))))

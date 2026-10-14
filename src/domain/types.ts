@@ -14,9 +14,10 @@ export type CharacterId = 'bill' | 'tiny' | 'mazu' | 'rocky' | 'giganto';
 export type TreasureId = 'coconut' | 'nut' | 'flower' | 'stone' | 'shell' | 'berries';
 /**
  * Maze difficulty. 'easy' is only the fixed first (tutorial) maze; generated
- * mazes start at 'medium' and step up automatically (see LEVELS in maze.ts).
+ * mazes start at 'hard' and step up automatically (see LEVELS in maze.ts).
+ * 'medium', 'medium-plus' and 'harder' remain as profiles (tests, old saves).
  */
-export type Difficulty = 'easy' | 'medium' | 'medium-plus' | 'harder' | 'hard' | 'expert';
+export type Difficulty = 'easy' | 'medium' | 'medium-plus' | 'harder' | 'hard' | 'expert' | 'master' | 'grand';
 
 /** Logical board coordinates in cell units; never device pixels. */
 export interface Point {

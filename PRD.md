@@ -48,7 +48,7 @@ Audio/narration scope, difficulty numbers, and content quantities below are prac
 - Four regular friends: Bill, Tiny, Mazu, and Rocky, plus Giganto as an occasional special quest host. Quest selection rotates them; no character-selection screen required.
 - Six collectible treasures, twelve regular quests, and two Giganto quests.
 - Five character animation sprite sheets covering idle, drawing reaction, encouragement/reset, and celebration.
-- Seeded generated mazes that grow harder automatically (five levels), a small fixed introductory maze, and validated fallback layouts.
+- Seeded generated mazes that grow harder automatically (four levels, starting hard), a small fixed introductory maze, and validated fallback layouts.
 - Persistent drawn trail, explicit start-over, optional one-step hint, complete celebration and collection flow.
 - Bilingual interface and quest content; effects audio; reduced-motion behavior.
 - Responsive browser build with device-local saving, installable/offline support in the release phase.
@@ -145,25 +145,28 @@ Giganto quests request one level above the current automatic level, capped at th
 
 Preserve the first-six-unique-treasures rule: select Giganto's treasure from uncollected items when necessary and use a generic localized special-quest template (“Znajdźmy skarb dla Giganto!” / “Let's find a treasure for Giganto!”) with the pictured target. Do not force a duplicate just because his example quests list coconut and berries.
 
-### Automatic difficulty (owner decision, 13 October 2026)
+### Automatic difficulty (owner decisions, 13 and 14 October 2026)
 
-There is no difficulty setting. The first maze is the fixed tutorial; generated mazes start at
-"medium or a little higher" and step up one level every three completed mazes, capped at the
-last level. "Zacznij grę od nowa" starts the climb again.
+There is no difficulty setting. The first maze is the fixed tutorial; generated mazes start
+clearly harder than the old "medium" (owner, 14 Oct: the first levels felt too easy) and step
+up one level every three completed mazes, capped at the last level. "Zacznij grę od nowa"
+starts the climb again.
 
-| Level | Mazes (after the tutorial) | Preferred grid (largest that keeps corridors ≥ 48 px) | Meaningful branch choices | Minimum route (cells) on 7 × 7 / 9 × 9 |
-|---|---|---|---|---|
-| medium | 1–3 | 7 × 7 | 3–5 | 13 / — |
-| medium-plus | 4–6 | 9 × 7, else 7 × 7 | 4–6 | 15 / — |
-| harder | 7–9 | 9 × 9, else 9 × 7, 7 × 7 | 4–7 (7 × 7), 5–7 (9 × 9) | 17 / 20 |
-| hard | 10–12 | same | 5–8 | 18 / 23 |
-| expert | 13+ | same | 5–8 (7 × 7), 6–9 (9 × 9) | 20 / 26 |
+| Level | Mazes (after the tutorial) | Grid on a 1180 × 820 tablet | Larger screens | Meaningful branch choices (7 × 7) | Minimum route (7 × 7) |
+|---|---|---|---|---|---|
+| hard | 1–3 | 7 × 7 | 9 × 7 / 9 × 9 | 5–8 | 18 |
+| expert | 4–6 | 7 × 7 | 9 × 7 / 9 × 9 | 6–8 | 20 |
+| master | 7–9 | 7 × 7 | up to 11 × 9 | 6–9 | 22 |
+| grand | 10+ | 7 × 7 | up to 11 × 9 | 7–9 | 22 |
 
-Grids are screen-limited (on a 1180 × 820 tablet 7 × 7 is the largest), so most of the climb
-comes from topology: more real branch decisions and a longer route. Targets were set from
-measured distributions; every profile passes 1,000 seeds with fewer than 1 % fallbacks.
-A centered clearing replaces the central cell. Never shrink corridors just to keep a nominal
-grid size; record the actual effective profile for QA.
+Measured averages on 7 × 7: 5.4 → 7.2 branch choices and a 22–25-cell route (the old
+starting level: 3.9 and 19). A bigger grid is used only where corridors stay ≥ 48 px **and**
+the strip beside the board keeps the friend at least as large as at the old starting level
+(otherwise the friend shrank by a third on tablets); there the climb comes from topology.
+Non-square grids open on one axis only (wide: bottom, tall: a side), so they fit more cells.
+Every profile passes 1,000 seeds with fewer than 1 % fallbacks. A centered clearing replaces
+the central cell. Never shrink corridors just to keep a nominal grid size; record the actual
+effective profile for QA.
 
 ## 6. Art direction and visual hierarchy
 

@@ -7,7 +7,7 @@
  * never shrink below MIN_CORRIDOR_PX to keep a nominal grid; a smaller grid is
  * chosen instead (and recorded as the effective profile).
  */
-import { CORRIDOR_RADIUS, ENTRANCE_REACH, FRAME_MARGIN, gridCandidates } from '../domain/maze';
+import { CORRIDOR_RADIUS, ENTRANCE_REACH, FRAME_MARGIN, entranceAxes, gridCandidates } from '../domain/maze';
 import type { Difficulty, GridSpec, Side } from '../domain/types';
 
 export interface Rect {
@@ -122,10 +122,12 @@ export function boardAreaFor(vw: number, vh: number): Rect {
   return { x: pad, y: top, w: Math.max(100, vw - 2 * pad), h: Math.max(100, vh - top - bottom) };
 }
 
-/** Pitch that fits a grid (reserving entrance room on both axes so size is side-independent). */
+/** Pitch that fits a grid; entrance room is reserved on the axes its entrance can use. */
 export function pitchFor(grid: GridSpec, area: Rect): number {
-  const uw = grid.cols + 2 * SIDE_UNITS + ENTRANCE_UNITS;
-  const uh = grid.rows + 2 * SIDE_UNITS + ENTRANCE_UNITS;
+  // Entrance room only on the axis the generator may open (entranceAxes).
+  const axes = entranceAxes(grid);
+  const uw = grid.cols + 2 * SIDE_UNITS + (axes.horizontal ? ENTRANCE_UNITS : 0);
+  const uh = grid.rows + 2 * SIDE_UNITS + (axes.vertical ? ENTRANCE_UNITS : 0);
   return Math.min(area.w / uw, area.h / uh, MAX_PITCH);
 }
 
@@ -137,14 +139,34 @@ export interface GridFit {
   nominal: GridSpec;
 }
 
+/**
+ * In landscape the friend stands in the strip beside the board. A bigger grid
+ * is only used if that strip stays at least this wide, so harder mazes never
+ * shrink the friend (owner requests of 13 and 14 Oct 2026); otherwise the
+ * difficulty comes from topology on a smaller grid.
+ */
+export function minFriendStrip(vh: number): number {
+  return Math.min(250, vh * 0.28);
+}
+
+/** Width of the strip beside a board of this grid (bottom entrance, no lean). */
+function friendStrip(grid: GridSpec, area: Rect): number {
+  const pitch = pitchFor(grid, area);
+  const bw = (grid.cols + 2 * SIDE_UNITS) * pitch;
+  return area.x + Math.max(0, area.w - bw) / 2 + (SIDE_UNITS - FRAME_MARGIN) * pitch;
+}
+
 export function fitGrid(difficulty: Difficulty, vw: number, vh: number): GridFit {
   const area = boardAreaFor(vw, vh);
   const landscape = orientationOf(vw, vh) === 'landscape';
   const candidates = gridCandidates(difficulty, landscape);
   const nominal = candidates[0] as GridSpec;
+  const smallestGrid = candidates[candidates.length - 1] as GridSpec;
   for (const grid of candidates) {
     const corridorPx = pitchFor(grid, area) * 2 * CORRIDOR_RADIUS;
-    if (corridorPx >= MIN_CORRIDOR_PX) return { grid, corridorPx, meetsMinimum: true, nominal };
+    if (corridorPx < MIN_CORRIDOR_PX) continue;
+    if (landscape && grid !== smallestGrid && friendStrip(grid, area) < minFriendStrip(vh)) continue;
+    return { grid, corridorPx, meetsMinimum: true, nominal };
   }
   const smallest = candidates[candidates.length - 1] as GridSpec;
   return { grid: smallest, corridorPx: pitchFor(smallest, area) * 2 * CORRIDOR_RADIUS, meetsMinimum: false, nominal };

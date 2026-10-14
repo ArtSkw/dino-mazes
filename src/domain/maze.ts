@@ -12,8 +12,8 @@
 import { createRng, hashString, type Rng } from './rng';
 import type { Difficulty, GridSpec, Maze, MazeCell, MazeMetrics, MazeProfile, Point, Side } from './types';
 
-/** v2: five automatic difficulty levels (owner decision, 13 Oct 2026). */
-export const GENERATOR_VERSION = 2;
+/** v3: harder automatic levels and one-axis entrances for non-square grids (owner decision, 14 Oct 2026). */
+export const GENERATOR_VERSION = 3;
 /** Visual corridor half-width in cell units (corridor width = 0.6 of the cell pitch). */
 export const CORRIDOR_RADIUS = 0.3;
 /** Hedge frame around the grid, in cell units. */
@@ -71,7 +71,7 @@ const RULES: Record<Difficulty, Record<string, ProfileRule>> = {
     '5x5': { branch: [2, 4], minSolution: 9 },
   },
   hard: {
-    '9x9': { branch: [5, 8], minSolution: 23, attempts: 250 },
+    '9x9': { branch: [5, 8], minSolution: 23, attempts: 300 },
     '9x7': { branch: [5, 7], minSolution: 19, attempts: 300 },
     '7x9': { branch: [5, 7], minSolution: 19, attempts: 300 },
     '7x7': { branch: [5, 8], minSolution: 18, attempts: 400 },
@@ -83,15 +83,39 @@ const RULES: Record<Difficulty, Record<string, ProfileRule>> = {
     '9x9': { branch: [6, 9], minSolution: 26, attempts: 400 },
     '9x7': { branch: [5, 8], minSolution: 21, attempts: 400 },
     '7x9': { branch: [5, 8], minSolution: 21, attempts: 400 },
-    '7x7': { branch: [5, 8], minSolution: 20, attempts: 500, bias: [0.6, 1] },
+    '7x7': { branch: [6, 8], minSolution: 20, attempts: 1500, bias: [0.6, 1] },
     '7x5': { branch: [4, 6], minSolution: 15, attempts: 400 },
     '5x7': { branch: [4, 6], minSolution: 15, attempts: 400 },
     '5x5': { branch: [3, 4], minSolution: 11, attempts: 400 },
   },
+  master: {
+    '11x9': { branch: [7, 10], minSolution: 30, attempts: 500 },
+    '9x11': { branch: [7, 10], minSolution: 30, attempts: 500 },
+    '9x9': { branch: [6, 9], minSolution: 28, attempts: 500 },
+    '9x7': { branch: [6, 8], minSolution: 23, attempts: 500 },
+    '7x9': { branch: [6, 8], minSolution: 23, attempts: 500 },
+    '7x7': { branch: [6, 9], minSolution: 22, attempts: 2000, bias: [0.6, 1] },
+    '7x5': { branch: [4, 6], minSolution: 16, attempts: 500 },
+    '5x7': { branch: [4, 6], minSolution: 16, attempts: 500 },
+    '5x5': { branch: [3, 4], minSolution: 11, attempts: 400 },
+  },
+  grand: {
+    '11x9': { branch: [8, 11], minSolution: 34, attempts: 800 },
+    '9x11': { branch: [8, 11], minSolution: 34, attempts: 800 },
+    '9x9': { branch: [7, 10], minSolution: 30, attempts: 800 },
+    '9x7': { branch: [6, 9], minSolution: 25, attempts: 800 },
+    '7x9': { branch: [6, 9], minSolution: 25, attempts: 800 },
+    '7x7': { branch: [7, 9], minSolution: 22, attempts: 4000 },
+    '7x5': { branch: [4, 7], minSolution: 17, attempts: 600 },
+    '5x7': { branch: [4, 7], minSolution: 17, attempts: 600 },
+    '5x5': { branch: [3, 5], minSolution: 12, attempts: 600 },
+  },
 };
 
 /** Automatic progression of generated mazes (the tutorial maze is 'easy'). */
-export const LEVELS: Difficulty[] = ['medium', 'medium-plus', 'harder', 'hard', 'expert'];
+// Owner decision (14 Oct 2026): start noticeably harder; bigger grids where the
+// screen keeps corridors ≥ 48 px (9×7 on a 1180×820 tablet, 11×9 on a laptop).
+export const LEVELS: Difficulty[] = ['hard', 'expert', 'master', 'grand'];
 
 /** Grid candidates in preference order; the layout fitter picks the first that fits. */
 export function gridCandidates(difficulty: Difficulty, landscape: boolean): GridSpec[] {
@@ -107,6 +131,9 @@ export function gridCandidates(difficulty: Difficulty, landscape: boolean): Grid
     case 'hard':
     case 'expert':
       return [{ cols: 9, rows: 9 }, wide(9, 7), { cols: 7, rows: 7 }, wide(7, 5), { cols: 5, rows: 5 }];
+    case 'master':
+    case 'grand':
+      return [wide(11, 9), { cols: 9, rows: 9 }, wide(9, 7), { cols: 7, rows: 7 }, wide(7, 5), { cols: 5, rows: 5 }];
   }
 }
 export function profileFor(difficulty: Difficulty, grid: GridSpec): MazeProfile {
@@ -226,9 +253,21 @@ function growingTree(g: GridSpec, rng: Rng, pNewest: number): Array<[number, num
   return edges;
 }
 
+/**
+ * Wide grids always open at the bottom and tall grids at a side, so the layout
+ * reserves entrance room on one axis only (see entranceAxes): that is what
+ * lets a 9×7 maze fit a 1180×820 tablet with corridors ≥ 48 px.
+ */
+export function entranceAxes(g: GridSpec): { horizontal: boolean; vertical: boolean } {
+  if (g.cols > g.rows) return { horizontal: false, vertical: true };
+  if (g.rows > g.cols) return { horizontal: true, vertical: false };
+  return { horizontal: true, vertical: true };
+}
+
 function pickEntrance(g: GridSpec, rng: Rng): { side: Side; cell: number } {
   const roll = rng.int(5);
-  const side: Side = roll < 3 ? 'bottom' : roll === 3 ? 'left' : 'right';
+  const axes = entranceAxes(g);
+  const side: Side = !axes.horizontal ? 'bottom' : !axes.vertical ? (roll % 2 === 0 ? 'left' : 'right') : roll < 3 ? 'bottom' : roll === 3 ? 'left' : 'right';
   const lowerRows = Math.ceil(g.rows / 2);
   if (side === 'bottom') return { side, cell: (g.rows - 1) * g.cols + rng.int(g.cols) };
   const y = g.rows - lowerRows + rng.int(lowerRows);

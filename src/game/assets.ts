@@ -49,7 +49,7 @@ export interface IntroAssets {
   gigantoPeek: AtlasAsset & { frames: string[]; frameSize: number };
   popups: AtlasAsset & { cellSize: number };
   dust: AtlasAsset & { frames: string[] };
-  sprout: { stages: string[]; width: number; height: number };
+  sprout: { stages: string[]; width: number; height: number; soil: { x: number; y: number } };
   titleSign: ItemAsset & { loops: Array<{ x: number; y: number }>; plank: { top: number; bottom: number } };
   vine: ItemAsset & { bottomX: number };
 }

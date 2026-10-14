@@ -100,10 +100,10 @@ describe('quest selection', () => {
   });
 
   it('special difficulty steps up one level and is capped', () => {
-    expect(specialDifficulty('medium')).toBe('medium-plus');
-    expect(specialDifficulty('medium-plus')).toBe('harder');
     expect(specialDifficulty('hard')).toBe('expert');
-    expect(specialDifficulty('expert')).toBe('expert');
+    expect(specialDifficulty('expert')).toBe('master');
+    expect(specialDifficulty('master')).toBe('grand');
+    expect(specialDifficulty('grand')).toBe('grand');
   });
 });
 
@@ -150,15 +150,14 @@ describe('award', () => {
 });
 
 describe('automatic difficulty', () => {
-  it('starts generated mazes at medium and steps up every few completions, capped', () => {
+  it('starts generated mazes at hard and steps up every few completions, capped', () => {
     const at = (total: number): string => levelFor({ totalCompleted: total, introDone: total > 0 });
-    expect(levelFor({ totalCompleted: 0, introDone: false })).toBe('medium');
-    expect(at(1)).toBe('medium'); // only the tutorial done
-    expect(at(1 + LEVEL_EVERY - 1)).toBe('medium');
-    expect(at(1 + LEVEL_EVERY)).toBe('medium-plus');
-    expect(at(1 + 2 * LEVEL_EVERY)).toBe('harder');
-    expect(at(1 + 3 * LEVEL_EVERY)).toBe('hard');
-    expect(at(1 + 4 * LEVEL_EVERY)).toBe('expert');
-    expect(at(500)).toBe('expert');
+    expect(levelFor({ totalCompleted: 0, introDone: false })).toBe('hard');
+    expect(at(1)).toBe('hard'); // only the tutorial done
+    expect(at(1 + LEVEL_EVERY - 1)).toBe('hard');
+    expect(at(1 + LEVEL_EVERY)).toBe('expert');
+    expect(at(1 + 2 * LEVEL_EVERY)).toBe('master');
+    expect(at(1 + 3 * LEVEL_EVERY)).toBe('grand');
+    expect(at(500)).toBe('grand');
   });
 });

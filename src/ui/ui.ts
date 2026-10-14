@@ -51,7 +51,6 @@ export class Ui implements UiBridge {
   private playLabel!: HTMLElement;
   private castLayer!: HTMLElement;
   private intro!: HTMLElement;
-  private introName!: HTMLElement;
   private introPrompt!: HTMLElement;
   private introTreasure!: HTMLImageElement;
   private introTreasureName!: HTMLElement;
@@ -123,6 +122,19 @@ export class Ui implements UiBridge {
     return b;
   }
 
+  /**
+   * Loading indicator: the painted seedling (the same art "Graj" later sprouts
+   * from) growing through its stages and swaying, instead of a flat shape.
+   */
+  private sproutLoader(extra = ''): HTMLElement {
+    const stages = ASSETS.intro.sprout.stages.slice(0, 3);
+    return h(
+      'div',
+      { class: `sprout-loader ${extra}`.trim(), 'aria-hidden': 'true' },
+      ...stages.map((src, i) => h('img', { class: `stage s${i}`, src: assetUrl(src), alt: '', draggable: 'false' })),
+    );
+  }
+
   private icon(name: IconName): HTMLElement {
     return h('span', { class: 'icon', html: ICONS[name] });
   }
@@ -137,7 +149,7 @@ export class Ui implements UiBridge {
       this.tr(h('p'), 'loadError'),
       this.tr(this.button('btn btn-leaf', () => window.location.reload()), 'retry'),
     );
-    this.loading = h('div', { class: 'screen loading' }, h('div', { class: 'leaf-spinner', 'aria-hidden': 'true' }), this.loadingText, this.loadError);
+    this.loading = h('div', { class: 'screen loading' }, this.sproutLoader(), this.loadingText, this.loadError);
 
     // Welcome
     this.playLabel = h('span', { class: 'label' });
@@ -177,7 +189,7 @@ export class Ui implements UiBridge {
       h('div', { class: 'curtain-backing' }),
       curtain('left'),
       curtain('right'),
-      h('div', { class: 'leaf-spinner curtain-spinner' }),
+      this.sproutLoader('curtain-spinner'),
     );
     this.openingSkip = this.button('opening-skip', () => c.skipOpening());
     this.tr(this.openingSkip, 'skip', 'aria-label');
@@ -185,7 +197,6 @@ export class Ui implements UiBridge {
 
     // Quest intro
     this.introRibbon = this.tr(h('div', { class: 'ribbon', hidden: true }), 'specialGuest');
-    this.introName = h('p', { class: 'intro-name' });
     this.introPrompt = h('p', { class: 'intro-prompt', id: 'quest-prompt' });
     this.introTreasure = h('img', { class: 'intro-treasure', alt: '' });
     this.introTreasureName = h('p', { class: 'intro-treasure-name' });
@@ -201,7 +212,6 @@ export class Ui implements UiBridge {
         'div',
         { class: 'intro-card panel' },
         this.introRibbon,
-        this.introName,
         h('div', { class: 'intro-treasure-wrap' }, h('div', { class: 'treasure-halo' }), this.introTreasure),
         this.introTreasureName,
         this.introPrompt,
@@ -586,7 +596,7 @@ export class Ui implements UiBridge {
     const lowestHead = this.castBoxes.length ? Math.min(...this.castBoxes.map((b) => b.y)) - 12 : vh - 16;
     const art = ASSETS.intro.titleSign;
     const buttonH = this.playBtn.offsetHeight || 84;
-    const fitW = ((lowestHead - regionTop - buttonH - 8) * art.width) / art.height;
+    const fitW = ((lowestHead - regionTop - buttonH - 12) * art.width) / art.height;
     card.style.width = `${Math.round(Math.max(260, Math.min(600, vw * 0.74, fitW)))}px`;
     const ch = card.offsetHeight;
     const cw = card.offsetWidth;
@@ -884,7 +894,6 @@ export class Ui implements UiBridge {
     // Quest intro
     const session = s.session;
     if (session && (screen === 'intro' || inGame)) {
-      this.introName.textContent = CHARACTERS[session.characterId].name[lang];
       this.introPrompt.textContent = this.ctrl.questPrompt();
       this.introTreasure.src = assetUrl(ASSETS.treasures[session.treasureId].image);
       this.introTreasureName.textContent = TREASURES[session.treasureId].name[lang];
