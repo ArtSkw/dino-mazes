@@ -52,6 +52,17 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 9 (14 October 2026)
+
+- **Loader:** a spinning ring of jungle vine (`src/ui/vineSpinner.ts`, canvas): the ring turns at a
+  steady rate while the vine's head grows ahead and its tail catches up, leaves unfurl at the head
+  and curl away at the tail, a tendril leads. It runs only while on screen; reduced motion shows a
+  still ring. Used on the loading screen and the closed-curtain loader.
+- **Art plan for rigged assets:** [../art/CODEX_REQUEST_MOTION.md](../art/CODEX_REQUEST_MOTION.md)
+  and [../art/prompts/jobs-motion.json](../art/prompts/jobs-motion.json) (58 jobs: butterfly,
+  six treasures, chest, confetti, plants, pointer, optional critters, each as an assembled master
+  plus parts made as edits of it). Waiting for Codex.
+
 ## Owner review, round 8 (14 October 2026)
 
 Living-world details built in code (no new art): wind, sun spots, falling leaves, perching

@@ -306,76 +306,10 @@ button:focus-visible,
   pointer-events: auto;
 }
 
-/* Loader: the painted seedling grows (three stages, each popping in on the
-   same soil mound) and sways from its roots. */
-.sprout-loader {
-  position: relative;
-  width: 150px;
-  aspect-ratio: var(--sprout-ar, 376 / 311);
-  translate: calc(50% - var(--soil-x, 50%)) 0;
-  transform-origin: var(--soil-x, 50%) var(--soil-y, 90%);
-  animation: loader-sway 2.4s ease-in-out infinite;
-}
-
-.sprout-loader .stage {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transform-origin: var(--soil-x, 50%) var(--soil-y, 90%);
-  user-select: none;
-  animation: loader-stage 2.4s ease-out infinite;
-}
-
-.sprout-loader .s1 {
-  animation-delay: 0.8s;
-}
-
-.sprout-loader .s2 {
-  animation-delay: 1.6s;
-}
-
-/* Each stage owns one third of the cycle: pop in, settle, then hand over. */
-@keyframes loader-stage {
-  0% {
-    opacity: 1;
-    scale: 0.86;
-  }
-  9% {
-    scale: 1.05;
-  }
-  18% {
-    scale: 1;
-  }
-  33.2% {
-    opacity: 1;
-  }
-  33.4%,
-  100% {
-    opacity: 0;
-    scale: 1;
-  }
-}
-
-@keyframes loader-sway {
-  0%,
-  100% {
-    rotate: -3deg;
-  }
-  50% {
-    rotate: 3deg;
-  }
-}
-
-/* Reduced motion: one still seedling. */
-.reduced-motion .sprout-loader,
-.reduced-motion .sprout-loader .stage {
-  animation: none !important;
-}
-
-.reduced-motion .sprout-loader .s2 {
-  opacity: 1;
+/* Loader: a ring of jungle vine (src/ui/vineSpinner.ts draws and animates it). */
+.vine-spinner {
+  display: block;
+  filter: drop-shadow(0 3px 5px rgba(20, 40, 10, 0.28));
 }
 
 .loading-text {
@@ -597,7 +531,7 @@ button:focus-visible,
   position: absolute;
   left: 50%;
   top: 50%;
-  translate: calc(-1 * var(--soil-x, 50%)) -50%;
+  translate: -50% -50%;
   transition-property: opacity;
   transition-duration: 200ms;
 }

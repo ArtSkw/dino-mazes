@@ -13,6 +13,7 @@ import type { OpeningStep } from '../game/opening';
 import { clusterSpec, introCardRect, orientationOf, type Rect } from '../platform/layout';
 import { flash, h, place, show } from './dom';
 import { ICONS, type IconName } from './icons';
+import { VineSpinner } from './vineSpinner';
 
 type Translatable = { el: HTMLElement; key: StringKey; attr?: 'aria-label' | 'title' | 'text' };
 
@@ -35,6 +36,8 @@ export class Ui implements UiBridge {
   private castBubble!: HTMLElement;
   private castBubbleText!: HTMLElement;
   private castBubbleTimer = 0;
+  /** Vine-ring loaders: the loading screen and the closed-curtain loader. */
+  private spinners = [new VineSpinner(80), new VineSpinner(80, 'curtain-spinner')];
   private shownScreen = '';
   surface!: HTMLDivElement;
 
@@ -126,19 +129,6 @@ export class Ui implements UiBridge {
     return b;
   }
 
-  /**
-   * Loading indicator: the painted seedling (the same art "Graj" later sprouts
-   * from) growing through its stages and swaying, instead of a flat shape.
-   */
-  private sproutLoader(extra = ''): HTMLElement {
-    const stages = ASSETS.intro.sprout.stages.slice(0, 3);
-    return h(
-      'div',
-      { class: `sprout-loader ${extra}`.trim(), 'aria-hidden': 'true' },
-      ...stages.map((src, i) => h('img', { class: `stage s${i}`, src: assetUrl(src), alt: '', draggable: 'false' })),
-    );
-  }
-
   private icon(name: IconName): HTMLElement {
     return h('span', { class: 'icon', html: ICONS[name] });
   }
@@ -153,7 +143,7 @@ export class Ui implements UiBridge {
       this.tr(h('p'), 'loadError'),
       this.tr(this.button('btn btn-leaf', () => window.location.reload()), 'retry'),
     );
-    this.loading = h('div', { class: 'screen loading' }, this.sproutLoader(), this.loadingText, this.loadError);
+    this.loading = h('div', { class: 'screen loading' }, this.spinners[0]!.el, this.loadingText, this.loadError);
 
     // Welcome
     this.playLabel = h('span', { class: 'label' });
@@ -195,7 +185,7 @@ export class Ui implements UiBridge {
       h('div', { class: 'curtain-backing' }),
       curtain('left'),
       curtain('right'),
-      this.sproutLoader('curtain-spinner'),
+      this.spinners[1]!.el,
     );
     this.openingSkip = this.button('opening-skip', () => c.skipOpening());
     this.tr(this.openingSkip, 'skip', 'aria-label');
@@ -886,6 +876,9 @@ export class Ui implements UiBridge {
     const curtainsClosed = !s.loadError && ((screen === 'loading' && !!s.openingPlan) || (!!s.opening && !this.curtainsOpened));
     show(this.curtains, curtainsClosed || this.curtains.classList.contains('open') || this.curtains.classList.contains('fade'));
     show(this.loading, screen === 'loading' && (!s.openingPlan || s.loadError));
+    for (const sp of this.spinners) sp.setReduced(s.reducedMotion);
+    this.spinners[0]?.setActive(!this.loading.hidden && !s.loadError);
+    this.spinners[1]?.setActive(!this.curtains.hidden && !s.opening);
     show(this.loadError, s.loadError);
     show(this.loadingText, !s.loadError);
     show(this.openingSkip, !!s.opening);

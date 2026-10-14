@@ -664,8 +664,8 @@ test.describe('living world details (14 October 2026)', () => {
     await startQuest(page);
     await solveByKeyboard(page);
     await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { screen: string } } } }).__dino.ctrl.state.screen === 'reward', null, { timeout: 15_000 });
-    await page.waitForTimeout(800);
-    expect(await state<number>(page, "d.game.scene.getScene('game').prints.length")).toBeGreaterThan(3);
+    // Prints start a moment after the reward screen; slow software GL can stretch that.
+    await page.waitForFunction(() => (window as never as { __dino: { game: { scene: { getScene(k: string): { prints: unknown[] } } } } }).__dino.game.scene.getScene('game').prints.length > 3, null, { timeout: 8_000 });
     const context = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 1180, height: 820 }, locale: 'en-US' });
     const calm = await context.newPage();
     await boot(calm);
