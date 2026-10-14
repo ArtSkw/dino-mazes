@@ -35,6 +35,17 @@ const session = {
   layoutHash: 'h',
 };
 
+describe('opening animation date', () => {
+  it('keeps a valid date and drops anything else', () => {
+    expect(validateSave({ ...defaultSave(), openingShownOn: '2026-10-14' })!.save.openingShownOn).toBe('2026-10-14');
+    for (const bad of ['14.10.2026', 20261014, '<b>', '2026-1-4']) expect(validateSave({ ...defaultSave(), openingShownOn: bad })!.save.openingShownOn).toBeUndefined();
+  });
+
+  it('survives a game restart (a viewing rhythm, not progress)', () => {
+    expect(restartedSave({ ...defaultSave(), openingShownOn: '2026-10-14', totalCompleted: 9 }).openingShownOn).toBe('2026-10-14');
+  });
+});
+
 describe('restart the game', () => {
   it('clears treasures, the current maze and all progress but keeps parent settings', () => {
     const played = {

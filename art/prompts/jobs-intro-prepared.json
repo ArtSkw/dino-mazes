@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "request": "Concept A intro assets authorized by owner on 2026-10-13; run after completion of character V3 set.",
+  "sourceRequest": "prompts/jobs-intro.json",
+  "status": "source-set-complete",
+  "generator": "built-in GPT Imagegen",
+  "notes": [
+    "Original job file retained; stale 'not approved yet' does not override user's request.",
+    "Corrected V3 masters are identity references; actual generated canvas sizes must be measured, not assumed.",
+    "12 assets total, including 7 animation sheets. Frame extraction, registration and runtime code remain Claude's responsibility."
+  ],
+  "jobs": [
+    {
+      "id": "intro-leaf-curtain-left",
+      "output": "source/intro-leaf-curtain-left.png",
+      "size": "1024x1536",
+      "alpha": true,
+      "prompt": "Use case: identity-preserve. Asset: intro-leaf-curtain-left. Requested canvas: 1024x1536. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). Front view, extreme close-up of huge overlapping jungle leaves (monstera and banana) filling a tall portrait canvas like a theatre stage curtain. Deep emerald with lighter veins, soft shadows between the leaf layers. The right (inner) edge is organic and leafy; the leaves run off the top, bottom and left edges of the canvas. Transparent background only beyond the inner leaf edge. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "refs": [
+        "source/jungle-backdrop-v1.png"
+      ],
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-leaf-curtain-left.png",
+      "promptFile": "prompts/intro-prepared/intro-leaf-curtain-left.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-leaf-curtain-left.txt"
+      ]
+    },
+    {
+      "id": "intro-leaf-curtain-right",
+      "output": "source/intro-leaf-curtain-right.png",
+      "size": "1024x1536",
+      "alpha": true,
+      "prompt": "Use case: identity-preserve. Asset: intro-leaf-curtain-right. Requested canvas: 1024x1536. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). Mirror companion of intro-leaf-curtain-left: the same huge front-view jungle leaves, inner edge on the LEFT, leaves running off the top, bottom and right edges. Same palette and lighting so the two meet seamlessly in the middle. Image1 is the completed left companion; image2 is palette guidance. Preserve upper-left lighting while reversing the curtain's layout. Keep the top/bottom/outer-right opaque coverage so the pair can cover the viewport. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "refs": [
+        "source/intro-leaf-curtain-left.png",
+        "source/jungle-backdrop-v1.png"
+      ],
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-leaf-curtain-right.png",
+      "promptFile": "prompts/intro-prepared/intro-leaf-curtain-right.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-leaf-curtain-right.txt"
+      ]
+    },
+    {
+      "id": "intro-light-shafts",
+      "output": "source/intro-light-shafts.png",
+      "size": "2048x1365",
+      "alpha": true,
+      "prompt": "Use case: illustration-story. Asset: intro-light-shafts. Requested canvas: 2048x1365. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). Gentle golden god-rays falling diagonally from the upper left, very soft and low opacity, a few tiny floating light specks, on a transparent background. No objects, no plants, no ground. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "refs": [],
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-light-shafts.png",
+      "promptFile": "prompts/intro-prepared/intro-light-shafts.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-light-shafts.txt"
+      ]
+    },
+    {
+      "id": "intro-giganto-peek",
+      "output": "source/intro-giganto-peek.png",
+      "size": "2048x1365",
+      "alpha": true,
+      "refs": [
+        "source/character-giganto-v3/master.png",
+        "references/final-likeness/giganto-closeup.png",
+        "source/jungle-backdrop-v1.png"
+      ],
+      "prompt": "Use case: identity-preserve. Asset: intro-giganto-peek. Requested canvas: 2048x1365. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). Animation sprite sheet, exactly 6 frames in a uniform 3 columns by 2 rows grid, identical scale, camera and registration in every cell. GIGANTO (enormous moss-green Gigantosaurus, long broad crocodilian snout, raised brow ridges, small red-brown eyes, dark green mottling, pale cream jaw, small red back spikes) leaning in from the LEFT edge of each cell through jungle foliage; his body is cropped by the left cell edge in every frame and the same foliage sits in front of his neck at the same place. Frames: 1 only the snout tip visible; 2 half the head in view; 3 sniffing, nostrils flared; 4 eyes turned to the viewer; 5 friendly closed-mouth grin with a few teeth; 6 soft blink. Friendly, never roaring. Transparent between cells. The corrected V3 master (image1) is the identity authority; image2 is official likeness guidance and image3 is environment style. Preserve heavy brow, relatively small eye and broad cream jaw. No snout horn, no extra arms, no human hands. Keep each frame's right-side snout and highest dorsal spikes fully inside its own cell; only neck/body may be deliberately cut at the LEFT cell edge. Leave separation between cells; no grid lines. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-giganto-peek.png",
+      "promptFile": "prompts/intro-prepared/intro-giganto-peek.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-giganto-peek.txt"
+      ]
+    },
+    {
+      "id": "intro-friend-popup-bill",
+      "output": "source/intro-friend-popup-bill.png",
+      "size": "1536x1536",
+      "alpha": true,
+      "refs": [
+        "source/character-bill-v3/master.png",
+        "references/gigantosaurus-cast.png",
+        "source/jungle-backdrop-v1.png"
+      ],
+      "prompt": "Use case: identity-preserve. Asset: intro-friend-popup-bill. Requested canvas: 1536x1536. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). Animation sprite sheet, exactly 4 frames in a uniform 2 by 2 grid, identical scale and registration. BILL (blue/slate teal long-necked brachiosaurus, long pale cream rectangular muzzle, two nostril dots, bright blue eyes, small olive dorsal spikes) rising from behind the SAME round jungle bush that sits at the bottom of every cell. Frames: 1 only the top of his head above the bush; 2 half up, eyes peeking; 3 full bust; 4 signature pose: neck stretched up tall and proud with a big smile. Transparent background. Image1 is the locked corrected V3 character identity; image2 supplies official cast likeness and image3 supplies bush/environment style. Match image1 facial proportions, markings and anatomy. All four cells must have the exact same bush silhouette, color, size, baseline and position. No grid lines; no foliage or character crossing into neighboring cells. Generous headroom in the tallest signature pose. Bill has NO side fin, ear, feather or mane. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-friend-popup-bill.png",
+      "promptFile": "prompts/intro-prepared/intro-friend-popup-bill.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-friend-popup-bill.txt",
+        "prompts/intro-prepared/intro-friend-popup-bill-layout-revision.txt",
+        "prompts/intro-prepared/intro-friend-popup-bill-spacing-revision.txt"
+      ]
+    },
+    {
+      "id": "intro-friend-popup-tiny",
+      "output": "source/intro-friend-popup-tiny.png",
+      "size": "1536x1536",
+      "alpha": true,
+      "refs": [
+        "source/character-tiny-v3/master.png",
+        "references/gigantosaurus-cast.png",
+        "source/jungle-backdrop-v1.png"
+      ],
+      "prompt": "Use case: identity-preserve. Asset: intro-friend-popup-tiny. Requested canvas: 1536x1536. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). Animation sprite sheet, exactly 4 frames in a uniform 2 by 2 grid, identical scale and registration. TINY (bright green triceratops, rounded scalloped frill, two cream brow horns, dark blue-gray beak, green eyes) rising from behind the SAME round jungle bush at the bottom of every cell. Frames: 1 only the frill tips above the bush; 2 half up, eyes peeking; 3 full bust; 4 signature pose: a happy little hop, frill bouncing, both arms up. Transparent background. Image1 is the locked corrected V3 character identity; image2 supplies official cast likeness and image3 supplies bush/environment style. Match image1 facial proportions, markings and anatomy. All four cells must have the exact same bush silhouette, color, size, baseline and position. No grid lines; no foliage or character crossing into neighboring cells. Generous headroom in the tallest signature pose. Preserve the exact beak and horn arrangement in the V3 master; do not invent a new nose horn. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-friend-popup-tiny.png",
+      "promptFile": "prompts/intro-prepared/intro-friend-popup-tiny.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-friend-popup-tiny.txt",
+        "prompts/intro-prepared/intro-friend-popup-tiny-layout-revision.txt",
+        "prompts/intro-prepared/intro-friend-popup-tiny-spacing-revision.txt"
+      ]
+    },
+    {
+      "id": "intro-friend-popup-mazu",
+      "output": "source/intro-friend-popup-mazu.png",
+      "size": "1536x1536",
+      "alpha": true,
+      "refs": [
+        "source/character-mazu-v3/master.png",
+        "references/gigantosaurus-cast.png",
+        "source/jungle-backdrop-v1.png"
+      ],
+      "prompt": "Use case: identity-preserve. Asset: intro-friend-popup-mazu. Requested canvas: 1536x1536. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). Animation sprite sheet, exactly 4 frames in a uniform 2 by 2 grid, identical scale and registration. MAZU (orange-brown compact ankylosaurus, large raised oval eyes high on a spotted head, broad short muzzle, cream jaw and belly) rising from behind the SAME round jungle bush at the bottom of every cell. Frames: 1 only the top of her spotted head; 2 half up, big eyes peeking; 3 full bust; 4 signature pose: curled cheerfully into a round ball, eyes smiling. No horns or glasses. Preserve the green leaf satchel and diagonal vine strap from the corrected V3 master, tucked naturally beside the curled body. Transparent background. Image1 is the locked corrected V3 character identity; image2 supplies official cast likeness and image3 supplies bush/environment style. Match image1 facial proportions, markings and anatomy. All four cells must have the exact same bush silhouette, color, size, baseline and position. No grid lines; no foliage or character crossing into neighboring cells. Generous headroom in the tallest signature pose. In smiling open-mouth poses preserve her few ivory teeth. Closed eyes use orange skin-colored eyelids. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-friend-popup-mazu.png",
+      "promptFile": "prompts/intro-prepared/intro-friend-popup-mazu.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-friend-popup-mazu.txt",
+        "prompts/intro-prepared/intro-friend-popup-mazu-layout-revision.txt",
+        "prompts/intro-prepared/intro-friend-popup-mazu-spacing-revision.txt"
+      ]
+    },
+    {
+      "id": "intro-friend-popup-rocky",
+      "output": "source/intro-friend-popup-rocky.png",
+      "size": "1536x1536",
+      "alpha": true,
+      "refs": [
+        "source/character-rocky-v3/master.png",
+        "references/gigantosaurus-cast.png",
+        "source/jungle-backdrop-v1.png"
+      ],
+      "prompt": "Use case: identity-preserve. Asset: intro-friend-popup-rocky. Requested canvas: 1536x1536. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). Animation sprite sheet, exactly 4 frames in a uniform 2 by 2 grid, identical scale and registration. ROCKY (red/orange parasaurolophus, long cream narrow face, signature backward-swept cream crest, large eyes) rising from behind the SAME round jungle bush at the bottom of every cell. Frames: 1 only the crest tip above the bush; 2 half up, eyes peeking; 3 full bust; 4 signature pose: head tilted back, crest raised as if trumpeting a happy toot, eyes closed with joy. Transparent background. Image1 is the locked corrected V3 character identity; image2 supplies official cast likeness and image3 supplies bush/environment style. Match image1 facial proportions, markings and anatomy. All four cells must have the exact same bush silhouette, color, size, baseline and position. No grid lines; no foliage or character crossing into neighboring cells. Generous headroom in the tallest signature pose. Preserve the master's tall cream crest silhouette and plain coral fingers without nails. Closed eyes have coral skin-colored eyelids. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-friend-popup-rocky.png",
+      "promptFile": "prompts/intro-prepared/intro-friend-popup-rocky.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-friend-popup-rocky.txt",
+        "prompts/intro-prepared/intro-friend-popup-rocky-layout-revision.txt",
+        "prompts/intro-prepared/intro-friend-popup-rocky-spacing-revision.txt"
+      ]
+    },
+    {
+      "id": "intro-title-sign",
+      "output": "source/intro-title-sign.png",
+      "size": "2048x1024",
+      "alpha": true,
+      "prompt": "Use case: identity-preserve. Asset: intro-title-sign. Requested canvas: 2048x1024. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). A wide honey-wood plank sign with a carved rounded border and a generous completely EMPTY centre for live text, two rope loops on top for hanging, a few small green leaves tucked at one upper corner. Same honey wood and painted grain as the game's wooden buttons. No text, no letters. Transparent background. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "refs": [
+        "source/ui-surfaces-v1.png"
+      ],
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-title-sign.png",
+      "promptFile": "prompts/intro-prepared/intro-title-sign.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-title-sign.txt",
+        "prompts/intro-prepared/intro-title-sign-layout-revision.txt"
+      ]
+    },
+    {
+      "id": "intro-vine",
+      "output": "source/intro-vine.png",
+      "size": "256x1536",
+      "alpha": true,
+      "prompt": "Use case: identity-preserve. Asset: intro-vine. Requested canvas: 256x1536. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). One hanging jungle vine, vertical, gently curving, with a few small leaves along it, ending in a loop at the bottom. Transparent background. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "refs": [
+        "source/jungle-backdrop-v1.png"
+      ],
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-vine.png",
+      "promptFile": "prompts/intro-prepared/intro-vine.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-vine.txt"
+      ]
+    },
+    {
+      "id": "intro-sprout",
+      "output": "source/intro-sprout.png",
+      "size": "2048x512",
+      "alpha": true,
+      "refs": [
+        "source/ui-surfaces-v1.png"
+      ],
+      "prompt": "Use case: identity-preserve. Asset: intro-sprout. Requested canvas: 2048x512. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). Animation sprite sheet, exactly 4 frames in one row, identical baseline and registration: 1 a tiny seedling with two leaves; 2 a taller sprout unfurling; 3 a broad leaf opening sideways; 4 a wide rounded vivid green leaf shape that matches the green leaf button in the reference (same green, same rounded pill silhouette, lighter centre). No text. Transparent background. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-sprout.png",
+      "promptFile": "prompts/intro-prepared/intro-sprout.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-sprout.txt",
+        "prompts/intro-prepared/intro-sprout-layout-revision.txt",
+        "prompts/intro-prepared/intro-sprout-spacing-revision.txt"
+      ]
+    },
+    {
+      "id": "intro-dust-puff",
+      "output": "source/intro-dust-puff.png",
+      "size": "1024x384",
+      "alpha": true,
+      "prompt": "Use case: identity-preserve. Asset: intro-dust-puff. Requested canvas: 1024x384. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes jungle kit; warm light from the upper left; crisp clean antialiased edges; rich but not oversaturated colour. NO text, letters, numbers, logos or watermark anywhere. True transparent alpha where alpha is true (no checkerboard, no matte, no halo). Animation sprite sheet, exactly 3 frames in one row: a soft round cartoon dust cloud appearing, billowing, fading. Pale warm sand colour matching a sunny jungle clearing. Transparent background. Deliver a single PNG asset, with the exact frame count and layout stated above where this is a sheet. Keep each animated subject clean and distinct. For translucent effects retain genuinely low alpha, not painted grey or black.",
+      "refs": [
+        "source/jungle-backdrop-v1.png"
+      ],
+      "outputAbsolute": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/intro-dust-puff.png",
+      "promptFile": "prompts/intro-prepared/intro-dust-puff.txt",
+      "state": "generated",
+      "selectedRevisionPrompts": [
+        "prompts/intro-prepared/intro-dust-puff.txt"
+      ]
+    }
+  ],
+  "completedAt": "2026-10-14"
+}

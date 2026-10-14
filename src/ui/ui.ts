@@ -7,8 +7,9 @@ import type { Controller, GameEvent, Reward } from '../app/controller';
 import { CHARACTERS, TREASURES, TREASURE_ORDER } from '../data/content';
 import type { StringKey } from '../data/i18n';
 import type { CharacterId, Lang, TreasureId } from '../domain/types';
-import { ASSETS, assetUrl } from '../game/assets';
+import { ASSETS, assetUrl, friendFrame } from '../game/assets';
 import type { UiBridge } from '../game/scene';
+import type { OpeningStep } from '../game/opening';
 import { clusterSpec, introCardRect, orientationOf, type Rect } from '../platform/layout';
 import { flash, h, place, show } from './dom';
 import { ICONS, type IconName } from './icons';
@@ -39,6 +40,13 @@ export class Ui implements UiBridge {
   private loadError!: HTMLElement;
   private welcome!: HTMLElement;
   private welcomeCard!: HTMLElement;
+  private signEl!: HTMLElement;
+  private vines: HTMLImageElement[] = [];
+  private sproutImgs: HTMLImageElement[] = [];
+  private curtains!: HTMLElement;
+  private curtainsOpened = false;
+  private openingSkip!: HTMLButtonElement;
+  private openingTimers: number[] = [];
   private playBtn!: HTMLButtonElement;
   private playLabel!: HTMLElement;
   private castLayer!: HTMLElement;
@@ -86,6 +94,10 @@ export class Ui implements UiBridge {
     this.build();
     ctrl.on((e) => this.onEvent(e));
     document.addEventListener('keydown', (e) => {
+      if (this.ctrl.state.opening) {
+        this.ctrl.skipOpening();
+        return;
+      }
       if (e.key === 'Escape') {
         if (!this.confirm.hidden) this.closeConfirm();
         else if (this.ctrl.state.overlay) this.closeOverlay();
@@ -134,14 +146,42 @@ export class Ui implements UiBridge {
       c.play();
     }, this.icon('play'), this.playLabel);
     this.castLayer = h('div', { class: 'cast-layer' });
-    this.welcomeCard = h(
+    // Title on a wooden sign hanging from two vines (live, localized text),
+    // "Graj" below it; during the opening the button sprouts from a seedling.
+    const signArt = ASSETS.intro.titleSign;
+    this.vines = signArt.loops.map(() => h('img', { class: 'vine', src: assetUrl(ASSETS.intro.vine.image), alt: '', draggable: 'false' }));
+    this.signEl = h(
       'div',
-      { class: 'welcome-card panel' },
-      this.tr(h('h1', { class: 'title' }), 'appTitle'),
-      this.tr(h('p', { class: 'tagline' }), 'tagline'),
-      this.playBtn,
+      { class: 'sign', style: `aspect-ratio:${signArt.width}/${signArt.height}` },
+      ...this.vines,
+      h('img', { class: 'sign-board', src: assetUrl(signArt.image), alt: '', draggable: 'false' }),
+      h(
+        'div',
+        { class: 'sign-text', style: `top:${(signArt.plank.top * 100).toFixed(1)}%;bottom:${((1 - signArt.plank.bottom) * 100).toFixed(1)}%` },
+        this.tr(h('h1', { class: 'title' }), 'appTitle'),
+        this.tr(h('p', { class: 'tagline' }), 'tagline'),
+      ),
     );
+    this.sproutImgs = ASSETS.intro.sprout.stages.map((src) => h('img', { class: 'sprout', src: assetUrl(src), alt: '', hidden: true, draggable: 'false' }));
+    this.welcomeCard = h('div', { class: 'welcome-card' }, this.signEl, h('div', { class: 'play-wrap' }, ...this.sproutImgs, this.playBtn));
     this.welcome = h('div', { class: 'screen welcome' }, this.castLayer, this.welcomeCard);
+
+    // Opening: closed leaf curtains (also the loading screen) and a tap-to-skip layer.
+    const curtain = (side: 'left' | 'right'): HTMLImageElement => {
+      const art = side === 'left' ? ASSETS.intro.curtainLeft : ASSETS.intro.curtainRight;
+      return h('img', { class: `curtain ${side}`, src: assetUrl(art.image), alt: '', draggable: 'false', style: `--ar:${(art.width / art.height).toFixed(4)}` });
+    };
+    this.curtains = h(
+      'div',
+      { class: 'curtains', hidden: true, 'aria-hidden': 'true' },
+      h('div', { class: 'curtain-backing' }),
+      curtain('left'),
+      curtain('right'),
+      h('div', { class: 'leaf-spinner curtain-spinner' }),
+    );
+    this.openingSkip = this.button('opening-skip', () => c.skipOpening());
+    this.tr(this.openingSkip, 'skip', 'aria-label');
+    show(this.openingSkip, false);
 
     // Quest intro
     this.introRibbon = this.tr(h('div', { class: 'ribbon', hidden: true }), 'specialGuest');
@@ -337,7 +377,7 @@ export class Ui implements UiBridge {
 
     this.live = h('div', { class: 'sr-only', 'aria-live': 'polite', role: 'status' });
 
-    this.root.append(this.loading, this.welcome, this.intro, this.surface, this.hud, this.cluster, this.homeBtn, this.collection, this.settings, this.confirm, this.rotateToast, this.live);
+    this.root.append(this.loading, this.welcome, this.intro, this.surface, this.hud, this.cluster, this.homeBtn, this.collection, this.settings, this.confirm, this.rotateToast, this.curtains, this.openingSkip, this.live);
 
     if (new URLSearchParams(window.location.search).has('debug')) {
       this.debug = h('pre', { class: 'debug' });
@@ -540,12 +580,18 @@ export class Ui implements UiBridge {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     const card = this.welcomeCard;
+    const cluster = this.cluster.getBoundingClientRect();
+    const regionTop = Math.max(cluster.bottom + 12, vh * 0.09);
+    // Size the sign so sign + button fit between the top and the friends' heads.
+    const lowestHead = this.castBoxes.length ? Math.min(...this.castBoxes.map((b) => b.y)) - 12 : vh - 16;
+    const art = ASSETS.intro.titleSign;
+    const buttonH = this.playBtn.offsetHeight || 84;
+    const fitW = ((lowestHead - regionTop - buttonH - 8) * art.width) / art.height;
+    card.style.width = `${Math.round(Math.max(260, Math.min(600, vw * 0.74, fitW)))}px`;
     const ch = card.offsetHeight;
     const cw = card.offsetWidth;
     const cardX0 = (vw - cw) / 2;
     const cardX1 = cardX0 + cw;
-    const cluster = this.cluster.getBoundingClientRect();
-    const regionTop = Math.max(cluster.bottom + 12, vh * 0.09);
     // The empty space ends at the heads of the friends standing under the card.
     const under = this.castBoxes.filter((b) => {
       const cx = b.x + b.w / 2;
@@ -559,7 +605,31 @@ export class Ui implements UiBridge {
       if (b.x < cardX1 + 8 && b.x + b.w > cardX0 - 8) top = Math.min(top, Math.max(regionTop, b.y - 12 - ch));
     }
     card.style.top = `${Math.round(top)}px`;
+    this.placeVines(Math.round(top));
   }
+
+  /** Vines run from above the screen edge down to the sign's rope loops. */
+  private placeVines(cardTop: number): void {
+    const signW = this.signEl.offsetWidth;
+    const signH = this.signEl.offsetHeight;
+    if (!signW || !signH) return;
+    this.signEl.style.setProperty('--sign-w', `${signW}px`);
+    const art = ASSETS.intro.vine;
+    const vineW = signW * 0.085;
+    const natural = (vineW * art.height) / art.width;
+    ASSETS.intro.titleSign.loops.forEach((loop, i) => {
+      const v = this.vines[i];
+      if (!v) return;
+      const bottom = loop.y * signH + signH * 0.05;
+      const needed = cardTop + bottom + 12;
+      const height = Math.max(natural * 0.5, needed);
+      v.style.width = `${vineW}px`;
+      v.style.height = `${height}px`;
+      v.style.left = `${loop.x * signW - vineW * art.bottomX}px`;
+      v.style.top = `${bottom - height}px`;
+    });
+  }
+
 
   private announce(text: string): void {
     this.live.textContent = '';
@@ -610,6 +680,80 @@ export class Ui implements UiBridge {
     if (!this.hintBtn.classList.contains('hint-waiting')) return;
     this.hintBtn.classList.remove('hint-waiting');
     flash(this.hintBtn, 'hint-arrive', 500);
+  }
+
+  /** DOM side of the opening (driven by the renderer's timeline). */
+  openingStep(step: OpeningStep, ms: number): void {
+    const later = (fn: () => void, delay: number): void => {
+      this.openingTimers.push(window.setTimeout(fn, delay));
+    };
+    if (step === 'curtains') {
+      this.curtainsOpened = true;
+      const c = this.curtains;
+      if (ms <= 0) {
+        c.classList.remove('open', 'fade');
+        show(c, false);
+        return;
+      }
+      c.style.setProperty('--ms', `${ms}ms`);
+      void c.offsetWidth;
+      c.classList.add(this.ctrl.state.opening === 'fade' ? 'fade' : 'open');
+      later(() => {
+        c.classList.remove('open', 'fade');
+        show(c, false);
+      }, ms + 60);
+      return;
+    }
+    if (step === 'sign') {
+      this.signEl.classList.add('shown');
+      this.placeWelcomeCard();
+      if (ms <= 0 || this.ctrl.state.reducedMotion) return;
+      const rect = this.welcomeCard.getBoundingClientRect();
+      const d = rect.bottom + 40;
+      this.signEl.animate(
+        [
+          { transform: `translateY(${-d}px) rotate(-3deg)` },
+          { transform: 'translateY(16px) rotate(1.6deg)', offset: 0.62 },
+          { transform: 'translateY(-6px) rotate(-0.9deg)', offset: 0.8 },
+          { transform: 'translateY(2px) rotate(0.3deg)', offset: 0.92 },
+          { transform: 'none' },
+        ],
+        { duration: ms, easing: 'cubic-bezier(0.35, 0.6, 0.4, 1)' },
+      );
+      return;
+    }
+    if (step === 'sprout') {
+      const btn = this.playBtn;
+      if (ms <= 0 || this.ctrl.state.reducedMotion) {
+        for (const img of this.sproutImgs) show(img, false);
+        btn.classList.add('shown');
+        return;
+      }
+      const each = (ms * 0.7) / this.sproutImgs.length;
+      this.sproutImgs.forEach((_, i) =>
+        later(() => {
+          this.sproutImgs.forEach((o, j) => show(o, j === i));
+          if (i === 0) this.ctrl.sfx('sparkle');
+        }, i * each),
+      );
+      later(() => {
+        btn.classList.add('shown', 'sprouted');
+        later(() => {
+          for (const img of this.sproutImgs) show(img, false);
+        }, 180);
+      }, ms * 0.7);
+      return;
+    }
+    // finish (or skip): everything in place, controls back.
+    for (const t of this.openingTimers) window.clearTimeout(t);
+    this.openingTimers = [];
+    for (const img of this.sproutImgs) show(img, false);
+    this.curtains.classList.remove('open', 'fade');
+    show(this.curtains, false);
+    this.signEl.getAnimations().forEach((a) => a.finish());
+    this.signEl.classList.add('shown');
+    this.playBtn.classList.add('shown');
+    this.placeWelcomeCard();
   }
 
   setCompanionRect(rect: Rect | null): void {
@@ -681,9 +825,13 @@ export class Ui implements UiBridge {
     const screen = s.screen;
 
     // Screens
-    show(this.loading, screen === 'loading');
+    const curtainsClosed = !s.loadError && ((screen === 'loading' && !!s.openingPlan) || (!!s.opening && !this.curtainsOpened));
+    show(this.curtains, curtainsClosed || this.curtains.classList.contains('open') || this.curtains.classList.contains('fade'));
+    show(this.loading, screen === 'loading' && (!s.openingPlan || s.loadError));
     show(this.loadError, s.loadError);
     show(this.loadingText, !s.loadError);
+    show(this.openingSkip, !!s.opening);
+    this.root.classList.toggle('opening', !!s.opening);
     show(this.welcome, screen === 'welcome');
     this.playLabel.textContent = this.ctrl.tr(s.canContinue ? 'continue' : 'play');
     show(this.intro, screen === 'intro');
@@ -742,7 +890,7 @@ export class Ui implements UiBridge {
       this.introTreasureName.textContent = TREASURES[session.treasureId].name[lang];
       this.introRibbon.hidden = !session.special;
       this.goBtn.textContent = this.ctrl.tr('letsLook');
-      place(this.intro.firstElementChild as HTMLElement, introCardRect(vw, vh));
+      place(this.intro.firstElementChild as HTMLElement, introCardRect(vw, vh, friendFrame(session.characterId)));
       this.companionBtn.setAttribute('aria-label', this.ctrl.tr('talkTo', { name: CHARACTERS[session.characterId].name[lang] }));
     }
 

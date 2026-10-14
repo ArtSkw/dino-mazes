@@ -65,7 +65,9 @@ Music, recorded narration, other habitats, adventure atlas, multiple player prof
 
 ### 4.1 Welcome
 
-A compact illustrated welcome with one prominent “Graj” / “Play” button centred on the screen, plus two small round controls: the treasure collection and one settings entry. Language and sound are set only inside settings, so nothing is duplicated (owner decision, 13 Oct 2026). Returning users see “Graj dalej” / “Continue” when a saved session is valid. A fresh user begins in Polish even when the browser language is English. Browser language must not override this decision.
+A compact illustrated welcome: the title hangs on a wooden sign on two vines (live, localized text), with one prominent “Graj” / “Play” button below it, centred in the free space above the friends, plus two small round controls: the treasure collection and one settings entry. Language and sound are set only inside settings, so nothing is duplicated (owner decision, 13 Oct 2026). Returning users see “Graj dalej” / “Continue” when a saved session is valid. A fresh user begins in Polish even when the browser language is English. Browser language must not override this decision.
+
+An opening animation plays at launch (owner request, 14 Oct 2026): the full story on the first launch of the day (leaf curtains part, Giganto's footsteps and peek, the friends pop up, the sign drops, “Graj” sprouts; about 7.5 s), a short greeting on later launches (about 2 s), a plain fade with reduced motion. Any tap or key skips it, and the game never waits on it.
 
 The first input unlocks browser audio when permitted. If audio is unavailable, continue silently. The game is understandable without sound.
 

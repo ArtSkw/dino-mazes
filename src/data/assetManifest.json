@@ -1,261 +1,521 @@
 {
- "schemaVersion": 1,
+ "schemaVersion": 2,
  "generatedBy": "tools/art/extract.py",
  "characters": {
   "bill": {
-   "image": "assets/characters/bill.webp",
-   "portrait": "assets/characters/bill-portrait.webp",
-   "frameWidth": 241,
-   "frameHeight": 283,
-   "spacing": 4,
+   "atlases": {
+    "idle": "assets/characters/bill/idle.json",
+    "wave": "assets/characters/bill/wave.json",
+    "more": "assets/characters/bill/more.json",
+    "stage": "assets/characters/bill/stage.json"
+   },
+   "decodedBytes": {
+    "idle": 7573256,
+    "wave": 8349672,
+    "more": 12569172,
+    "stage": 14036596
+   },
+   "bytes": 846823,
    "pivot": {
-    "x": 0.4896,
+    "x": 0.4374,
     "y": 1.0
    },
    "content": {
-    "x": 0.112,
-    "y": 0.053,
-    "w": 0.7552,
-    "h": 0.947
+    "x": 0.1685,
+    "y": 0.0198,
+    "w": 0.6245,
+    "h": 0.9802
    },
    "contentActive": {
-    "x": 0.0249,
-    "y": 0.0247,
-    "w": 0.9461,
-    "h": 0.9753
+    "x": 0.1564,
+    "y": 0.0072,
+    "w": 0.8363,
+    "h": 0.9928
    },
    "sequences": {
     "idle": [
-     0,
-     1,
-     2,
-     3
+     "idle-00",
+     "idle-01",
+     "idle-02",
+     "idle-03",
+     "idle-04",
+     "idle-05",
+     "idle-06",
+     "idle-07"
     ],
     "drawing": [
-     4,
-     5,
-     6,
-     7
+     "drawing-08",
+     "drawing-09",
+     "drawing-10",
+     "drawing-11",
+     "drawing-12",
+     "drawing-13",
+     "drawing-14",
+     "drawing-15"
     ],
     "encouragement": [
-     8,
-     9,
-     10,
-     11
+     "encouragement-16",
+     "encouragement-17",
+     "encouragement-18",
+     "encouragement-19",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-22",
+     "encouragement-23"
     ],
     "celebration": [
-     12,
-     13,
-     14,
-     15
+     "celebration-24",
+     "celebration-25",
+     "celebration-26",
+     "celebration-27",
+     "celebration-28",
+     "celebration-29",
+     "celebration-30",
+     "celebration-31"
+    ],
+    "talk": [
+     "talk-32",
+     "talk-33",
+     "talk-34",
+     "talk-35"
     ]
    },
-   "bytes": 229488,
-   "decodedBytes": 4466176
+   "stageSequences": {
+    "idle": [
+     "idle-00",
+     "idle-02",
+     "idle-04",
+     "idle-06"
+    ],
+    "encouragement": [
+     "encouragement-16",
+     "encouragement-18",
+     "encouragement-19",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-22"
+    ]
+   },
+   "frameWidth": 391,
+   "frameHeight": 522,
+   "stage": {
+    "frameWidth": 610,
+    "frameHeight": 816
+   }
   },
   "tiny": {
-   "image": "assets/characters/tiny.webp",
-   "portrait": "assets/characters/tiny-portrait.webp",
-   "frameWidth": 296,
-   "frameHeight": 304,
-   "spacing": 4,
+   "atlases": {
+    "idle": "assets/characters/tiny/idle.json",
+    "wave": "assets/characters/tiny/wave.json",
+    "more": "assets/characters/tiny/more.json",
+    "stage": "assets/characters/tiny/stage.json"
+   },
+   "decodedBytes": {
+    "idle": 7248152,
+    "wave": 7255040,
+    "more": 18556624,
+    "stage": 26127584
+   },
+   "bytes": 1645749,
    "pivot": {
-    "x": 0.5118,
+    "x": 0.4782,
     "y": 1.0
    },
    "content": {
-    "x": 0.0642,
-    "y": 0.0296,
-    "w": 0.8919,
-    "h": 0.9671
+    "x": 0.1069,
+    "y": 0.0148,
+    "w": 0.8354,
+    "h": 0.9852
    },
    "contentActive": {
-    "x": 0.0236,
-    "y": 0.023,
-    "w": 0.9527,
-    "h": 0.977
+    "x": 0.105,
+    "y": 0.0074,
+    "w": 0.8439,
+    "h": 0.9926
    },
    "sequences": {
     "idle": [
-     0,
-     1,
-     2,
-     3
+     "idle-00",
+     "idle-01",
+     "idle-02",
+     "idle-03",
+     "idle-04",
+     "idle-05",
+     "idle-06",
+     "idle-07"
     ],
     "drawing": [
-     4,
-     5,
-     6,
-     7
+     "drawing-08",
+     "drawing-09",
+     "drawing-10",
+     "drawing-11",
+     "drawing-12",
+     "drawing-13",
+     "drawing-14",
+     "drawing-15"
     ],
     "encouragement": [
-     8,
-     9,
-     10,
-     11
+     "encouragement-16",
+     "encouragement-17",
+     "encouragement-18",
+     "encouragement-19",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-22",
+     "encouragement-23"
     ],
     "celebration": [
-     12,
-     13,
-     14,
-     15
+     "celebration-24",
+     "celebration-25",
+     "celebration-26",
+     "celebration-27",
+     "celebration-28",
+     "celebration-29",
+     "celebration-30",
+     "celebration-31"
+    ],
+    "talk": [
+     "talk-32",
+     "talk-33",
+     "talk-34",
+     "talk-35"
     ]
    },
-   "bytes": 403544,
-   "decodedBytes": 5874752
+   "stageSequences": {
+    "idle": [
+     "idle-00",
+     "idle-02",
+     "idle-04",
+     "idle-06"
+    ],
+    "encouragement": [
+     "encouragement-16",
+     "encouragement-18",
+     "encouragement-19",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-22"
+    ]
+   },
+   "frameWidth": 508,
+   "frameHeight": 520,
+   "stage": {
+    "frameWidth": 793,
+    "frameHeight": 812
+   }
   },
   "mazu": {
-   "image": "assets/characters/mazu.webp",
-   "portrait": "assets/characters/mazu-portrait.webp",
-   "frameWidth": 305,
-   "frameHeight": 274,
-   "spacing": 4,
+   "atlases": {
+    "idle": "assets/characters/mazu/idle.json",
+    "wave": "assets/characters/mazu/wave.json",
+    "more": "assets/characters/mazu/more.json",
+    "stage": "assets/characters/mazu/stage.json"
+   },
+   "decodedBytes": {
+    "idle": 7461888,
+    "wave": 8110928,
+    "more": 19667296,
+    "stage": 23434832
+   },
+   "bytes": 1370501,
    "pivot": {
-    "x": 0.482,
+    "x": 0.4883,
     "y": 1.0
    },
    "content": {
-    "x": 0.0328,
-    "y": 0.062,
-    "w": 0.8951,
-    "h": 0.938
+    "x": 0.0817,
+    "y": 0.0209,
+    "w": 0.7896,
+    "h": 0.9791
    },
    "contentActive": {
-    "x": 0.0197,
-    "y": 0.0255,
-    "w": 0.9115,
-    "h": 0.9745
+    "x": 0.0739,
+    "y": 0.0127,
+    "w": 0.9209,
+    "h": 0.9873
    },
    "sequences": {
     "idle": [
-     0,
-     1,
-     2,
-     3
+     "idle-00",
+     "idle-01",
+     "idle-02",
+     "idle-03",
+     "idle-04",
+     "idle-05",
+     "idle-06",
+     "idle-07"
     ],
     "drawing": [
-     4,
-     5,
-     6,
-     7
+     "drawing-08",
+     "drawing-09",
+     "drawing-10",
+     "drawing-11",
+     "drawing-12",
+     "drawing-13",
+     "drawing-14",
+     "drawing-15"
     ],
     "encouragement": [
-     8,
-     9,
-     10,
-     11
+     "encouragement-16",
+     "encouragement-17",
+     "encouragement-18",
+     "encouragement-19",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-22",
+     "encouragement-23"
     ],
     "celebration": [
-     12,
-     13,
-     14,
-     15
+     "celebration-24",
+     "celebration-25",
+     "celebration-26",
+     "celebration-27",
+     "celebration-28",
+     "celebration-29",
+     "celebration-30",
+     "celebration-31"
+    ],
+    "talk": [
+     "talk-32",
+     "talk-33",
+     "talk-34",
+     "talk-35"
     ]
    },
-   "bytes": 336222,
-   "decodedBytes": 5460224
+   "stageSequences": {
+    "idle": [
+     "idle-00",
+     "idle-02",
+     "idle-04",
+     "idle-06"
+    ],
+    "encouragement": [
+     "encouragement-16",
+     "encouragement-18",
+     "encouragement-19",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-22"
+    ]
+   },
+   "frameWidth": 546,
+   "frameHeight": 523,
+   "stage": {
+    "frameWidth": 853,
+    "frameHeight": 817
+   }
   },
   "rocky": {
-   "image": "assets/characters/rocky.webp",
-   "portrait": "assets/characters/rocky-portrait.webp",
-   "frameWidth": 257,
-   "frameHeight": 305,
-   "spacing": 4,
+   "atlases": {
+    "idle": "assets/characters/rocky/idle.json",
+    "wave": "assets/characters/rocky/wave.json",
+    "more": "assets/characters/rocky/more.json",
+    "stage": "assets/characters/rocky/stage.json"
+   },
+   "decodedBytes": {
+    "idle": 7366116,
+    "wave": 8449320,
+    "more": 13114412,
+    "stage": 14762448
+   },
+   "bytes": 897774,
    "pivot": {
-    "x": 0.5117,
+    "x": 0.4666,
     "y": 1.0
    },
    "content": {
-    "x": 0.1479,
-    "y": 0.0262,
-    "w": 0.7276,
-    "h": 0.9705
+    "x": 0.1543,
+    "y": 0.0187,
+    "w": 0.6319,
+    "h": 0.9813
    },
    "contentActive": {
-    "x": 0.0233,
-    "y": 0.0197,
-    "w": 0.9494,
-    "h": 0.9803
+    "x": 0.0428,
+    "y": 0.0124,
+    "w": 0.755,
+    "h": 0.9876
    },
    "sequences": {
     "idle": [
-     0,
-     1,
-     2,
-     3
+     "idle-00",
+     "idle-01",
+     "idle-02",
+     "idle-03",
+     "idle-04",
+     "idle-05",
+     "idle-06",
+     "idle-07"
     ],
     "drawing": [
-     4,
-     5,
-     6,
-     7
+     "drawing-08",
+     "drawing-09",
+     "drawing-10",
+     "drawing-11",
+     "drawing-12",
+     "drawing-13",
+     "drawing-14",
+     "drawing-15"
     ],
     "encouragement": [
-     8,
-     9,
-     10,
-     11
+     "encouragement-16",
+     "encouragement-17",
+     "encouragement-18",
+     "encouragement-19",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-22",
+     "encouragement-23"
     ],
     "celebration": [
-     12,
-     13,
-     14,
-     15
+     "celebration-24",
+     "celebration-25",
+     "celebration-26",
+     "celebration-27",
+     "celebration-28",
+     "celebration-29",
+     "celebration-30",
+     "celebration-31"
+    ],
+    "talk": [
+     "talk-32",
+     "talk-33",
+     "talk-34",
+     "talk-35"
     ]
    },
-   "bytes": 285062,
-   "decodedBytes": 5125120
+   "stageSequences": {
+    "idle": [
+     "idle-00",
+     "idle-02",
+     "idle-04",
+     "idle-06"
+    ],
+    "encouragement": [
+     "encouragement-16",
+     "encouragement-18",
+     "encouragement-19",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-22"
+    ]
+   },
+   "frameWidth": 445,
+   "frameHeight": 522,
+   "stage": {
+    "frameWidth": 695,
+    "frameHeight": 815
+   }
   },
   "giganto": {
-   "image": "assets/characters/giganto.webp",
-   "portrait": "assets/characters/giganto-portrait.webp",
-   "frameWidth": 293,
-   "frameHeight": 255,
-   "spacing": 4,
+   "atlases": {
+    "idle": "assets/characters/giganto/idle.json",
+    "wave": "assets/characters/giganto/wave.json",
+    "more": "assets/characters/giganto/more.json",
+    "stage": "assets/characters/giganto/stage.json"
+   },
+   "decodedBytes": {
+    "idle": 9802936,
+    "wave": 9840480,
+    "more": 22039296,
+    "stage": 26288800
+   },
+   "bytes": 2047206,
    "pivot": {
-    "x": 0.4898,
+    "x": 0.318,
     "y": 1.0
    },
    "content": {
-    "x": 0.0341,
-    "y": 0.051,
-    "w": 0.9113,
-    "h": 0.949
+    "x": 0.0421,
+    "y": 0.0817,
+    "w": 0.9185,
+    "h": 0.9183
    },
    "contentActive": {
-    "x": 0.0239,
-    "y": 0.0314,
-    "w": 0.9556,
-    "h": 0.9686
+    "x": 0.0052,
+    "y": 0.0649,
+    "w": 0.9682,
+    "h": 0.9351
    },
    "sequences": {
     "idle": [
-     0,
-     1,
-     2,
-     3
+     "idle-00",
+     "idle-01",
+     "idle-02",
+     "idle-03",
+     "idle-04",
+     "idle-05",
+     "idle-06",
+     "idle-07"
     ],
     "drawing": [
-     4,
-     5,
-     6,
-     7
+     "drawing-08",
+     "drawing-09",
+     "drawing-10",
+     "drawing-11",
+     "drawing-12",
+     "drawing-13",
+     "drawing-14",
+     "drawing-15"
     ],
     "encouragement": [
-     8,
-     9,
-     10,
-     11
+     "encouragement-16",
+     "encouragement-17",
+     "encouragement-18",
+     "encouragement-19",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-22",
+     "encouragement-23"
     ],
     "celebration": [
-     12,
-     13,
-     14,
-     15
+     "celebration-24",
+     "celebration-25",
+     "celebration-26",
+     "celebration-27",
+     "celebration-28",
+     "celebration-29",
+     "celebration-30",
+     "celebration-31"
+    ],
+    "talk": [
+     "talk-32",
+     "talk-33",
+     "talk-34",
+     "talk-35"
     ]
    },
-   "bytes": 364688,
-   "decodedBytes": 4887552
+   "stageSequences": {
+    "idle": [
+     "idle-00",
+     "idle-02",
+     "idle-04",
+     "idle-06"
+    ],
+    "encouragement": [
+     "encouragement-16",
+     "encouragement-18",
+     "encouragement-19",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-20",
+     "encouragement-21",
+     "encouragement-22"
+    ]
+   },
+   "frameWidth": 547,
+   "frameHeight": 558,
+   "stage": {
+    "frameWidth": 855,
+    "frameHeight": 871
+   }
   }
  },
  "treasures": {
@@ -512,5 +772,92 @@
    "sourceSha256": "9c623da4b1a42a4da70b762f61a14e15652624822382e1fdf84fa809ee9fe2c7"
   }
  },
- "totalBytes": 2592928
+ "intro": {
+  "curtainLeft": {
+   "image": "assets/intro/curtain-left.webp",
+   "width": 683,
+   "height": 1536,
+   "bytes": 207070
+  },
+  "curtainRight": {
+   "image": "assets/intro/curtain-right.webp",
+   "width": 640,
+   "height": 1536,
+   "bytes": 181998
+  },
+  "lightShafts": {
+   "image": "assets/intro/light-shafts.webp",
+   "width": 1536,
+   "height": 1024,
+   "bytes": 212102
+  },
+  "gigantoPeek": {
+   "atlas": "assets/intro/giganto-peek.json",
+   "frames": [
+    "peek-0",
+    "peek-1",
+    "peek-2",
+    "peek-3",
+    "peek-4",
+    "peek-5"
+   ],
+   "frameSize": 512,
+   "bytes": 289129,
+   "decodedBytes": 7112424
+  },
+  "popups": {
+   "atlas": "assets/intro/popups.json",
+   "cellSize": 502,
+   "bytes": 463359,
+   "decodedBytes": 7929480
+  },
+  "dust": {
+   "atlas": "assets/intro/dust.json",
+   "frames": [
+    "dust-0",
+    "dust-1",
+    "dust-2"
+   ],
+   "bytes": 56378,
+   "decodedBytes": 1017144
+  },
+  "sprout": {
+   "stages": [
+    "assets/intro/sprout-0.webp",
+    "assets/intro/sprout-1.webp",
+    "assets/intro/sprout-2.webp",
+    "assets/intro/sprout-3.webp"
+   ],
+   "width": 336,
+   "height": 261
+  },
+  "titleSign": {
+   "image": "assets/intro/title-sign.webp",
+   "width": 862,
+   "height": 376,
+   "loops": [
+    {
+     "x": 0.22,
+     "y": 0.008
+    },
+    {
+     "x": 0.7792,
+     "y": 0.008
+    }
+   ],
+   "plank": {
+    "top": 0.2975,
+    "bottom": 0.9867
+   },
+   "bytes": 52292
+  },
+  "vine": {
+   "image": "assets/intro/vine.webp",
+   "width": 146,
+   "height": 734,
+   "bottomX": 0.6451,
+   "bytes": 37908
+  }
+ },
+ "totalBytes": 9282213
 }

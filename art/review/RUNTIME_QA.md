@@ -1,4 +1,40 @@
-# Runtime extraction QA — 13 October 2026 (Claude)
+# Runtime extraction QA (Claude)
+
+## V3 characters and intro assets — 14 October 2026
+
+Source: art/CLAUDE_HANDOFF_V3.md and art/INTRO_ASSET_HANDOFF.md. Packed by `tools/art/v3.py`
+(called from `npm run art`). Sources untouched.
+
+### Registration decision
+
+Measured on all 180 frames against each master: the left (back) silhouette edge at several
+torso heights stays within 2–3 source px; waist-band cross-correlation suggested shifts of up
+to 30 px, but those came from poses that widen on one side (a raised arm, a hand at the hip),
+not from drift. Applying them would introduce pops, so frames keep Codex's shared canvas
+with the waist on the bottom edge. Head-centroid steps between consecutive frames (≤ 28 px
+in drawing nods, 53 px in Mazu's anticipation squash) are intended motion.
+
+### Tiers and atlases
+
+| Tier | Subject height | Frames | Use |
+|---|---|---|---|
+| corner | 512 px | idle 8 / wave 8 / more 20 (drawing 8, celebration 8, talk 4) | welcome cast, corner companion |
+| stage | 800 px | idle-00/02/04/06 + encouragement-16/18/19/20/21/22 | quest-intro pose |
+
+Trimmed multiatlas pages ≤ 2048 px, 2 px padding, premultiplied LANCZOS scaling,
+WebP q76 with alpha q70 (indistinguishable from q90/alpha 100 at 2× zoom on dark green;
+saves ≈ 35 %). Per friend: 0.8–2.0 MB of files; 27–40 MiB decoded for the full corner set.
+
+### Intro assets
+
+Curtains cropped to their foliage; Giganto peek packed trimmed on its 512 px canvas; the
+pop-up bushes registered with Codex's `suggestedTranslationToFirstBush` and scaled to 0.8;
+dust at 0.5; sprout stages on one canvas with the soil baseline aligned; title sign cropped
+with rope-loop positions and the plank area recorded for live text; vine cropped with its
+bottom-loop position recorded. The peek's flat cell bottom is kept below the screen edge.
+
+## V1/V2 extraction — 13 October 2026 (superseded by V3 above)
+
 
 Runtime derivatives are produced by `tools/art/extract.py` (`npm run art`) from the
 selected sources listed in [../manifest.json](../manifest.json). Sources were not

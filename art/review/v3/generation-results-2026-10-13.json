@@ -1,0 +1,540 @@
+{
+  "transitionBatch": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-drawing-09",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/drawing-09.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-drawing-11",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/drawing-11.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-drawing-13",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/drawing-13.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-drawing-15",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/drawing-15.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-encouragement-17",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/encouragement-17.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-encouragement-20",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/encouragement-20.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-encouragement-21",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/encouragement-21.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-encouragement-23",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/encouragement-23.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-celebration-25",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/celebration-25.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-celebration-27",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/celebration-27.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-celebration-29",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/celebration-29.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-celebration-31",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/celebration-31.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-drawing-09",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/drawing-09.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-drawing-11",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/drawing-11.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-drawing-13",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/drawing-13.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-drawing-15",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/drawing-15.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-encouragement-17",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/encouragement-17.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-encouragement-20",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/encouragement-20.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-encouragement-21",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/encouragement-21.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-encouragement-23",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/encouragement-23.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-celebration-25",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/celebration-25.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-celebration-27",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/celebration-27.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-celebration-29",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/celebration-29.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-celebration-31",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/celebration-31.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-drawing-09",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/drawing-09.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-drawing-11",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/drawing-11.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-drawing-13",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/drawing-13.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-drawing-15",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/drawing-15.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-encouragement-17",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/encouragement-17.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-encouragement-20",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/encouragement-20.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-encouragement-21",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/encouragement-21.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-encouragement-23",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/encouragement-23.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-celebration-25",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/celebration-25.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-celebration-27",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/celebration-27.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-celebration-29",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/celebration-29.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "mazu-celebration-31",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-mazu-v3/celebration-31.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "rocky-drawing-09",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-rocky-v3/drawing-09.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "rocky-drawing-11",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-rocky-v3/drawing-11.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "rocky-drawing-13",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-rocky-v3/drawing-13.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "rocky-drawing-15",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-rocky-v3/drawing-15.png"
+      }
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10898}}\")"
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "rocky-encouragement-20",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-rocky-v3/encouragement-20.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "rocky-encouragement-21",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-rocky-v3/encouragement-21.png"
+      }
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10897}}\")"
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "rocky-celebration-25",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-rocky-v3/celebration-25.png"
+      }
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10895}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10896}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10894}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10893}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10891}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10890}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924756,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10887}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10888}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10885}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10881}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10877}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10875}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10873}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10872}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10870}}\")"
+    }
+  ],
+  "talkBatch": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-talk-32",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/talk-32.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-talk-33",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/talk-33.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-talk-34",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/talk-34.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "bill-talk-35",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-bill-v3/talk-35.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-talk-32",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/talk-32.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-talk-33",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/talk-33.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-talk-34",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/talk-34.png"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "tiny-talk-35",
+        "status": "saved",
+        "path": "/Users/arturskwarek/My stuff/CC_Projects/Dino Mazes/art/source/character-tiny-v3/talk-35.png"
+      }
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10870}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10869}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10871}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10867}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10866}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10868}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10861}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10864}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10865}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10863}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10861}}\")"
+    },
+    {
+      "status": "rejected",
+      "reason": "image generation failed: http 429 Too Many Requests: Some(\"{\\\"error\\\":{\\\"type\\\":\\\"usage_limit_reached\\\",\\\"message\\\":\\\"The usage limit has been reached\\\",\\\"plan_type\\\":\\\"plus\\\",\\\"resets_at\\\":1791924755,\\\"eligible_promo\\\":null,\\\"limit_window_minutes\\\":1440,\\\"resets_in_seconds\\\":10860}}\")"
+    }
+  ],
+  "finalRepairs": [
+    {
+      "status": "fulfilled",
+      "value": "bill-celebration-31"
+    },
+    {
+      "status": "fulfilled",
+      "value": "mazu-encouragement-20"
+    }
+  ]
+}

@@ -333,29 +333,20 @@ button:focus-visible,
 
 /* ---------- Welcome ---------- */
 
-/* Centred on the screen; ui.ts sets `top` so it never touches the cast or the cluster. */
+/* Centred in the empty sand; ui.ts sets `top` so it never touches the cast or the
+   cluster. The title hangs on a wooden sign (live text), "Graj" sits below it. */
 .welcome-card {
   position: absolute;
   left: 50%;
   top: 30vh;
   transform: translateX(-50%);
-  width: min(560px, 86vw);
+  width: min(600px, 74vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
   text-align: center;
-  padding: 2px 10px 6px;
   animation: card-rise 420ms var(--ease-out) both;
-}
-
-/* Infrequent staged entrance: title, tagline, button ~100 ms apart. */
-.welcome-card > * {
-  animation: rise 420ms var(--ease-out) both;
-}
-
-.welcome-card > :nth-child(2) {
-  animation-delay: 100ms;
-}
-
-.welcome-card > :nth-child(3) {
-  animation-delay: 200ms;
 }
 
 @keyframes card-rise {
@@ -373,27 +364,199 @@ button:focus-visible,
   }
 }
 
-.title {
+.sign {
+  position: relative;
+  width: 100%;
+  transform-origin: 50% 0;
+}
+
+.sign-board {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 10px 14px rgba(40, 25, 5, 0.32));
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Vines hang from above the screen edge to the rope loops (ui.ts sizes them). */
+.vine {
+  position: absolute;
+  object-fit: cover;
+  object-position: 50% 100%;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 4px 6px rgba(20, 40, 10, 0.3));
+}
+
+.sign-text {
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Painted letters on wood: cream with a carved brown edge. */
+.sign .title {
   margin: 0;
-  font-size: clamp(2.2rem, 5.6vw, 3.6rem);
+  font-size: calc(var(--sign-w, 560px) * 0.094);
   font-weight: var(--fw-title);
-  color: #4b7a1a;
+  line-height: 1;
   letter-spacing: 0.01em;
-  text-shadow: 0 2px 0 #fff6d9, 0 4px 0 rgba(90, 60, 10, 0.18);
+  color: #fff8e6;
+  text-shadow: 0 2px 0 #8a5216, 0 3px 0 #6a3c0e, 0 6px 10px rgba(40, 20, 0, 0.35);
 }
 
-.tagline {
-  margin: 4px 0 14px;
-  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
-  color: var(--ink-soft);
+.sign .tagline {
+  margin: 0.45em 0 0;
+  font-size: calc(var(--sign-w, 560px) * 0.037);
+  font-weight: var(--fw-label);
+  color: #fff3d1;
+  text-shadow: 0 1px 0 #6b3c0f, 0 2px 4px rgba(40, 20, 0, 0.3);
 }
 
-.welcome-card > .btn-play {
+.play-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+/* The seedling grows inside the button's footprint (never over the sign). */
+.sprout {
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: min(190px, 40vw);
+  translate: -50% 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.welcome-card .btn-play {
   font-size: clamp(1.7rem, 3.6vw, 2.3rem);
   min-width: 240px;
   min-height: 84px;
   padding-left: calc(1.1em - 2px);
   animation: rise 420ms var(--ease-out) 200ms both, breathe 2.6s ease-in-out 900ms infinite;
+}
+
+.welcome-card .btn-play.sprouted {
+  animation: sprout-in 320ms var(--ease-out) both, breathe 2.6s ease-in-out 600ms infinite;
+}
+
+@keyframes sprout-in {
+  from {
+    opacity: 0;
+    scale: 0.7;
+  }
+}
+
+/* ---------- Opening animation ---------- */
+
+/* Until their moment in the opening, the sign, button and corner controls wait
+   invisibly in place (visibility keeps their layout for measuring). */
+#ui.opening .sign:not(.shown),
+#ui.opening .btn-play:not(.shown),
+#ui.opening .cluster {
+  visibility: hidden;
+}
+
+#ui .cluster {
+  transition-property: opacity;
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
+}
+
+#ui.opening .cluster {
+  opacity: 0;
+}
+
+.curtains {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  overflow: hidden;
+  --ms: 1000ms;
+}
+
+.curtain-backing {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 42%, #2f6e2b, #143817 75%);
+  transition-property: opacity;
+  transition-duration: calc(var(--ms) * 0.6);
+  transition-timing-function: ease-out;
+}
+
+.curtain {
+  position: absolute;
+  top: 50%;
+  height: max(100vh, calc(68vw / var(--ar)));
+  width: auto;
+  translate: 0 -50%;
+  user-select: none;
+  transition-property: transform;
+  transition-duration: var(--ms);
+  transition-timing-function: cubic-bezier(0.55, 0, 0.3, 1);
+}
+
+.curtain.left {
+  left: 0;
+}
+
+.curtain.right {
+  right: 0;
+}
+
+.curtains.open .curtain.left {
+  transform: translateX(-104%);
+}
+
+.curtains.open .curtain.right {
+  transform: translateX(104%);
+}
+
+.curtains.open .curtain-backing,
+.curtains.open .curtain-spinner {
+  opacity: 0;
+}
+
+.curtains.fade {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: var(--ms);
+  transition-timing-function: ease-out;
+}
+
+.curtain-spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  transition-property: opacity;
+  transition-duration: 200ms;
+}
+
+#ui:not(.opening) .curtain-spinner {
+  display: block;
+}
+
+#ui.opening .curtain-spinner {
+  display: none;
+}
+
+/* Tap anywhere (or press a key) to skip the opening. */
+.opening-skip {
+  position: absolute;
+  inset: 0;
+  z-index: 45;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .btn-play .icon {

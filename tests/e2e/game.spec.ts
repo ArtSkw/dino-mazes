@@ -553,3 +553,81 @@ test.describe('owner review fixes (13 October 2026)', () => {
     expect(Math.abs(nb.y + nb.height / 2 - vp.height / 2)).toBeLessThan(3);
   });
 });
+
+test.describe('opening animation and V3 characters (14 October 2026)', () => {
+  const opening = (page: Page): Promise<string | null> => state<string | null>(page, 'c.state.opening');
+  const textures = (page: Page): Promise<string[]> => state<string[]>(page, "d.game.textures.getTextureKeys().filter((k) => k.startsWith('char-') || k.startsWith('intro-')).sort()");
+
+  test('the full opening plays through and ends on the welcome screen, its textures released', async ({ page }) => {
+    await boot(page, '?test&opening=full');
+    expect(await opening(page)).toBe('full');
+    await expect(page.getByRole('button', { name: 'Pomiń' }).first()).toBeVisible();
+    // The play button waits for its moment (sprouts near the end).
+    await expect(page.locator('.btn-play')).toBeHidden();
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { opening: string | null } } } }).__dino.ctrl.state.opening === null, null, { timeout: 15_000 });
+    await expect(page.getByRole('button', { name: 'Graj', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Dino Labirynty' })).toBeVisible();
+    await page.waitForTimeout(600);
+    const keys = await textures(page);
+    expect(keys.filter((k) => k.startsWith('intro-'))).toEqual([]);
+    expect(keys).toEqual(['char-bill-idle', 'char-giganto-idle', 'char-mazu-idle', 'char-rocky-idle', 'char-tiny-idle']);
+  });
+
+  test('a tap skips the opening at once; a key does too', async ({ page }) => {
+    await boot(page, '?test&opening=full');
+    await page.waitForTimeout(900);
+    await page.mouse.click(600, 400);
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { opening: string | null } } } }).__dino.ctrl.state.opening === null, null, { timeout: 1_500 });
+    await expect(page.getByRole('button', { name: 'Graj', exact: true })).toBeVisible();
+    await boot(page, '?test&opening=short');
+    await page.keyboard.press('Space');
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { opening: string | null } } } }).__dino.ctrl.state.opening === null, null, { timeout: 1_500 });
+  });
+
+  test('first launch of the day gets the full opening, later launches the short one', async ({ page }) => {
+    await boot(page, '?test&opening=auto');
+    expect(await opening(page)).toBe('full');
+    await boot(page, '?test&opening=auto');
+    expect(await opening(page)).toBe('short');
+  });
+
+  test('reduced motion gets a plain fade', async ({ browser }) => {
+    const context = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 1180, height: 820 }, locale: 'en-US' });
+    const page = await context.newPage();
+    await boot(page, '?test&opening=auto');
+    expect(await opening(page)).toBe('fade');
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { opening: string | null } } } }).__dino.ctrl.state.opening === null, null, { timeout: 3_000 });
+    await context.close();
+  });
+
+  test('character atlases load per screen and the rest are released', async ({ page }) => {
+    await boot(page);
+    await page.waitForTimeout(300);
+    expect(await textures(page)).toEqual(['char-bill-idle', 'char-giganto-idle', 'char-mazu-idle', 'char-rocky-idle', 'char-tiny-idle']);
+    await page.getByRole('button', { name: /^(Graj|Play)$/ }).click({ force: true });
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { screen: string } } } }).__dino.ctrl.state.screen === 'intro');
+    // Quest intro: the host's large stage pose + corner idle only.
+    await page.waitForFunction(() => {
+      const k = (window as never as { __dino: { game: { textures: { getTextureKeys(): string[] } } } }).__dino.game.textures.getTextureKeys().filter((x) => x.startsWith('char-'));
+      return k.length === 2 && k.includes('char-bill-stage') && k.includes('char-bill-idle');
+    }, null, { timeout: 5_000 });
+    await page.getByRole('button', { name: /Szukajmy/ }).click({ force: true });
+    // Play: the corner set; the stage pose is released after the reveal.
+    await page.waitForFunction(() => {
+      const k = (window as never as { __dino: { game: { textures: { getTextureKeys(): string[] } } } }).__dino.game.textures.getTextureKeys().filter((x) => x.startsWith('char-')).sort().join(',');
+      return k === 'char-bill-idle,char-bill-more,char-bill-wave';
+    }, null, { timeout: 5_000 });
+    // Tapping the friend plays the talking mouth poses.
+    await page.getByRole('button', { name: /Dotknij, żeby porozmawiać/ }).click();
+    await page.waitForFunction(() => {
+      const scene = (window as never as { __dino: { game: { scene: { getScene(k: string): { children: { list: Array<{ anims?: { currentAnim?: { key: string } } }> } } } } } }).__dino.game.scene.getScene('game');
+      return scene.children.list.some((o) => o.anims?.currentAnim?.key === 'bill-corner-talk');
+    }, null, { timeout: 3_000 });
+    // Home: back to the cast's idle frames only.
+    await page.getByRole('button', { name: 'Ekran startowy' }).click();
+    await page.waitForFunction(() => {
+      const k = (window as never as { __dino: { game: { textures: { getTextureKeys(): string[] } } } }).__dino.game.textures.getTextureKeys().filter((x) => x.startsWith('char-')).sort().join(',');
+      return k === 'char-bill-idle,char-giganto-idle,char-mazu-idle,char-rocky-idle,char-tiny-idle';
+    }, null, { timeout: 5_000 });
+  });
+});

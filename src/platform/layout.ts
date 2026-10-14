@@ -336,40 +336,44 @@ export function toScreen(t: BoardTransform, p: { x: number; y: number }): { x: n
  * group centred on the screen (friend left, card right) so the card does not
  * hug the right edge; in portrait the card sits above the friend.
  */
-export function introLayout(vw: number, vh: number): { character: Rect; card: Rect } {
+export function introLayout(vw: number, vh: number, friend: Pick<FriendFrame, 'aspect' | 'content'> = INTRO_DEFAULT): { character: Rect; card: Rect } {
+  const { aspect, content } = friend;
   if (orientationOf(vw, vh) === 'landscape') {
     const ch = Math.min(vh * 0.66, 500);
-    const cw = ch * 0.9;
-    // Visible silhouette is narrower than the frame box (transparent padding).
-    const visible = cw * 0.78;
+    const cw = ch * aspect;
+    // Lay out by the painted part of the friend, so a long snout or a waving
+    // hand never reaches under the card.
+    const visible = cw * content.w;
     const cardW = Math.min(520, vw * 0.44);
     const cardH = Math.min(vh - 48, 460);
     const gap = Math.round(Math.min(64, Math.max(28, vw * 0.035)));
     const total = visible + gap + cardW;
     const start = Math.max(12, (vw - total) / 2);
-    const cx = start + visible / 2;
     return {
-      character: { x: cx - cw / 2, y: vh - ch, w: cw, h: ch },
+      character: { x: start - cw * content.x, y: vh - ch, w: cw, h: ch },
       card: { x: start + visible + gap, y: (vh - cardH) / 2 - vh * 0.02, w: cardW, h: cardH },
     };
   }
   const ch = Math.min(vh * 0.42, 440);
-  const cw = ch * 0.9;
+  const cw = ch * aspect;
   const w = Math.min(560, vw - 40);
   // Below the top-right control row, above the friend's head.
   const top = portraitTopBar(vw, vh);
   const h = Math.min(vh * 0.5, 470, vh - ch * 0.88 - top - 12);
-  return { character: { x: vw / 2 - cw / 2, y: vh - ch, w: cw, h: ch }, card: { x: (vw - w) / 2, y: top, w, h } };
+  const visibleCenter = cw * (content.x + content.w / 2);
+  return { character: { x: vw / 2 - visibleCenter, y: vh - ch, w: cw, h: ch }, card: { x: (vw - w) / 2, y: top, w, h } };
 }
 
-/** Large character pose on the quest intro screen (bottom-anchored). */
-export function introCharacterRect(vw: number, vh: number): Rect {
-  return introLayout(vw, vh).character;
+const INTRO_DEFAULT = { aspect: 0.9, content: { x: 0.11, y: 0, w: 0.78, h: 1 } };
+
+/** Large character pose on the quest intro screen: the exact frame rect, bottom-anchored. */
+export function introCharacterRect(vw: number, vh: number, friend?: Pick<FriendFrame, 'aspect' | 'content'>): Rect {
+  return introLayout(vw, vh, friend).character;
 }
 
 /** Quest card next to (landscape) or above (portrait) the intro character. */
-export function introCardRect(vw: number, vh: number): Rect {
-  return introLayout(vw, vh).card;
+export function introCardRect(vw: number, vh: number, friend?: Pick<FriendFrame, 'aspect' | 'content'>): Rect {
+  return introLayout(vw, vh, friend).card;
 }
 
 /**

@@ -52,6 +52,59 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## V3 characters and the opening animation (14 October 2026)
+
+Codex delivered 180 character frames (36 per friend, 1254 px each) and 12 intro assets
+(art/CLAUDE_HANDOFF_V3.md, art/INTRO_ASSET_HANDOFF.md). Integrated as planned:
+
+- **Characters** (`tools/art/v3.py`, `src/game/characterTextures.ts`, `src/game/actor.ts`):
+  trimmed Phaser multiatlases in two tiers. Corner tier, 512 px subject height, as three
+  atlases loaded independently: `idle`, `wave` and `more` (drawing, celebration, talk). Stage
+  tier, 800 px, for the quest-intro pose: key poses only (4 breathing, 6 wave). Frame rates
+  doubled (7/11/11/14 fps), so reactions last as long as before. New talk mouth poses play
+  while the speech bubble is up. Reduced motion shows one static pose per state.
+- **Registration:** Codex's shared canvas is kept, with no automatic shifting. The back
+  contour is stable within 2–3 source px. Correlation-based shifts were misled by asymmetric
+  poses and would have added pops. Head-centroid steps between frames are the intended nods
+  and bounces. Details are in art/review/RUNTIME_QA.md.
+- **Atlases load on demand and are released:**
+
+  | Screen | Atlases in GPU memory |
+  |---|---|
+  | Welcome | every friend's `idle`; a tap adds that friend's `wave` for the wave |
+  | Quest intro | host `stage` + `idle` |
+  | Play and reward | host `idle` + `wave` + `more`; stage released after the reveal |
+
+  The reveal swaps tiers without a visible jump (measured: position and size continuous).
+- **Opening** (`src/game/opening.ts`, DOM parts in `src/ui/ui.ts`): concept A. The full
+  version (≈ 7.5 s, first launch of the day): curtains part, two footsteps with shake, dust and
+  a sweeping shadow, Giganto peeks over the bottom-left plants and stands up, the friends pop
+  up from bushes and hop to the front, the title sign drops on vines, "Graj" sprouts. The short
+  version (≈ 1.8 s) plays on later launches that day, and reduced motion gets a 0.5 s fade.
+  A tap or key skips. The closed curtains double as the loading screen. Opening textures are
+  released at the end. The welcome screen's cream card became the hanging wooden sign (live
+  text), sized to fit above the friends.
+- **Budgets** (10 Mbps, cache and service worker disabled, 3 runs, production build):
+
+  | Measure | Result | Target |
+  |---|---|---|
+  | First visit transfer (with opening) | 4.91 MB | ≤ 5 MB |
+  | Complete offline download | ≈ 10.2 MB | ≤ 12 MB |
+  | Welcome screen ready | 3.42–3.46 s | — |
+  | Maze drawable | 3.83–3.84 s | ≤ 4 s |
+  | Friend fully animated | ≈ 4.9 s | atlases stream in the background |
+
+  GPU estimate (tests/domain/assets.test.ts) for the worst friend per screen:
+
+  | Screen | Estimate | Budget |
+  |---|---|---|
+  | Welcome during the opening | ≈ 77 MiB | ≤ 96 MiB |
+  | Quest intro | ≈ 68 MiB | ≤ 96 MiB |
+  | Play | ≈ 74 MiB | ≤ 96 MiB |
+- **Pending:** watching the loops and the opening on the family tablet at real frame rate; owner
+  likeness approval of every generated pose (the handoff records permission to proceed, not a
+  per-pose sign-off).
+
 ## Owner tablet test: sharp hedge corners (13 October 2026)
 
 Drawing by touch, the ink stuck at the sharp inside corners of turns. Cause: the ink moves
@@ -97,8 +150,8 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 155 passed |
-| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 47 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
+| Domain unit + property | `npm test` | 170 passed |
+| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 57 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
 

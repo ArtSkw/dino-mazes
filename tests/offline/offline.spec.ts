@@ -43,7 +43,7 @@ test('after the first visit the game relaunches and plays offline', async ({ pag
   await context.setOffline(false);
 });
 
-test('painted UI surfaces (panels, leaf and wood buttons, corner leaf) load in the production build', async ({ page }) => {
+test('painted UI surfaces and the welcome/opening art load in the production build', async ({ page }) => {
   await page.goto('./?test');
   await page.waitForFunction(() => (window as never as { __dino?: { ctrl: { state: { screen: string } } } }).__dino?.ctrl.state.screen === 'welcome', null, { timeout: 30_000 });
   const urls = await page.evaluate(() => {
@@ -52,10 +52,15 @@ test('painted UI surfaces (panels, leaf and wood buttons, corner leaf) load in t
       return el ? getComputedStyle(el, pseudo).getPropertyValue(prop) : '';
     };
     return [
-      pick('.welcome-card', 'border-image-source'),
+      pick('.intro-card', 'border-image-source'),
       pick('.btn-play', 'border-image-source'),
       pick('.reset-btn', 'border-image-source'),
-      pick('.welcome-card', 'background-image', '::after'),
+      pick('.intro-card', 'background-image', '::after'),
+      // DOM art of the welcome screen and the opening.
+      ...['.sign-board', '.vine', '.curtain.left', '.curtain.right', '.sprout'].map((sel) => {
+        const img = document.querySelector<HTMLImageElement>(sel);
+        return img ? `url("${img.src}")` : 'none';
+      }),
     ].map((v) => /url\("?([^")]+)"?\)/.exec(v)?.[1] ?? `missing: ${v}`);
   });
   for (const url of urls) {

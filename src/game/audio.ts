@@ -4,7 +4,7 @@
  * and suspends while the page is hidden. No error buzzers, no continuous sound
  * while drawing, no music.
  */
-export type Sfx = 'tap' | 'pickup' | 'success' | 'wave' | 'flutter' | 'pop' | 'whoosh';
+export type Sfx = 'tap' | 'pickup' | 'success' | 'wave' | 'flutter' | 'pop' | 'whoosh' | 'bum' | 'toot' | 'sparkle';
 
 export class SoundBoard {
   private ctx: AudioContext | null = null;
@@ -83,6 +83,19 @@ export class SoundBoard {
       case 'flutter':
         for (let i = 0; i < 4; i++) this.noise(t + i * 0.07, 0.05, 3200, 0.04);
         this.tone(1760, t + 0.05, 0.25, 'sine', 0.05, 0.01);
+        break;
+      case 'bum':
+        // A soft, friendly footstep: low thump, never a scary boom.
+        this.sweep(120, 48, t, 0.32, 'sine', 0.42);
+        this.noise(t, 0.12, 180, 0.12);
+        break;
+      case 'toot':
+        // Czupur's crest: a short, round two-note toot.
+        this.sweep(392, 440, t, 0.16, 'triangle', 0.12);
+        this.sweep(523, 587, t + 0.17, 0.24, 'triangle', 0.12);
+        break;
+      case 'sparkle':
+        [1568, 2093, 2637].forEach((f, i) => this.marimba(f, t + i * 0.07, 0.07));
         break;
     }
   }

@@ -21,6 +21,23 @@ import { computeLayout, fitGrid, type Layout } from '../platform/layout';
 import { restartedSave, type LoadStatus, type SaveStore } from '../storage/save';
 
 export type Screen = 'loading' | 'welcome' | 'intro' | 'play' | 'reward';
+/** Full story (first launch of the day), short greeting (later launches), or a plain fade (reduced motion). */
+export type OpeningMode = 'full' | 'short' | 'fade';
+export type OpeningPolicy = 'auto' | 'off' | OpeningMode;
+
+/** Local calendar date as YYYY-MM-DD. */
+export function localDate(d = new Date()): string {
+  const p = (n: number): string => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+
+/** Which opening plays (art/INTRO_ANIMATION_PLAN.md): pure, so it can be tested. */
+export function decideOpening(policy: OpeningPolicy, reducedMotion: boolean, shownOn: string | undefined, today: string): OpeningMode | null {
+  if (policy === 'off') return null;
+  if (policy !== 'auto') return policy;
+  if (reducedMotion) return 'fade';
+  return shownOn === today ? 'short' : 'full';
+}
 export type Overlay = 'collection' | 'settings' | null;
 
 export interface Reward {
@@ -44,6 +61,10 @@ export interface AppState {
   storage: LoadStatus;
   /** True until the first drawing input on the introductory maze (hand demo). */
   showHandDemo: boolean;
+  /** Opening animation planned at boot (shown while loading as closed curtains). */
+  openingPlan: OpeningMode | null;
+  /** Opening animation currently playing on the welcome screen. */
+  opening: OpeningMode | null;
   /** Drawing is connected right now (finger/mouse down and following). */
   drawing: boolean;
   loadError: boolean;
@@ -60,7 +81,8 @@ export type GameEvent =
   | { type: 'skip-celebration' }
   | { type: 'hint'; hint: Hint }
   | { type: 'hint-ready' }
-  | { type: 'talk'; characterId: string }
+  | { type: 'talk'; characterId: string; ms: number }
+  | { type: 'opening-skip' }
   | { type: 'wave'; characterId: string }
   | { type: 'treasure-tap'; treasureId: TreasureId }
   | { type: 'reveal' }
@@ -116,6 +138,8 @@ export class Controller {
       canContinue: !!save.activeSession,
       storage: store.status,
       showHandDemo: false,
+      openingPlan: null,
+      opening: null,
       drawing: false,
       loadError: false,
     };
@@ -162,9 +186,34 @@ export class Controller {
   // ---------------------------------------------------------------------------
   // Lifecycle
 
+  /**
+   * Decide the opening once at boot (after the system motion preference is
+   * known), so the loader fetches only what that opening needs and the closed
+   * curtains can stand in for the loading screen.
+   */
+  planOpening(policy: OpeningPolicy, today = localDate()): OpeningMode | null {
+    const plan = decideOpening(policy, this.state.reducedMotion, this.store.get().openingShownOn, today);
+    this.set({ openingPlan: plan });
+    if (plan === 'full') {
+      const save = this.store.get();
+      this.store.commit({ ...save, openingShownOn: today });
+    }
+    return plan;
+  }
+
   ready(): void {
     const save = this.store.get();
-    this.set({ screen: 'welcome', canContinue: this.isResumable(save) });
+    this.set({ screen: 'welcome', canContinue: this.isResumable(save), opening: this.state.openingPlan });
+  }
+
+  /** The renderer finished (or skipped) the opening: the welcome screen is live. */
+  finishOpening(): void {
+    if (this.state.opening) this.set({ opening: null, openingPlan: null });
+  }
+
+  /** Tap or key during the opening: jump straight to the welcome screen. */
+  skipOpening(): void {
+    if (this.state.opening) this.emit({ type: 'opening-skip' });
   }
 
   failLoading(): void {
@@ -642,14 +691,15 @@ export class Controller {
     if (!session) return '';
     const n = this.talks++;
     this.sfx('wave');
-    this.emit({ type: 'talk', characterId: session.characterId });
     const own = FRIEND_LINES[session.characterId];
     const cycle = 2 * own.length + 1;
     const k = n % cycle;
-    if (k === 0) return this.askLine(session);
     const i = Math.floor((k - 1) / 2);
-    const line = (k - 1) % 2 === 0 ? own[i % own.length] : KIND_LINES[i % KIND_LINES.length];
-    return line ? line[this.lang] : this.askLine(session);
+    const line = k === 0 ? null : (k - 1) % 2 === 0 ? own[i % own.length] : KIND_LINES[i % KIND_LINES.length];
+    const text = line ? line[this.lang] : this.askLine(session);
+    // Mouth poses for roughly the time it takes to read the line aloud.
+    this.emit({ type: 'talk', characterId: session.characterId, ms: Math.min(3200, Math.max(1200, 600 + text.length * 40)) });
+    return text;
   }
 
   private askLine(session: Session): string {

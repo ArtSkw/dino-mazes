@@ -28,7 +28,13 @@ export function defaultSettings(): Settings {
  * keeps the parent's settings and language choice.
  */
 export function restartedSave(save: SaveV1): SaveV1 {
-  return { ...defaultSave(), settings: { ...save.settings }, langChosen: save.langChosen };
+  return {
+    ...defaultSave(),
+    settings: { ...save.settings },
+    langChosen: save.langChosen,
+    // A viewing preference, not progress: the daily opening rhythm continues.
+    ...(save.openingShownOn ? { openingShownOn: save.openingShownOn } : {}),
+  };
 }
 
 export function defaultSave(): SaveV1 {
@@ -137,6 +143,7 @@ export function validateSave(raw: unknown): { save: SaveV1; recovered: boolean }
     gigantoCompleted: isNat(raw.gigantoCompleted) ? raw.gigantoCompleted : 0,
     totalCompleted: isNat(raw.totalCompleted) ? raw.totalCompleted : 0,
     introDone: raw.introDone === true || isNat(raw.totalCompleted) && (raw.totalCompleted as number) > 0,
+    ...(typeof raw.openingShownOn === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(raw.openingShownOn) ? { openingShownOn: raw.openingShownOn } : {}),
     ...(activeSession ? { activeSession } : {}),
   };
   return { save, recovered };

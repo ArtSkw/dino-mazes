@@ -10,9 +10,11 @@ import { nodePos } from '../domain/maze';
 import type { Hint } from '../domain/trail';
 import type { CharacterId, Point, TreasureId } from '../domain/types';
 import { castSlots, introCharacterRect, toScreen, type Rect } from '../platform/layout';
-import { CharacterActor, sheetKey } from './actor';
-import { ASSETS, CAST_SCALE, assetUrl, handTexture, leafTexture, ringTexture, sparkTexture, starTexture } from './assets';
+import { CharacterActor } from './actor';
+import { ASSETS, CAST_SCALE, assetUrl, friendFrame, handTexture, leafTexture, ringTexture, sparkTexture, starTexture } from './assets';
 import { paintBoard } from './boardPainter';
+import { CharacterTextures, type AtlasRef } from './characterTextures';
+import { OpeningDirector, preloadOpening, type OpeningStep } from './opening';
 
 export interface UiBridge {
   rectOf(name: 'collection' | 'reset' | 'hint'): DOMRect | null;
@@ -23,6 +25,8 @@ export interface UiBridge {
   hintLanded(): void;
   /** Screen rect of the corner companion's frame (null while it is not on the board). */
   setCompanionRect(rect: Rect | null): void;
+  /** Drive the DOM parts of the opening (curtains, title sign, sprouting button). */
+  openingStep(step: OpeningStep, ms: number): void;
 }
 
 const D = {
@@ -77,6 +81,12 @@ export class GameScene extends Phaser.Scene {
   private sparkle!: Phaser.GameObjects.Particles.ParticleEmitter;
   private celebration: { timers: Phaser.Time.TimerEvent[]; flyer: Phaser.GameObjects.Image | null; done: boolean } | null = null;
   private unsubscribe: (() => void) | null = null;
+  private chars!: CharacterTextures;
+  private opening: OpeningDirector | null = null;
+  /** Bumped per maze so a slow atlas load never installs a stale companion. */
+  private companionSerial = 0;
+  private castSerial = 0;
+  private releaseTimer: Phaser.Time.TimerEvent | null = null;
 
   constructor(ctrl: Controller, ui: UiBridge) {
     super({ key: 'game' });
@@ -93,13 +103,11 @@ export class GameScene extends Phaser.Scene {
     this.load.image('ground', assetUrl(ASSETS.backgrounds.ground.image));
     for (const [name, item] of Object.entries(ASSETS.foliage)) this.load.image(`fol-${name}`, assetUrl(item.image));
     for (const [id, item] of Object.entries(ASSETS.treasures)) this.load.image(`tr-${id}`, assetUrl(item.image));
-    for (const [id, c] of Object.entries(ASSETS.characters)) {
-      this.load.spritesheet(sheetKey(id as CharacterId), assetUrl(c.image), {
-        frameWidth: c.frameWidth,
-        frameHeight: c.frameHeight,
-        spacing: c.spacing,
-      });
-    }
+    // Only what the first screen shows: every friend's corner idle frames
+    // (other atlases load on demand; see characterTextures.ts).
+    this.chars = new CharacterTextures(this);
+    this.chars.preload(CAST_ORDER.map((id) => [id, 'idle'] as const));
+    preloadOpening(this, this.ctrl.state.openingPlan);
   }
 
   create(): void {
@@ -194,14 +202,20 @@ export class GameScene extends Phaser.Scene {
         this.butterflyArrives();
         break;
       case 'talk':
-        this.boop();
-        this.companion?.react('encouragement', true);
+        this.boop(this.companion?.sprite);
+        this.companion?.talk(e.ms);
         break;
       case 'wave': {
         const actor = this.cast.find((a) => a.id === e.characterId) ?? (this.companion?.id === e.characterId ? this.companion : null);
+        this.boop(actor?.sprite);
         actor?.react('encouragement', true);
+        // The wave atlas is loaded for this tap only; let it go again afterwards.
+        this.scheduleRelease(6000);
         break;
       }
+      case 'opening-skip':
+        this.opening?.skip();
+        break;
       case 'layout':
         this.handleResize(false);
         break;
@@ -239,6 +253,7 @@ export class GameScene extends Phaser.Scene {
     const s = Math.max(w / this.bg.width, h / this.bg.height);
     this.bg.setPosition(w / 2, h / 2).setScale(s);
     if (initial) return;
+    this.opening?.skip();
     // A resize cancels flights cleanly; rewards are already saved.
     if (this.celebration && !this.celebration.done) this.finishCelebration(true);
     this.placeEverything();
@@ -299,9 +314,9 @@ export class GameScene extends Phaser.Scene {
         onComplete: () => oldCompanion.destroy(),
       });
     }
-    this.companion = new CharacterActor(this, session.characterId, this.reduced);
-    this.companion.sprite.setDepth(D.companion);
+    this.companion = null;
     this.createCompanionPlants();
+    this.loadCompanion(session.characterId);
 
     this.paintBoardTexture();
     const tr = TREASURES[session.treasureId];
@@ -383,19 +398,19 @@ export class GameScene extends Phaser.Scene {
     let scale: number;
     const y = this.vh + 6;
     if (intro) {
-      // Intro pose: fitted into its box, anchored on the torso pivot.
-      const box = introCharacterRect(this.vw, this.vh);
-      scale = Math.min(box.w / actor.frameWidth, box.h / actor.frameHeight);
-      x = box.x + box.w / 2;
-      actor.sprite.setOrigin(ASSETS.characters[actor.id].pivot.x, 1);
+      // Intro pose: the exact frame rect, laid out by the painted area.
+      const box = introCharacterRect(this.vw, this.vh, friendFrame(actor.id));
+      scale = box.h / actor.frameHeight;
+      x = box.x;
+      this.setOriginKeepingPlace(actor.sprite, 0);
     } else {
       // Corner: the layout gives the exact frame rect (size, Giganto's bleed).
       const r = layout.character;
       scale = r.h / actor.frameHeight;
       x = r.x;
-      actor.sprite.setOrigin(0, 1);
+      this.setOriginKeepingPlace(actor.sprite, 0);
     }
-    const box = intro ? introCharacterRect(this.vw, this.vh) : layout.character;
+    const box = intro ? introCharacterRect(this.vw, this.vh, friendFrame(actor.id)) : layout.character;
     this.ui.setCompanionRect(intro || screen === 'welcome' ? null : layout.character);
     actor.sprite.setData('baseScale', scale);
     this.tweens.killTweensOf(actor.sprite);
@@ -421,8 +436,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   /** Immediate tactile answer to a tap on the friend: a tiny squash and stretch. */
-  private boop(): void {
-    const sprite = this.companion?.sprite;
+  private boop(sprite: Phaser.GameObjects.Sprite | undefined): void {
     if (!sprite || this.reduced) return;
     const base = (sprite.getData('baseScale') as number | undefined) ?? sprite.scaleX;
     this.tweens.killTweensOf(sprite);
@@ -447,12 +461,20 @@ export class GameScene extends Phaser.Scene {
     this.shownScreen = screen;
     const boardVisible = screen === 'play' || screen === 'reward';
     this.setCastVisible(screen === 'welcome');
+    this.scheduleRelease(900);
 
     if (screen === 'welcome' || screen === 'loading') {
       this.ui.setCompanionRect(null);
       this.fade(this.board, 0);
       for (const o of [this.treasure, this.treasureGlow]) this.fade(o, 0);
-      if (this.companion) this.fade(this.companion.sprite, 0);
+      // The host leaves the stage; "Graj dalej" rebuilds it, so its atlases can go.
+      this.companionSerial++;
+      const host = this.companion;
+      this.companion = null;
+      if (host) {
+        this.tweens.killTweensOf(host.sprite);
+        this.tweens.add({ targets: host.sprite, alpha: 0, duration: this.reduced ? 0 : 260, onComplete: () => host.destroy() });
+      }
       for (const p of this.companionPlants) p.setVisible(false);
       this.trailGfx.setVisible(false);
       this.marker.setVisible(false);
@@ -469,21 +491,14 @@ export class GameScene extends Phaser.Scene {
       this.marker.setVisible(false);
       this.markerGlow.setVisible(false);
       this.ring.setVisible(false);
-      const actor = this.companion;
-      if (actor) {
-        this.placeCompanion(false);
-        if (!this.reduced) {
-          const targetY = actor.sprite.y;
-          actor.sprite.setY(targetY + actor.sprite.displayHeight * 0.6).setAlpha(0);
-          this.tweens.add({ targets: actor.sprite, y: targetY, alpha: 1, duration: 520, ease: 'Back.easeOut', delay: 120 });
-        }
-        this.time.delayedCall(this.reduced ? 0 : 500, () => actor.react('encouragement', true));
-      }
+      if (this.companion) this.introEntrance(this.companion);
       return;
     }
 
     if (boardVisible) {
       const revealing = from === 'intro';
+      if (this.companion) this.toCornerTier(this.companion);
+      this.ensureCompanionCorner();
       this.placeCompanion(revealing);
       this.trailGfx.setVisible(true);
       const dur = this.reduced ? 150 : revealing ? 520 : 300;
@@ -517,18 +532,37 @@ export class GameScene extends Phaser.Scene {
   // ---------------------------------------------------------------------------
   // Welcome cast
 
+  /**
+   * The welcome cast exists only on the welcome screen: elsewhere it is
+   * destroyed so its atlases can be released (GPU budget).
+   */
   private setCastVisible(visible: boolean): void {
-    if (visible && this.cast.length === 0) this.createCast();
-    for (const a of this.cast) a.sprite.setVisible(visible);
-    for (const p of this.castPlants) p.setVisible(visible);
     for (const f of this.ambientFlies) f.setVisible(true);
-    if (visible) this.placeCast();
-    this.ui.setCastRects(visible ? this.castRects() : []);
+    if (!visible) {
+      this.castSerial++;
+      for (const a of this.cast) a.destroy();
+      for (const p of this.castPlants) p.destroy();
+      this.cast = [];
+      this.castPlants = [];
+      this.ui.setCastRects([]);
+      return;
+    }
+    if (this.cast.length) {
+      this.placeCast();
+      return;
+    }
+    const serial = ++this.castSerial;
+    void this.chars.ensure(CAST_ORDER.map((id) => [id, 'idle'] as const)).then(() => {
+      if (serial !== this.castSerial || this.ctrl.state.screen !== 'welcome') return;
+      this.createCast();
+      this.placeCast();
+      if (this.ctrl.state.opening && !this.opening) this.startOpening();
+    });
   }
 
   private createCast(): void {
     for (const id of CAST_ORDER) {
-      const a = new CharacterActor(this, id, this.reduced);
+      const a = new CharacterActor(this, id, this.reduced, this.chars);
       a.sprite.setDepth(D.companion);
       this.cast.push(a);
     }
@@ -578,6 +612,107 @@ export class GameScene extends Phaser.Scene {
       if (!this.reduced) this.tweens.add({ targets: p, angle: i % 2 ? 2.5 : -2.5, duration: 2400 + i * 300, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
     });
     this.ui.setCastRects(this.castRects());
+  }
+
+  // ---------------------------------------------------------------------------
+  // Opening animation
+
+  private startOpening(): void {
+    const mode = this.ctrl.state.opening;
+    if (!mode || this.opening) return;
+    this.opening = new OpeningDirector(
+      {
+        scene: this,
+        vw: () => this.vw,
+        vh: () => this.vh,
+        cast: () => this.cast,
+        castSlots: () => this.castSlots(),
+        step: (step, ms) => this.ui.openingStep(step, ms),
+        sfx: (name) => this.ctrl.sfx(name),
+        sparkle: (x, y, n) => this.sparkle.explode(n, x, y),
+        depth: { shadow: D.ambient + 1, peek: D.companion - 2, popup: D.companion - 1, dust: D.foreground + 1, shafts: D.foreground + 2 },
+        done: () => {
+          this.opening = null;
+          this.ctrl.finishOpening();
+        },
+      },
+      mode,
+    );
+    this.opening.start();
+  }
+
+  // ---------------------------------------------------------------------------
+  // Character atlases and the companion
+
+  /** Atlases the current screen needs; everything else may be released. */
+  private wantedAtlases(): AtlasRef[] {
+    const { screen, session } = this.ctrl.state;
+    if (screen === 'welcome' || screen === 'loading') return CAST_ORDER.map((id) => [id, 'idle'] as const);
+    if (!session) return [];
+    const id = session.characterId;
+    if (screen === 'intro') return [[id, 'stage'], [id, 'idle']];
+    return [[id, 'idle'], [id, 'wave'], [id, 'more']];
+  }
+
+  private scheduleRelease(ms: number): void {
+    this.releaseTimer?.remove();
+    this.releaseTimer = this.time.delayedCall(ms, () => this.chars.releaseExcept(this.wantedAtlases()));
+  }
+
+  /** Load the host's atlases for the current screen, then put the friend on stage. */
+  private loadCompanion(id: CharacterId): void {
+    const serial = ++this.companionSerial;
+    const refs = this.wantedAtlases().filter(([cid, g]) => cid === id && (g === 'stage' || g === 'idle'));
+    void this.chars.ensure(refs.length ? refs : [[id, 'idle']]).then(() => {
+      if (serial !== this.companionSerial || this.companion) return;
+      const screen = this.ctrl.state.screen;
+      const tier = screen === 'intro' && this.chars.has(id, 'stage') ? 'stage' : 'corner';
+      const actor = new CharacterActor(this, id, this.reduced, this.chars, tier);
+      actor.sprite.setDepth(D.companion);
+      this.companion = actor;
+      if (screen === 'intro') this.introEntrance(actor);
+      else if (screen === 'play' || screen === 'reward') {
+        this.placeCompanion(false);
+        this.ensureCompanionCorner();
+      } else actor.sprite.setAlpha(0);
+      this.scheduleRelease(900);
+    });
+  }
+
+  /** The quest-intro pose: the friend pops up and waves. */
+  private introEntrance(actor: CharacterActor): void {
+    this.placeCompanion(false);
+    if (!this.reduced) {
+      const targetY = actor.sprite.y;
+      actor.sprite.setY(targetY + actor.sprite.displayHeight * 0.6).setAlpha(0);
+      this.tweens.add({ targets: actor.sprite, y: targetY, alpha: 1, duration: 520, ease: 'Back.easeOut', delay: 120 });
+    }
+    this.time.delayedCall(this.reduced ? 0 : 500, () => actor.react('encouragement', true));
+  }
+
+  /** Swap the large intro pose for corner frames without a visible jump. */
+  private toCornerTier(actor: CharacterActor): void {
+    if (actor.currentTier === 'corner') return;
+    const h = actor.frameHeight;
+    const s = actor.sprite;
+    const left = s.x - s.originX * s.displayWidth;
+    actor.setTier('corner');
+    s.setScale(s.scaleX * (h / actor.frameHeight));
+    s.setX(left + s.originX * s.displayWidth);
+  }
+
+  /** Corner reactions (wave, drawing, celebration, talk) for the play screens. */
+  private ensureCompanionCorner(): void {
+    const id = this.ctrl.state.session?.characterId;
+    if (!id) return;
+    void this.chars.ensure([[id, 'idle'], [id, 'wave'], [id, 'more']]).then(() => this.scheduleRelease(900));
+  }
+
+  private setOriginKeepingPlace(sprite: Phaser.GameObjects.Sprite, originX: number): void {
+    if (sprite.originX === originX) return;
+    const left = sprite.x - sprite.originX * sprite.displayWidth;
+    sprite.setOrigin(originX, 1);
+    sprite.setX(left + originX * sprite.displayWidth);
   }
 
   // ---------------------------------------------------------------------------

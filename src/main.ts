@@ -3,7 +3,7 @@
  */
 import './fonts.css';
 import './styles.css';
-import { Controller } from './app/controller';
+import { Controller, type OpeningPolicy } from './app/controller';
 import { ASSETS, assetUrl } from './game/assets';
 import { SoundBoard } from './game/audio';
 import { createGame } from './game/game';
@@ -30,6 +30,18 @@ const ctrl = new Controller(store, sound, { width: () => window.innerWidth, heig
 const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 ctrl.setSystemReducedMotion(motionQuery.matches);
 motionQuery.addEventListener('change', (e) => ctrl.setSystemReducedMotion(e.matches));
+
+// Opening animation: automatic for families; off for the test hooks unless a
+// test asks for one explicitly (?opening=full|short|fade).
+const params = new URLSearchParams(window.location.search);
+const openingParam = params.get('opening');
+const policy: OpeningPolicy =
+  openingParam === 'full' || openingParam === 'short' || openingParam === 'fade' || openingParam === 'off' || openingParam === 'auto'
+    ? openingParam
+    : params.has('test')
+      ? 'off'
+      : 'auto';
+ctrl.planOpening(policy);
 
 const uiRoot = document.getElementById('ui') as HTMLElement;
 const ui = new Ui(uiRoot, ctrl);
@@ -83,7 +95,6 @@ for (const type of ['pointerdown', 'pointerup', 'touchend', 'keydown'] as const)
   window.addEventListener(type, () => ctrl.gesture(), { capture: true, passive: true });
 }
 
-const params = new URLSearchParams(window.location.search);
 if (params.has('test') || params.has('debug')) {
   (window as unknown as { __dino: unknown }).__dino = { ctrl, store, game };
 }

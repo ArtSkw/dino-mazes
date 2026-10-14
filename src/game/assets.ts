@@ -6,18 +6,28 @@ import manifestJson from '../data/assetManifest.json';
 import type { CharacterId, TreasureId } from '../domain/types';
 import { FRIEND_SIZE, type FriendFrame } from '../platform/layout';
 
+export type Reaction = 'idle' | 'drawing' | 'encouragement' | 'celebration' | 'talk';
+/** Corner-tier atlas groups (loaded and released independently) and the stage tier. */
+export type AtlasGroup = 'idle' | 'wave' | 'more' | 'stage';
+
 export interface CharacterAsset {
-  image: string;
-  portrait: string;
+  /** Multiatlas JSON per group (tools/art/v3.py). */
+  atlases: Record<AtlasGroup, string>;
+  decodedBytes: Record<AtlasGroup, number>;
+  bytes: number;
+  /** Corner-tier frame (untrimmed canvas) size. */
   frameWidth: number;
   frameHeight: number;
-  spacing: number;
+  /** Stage tier (quest intro pose) frame size. */
+  stage: { frameWidth: number; frameHeight: number };
   pivot: { x: number; y: number };
-  /** Painted area of frame 0 as fractions of the frame. */
+  /** Painted area of idle-00 as fractions of the frame. */
   content: { x: number; y: number; w: number; h: number };
-  /** Union of the painted areas of frames 0–11 (everything but the celebration). */
+  /** Union of the painted areas of every frame but the celebration. */
   contentActive: { x: number; y: number; w: number; h: number };
-  sequences: Record<'idle' | 'drawing' | 'encouragement' | 'celebration', number[]>;
+  sequences: Record<Reaction, string[]>;
+  /** Key poses available in the stage tier. */
+  stageSequences: Record<'idle' | 'encouragement', string[]>;
 }
 
 export interface ItemAsset {
@@ -26,12 +36,31 @@ export interface ItemAsset {
   height: number;
 }
 
+export interface AtlasAsset {
+  atlas: string;
+  bytes: number;
+  decodedBytes: number;
+}
+
+export interface IntroAssets {
+  curtainLeft: ItemAsset;
+  curtainRight: ItemAsset;
+  lightShafts: ItemAsset;
+  gigantoPeek: AtlasAsset & { frames: string[]; frameSize: number };
+  popups: AtlasAsset & { cellSize: number };
+  dust: AtlasAsset & { frames: string[] };
+  sprout: { stages: string[]; width: number; height: number };
+  titleSign: ItemAsset & { loops: Array<{ x: number; y: number }>; plank: { top: number; bottom: number } };
+  vine: ItemAsset & { bottomX: number };
+}
+
 interface Manifest {
   characters: Record<CharacterId, CharacterAsset>;
   treasures: Record<TreasureId, ItemAsset>;
   foliage: Record<string, ItemAsset>;
   ui: Record<string, ItemAsset>;
   backgrounds: Record<'jungle' | 'collection' | 'ground', ItemAsset>;
+  intro: IntroAssets;
 }
 
 export const ASSETS = manifestJson as unknown as Manifest;

@@ -147,6 +147,18 @@ describe('layout', () => {
     }
   });
 
+  it('quest intro: the painted friend (wave included) never reaches under the card', () => {
+    for (const [vw, vh] of VIEWPORTS.filter(([w, h]) => w / h >= 1.12)) {
+      for (const id of ['bill', 'tiny', 'mazu', 'rocky', 'giganto'] as const) {
+        const f = friendFrame(id);
+        const { character, card } = introLayout(vw, vh, f);
+        const paintedRight = character.x + character.w * (f.content.x + f.content.w);
+        expect(paintedRight, id).toBeLessThan(card.x);
+        expect(card.x + card.w).toBeLessThanOrEqual(vw - 12);
+      }
+    }
+  });
+
   it('places Giganto in the lower-left corner when forced', () => {
     const L = computeLayout({ vw: 1180, vh: 820, grid: { cols: 7, rows: 7 }, entranceSide: 'left', entranceX: 0, forceCorner: 'left' });
     expect(L.corner).toBe('left');

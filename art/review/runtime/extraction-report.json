@@ -1,223 +1,128 @@
 {
- "bill": {
-  "frameSize": [
-   241,
-   283
+ "character-bill-v3": {
+  "unionBoxSource": [
+   276,
+   143,
+   1107,
+   1254
   ],
-  "shiftsX": [
-   0,
-   26,
-   40,
-   46,
-   -1,
-   31,
-   40,
-   45,
-   3,
-   23,
-   30,
-   36,
-   -14,
-   25,
-   13,
-   32
+  "masterSubjectHeight": 1089,
+  "cornerFrame": [
+   391,
+   522
   ],
-  "bottoms": [
-   304,
-   304,
-   304,
-   304,
-   294,
-   294,
-   294,
-   294,
-   292,
-   293,
-   293,
-   293,
-   292,
-   292,
-   292,
-   292
+  "stageFrame": [
+   610,
+   816
   ],
-  "edgeTouching": [],
-  "bytes": 229488
+  "decodedBytes": {
+   "idle": 7573256,
+   "wave": 8349672,
+   "more": 12569172,
+   "stage": 14036596
+  },
+  "bytes": 846823,
+  "registration": "Codex canvas kept (no automatic shift); see RUNTIME_QA.md"
  },
- "tiny": {
-  "frameSize": [
-   296,
-   304
+ "character-tiny-v3": {
+  "unionBoxSource": [
+   97,
+   172,
+   1154,
+   1254
   ],
-  "shiftsX": [
-   0,
-   21,
-   18,
-   19,
-   0,
-   21,
-   17,
-   20,
-   2,
-   7,
-   11,
-   20,
-   -3,
-   14,
-   16,
-   18
+  "masterSubjectHeight": 1066,
+  "cornerFrame": [
+   508,
+   520
   ],
-  "bottoms": [
-   310,
-   310,
-   310,
-   310,
-   306,
-   306,
-   306,
-   306,
-   304,
-   304,
-   305,
-   304,
-   303,
-   303,
-   303,
-   304
+  "stageFrame": [
+   793,
+   812
   ],
-  "edgeTouching": [],
-  "bytes": 403544
+  "decodedBytes": {
+   "idle": 7248152,
+   "wave": 7255040,
+   "more": 18556624,
+   "stage": 26127584
+  },
+  "bytes": 1645749,
+  "registration": "Codex canvas kept (no automatic shift); see RUNTIME_QA.md"
  },
- "mazu": {
-  "frameSize": [
-   305,
-   274
+ "character-mazu-v3": {
+  "unionBoxSource": [
+   92,
+   153,
+   1242,
+   1254
   ],
-  "shiftsX": [
-   0,
-   19,
-   24,
-   20,
-   0,
-   19,
-   24,
-   19,
-   -2,
-   12,
-   13,
-   17,
-   -2,
-   16,
-   18,
-   17
+  "masterSubjectHeight": 1078,
+  "cornerFrame": [
+   546,
+   523
   ],
-  "bottoms": [
-   297,
-   297,
-   297,
-   297,
-   287,
-   287,
-   288,
-   287,
-   286,
-   287,
-   287,
-   289,
-   281,
-   282,
-   282,
-   282
+  "stageFrame": [
+   853,
+   817
   ],
-  "edgeTouching": [],
-  "bytes": 336222
+  "decodedBytes": {
+   "idle": 7461888,
+   "wave": 8110928,
+   "more": 19667296,
+   "stage": 23434832
+  },
+  "bytes": 1370501,
+  "registration": "Codex canvas kept (no automatic shift); see RUNTIME_QA.md"
  },
- "rocky": {
-  "frameSize": [
-   257,
-   305
+ "character-rocky-v3": {
+  "unionBoxSource": [
+   192,
+   129,
+   1151,
+   1254
   ],
-  "shiftsX": [
-   0,
-   39,
-   36,
-   42,
-   0,
-   38,
-   37,
-   42,
-   -1,
-   36,
-   29,
-   43,
-   -1,
-   32,
-   27,
-   42
+  "masterSubjectHeight": 1104,
+  "cornerFrame": [
+   445,
+   522
   ],
-  "bottoms": [
-   310,
-   310,
-   310,
-   310,
-   307,
-   307,
-   307,
-   306,
-   306,
-   306,
-   305,
-   305,
-   293,
-   293,
-   294,
-   294
+  "stageFrame": [
+   695,
+   815
   ],
-  "edgeTouching": [],
-  "bytes": 285062
+  "decodedBytes": {
+   "idle": 7366116,
+   "wave": 8449320,
+   "more": 13114412,
+   "stage": 14762448
+  },
+  "bytes": 897774,
+  "registration": "Codex canvas kept (no automatic shift); see RUNTIME_QA.md"
  },
- "giganto": {
-  "frameSize": [
-   293,
-   255
+ "character-giganto-v3": {
+  "unionBoxSource": [
+   80,
+   67,
+   1245,
+   1254
   ],
-  "shiftsX": [
-   0,
-   11,
-   16,
-   16,
-   0,
-   13,
-   15,
-   16,
-   0,
-   13,
-   11,
-   14,
-   -2,
-   12,
-   11,
-   14
+  "masterSubjectHeight": 1090,
+  "cornerFrame": [
+   547,
+   558
   ],
-  "bottoms": [
-   302,
-   302,
-   302,
-   302,
-   271,
-   272,
-   271,
-   272,
-   278,
-   278,
-   278,
-   278,
-   273,
-   273,
-   273,
-   273
+  "stageFrame": [
+   855,
+   871
   ],
-  "edgeTouching": [],
-  "bytes": 364688
+  "decodedBytes": {
+   "idle": 9802936,
+   "wave": 9840480,
+   "more": 22039296,
+   "stage": 26288800
+  },
+  "bytes": 2047206,
+  "registration": "Codex canvas kept (no automatic shift); see RUNTIME_QA.md"
  },
  "treasure-kit-v1.png": {
   "coconut": {
@@ -478,5 +383,48 @@
   "height": 1254,
   "bytes": 87814,
   "sourceSha256": "9c623da4b1a42a4da70b762f61a14e15652624822382e1fdf84fa809ee9fe2c7"
+ },
+ "intro": {
+  "curtainLeft": {
+   "width": 683,
+   "height": 1536,
+   "bytes": 207070
+  },
+  "curtainRight": {
+   "width": 640,
+   "height": 1536,
+   "bytes": 181998
+  },
+  "lightShafts": {
+   "width": 1536,
+   "height": 1024,
+   "bytes": 212102
+  },
+  "gigantoPeek": {
+   "bytes": 289129,
+   "decodedBytes": 7112424
+  },
+  "popups": {
+   "bytes": 463359,
+   "decodedBytes": 7929480
+  },
+  "dust": {
+   "bytes": 56378,
+   "decodedBytes": 1017144
+  },
+  "sprout": {
+   "width": 336,
+   "height": 261
+  },
+  "titleSign": {
+   "width": 862,
+   "height": 376,
+   "bytes": 52292
+  },
+  "vine": {
+   "width": 146,
+   "height": 734,
+   "bytes": 37908
+  }
  }
 }

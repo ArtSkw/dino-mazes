@@ -162,5 +162,7 @@ export interface SaveV1 {
   gigantoCompleted: number;
   totalCompleted: number;
   introDone: boolean;
+  /** Local date (YYYY-MM-DD) the full opening animation last played; later launches that day get the short one. */
+  openingShownOn?: string;
   activeSession?: Session;
 }
