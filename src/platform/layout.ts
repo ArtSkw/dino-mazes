@@ -177,10 +177,6 @@ export interface LayoutInput {
   vh: number;
   grid: GridSpec;
   entranceSide: Side;
-  /** Entrance x as a fraction of the grid width (0..1), for corner choice. */
-  entranceX: number;
-  /** Force a corner (Giganto faces right and is cropped on the left). */
-  forceCorner?: Corner;
   /** The hosting friend's sprite frame, so the layout knows its real size. */
   friend?: FriendFrame;
 }
@@ -202,18 +198,24 @@ const DEFAULT_FRIEND: FriendFrame = { aspect: 0.9, size: 1, content: { x: 0.04, 
 /** On-screen size of the friend relative to the four regular friends. */
 export const FRIEND_SIZE: Record<string, number> = { giganto: 1.22 };
 
-export function chooseCorner(side: Side, entranceX: number): Corner {
-  if (side === 'left') return 'right';
-  if (side === 'right') return 'left';
-  return entranceX < 0.5 ? 'right' : 'left';
-}
+/**
+ * The friend always stands in the lower-left corner and "Wróć" is always at the
+ * lower right, on every maze (owner decision, 14 Oct 2026): a child learns where
+ * the reset button is and it never moves between sessions. Every friend faces
+ * right or straight ahead (FACING in game/assets.ts), so from the left it looks
+ * at the maze. The generator never opens a maze on the left side, so the
+ * entrance stays clear of the friend.
+ */
+export const FRIEND_CORNER: Corner = 'left';
+/** How far the board leans away from the friend, as a share of the spare width. */
+const LEAN = 0.3;
 
 export function computeLayout(input: LayoutInput): Layout {
   const { vw, vh, grid } = input;
   const orientation = orientationOf(vw, vh);
   const area = boardAreaFor(vw, vh);
   const pitch = pitchFor(grid, area);
-  const corner = input.forceCorner ?? chooseCorner(input.entranceSide, input.entranceX);
+  const corner = FRIEND_CORNER;
 
   // Actual logical extents of this board (entrance room only on its side).
   const side = input.entranceSide;
@@ -226,7 +228,7 @@ export function computeLayout(input: LayoutInput): Layout {
   // In landscape the board leans a little away from the friend's corner when
   // there is spare width, so the friend can be drawn larger.
   const slack = Math.max(0, area.w - bw);
-  const lean = orientation === 'landscape' ? slack * 0.3 * (corner === 'left' ? 1 : -1) : 0;
+  const lean = orientation === 'landscape' ? slack * LEAN * (corner === 'left' ? 1 : -1) : 0;
   const bx = area.x + (area.w - bw) / 2 + lean;
   const by = area.y + (area.h - bh) / 2;
   const transform: BoardTransform = { pitch, ox: bx - xMin * pitch, oy: by - yMin * pitch };

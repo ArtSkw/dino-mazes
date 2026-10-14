@@ -2,6 +2,7 @@
  * Authored content: characters, treasures and quests (PRD §5).
  * Original quest scenarios inspired by the characters, not episode claims.
  */
+import manifestJson from './assetManifest.json';
 import type { CharacterId, Localized, Quest, TreasureId } from '../domain/types';
 
 export interface CharacterInfo {
@@ -36,18 +37,40 @@ export interface TreasureInfo {
   motion: TreasureMotion;
   /** Glow colour behind the treasure in the clearing and collection. */
   glow: string;
+  /** Classic treasures are found with the friends; Giganto's only with him. */
+  kind: 'classic' | 'giganto';
 }
 
 export const TREASURES: Record<TreasureId, TreasureInfo> = {
-  coconut: { id: 'coconut', name: { pl: 'Kokos', en: 'Coconut' }, motion: 'roll', glow: '#ffd27a' },
-  nut: { id: 'nut', name: { pl: 'Orzech', en: 'Nut' }, motion: 'hop', glow: '#ffc07a' },
-  flower: { id: 'flower', name: { pl: 'Kwiatek', en: 'Flower' }, motion: 'sway', glow: '#ffb3a1' },
-  stone: { id: 'stone', name: { pl: 'Kamyk', en: 'Stone' }, motion: 'glint', glow: '#9ff0ea' },
-  shell: { id: 'shell', name: { pl: 'Muszelka', en: 'Shell' }, motion: 'turn', glow: '#ffd6b0' },
-  berries: { id: 'berries', name: { pl: 'Jagody', en: 'Berries' }, motion: 'jiggle', glow: '#b9c8ff' },
+  coconut: { id: 'coconut', name: { pl: 'Kokos', en: 'Coconut' }, motion: 'roll', glow: '#ffd27a', kind: 'classic' },
+  nut: { id: 'nut', name: { pl: 'Orzech', en: 'Nut' }, motion: 'hop', glow: '#ffc07a', kind: 'classic' },
+  flower: { id: 'flower', name: { pl: 'Kwiatek', en: 'Flower' }, motion: 'sway', glow: '#ffb3a1', kind: 'classic' },
+  stone: { id: 'stone', name: { pl: 'Kamyk', en: 'Stone' }, motion: 'glint', glow: '#9ff0ea', kind: 'classic' },
+  shell: { id: 'shell', name: { pl: 'Muszelka', en: 'Shell' }, motion: 'turn', glow: '#ffd6b0', kind: 'classic' },
+  berries: { id: 'berries', name: { pl: 'Jagody', en: 'Berries' }, motion: 'jiggle', glow: '#b9c8ff', kind: 'classic' },
+  // Owner request, 14 Oct 2026: seven classic treasures and three of Giganto's own.
+  feather: { id: 'feather', name: { pl: 'Piórko', en: 'Feather' }, motion: 'sway', glow: '#ffe2a8', kind: 'classic' },
+  amber: { id: 'amber', name: { pl: 'Bursztyn', en: 'Amber' }, motion: 'glint', glow: '#ffbe3d', kind: 'giganto' },
+  gigaflower: { id: 'gigaflower', name: { pl: 'Gigakwiat', en: 'Giga flower' }, motion: 'sway', glow: '#d9b8ff', kind: 'giganto' },
+  crystal: { id: 'crystal', name: { pl: 'Kryształ', en: 'Crystal' }, motion: 'glint', glow: '#b6dcff', kind: 'giganto' },
 };
 
-export const TREASURE_ORDER: TreasureId[] = ['coconut', 'nut', 'flower', 'stone', 'shell', 'berries'];
+/** Classic treasures, in collection order. */
+export const TREASURE_ORDER: TreasureId[] = ['coconut', 'nut', 'flower', 'stone', 'shell', 'berries', 'feather'];
+/** Giganto's own treasures, found only on his quests. */
+export const GIGANTO_TREASURE_ORDER: TreasureId[] = ['amber', 'gigaflower', 'crystal'];
+export const ALL_TREASURE_IDS: TreasureId[] = [...TREASURE_ORDER, ...GIGANTO_TREASURE_ORDER];
+
+const TREASURE_ART = (manifestJson as unknown as { treasures: Record<string, unknown> }).treasures;
+
+/**
+ * A treasure is in the game only once its painted art is in the asset
+ * manifest (tools/art/extract.py). New treasures therefore switch on by
+ * themselves when Codex delivers them (art/CODEX_REQUEST_TREASURES.md).
+ */
+export function treasureHasArt(id: TreasureId): boolean {
+  return Object.prototype.hasOwnProperty.call(TREASURE_ART, id);
+}
 
 const q = (id: string, characterId: CharacterId, treasureId: TreasureId, prompt: Localized, ask: Localized, special = false): Quest => ({
   id,
@@ -160,9 +183,57 @@ export const ORDINARY_QUESTS: Quest[] = [
     { pl: 'Czupur chce dać Giganto prezent. Może błyszczący kamyk?', en: 'Rocky wants to give Giganto a present. How about a shiny stone?' },
     { pl: 'Błyszczący kamyk dla Giganto! Ale się ucieszy!', en: "A shiny stone for Giganto! He'll be so happy!" },
   ),
+  // The feather (owner request, 14 Oct 2026): Miłka's paintbrush fell apart
+  // in the series, and Arek the archaeopteryx is a bird who cannot fly.
+  q(
+    'tiny-feather',
+    'tiny',
+    'feather',
+    { pl: 'Miłce rozpadł się pędzel. Z piórka zrobi nowy!', en: "Tiny's paintbrush fell apart. She can make a new one from a feather!" },
+    { pl: 'Mój pędzel się rozpadł! Znajdziesz piórko?', en: 'My paintbrush fell apart! Can you find a feather?' },
+  ),
+  q(
+    'rocky-feather',
+    'rocky',
+    'feather',
+    { pl: 'Czupur chce latać jak ptak. Na początek wystarczy mu piórko!', en: 'Rocky wants to fly like a bird. A feather will do for a start!' },
+    { pl: 'Z piórkiem na pewno polecę! No… może trochę.', en: "With a feather I'll fly for sure! Well… maybe a bit." },
+  ),
 ];
 
+/** Giganto's quests for his own three treasures (owner request, 14 Oct 2026). */
 export const SPECIAL_QUESTS: Quest[] = [
+  q(
+    'giganto-amber',
+    'giganto',
+    'amber',
+    { pl: 'Giganto szuka bursztynu. W środku śpi maleńki listek!', en: 'Giganto is looking for amber. A tiny leaf sleeps inside it!' },
+    { pl: 'Grrr… Bursztyn? Proszę.', en: 'Grrr… Amber? Please.' },
+    true,
+  ),
+  q(
+    'giganto-gigaflower',
+    'giganto',
+    'gigaflower',
+    { pl: 'Gigakwiat kwitnie bardzo rzadko. Giganto chce go powąchać!', en: 'The giga flower hardly ever blooms. Giganto wants to smell it!' },
+    { pl: 'Mrrr… Gigakwiat? Proszę.', en: 'Mrrr… Giga flower? Please.' },
+    true,
+  ),
+  q(
+    'giganto-crystal',
+    'giganto',
+    'crystal',
+    { pl: 'W jaskini Giganto coś błyszczy. Może to kryształ?', en: "Something sparkles in Giganto's cave. Could it be a crystal?" },
+    { pl: 'Grrr… Kryształ? Proszę.', en: 'Grrr… Crystal? Please.' },
+    true,
+  ),
+];
+
+/**
+ * Giganto's quests from before his own treasures: used only while none of
+ * them has art yet, and kept so saved sessions and history still resolve.
+ */
+export const LEGACY_SPECIAL_QUESTS: Quest[] = [
   q(
     'giganto-coconut',
     'giganto',
@@ -201,7 +272,7 @@ export const INTRO_PROMPT: Localized = {
   en: "Bill can smell a coconut. Let's find it together!",
 };
 
-export const ALL_QUESTS: Quest[] = [...ORDINARY_QUESTS, ...SPECIAL_QUESTS, GIGANTO_GENERIC];
+export const ALL_QUESTS: Quest[] = [...ORDINARY_QUESTS, ...SPECIAL_QUESTS, ...LEGACY_SPECIAL_QUESTS, GIGANTO_GENERIC];
 
 export function questById(id: string): Quest | undefined {
   return ALL_QUESTS.find((x) => x.id === id);
@@ -215,6 +286,10 @@ export const TREASURE_OBJECT: Record<TreasureId, Localized> = {
   stone: { pl: 'kamyk', en: 'a stone' },
   shell: { pl: 'muszelkę', en: 'a shell' },
   berries: { pl: 'jagody', en: 'some berries' },
+  feather: { pl: 'piórko', en: 'a feather' },
+  amber: { pl: 'bursztyn', en: 'a piece of amber' },
+  gigaflower: { pl: 'gigakwiat', en: 'a giga flower' },
+  crystal: { pl: 'kryształ', en: 'a crystal' },
 };
 
 /** Celebration banner when a treasure is found again. */
@@ -225,6 +300,10 @@ export const TREASURE_AGAIN: Record<TreasureId, Localized> = {
   stone: { pl: 'Znowu kamyk!', en: 'Another stone!' },
   shell: { pl: 'Znowu muszelka!', en: 'Another shell!' },
   berries: { pl: 'Znowu jagody!', en: 'More berries!' },
+  feather: { pl: 'Znowu piórko!', en: 'Another feather!' },
+  amber: { pl: 'Znowu bursztyn!', en: 'More amber!' },
+  gigaflower: { pl: 'Znowu gigakwiat!', en: 'Another giga flower!' },
+  crystal: { pl: 'Znowu kryształ!', en: 'Another crystal!' },
 };
 
 /**

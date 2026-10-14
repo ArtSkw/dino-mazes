@@ -12,8 +12,12 @@
 import { createRng, hashString, type Rng } from './rng';
 import type { Difficulty, GridSpec, Maze, MazeCell, MazeMetrics, MazeProfile, Point, Side } from './types';
 
-/** v3: harder automatic levels and one-axis entrances for non-square grids (owner decision, 14 Oct 2026). */
-export const GENERATOR_VERSION = 3;
+/**
+ * v3: harder automatic levels and one-axis entrances for non-square grids.
+ * v4: side entrances only on the right, because the friend always stands at
+ * the lower left (owner decisions, 14 Oct 2026).
+ */
+export const GENERATOR_VERSION = 4;
 /** Visual corridor half-width in cell units (corridor width = 0.6 of the cell pitch). */
 export const CORRIDOR_RADIUS = 0.3;
 /** Hedge frame around the grid, in cell units. */
@@ -254,24 +258,31 @@ function growingTree(g: GridSpec, rng: Rng, pNewest: number): Array<[number, num
 }
 
 /**
- * Wide grids always open at the bottom and tall grids at a side, so the layout
- * reserves entrance room on one axis only (see entranceAxes): that is what
- * lets a 9×7 maze fit a 1180×820 tablet with corridors ≥ 48 px.
+ * Wide and square grids always open at the bottom, tall grids on the right
+ * side, so the layout reserves entrance room on one axis only: that is what
+ * lets a 9×7 maze fit a 1180×820 tablet with corridors ≥ 48 px. Square grids
+ * open at the bottom since GENERATOR_VERSION 4: a side entrance widened the
+ * board and squeezed the friend standing at the lower left.
  */
 export function entranceAxes(g: GridSpec): { horizontal: boolean; vertical: boolean } {
-  if (g.cols > g.rows) return { horizontal: false, vertical: true };
   if (g.rows > g.cols) return { horizontal: true, vertical: false };
-  return { horizontal: true, vertical: true };
+  return { horizontal: false, vertical: true };
 }
 
+/**
+ * Entrances open in the right half of the bottom edge (wide and square grids)
+ * or on the right side (tall grids), never on the left: the friend stands in the lower-left corner on every maze
+ * (in portrait right under the board), so a left entrance would run into it
+ * (owner decision, 14 Oct 2026). The start is then also near "Wróć".
+ */
 function pickEntrance(g: GridSpec, rng: Rng): { side: Side; cell: number } {
-  const roll = rng.int(5);
-  const axes = entranceAxes(g);
-  const side: Side = !axes.horizontal ? 'bottom' : !axes.vertical ? (roll % 2 === 0 ? 'left' : 'right') : roll < 3 ? 'bottom' : roll === 3 ? 'left' : 'right';
+  rng.int(5); // keeps the random stream aligned with the entrance draw below
+  const side: Side = entranceAxes(g).horizontal ? 'right' : 'bottom';
   const lowerRows = Math.ceil(g.rows / 2);
-  if (side === 'bottom') return { side, cell: (g.rows - 1) * g.cols + rng.int(g.cols) };
+  const half = Math.floor(g.cols / 2);
+  if (side === 'bottom') return { side, cell: (g.rows - 1) * g.cols + half + rng.int(g.cols - half) };
   const y = g.rows - lowerRows + rng.int(lowerRows);
-  return { side, cell: side === 'left' ? y * g.cols : y * g.cols + g.cols - 1 };
+  return { side, cell: y * g.cols + g.cols - 1 };
 }
 
 // ---------------------------------------------------------------------------
@@ -567,12 +578,15 @@ export function generateMaze(seed: string, profile: MazeProfile): Maze {
 // Fixed introductory maze for the very first quest (Bill and the coconut).
 
 const INTRO_GRID: GridSpec = { cols: 5, rows: 5 };
-const c = (x: number, y: number): number => y * INTRO_GRID.cols + x;
+// Drawn mirrored (x → 4 − x) so the entrance sits right of centre, clear of
+// the friend at the lower left (GENERATOR_VERSION 4).
+const c = (x: number, y: number): number => y * INTRO_GRID.cols + (INTRO_GRID.cols - 1 - x);
 export const INTRO_LAYOUT: RawLayout = {
   grid: INTRO_GRID,
   entranceCell: c(1, 4),
   side: 'bottom',
   edges: [
+    // (in the unmirrored coordinates below)
     // solution: straight up the left-centre column, across the top, down to the clearing
     [c(1, 4), c(1, 3)],
     [c(1, 3), c(1, 2)],

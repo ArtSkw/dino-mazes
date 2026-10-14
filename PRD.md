@@ -30,7 +30,7 @@ The experience is a living 2D storybook: lush jungle framing, broad sandy paths,
 | Correction | “Wróć” / “Start over” clears the entire current trail and returns the endpoint to the entrance of the **same maze**. |
 | View | Whole maze visible in a strict top-down orthographic view; no tilted board or foreshortening. Landscape-first tablet and small laptop support. |
 | Maze structure | Exactly one simple solution from entrance to center; multiple plausible wrong branches ending in dead ends, no alternate solution or loops. |
-| Quest host | Exactly one character introduced before the maze is revealed, then animated in a reserved lower-left or lower-right corner. |
+| Quest host | Exactly one character introduced before the maze is revealed, then animated in the reserved lower-left corner; “Wróć” is always at the lower right (owner decision, 14 Oct 2026). |
 | Visual medium | High-quality 2D painted assets with dimensional shading. No runtime 3D, isometric navigation, or 3D asset pipeline. |
 | World | Actual Gigantosaurus characters; private family game. |
 | Progression | Next maze plus treasure collection. No adventure map in v1. |
@@ -46,7 +46,7 @@ Audio/narration scope, difficulty numbers, and content quantities below are prac
 
 - One polished jungle habitat, with bounded variation in foliage, flowers, and background dressing.
 - Four regular friends: Bill, Tiny, Mazu, and Rocky, plus Giganto as an occasional special quest host. Quest selection rotates them; no character-selection screen required.
-- Six collectible treasures, twelve regular quests, and two Giganto quests.
+- Ten collectible treasures (owner request, 14 Oct 2026): seven classic ones found with the friends and three found only with Giganto; fourteen regular quests and three Giganto quests. A treasure joins the game once its art exists ([art/CODEX_REQUEST_TREASURES.md](art/CODEX_REQUEST_TREASURES.md)).
 - Five character animation sprite sheets covering idle, drawing reaction, encouragement/reset, and celebration.
 - Seeded generated mazes that grow harder automatically (four levels, starting hard), a small fixed introductory maze, and validated fallback layouts.
 - Persistent drawn trail, explicit start-over, optional one-step hint, complete celebration and collection flow.
@@ -75,7 +75,7 @@ The first input unlocks browser audio when permitted. If audio is unavailable, c
 
 Before revealing the maze, show only this quest's character, a treasure picture and a short invitation. Example: “Dudek wywęszył kokos. Znajdźmy go razem!” / “Bill can smell a coconut. Let's find it together!” A large “Szukajmy!” / “Let's look!” button reveals the board, with a gentle fade; do not require reading, narration or a timed wait. Returning children can tap immediately. This intro repeats briefly for each new quest.
 
-Layout priorities: treasure and maze first, expressive friend second, controls third. Once the maze is revealed, its one host settles in a reserved lower-left or lower-right corner, outside the board and controls, drawn as large as that corner allows (Giganto larger than the four friends, as in the cartoon; on the welcome screen too). Choose the corner during layout, not continuously while drawing. The quest reminder is the host itself: tapping the corner friend shows a short speech bubble, first the quest in the friend's own voice, then friendly lines about the friend or the child's effort (never about whether the route is right). The friend is not shown a second time as a card. No group of dinosaurs on an active maze. Names are data-driven (Polish dub names in Polish, original names in English) in case the family prefers other names.
+Layout priorities: treasure and maze first, expressive friend second, controls third. Once the maze is revealed, its one host settles in the reserved lower-left corner, outside the board and controls, drawn as large as that corner allows (Giganto larger than the four friends, as in the cartoon; on the welcome screen too). The corner never changes, so “Wróć” is always at the lower right and a child learns where it is (owner decision, 14 Oct 2026). Every friend's art faces right or straight ahead, so from the left it looks at the maze; the welcome screen keeps its own arrangement. Mazes therefore never open on the left: wide and square grids open in the right half of the bottom edge, tall grids on the right side. The quest reminder is the host itself: tapping the corner friend shows a short speech bubble, first the quest in the friend's own voice, then friendly lines about the friend or the child's effort (never about whether the route is right). The friend is not shown a second time as a card. No group of dinosaurs on an active maze. Names are data-driven (Polish dub names in Polish, original names in English) in case the family prefers other names.
 
 The maze has one external entrance and a visibly central treasure clearing. A friendly entrance marker demonstrates where drawing begins. The first puzzle may show a short looping hand trace over the first safe section, stopping permanently when input begins.
 
@@ -106,9 +106,9 @@ Suggested sequence: trail glows softly → treasure performs its signature motio
 
 Examples: coconut wobbles and rolls a little; nut makes a tiny hop; flower petals sway; shiny stone catches a soft glint; shell turns slightly; berry bunch jiggles. Use authored 2D transforms and approved poses. Do not attempt improvised character lip-sync or deform faces into smiles.
 
-“Kolejna przygoda” / “Next adventure” is explicit; never advance automatically. “Moje skarby” / “My treasures” opens an illustrated collection with six generous slots. First discoveries fill a slot with a warm arrival animation. Repeated treasures receive the same care, a soft slot pulse, and an updated internal count; there is no duplicate disappointment screen.
+“Kolejna przygoda” / “Next adventure” is explicit; never advance automatically. “Moje skarby” / “My treasures” opens an illustrated collection: the seven classic treasures in two centred rows, and Giganto's three in a golden box (“Skarby Giganto”) beside them, or below them in portrait. First discoveries fill a slot with a warm arrival animation. Repeated treasures receive the same care, a soft slot pulse, and an updated internal count; there is no duplicate disappointment screen.
 
-Collect all six before deliberately repeating the same treasure in the normal rotation. After all six, endless new mazes continue. No rarity tiers or locked-looking shop tiles. Tapping a found treasure replays its small animation.
+Collect all seven classic treasures before deliberately repeating one in the normal rotation; Giganto's quests bring his own three, unfound ones first. After that, endless new mazes continue. No rarity tiers or locked-looking shop tiles. Tapping a found treasure replays its small animation.
 
 Opening and closing the collection while drawing restores the exact same maze and trail. Collection visits never count as new sessions or completions.
 
@@ -130,10 +130,15 @@ Original quest scenarios for this game, built on what each friend is like in the
 | rocky-nut | Rocky | Nut | Czupur chce pobić rekord. Szuka największego orzecha w dżungli! | Rocky wants to break a record. He's after the biggest nut in the jungle! |
 | rocky-flower | Rocky | Flower | Czupur chce dać przyjaciołom kwiatek. Najpierw musi go znaleźć! | Rocky wants to give his friends a flower. First he has to find one! |
 | rocky-stone | Rocky | Shiny stone | Czupur chce dać Giganto prezent. Może błyszczący kamyk? | Rocky wants to give Giganto a present. How about a shiny stone? |
-| giganto-coconut | Giganto | Coconut | Giganto zgubił kokos. Taki wielki, a nie może go znaleźć! | Giganto has lost his coconut. He's so big, and he still can't find it! |
-| giganto-berries | Giganto | Berries | Nawet Giganto lubi jagody. Znajdźmy mu kilka! | Even Giganto loves berries. Let's find him some! |
+| tiny-feather | Tiny | Feather | Miłce rozpadł się pędzel. Z piórka zrobi nowy! | Tiny's paintbrush fell apart. She can make a new one from a feather! |
+| rocky-feather | Rocky | Feather | Czupur chce latać jak ptak. Na początek wystarczy mu piórko! | Rocky wants to fly like a bird. A feather will do for a start! |
+| giganto-amber | Giganto | Amber | Giganto szuka bursztynu. W środku śpi maleńki listek! | Giganto is looking for amber. A tiny leaf sleeps inside it! |
+| giganto-gigaflower | Giganto | Giga flower | Gigakwiat kwitnie bardzo rzadko. Giganto chce go powąchać! | The giga flower hardly ever blooms. Giganto wants to smell it! |
+| giganto-crystal | Giganto | Crystal | W jaskini Giganto coś błyszczy. Może to kryształ? | Something sparkles in Giganto's cave. Could it be a crystal? |
 
-Treasure names: Kokos / Coconut; Orzech / Nut; Kwiatek / Flower; Kamyk / Stone; Muszelka / Shell; Jagody / Berries. Ensure berry artwork reads as a small blue berry bunch, not grapes.
+Until Giganto's own treasures have art, his earlier quests stay in use: giganto-coconut (“Giganto zgubił kokos. Taki wielki, a nie może go znaleźć!”) and giganto-berries (“Nawet Giganto lubi jagody. Znajdźmy mu kilka!”).
+
+Treasure names: Kokos / Coconut; Orzech / Nut; Kwiatek / Flower; Kamyk / Stone; Muszelka / Shell; Jagody / Berries; Piórko / Feather (classic); Bursztyn / Amber, Gigakwiat / Giga flower, Kryształ / Crystal (Giganto's own). Ensure berry artwork reads as a small blue berry bunch, not grapes.
 
 Selection uses a shuffled content bag and recent-history exclusion. Do not show the same quest or normalized maze layout immediately twice. Reset retains the current maze. Next creates a new session with a new seed. Cosmetic randomness uses its own seed stream so art changes do not change routes.
 
@@ -143,7 +148,7 @@ Working cadence: complete five ordinary mazes to unlock the first Giganto quest,
 
 Giganto quests request one level above the current automatic level, capped at the hardest supported profile and viewport corridor limits. Prefer one extra meaningful branch over shrinking the paths. Explain the special adventure with the character intro, not a warning. Provide “Łatwiejszy labirynt” / “Easier maze” in settings to restart this special quest at the current normal level without reward/progress penalty. Cadence and special-quest difficulty are explicit tunable defaults based on the user's four-to-five-maze suggestion.
 
-Preserve the first-six-unique-treasures rule: select Giganto's treasure from uncollected items when necessary and use a generic localized special-quest template (“Giganto czeka na skarb. Poszukamy?” / “Giganto is waiting for a treasure. Shall we look?”) with the pictured target. Do not force a duplicate just because his example quests list coconut and berries.
+Giganto's quests ask for his own three treasures, unfound ones first (owner request, 14 Oct 2026). Until their art exists, he keeps the earlier rule: select his treasure from uncollected classic items when necessary and use a generic localized special-quest template (“Giganto czeka na skarb. Poszukamy?” / “Giganto is waiting for a treasure. Shall we look?”) with the pictured target. Do not force a duplicate just because his example quests list coconut and berries.
 
 ### Automatic difficulty (owner decisions, 13 and 14 October 2026)
 

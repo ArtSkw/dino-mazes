@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { FRIEND_SIZE, MIN_CONTROL_PX, MIN_CORRIDOR_PX, castSlots, clusterSpec, computeLayout, fitGrid, introLayout, toLogical, toScreen, type Rect } from '../../src/platform/layout';
+import { FRIEND_CORNER, FRIEND_SIZE, MIN_CONTROL_PX, MIN_CORRIDOR_PX, castSlots, clusterSpec, computeLayout, fitGrid, introLayout, toLogical, toScreen, type Layout, type Rect } from '../../src/platform/layout';
 import type { Difficulty } from '../../src/domain/types';
-import { LEVELS, entranceAxes } from '../../src/domain/maze';
-import { friendFrame } from '../../src/game/assets';
+import { CORRIDOR_RADIUS, ENTRANCE_REACH, FRAME_MARGIN, LEVELS, entranceAxes } from '../../src/domain/maze';
+import { FACING, friendFrame } from '../../src/game/assets';
+import type { GridSpec, Side } from '../../src/domain/types';
 
 const VIEWPORTS: Array<[number, number]> = [
   [1024, 768],
@@ -15,6 +16,30 @@ const VIEWPORTS: Array<[number, number]> = [
 
 const overlaps = (a: Rect, b: Rect): boolean => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 const inside = (a: Rect, vw: number, vh: number): boolean => a.x >= -0.5 && a.y >= -0.5 && a.x + a.w <= vw + 0.5 && a.y + a.h <= vh + 0.5;
+
+/**
+ * Screen boxes of every entrance the generator may open on this grid: the stub
+ * from the hedge frame to the start pad, widened by the corridor and the pad.
+ */
+function entranceBoxes(L: Layout, grid: GridSpec, side: Side): Rect[] {
+  const { pitch, ox, oy } = L.transform;
+  const r = (CORRIDOR_RADIUS + 0.15) * pitch;
+  const reach = FRAME_MARGIN + ENTRANCE_REACH;
+  const boxes: Rect[] = [];
+  if (side === 'bottom') {
+    for (let x = Math.floor(grid.cols / 2); x < grid.cols; x++) {
+      const cx = ox + (x + 0.5) * pitch;
+      boxes.push({ x: cx - r, y: oy + (grid.rows + FRAME_MARGIN) * pitch, w: 2 * r, h: (reach - FRAME_MARGIN) * pitch + r });
+    }
+  } else {
+    const lowerRows = Math.ceil(grid.rows / 2);
+    for (let y = grid.rows - lowerRows; y < grid.rows; y++) {
+      const cy = oy + (y + 0.5) * pitch;
+      boxes.push({ x: ox + (grid.cols + FRAME_MARGIN) * pitch, y: cy - r, w: (reach - FRAME_MARGIN) * pitch + r, h: 2 * r });
+    }
+  }
+  return boxes;
+}
 
 describe('grid fitting', () => {
   for (const [vw, vh] of VIEWPORTS) {
@@ -40,7 +65,7 @@ describe('grid fitting', () => {
     for (const [vw, vh] of [...VIEWPORTS, [1920, 1080] as [number, number], [1280, 800] as [number, number]].filter(([w, h]) => w / h >= 1.12)) {
       for (const id of ['rocky', 'giganto'] as const) {
         const at = (grid: { cols: number; rows: number }): number =>
-          computeLayout({ vw, vh, grid, entranceSide: 'bottom', entranceX: 0.7, friend: friendFrame(id), ...(id === 'giganto' ? { forceCorner: 'left' as const } : {}) }).friendVisible.h;
+          computeLayout({ vw, vh, grid, entranceSide: 'bottom', friend: friendFrame(id) }).friendVisible.h;
         // Baseline: the old starting level's grid on this screen (7×7, or smaller where 7×7 does not fit).
         const base = at(fitGrid('medium', vw, vh).grid);
         for (const d of LEVELS) expect(at(fitGrid(d, vw, vh).grid), `${vw}x${vh} ${d} ${id}`).toBeGreaterThanOrEqual(base * 0.85);
@@ -56,21 +81,22 @@ describe('grid fitting', () => {
 
 describe('layout', () => {
   for (const [vw, vh] of VIEWPORTS) {
-    for (const [side, id] of [['bottom', 'bill'], ['left', 'tiny'], ['right', 'mazu'], ['bottom', 'rocky'], ['left', 'giganto'], ['right', 'giganto']] as const) {
+    for (const [side, id] of [['bottom', 'bill'], ['right', 'tiny'], ['right', 'mazu'], ['bottom', 'rocky'], ['bottom', 'giganto'], ['right', 'giganto']] as const) {
       it(`${vw}x${vh} entrance ${side}, ${id}: board, friend and controls do not collide`, () => {
         const fit = fitGrid(id === 'giganto' ? 'expert' : 'hard', vw, vh);
-        // Only the sides the generator can open for this grid (entranceAxes).
+        // Only the sides the generator can open for this grid (entranceAxes; never left).
         const axes = entranceAxes(fit.grid);
-        const usable = (side === 'bottom' && !axes.vertical) || (side !== 'bottom' && !axes.horizontal) ? (axes.horizontal ? 'left' : 'bottom') : side;
-        const L = computeLayout({
-          vw,
-          vh,
-          grid: fit.grid,
-          entranceSide: usable,
-          entranceX: 0.3,
-          friend: friendFrame(id),
-          ...(id === 'giganto' ? { forceCorner: 'left' as const } : {}),
-        });
+        const usable: Side = side === 'bottom' && !axes.vertical ? 'right' : side === 'right' && !axes.horizontal ? 'bottom' : side;
+        const L = computeLayout({ vw, vh, grid: fit.grid, entranceSide: usable, friend: friendFrame(id) });
+        // The friend always at the lower left, "Wróć" always at the lower right.
+        expect(L.corner).toBe('left');
+        expect(L.reset.x + L.reset.w / 2).toBeGreaterThan(vw / 2);
+        expect(L.friendVisible.x + L.friendVisible.w / 2).toBeLessThan(vw / 2);
+        // No entrance the generator can open runs into the friend or "Wróć".
+        for (const e of entranceBoxes(L, fit.grid, usable)) {
+          expect(overlaps(e, L.friendVisible), `entrance vs friend ${JSON.stringify(e)}`).toBe(false);
+          expect(overlaps(e, L.reset), `entrance vs reset ${JSON.stringify(e)}`).toBe(false);
+        }
         expect(inside(L.board, vw, vh)).toBe(true);
         for (const r of [L.character, L.reset, L.hint, L.clusterRect, L.home]) {
           expect(overlaps(r, L.board)).toBe(false);
@@ -126,7 +152,7 @@ describe('layout', () => {
   });
 
   it('maps pointer coordinates to logical board units and back', () => {
-    const L = computeLayout({ vw: 1024, vh: 768, grid: { cols: 5, rows: 5 }, entranceSide: 'bottom', entranceX: 0.1 });
+    const L = computeLayout({ vw: 1024, vh: 768, grid: { cols: 5, rows: 5 }, entranceSide: 'bottom' });
     const p = toScreen(L.transform, { x: 2.5, y: 2.5 });
     const q = toLogical(L.transform, p.x, p.y);
     expect(q.x).toBeCloseTo(2.5);
@@ -148,7 +174,7 @@ describe('layout', () => {
   it('draws Giganto larger than a regular friend in the same spot', () => {
     for (const [vw, vh] of VIEWPORTS) {
       const fit = fitGrid('medium', vw, vh);
-      const base = { vw, vh, grid: fit.grid, entranceSide: 'bottom' as const, entranceX: 0.7, forceCorner: 'left' as const };
+      const base = { vw, vh, grid: fit.grid, entranceSide: 'bottom' as const };
       const friend = computeLayout({ ...base, friend: { aspect: 0.9, size: 1, content: { x: 0, y: 0, w: 1, h: 1 } } });
       const giganto = computeLayout({ ...base, friend: { aspect: 293 / 255, size: FRIEND_SIZE['giganto'] as number, content: { x: 0, y: 0, w: 1, h: 1 }, flushLeft: true, bleed: 0.12 } });
       expect(giganto.character.h * giganto.character.w).toBeGreaterThan(friend.character.h * friend.character.w);
@@ -160,7 +186,7 @@ describe('layout', () => {
     for (const [vw, vh] of VIEWPORTS) {
       const spec = clusterSpec(vw, vh);
       const fit = fitGrid('medium', vw, vh);
-      const L = computeLayout({ vw, vh, grid: fit.grid, entranceSide: 'bottom', entranceX: 0.3 });
+      const L = computeLayout({ vw, vh, grid: fit.grid, entranceSide: 'bottom' });
       // Play uses exactly the rect the welcome/intro screens use.
       expect(L.clusterRect).toEqual(spec.rect);
       expect(spec.direction).toBe('row');
@@ -184,9 +210,16 @@ describe('layout', () => {
     }
   });
 
-  it('places Giganto in the lower-left corner when forced', () => {
-    const L = computeLayout({ vw: 1180, vh: 820, grid: { cols: 7, rows: 7 }, entranceSide: 'left', entranceX: 0, forceCorner: 'left' });
-    expect(L.corner).toBe('left');
-    expect(L.character.x).toBeLessThan(L.board.x);
+  it('every friend stands at the lower left and faces the maze; "Wróć" is always at the lower right', () => {
+    expect(FRIEND_CORNER).toBe('left');
+    for (const id of ['bill', 'tiny', 'mazu', 'rocky', 'giganto'] as const) {
+      // Facing left would turn the friend's back on the board.
+      expect(FACING[id], id).not.toBe('left');
+      for (const side of ['bottom', 'right'] as const) {
+        const L = computeLayout({ vw: 1180, vh: 820, grid: { cols: 7, rows: 7 }, entranceSide: side, friend: friendFrame(id) });
+        expect(L.character.x).toBeLessThan(L.board.x);
+        expect(L.reset.x).toBeGreaterThan(L.board.x + L.board.w);
+      }
+    }
   });
 });

@@ -86,6 +86,8 @@ describe('maze generator', () => {
         expect(onSide(maze)).toBe(true);
         expect(meetsProfile(maze.metrics, profile)).toBe(true);
         expect(maze.attempts).toBeLessThanOrEqual(profile.maxAttempts ?? MAX_ATTEMPTS);
+        // Never on the left: the friend stands at the lower left.
+        expect(maze.entrance.side).not.toBe('left');
         // One external entrance: exactly one corridor touches the outside node.
         expect(maze.corridors.filter((c) => c.from === maze.entranceNode || c.to === maze.entranceNode)).toHaveLength(1);
         if (i < 60) expect(countSimplePaths(maze, maze.entrance.insideCell, center)).toBe(1);
@@ -151,9 +153,11 @@ describe('introductory maze', () => {
     const maze = introMaze();
     expect(checkGraph(maze.cells, maze.goal.cellId).ok).toBe(true);
     expect(meetsProfile(maze.metrics, maze.profile)).toBe(true);
-    expect(maze.metrics.solution.slice(0, 3)).toEqual([21, 16, 11]);
-    expect(maze.cells[21]?.neighbors).toEqual([16]);
-    expect(maze.cells[16]?.neighbors).toEqual([11, 21]);
+    // Mirrored (GENERATOR_VERSION 4): up the right-centre column, clear of the friend.
+    expect(maze.entrance.side).toBe('bottom');
+    expect(maze.metrics.solution.slice(0, 3)).toEqual([23, 18, 13]);
+    expect(maze.cells[23]?.neighbors).toEqual([18]);
+    expect(maze.cells[18]?.neighbors).toEqual([13, 23]);
   });
 });
 

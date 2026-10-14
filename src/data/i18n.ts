@@ -48,6 +48,9 @@ export const STRINGS = {
   notFoundYet: { pl: 'Jeszcze przed nami', en: 'Still to find' },
   foundTimes: { pl: 'W kolekcji: {n}', en: 'In your collection: {n}' },
   newTreasure: { pl: 'Nowy skarb: {name}!', en: 'New treasure: {name}!' },
+  newGigantoTreasure: { pl: 'Skarb Giganto: {name}!', en: "Giganto's treasure: {name}!" },
+  gigantoTreasures: { pl: 'Skarby Giganto', en: "Giganto's treasures" },
+  withGiganto: { pl: 'Do znalezienia z Giganto', en: 'To find with Giganto' },
   wellDone: { pl: 'Brawo!', en: 'Well done!' },
   loading: { pl: 'Ładowanie…', en: 'Loading…' },
   loadError: {

@@ -22,6 +22,14 @@ Sources:
 character and episode pages of the [Gigantosaurus fan wiki](https://gigantosaurus.fandom.com/)
 (user-edited; used only for traits that match the episode synopses).
 
+## Treasures and their stories
+
+Seven classic treasures are found with the friends, three only with Giganto (owner request,
+14 October 2026). The new ones tie into the series: Miłka's favourite paintbrush once fell apart
+(so she makes one from a feather), Arek / Archie is a bird who cannot fly (Czupur wants to try with
+a feather), and the rare Giga Flower blooms in the series; amber with a leaf inside and a crystal
+from his cave make Giganto's set feel old and precious.
+
 ## Rules for every text
 
 - One or two short sentences. Speech bubbles at most 72 characters, quest cards at most 80

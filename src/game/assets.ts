@@ -58,7 +58,8 @@ export interface IntroAssets {
 
 interface Manifest {
   characters: Record<CharacterId, CharacterAsset>;
-  treasures: Record<TreasureId, ItemAsset>;
+  /** Treasures with art; new ones join when Codex delivers them (treasureHasArt). */
+  treasures: Partial<Record<TreasureId, ItemAsset>>;
   foliage: Record<string, ItemAsset>;
   ui: Record<string, ItemAsset>;
   backgrounds: Record<'jungle' | 'collection' | 'ground', ItemAsset>;
@@ -86,6 +87,20 @@ export function friendFrame(id: CharacterId): FriendFrame {
 export function baseHidden(id: CharacterId, displayHeight: number): number {
   return Math.ceil(displayHeight * (ASSETS.characters[id].cutFade ?? 0)) + 2;
 }
+
+/**
+ * Which way each friend's painted body and face point (checked on the V3
+ * frames, 14 Oct 2026). On a maze the friend stands at the lower left
+ * (FRIEND_CORNER), so nobody may face left, away from the board; a friend
+ * drawn facing left would need mirroring there (tests/domain/layout.test.ts).
+ */
+export const FACING: Record<CharacterId, 'left' | 'right' | 'front'> = {
+  giganto: 'right',
+  mazu: 'right',
+  bill: 'right',
+  rocky: 'front',
+  tiny: 'front',
+};
 
 /** Welcome cast height relative to the base: Giganto a bit taller than the friends. */
 export const CAST_SCALE: Record<CharacterId, number> = { giganto: 1.08, bill: 0.88, tiny: 0.88, mazu: 0.88, rocky: 0.88 };

@@ -172,6 +172,37 @@ def export_items(src_name: str, names_in_reading_order: list[str], folder: str, 
     return out
 
 
+# New treasures (owner request, 14 Oct 2026; art/CODEX_REQUEST_TREASURES.md):
+# one transparent PNG each, delivered by Codex. A missing file is skipped, and
+# the game leaves that treasure out until it exists (treasureHasArt).
+NEW_TREASURES = ["feather", "amber", "gigaflower", "crystal"]
+NEW_TREASURE_DIR = os.path.join(SRC, "treasures-v2")
+
+
+def export_single_treasures(max_side: int, report: dict) -> dict:
+    out: dict = {}
+    for name in NEW_TREASURES:
+        path = os.path.join(NEW_TREASURE_DIR, f"{name}.png")
+        if not os.path.exists(path):
+            print(f"treasure {name}: no art yet ({os.path.relpath(path, ROOT)}), left out of the game")
+            continue
+        rgba = clean_alpha(np.array(Image.open(path).convert("RGBA")))
+        a = rgba[:, :, 3]
+        ys, xs = np.nonzero(a >= ALPHA_FLOOR)
+        if len(xs) == 0:
+            raise RuntimeError(f"{path}: empty image")
+        crop = rgba[ys.min() : ys.max() + 1, xs.min() : xs.max() + 1]
+        img = Image.fromarray(np.ascontiguousarray(crop))
+        scale = min(1.0, max_side / max(img.size))
+        if scale < 1:
+            img = premul_resize(img, (round(img.width * scale), round(img.height * scale)))
+        rel = f"assets/treasures/{name}.webp"
+        nbytes = save_webp(img, os.path.join(ROOT, "public", rel), quality=88)
+        out[name] = {"image": rel, "width": img.width, "height": img.height, "bytes": nbytes, "sourceSha256": sha256(path)}
+    report["treasures-v2"] = out
+    return out
+
+
 def split_panel_leaf(ui: dict, report: dict) -> None:
     """
     The cream panel arrives with a leaf accent baked into its top-right corner.
@@ -237,6 +268,7 @@ def main() -> int:
     manifest["characters"] = v3.process_characters(SRC, os.path.join(ROOT, "public"), REVIEW, report)
 
     manifest["treasures"] = export_items("treasure-kit-v1.png", ["coconut", "nut", "flower", "stone", "shell", "berries"], "treasures", 320, report)
+    manifest["treasures"].update(export_single_treasures(320, report))
     manifest["foliage"] = export_items(
         "foliage-kit-v1.png",
         ["hedge-a", "hedge-b", "rocks", "flower-bush", "banana-plant", "fern", "monstera", "butterfly"],

@@ -4,7 +4,7 @@
  * unavailable or full localStorage falls back to an in-memory session.
  */
 import { GENERATOR_VERSION } from '../domain/maze';
-import { TREASURE_ORDER, questById } from '../data/content';
+import { ALL_TREASURE_IDS, questById } from '../data/content';
 import type { Difficulty, Lang, Point, SaveV1, Session, Settings, TreasureId } from '../domain/types';
 
 export const SAVE_KEY = 'dino-mazes:save';
@@ -60,7 +60,7 @@ const isNat = (v: unknown): v is number => typeof v === 'number' && Number.isInt
 const isLang = (v: unknown): v is Lang => v === 'pl' || v === 'en';
 const DIFFICULTIES: readonly Difficulty[] = ['easy', 'medium', 'medium-plus', 'harder', 'hard', 'expert'];
 const isDiff = (v: unknown): v is Difficulty => (DIFFICULTIES as readonly unknown[]).includes(v);
-const isTreasure = (v: unknown): v is TreasureId => typeof v === 'string' && (TREASURE_ORDER as string[]).includes(v);
+const isTreasure = (v: unknown): v is TreasureId => typeof v === 'string' && (ALL_TREASURE_IDS as string[]).includes(v);
 const strList = (v: unknown, cap: number): string[] =>
   Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string' && x.length < 200).slice(0, cap) : [];
 

@@ -4,11 +4,14 @@
  */
 import {
   GIGANTO_GENERIC,
+  GIGANTO_TREASURE_ORDER,
   INTRO_QUEST_ID,
+  LEGACY_SPECIAL_QUESTS,
   ORDINARY_QUESTS,
   SPECIAL_QUESTS,
   TREASURE_ORDER,
   questById,
+  treasureHasArt,
 } from '../data/content';
 import { LEVELS } from './maze';
 import type { Rng } from './rng';
@@ -29,8 +32,12 @@ export interface QuestChoice {
   promptKey?: 'giganto-generic';
 }
 
-export function uncollected(save: Pick<SaveV1, 'collection'>): TreasureId[] {
-  return TREASURE_ORDER.filter((t) => !(save.collection[t]?.count ?? 0));
+/** Which treasures are in the game (their art exists); tests pass their own. */
+export type TreasureReady = (id: TreasureId) => boolean;
+
+/** Not yet found among `ids` (default: the classic treasures in the game). */
+export function uncollected(save: Pick<SaveV1, 'collection'>, ids: TreasureId[] = TREASURE_ORDER.filter(treasureHasArt)): TreasureId[] {
+  return ids.filter((t) => !(save.collection[t]?.count ?? 0));
 }
 
 export function isGigantoDue(save: Pick<SaveV1, 'gigantoCompleted' | 'ordinaryCompletionsSinceGiganto'>): boolean {
@@ -60,13 +67,14 @@ export function specialDifficulty(d: Difficulty): Difficulty {
   return LEVELS[Math.min(LEVELS.length - 1, Math.max(0, i) + 1)] as Difficulty;
 }
 
-function pickOrdinary(save: SaveV1, rng: Rng, bag: string[]): { quest: Quest; bag: string[] } {
+function pickOrdinary(save: SaveV1, rng: Rng, bag: string[], ready: TreasureReady): { quest: Quest; bag: string[] } {
   const lastId = save.recentQuestIds[0];
   const lastChar = lastId ? questById(lastId)?.characterId : undefined;
-  const open = new Set(uncollected(save));
-  let pool = bag.filter((id) => ORDINARY_QUESTS.some((q) => q.id === id));
-  if (pool.length === 0) pool = rng.shuffle(ORDINARY_QUESTS.map((q) => q.id));
-  const all = ORDINARY_QUESTS.map((q) => q.id);
+  const open = new Set(uncollected(save, TREASURE_ORDER.filter(ready)));
+  const quests = ORDINARY_QUESTS.filter((q) => ready(q.treasureId));
+  let pool = bag.filter((id) => quests.some((q) => q.id === id));
+  if (pool.length === 0) pool = rng.shuffle(quests.map((q) => q.id));
+  const all = quests.map((q) => q.id);
   const byId = (id: string): Quest => questById(id) as Quest;
   const notLast = (id: string): boolean => id !== lastId;
   const freshFriend = (id: string): boolean => byId(id).characterId !== lastChar;
@@ -94,11 +102,24 @@ function pickOrdinary(save: SaveV1, rng: Rng, bag: string[]): { quest: Quest; ba
   return { quest: byId(fallback), bag: pool.filter((x) => x !== fallback) };
 }
 
-function pickSpecial(save: SaveV1, rng: Rng): QuestChoice {
+/**
+ * Giganto's quest. With his own treasures in the game he asks for one of
+ * them, unfound ones first, never the same quest twice in a row. Until their
+ * art exists he keeps the old behaviour: a classic treasure, unfound first.
+ */
+function pickSpecial(save: SaveV1, rng: Rng, ready: TreasureReady): QuestChoice {
   const lastId = save.recentQuestIds.find((id) => questById(id)?.special);
-  const open = uncollected(save);
+  const own = SPECIAL_QUESTS.filter((q) => ready(q.treasureId));
+  if (own.length) {
+    const open = uncollected(save, GIGANTO_TREASURE_ORDER.filter(ready));
+    const fresh = own.filter((q) => open.includes(q.treasureId) && q.id !== lastId);
+    const notLast = own.filter((q) => q.id !== lastId);
+    const quest = rng.pick(fresh.length ? fresh : notLast.length ? notLast : own);
+    return { quest, treasureId: quest.treasureId, characterId: 'giganto', special: true, intro: false };
+  }
+  const open = uncollected(save, TREASURE_ORDER.filter(ready));
   if (open.length) {
-    const matching = SPECIAL_QUESTS.filter((q) => open.includes(q.treasureId) && q.id !== lastId);
+    const matching = LEGACY_SPECIAL_QUESTS.filter((q) => open.includes(q.treasureId) && q.id !== lastId);
     if (matching.length) {
       const quest = rng.pick(matching);
       return { quest, treasureId: quest.treasureId, characterId: 'giganto', special: true, intro: false };
@@ -113,8 +134,8 @@ function pickSpecial(save: SaveV1, rng: Rng): QuestChoice {
       promptKey: 'giganto-generic',
     };
   }
-  const options = SPECIAL_QUESTS.filter((q) => q.id !== lastId);
-  const quest = rng.pick(options.length ? options : SPECIAL_QUESTS);
+  const options = LEGACY_SPECIAL_QUESTS.filter((q) => q.id !== lastId);
+  const quest = rng.pick(options.length ? options : LEGACY_SPECIAL_QUESTS);
   return { quest, treasureId: quest.treasureId, characterId: 'giganto', special: true, intro: false };
 }
 
@@ -123,7 +144,7 @@ export interface Selection {
   questBag: string[];
 }
 
-export function selectNextQuest(save: SaveV1, rng: Rng, questBag: string[]): Selection {
+export function selectNextQuest(save: SaveV1, rng: Rng, questBag: string[], ready: TreasureReady = treasureHasArt): Selection {
   if (!save.introDone) {
     const quest = questById(INTRO_QUEST_ID) as Quest;
     return {
@@ -131,8 +152,8 @@ export function selectNextQuest(save: SaveV1, rng: Rng, questBag: string[]): Sel
       questBag,
     };
   }
-  if (isGigantoDue(save)) return { choice: pickSpecial(save, rng), questBag };
-  const { quest, bag } = pickOrdinary(save, rng, questBag);
+  if (isGigantoDue(save)) return { choice: pickSpecial(save, rng, ready), questBag };
+  const { quest, bag } = pickOrdinary(save, rng, questBag, ready);
   return {
     choice: { quest, treasureId: quest.treasureId, characterId: quest.characterId, special: false, intro: false },
     questBag: bag,

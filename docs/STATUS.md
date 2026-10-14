@@ -52,6 +52,27 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 12 (14 October 2026): one corner for the friend, ten treasures
+
+- **The friend always at the lower left, "Wróć" always at the lower right** (`FRIEND_CORNER`), so
+  the reset button never jumps between mazes. Checked on the V3 frames: Giganto, Rudzia and Dudek
+  face right, Czupur and Miłka face front (`FACING`), so from the left everyone looks at the maze
+  and no art needs mirroring (unit test). The welcome screen keeps its arrangement.
+- **Entrances never on the left** (GENERATOR_VERSION 4): wide and square grids open in the right
+  half of the bottom edge, tall grids on the right side; the introductory maze is mirrored. A
+  layout test checks that no possible entrance runs into the friend or "Wróć". Square grids no
+  longer open on a side, which widened the board and shrank the friend by about a fifth. A maze
+  saved by an older version starts fresh (the save never reinterprets an old trail).
+- **Ten treasures:** seven classic (new: Piórko / Feather) and three of Giganto's own (Bursztyn /
+  Amber, Gigakwiat / Giga flower, Kryształ / Crystal) with new quests (Miłka's paintbrush,
+  Czupur wants to fly, Giganto's cave…). A treasure enters the game only once its art is in the
+  manifest (`treasureHasArt`), so today's game is unchanged until Codex delivers
+  ([../art/CODEX_REQUEST_TREASURES.md](../art/CODEX_REQUEST_TREASURES.md), 26 jobs); then
+  `npm run art` switches them on. Until then Giganto keeps his old quests.
+- **Collection:** classic treasures in centred rows (4 + 3), Giganto's in a golden "Skarby
+  Giganto" box with his footprint, beside them in landscape and below in portrait; nests stay
+  round at any size. Checked with stand-in art on 1180 × 820, 820 × 1180 and 667 × 375.
+
 ## Owner review, round 11 (14 October 2026): what the friends say
 
 The owner found generic lines and a factual slip (Miłka "has three horns"; the art has two).
@@ -219,7 +240,7 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 213 passed |
+| Domain unit + property | `npm test` | 218 passed |
 | Browser flows (Chromium + WebKit) | `npm run test:e2e` | 65 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |

@@ -304,15 +304,12 @@ export class Controller {
   }
 
   private layoutFor(maze: Maze, session: Pick<Session, 'characterId'>): Layout {
-    const insideX = (maze.entrance.insideCell % maze.width) + 0.5;
     return computeLayout({
       vw: this.viewport.width(),
       vh: this.viewport.height(),
       grid: { cols: maze.width, rows: maze.height },
       entranceSide: maze.entrance.side,
-      entranceX: insideX / maze.width,
       friend: friendFrame(session.characterId),
-      ...(session.characterId === 'giganto' ? { forceCorner: 'left' as const } : {}),
     });
   }
 
@@ -576,18 +573,6 @@ export class Controller {
     window.clearTimeout(this.celebrationGuard);
     this.celebrationGuard = window.setTimeout(() => this.finishCelebration(), CELEBRATION_GUARD_MS);
     this.announce(this.tr('srSolved', { treasure: TREASURE_OBJECT[session.treasureId][this.lang] }));
-  }
-
-  treasureName(id: TreasureId): string {
-    const names: Record<TreasureId, Localized> = {
-      coconut: { pl: 'kokos', en: 'coconut' },
-      nut: { pl: 'orzech', en: 'nut' },
-      flower: { pl: 'kwiatek', en: 'flower' },
-      stone: { pl: 'kamyk', en: 'stone' },
-      shell: { pl: 'muszelka', en: 'shell' },
-      berries: { pl: 'jagody', en: 'berries' },
-    };
-    return names[id][this.lang];
   }
 
   /** Called by the renderer when the success performance ends (or is skipped). */

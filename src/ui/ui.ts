@@ -4,7 +4,7 @@
  * The UI renders controller state and sends commands; it owns no game state.
  */
 import type { Controller, GameEvent, Reward } from '../app/controller';
-import { CHARACTERS, TREASURES, TREASURE_AGAIN, TREASURE_ORDER } from '../data/content';
+import { ALL_TREASURE_IDS, CHARACTERS, GIGANTO_TREASURE_ORDER, TREASURES, TREASURE_AGAIN, TREASURE_ORDER, treasureHasArt } from '../data/content';
 import type { StringKey } from '../data/i18n';
 import type { CharacterId, Lang, TreasureId } from '../domain/types';
 import { ASSETS, assetUrl, friendFrame } from '../game/assets';
@@ -82,7 +82,9 @@ export class Ui implements UiBridge {
   private skipLayer!: HTMLButtonElement;
   private banner!: HTMLElement;
   private collection!: HTMLElement;
-  private slots: Array<{ id: TreasureId; btn: HTMLButtonElement; img: HTMLImageElement; name: HTMLElement; count: HTMLElement }> = [];
+  private slots: Array<{ id: TreasureId; btn: HTMLButtonElement; img: HTMLImageElement; name: HTMLElement; count: HTMLElement; giganto: boolean }> = [];
+  private classicSlots!: HTMLElement;
+  private gigantoSlots: HTMLElement | null = null;
   private settings!: HTMLElement;
   private settingsLang!: HTMLButtonElement[];
   private settingsSound!: HTMLButtonElement[];
@@ -274,15 +276,28 @@ export class Ui implements UiBridge {
     this.banner = h('div', { class: 'banner', hidden: true, 'aria-hidden': 'true' });
     this.hud = h('div', { class: 'hud' }, this.companionBtn, this.bubble, this.resetBtn, this.hintBtn, this.nextBtn, this.skipLayer, this.banner);
 
-    // Collection overlay
-    const grid = h('div', { class: 'slots' });
-    for (const id of TREASURE_ORDER) {
-      const img = h('img', { src: assetUrl(ASSETS.treasures[id].image), alt: '' });
+    // Collection overlay: the classic treasures, then Giganto's own in a
+    // golden box (owner request, 14 Oct 2026). A treasure appears once its
+    // art is in the game (treasureHasArt).
+    const makeSlot = (id: TreasureId, giganto: boolean): HTMLButtonElement => {
+      const img = h('img', { src: assetUrl(ASSETS.treasures[id]?.image ?? ''), alt: '' });
       const name = h('span', { class: 'slot-name' });
       const count = h('span', { class: 'slot-count' });
-      const btn = this.button('slot', () => this.tapSlot(id), h('span', { class: 'slot-nest', 'aria-hidden': 'true' }), img, name, count);
-      grid.append(btn);
-      this.slots.push({ id, btn, img, name, count });
+      const btn = this.button(giganto ? 'slot slot-giganto' : 'slot', () => this.tapSlot(id), h('span', { class: 'slot-nest', 'aria-hidden': 'true' }), img, name, count);
+      this.slots.push({ id, btn, img, name, count, giganto });
+      return btn;
+    };
+    this.classicSlots = h('div', { class: 'slots slots-classic' }, ...TREASURE_ORDER.filter(treasureHasArt).map((id) => makeSlot(id, false)));
+    const gigantoIds = GIGANTO_TREASURE_ORDER.filter(treasureHasArt);
+    let gigantoBox: HTMLElement | null = null;
+    if (gigantoIds.length) {
+      this.gigantoSlots = h('div', { class: 'slots slots-giganto' }, ...gigantoIds.map((id) => makeSlot(id, true)));
+      gigantoBox = h(
+        'section',
+        { class: 'giganto-box', 'aria-labelledby': 'giganto-title' },
+        h('h3', { class: 'giganto-title', id: 'giganto-title' }, h('span', { class: 'footprint', 'aria-hidden': 'true', html: FOOTPRINT_SVG }), this.tr(h('span'), 'gigantoTreasures')),
+        this.gigantoSlots,
+      );
     }
     const closeCollection = this.button('btn-round close-btn', () => this.closeOverlay(), this.icon('close'));
     this.tr(closeCollection, 'close', 'aria-label');
@@ -290,7 +305,12 @@ export class Ui implements UiBridge {
       'div',
       { class: 'overlay collection', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'collection-title', hidden: true },
       h('div', { class: 'collection-bg', style: `background-image:url(${assetUrl(ASSETS.backgrounds.collection.image)})` }),
-      h('div', { class: 'collection-inner' }, this.tr(h('h2', { id: 'collection-title' }), 'myTreasures'), grid),
+      h(
+        'div',
+        { class: 'collection-inner' },
+        this.tr(h('h2', { id: 'collection-title' }), 'myTreasures'),
+        h('div', { class: `collection-body${gigantoBox ? ' with-giganto' : ''}` }, this.classicSlots, gigantoBox),
+      ),
       closeCollection,
     );
 
@@ -812,12 +832,14 @@ export class Ui implements UiBridge {
   celebrationBanner(reward: Reward): void {
     const lang = this.ctrl.lang;
     this.banner.replaceChildren(
-      h('img', { src: assetUrl(ASSETS.treasures[reward.treasureId].image), alt: '' }),
+      h('img', { src: assetUrl(ASSETS.treasures[reward.treasureId]?.image ?? ''), alt: '' }),
       h(
         'span',
         {},
         reward.firstFind
-          ? this.ctrl.tr('newTreasure', { name: TREASURES[reward.treasureId].name[lang].toLocaleLowerCase(lang) })
+          ? this.ctrl.tr(TREASURES[reward.treasureId].kind === 'giganto' ? 'newGigantoTreasure' : 'newTreasure', {
+              name: TREASURES[reward.treasureId].name[lang].toLocaleLowerCase(lang),
+            })
           : TREASURE_AGAIN[reward.treasureId][lang],
       ),
     );
@@ -857,7 +879,7 @@ export class Ui implements UiBridge {
 
   private renderBadge(): void {
     const save = this.ctrl.store.get();
-    let found = TREASURE_ORDER.filter((t) => (save.collection[t]?.count ?? 0) > 0).length;
+    let found = ALL_TREASURE_IDS.filter((t) => treasureHasArt(t) && (save.collection[t]?.count ?? 0) > 0).length;
     const reward = this.ctrl.state.reward;
     if (this.badgeHold && reward?.firstFind) found -= 1;
     this.badge.textContent = found > 0 ? String(found) : '';
@@ -942,7 +964,7 @@ export class Ui implements UiBridge {
     const session = s.session;
     if (session && (screen === 'intro' || inGame)) {
       this.introPrompt.textContent = this.ctrl.questPrompt();
-      this.introTreasure.src = assetUrl(ASSETS.treasures[session.treasureId].image);
+      this.introTreasure.src = assetUrl(ASSETS.treasures[session.treasureId]?.image ?? '');
       this.introTreasureName.textContent = TREASURES[session.treasureId].name[lang];
       this.introRibbon.hidden = !session.special;
       this.goBtn.textContent = this.ctrl.tr('letsLook');
@@ -987,6 +1009,12 @@ export class Ui implements UiBridge {
   private renderCollection(): void {
     const save = this.ctrl.store.get();
     const lang = this.ctrl.lang;
+    // Classic: 4 + 3 beside Giganto's box in landscape, 3 per row in portrait;
+    // Giganto's three stand in a column beside them, or in a row below.
+    const landscape = window.innerWidth >= window.innerHeight;
+    const n = this.classicSlots.children.length;
+    gridSlots(this.classicSlots, landscape ? (n > 6 || this.gigantoSlots ? 4 : 3) : n > 6 || this.gigantoSlots ? 3 : 2);
+    if (this.gigantoSlots) gridSlots(this.gigantoSlots, landscape ? 1 : this.gigantoSlots.children.length);
     for (const slot of this.slots) {
       const count = save.collection[slot.id]?.count ?? 0;
       const found = count > 0;
@@ -996,7 +1024,7 @@ export class Ui implements UiBridge {
       slot.count.textContent = count > 1 ? `×${count}` : '';
       slot.btn.setAttribute(
         'aria-label',
-        found ? `${TREASURES[slot.id].name[lang]}. ${this.ctrl.tr('foundTimes', { n: count })}` : this.ctrl.tr('notFoundYet'),
+        found ? `${TREASURES[slot.id].name[lang]}. ${this.ctrl.tr('foundTimes', { n: count })}` : this.ctrl.tr(slot.giganto ? 'withGiganto' : 'notFoundYet'),
       );
       slot.btn.setAttribute('aria-disabled', String(!found));
     }
@@ -1009,4 +1037,26 @@ export class Ui implements UiBridge {
       .map(([k, v]) => `${k}: ${v}`)
       .join('\n');
   }
+}
+
+/** Giganto's three-toed footprint, the badge of his treasure box. */
+const FOOTPRINT_SVG =
+  '<svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="17.2" rx="4.6" ry="4.9"/><ellipse cx="12" cy="6.4" rx="2.1" ry="4.6"/><ellipse cx="6.3" cy="9" rx="1.9" ry="4.2" transform="rotate(-28 6.3 9)"/><ellipse cx="17.7" cy="9" rx="1.9" ry="4.2" transform="rotate(28 17.7 9)"/></svg>';
+
+/**
+ * Lay out treasure slots in rows of `cols`, the last row centred: each slot
+ * spans two half-columns, so a short last row can start half a slot in.
+ */
+function gridSlots(box: HTMLElement, cols: number): void {
+  const kids = [...box.children] as HTMLElement[];
+  const n = kids.length;
+  const c = Math.max(1, Math.min(cols, n));
+  const rows = Math.max(1, Math.ceil(n / c));
+  box.style.gridTemplateColumns = `repeat(${2 * c}, minmax(0, 1fr))`;
+  box.style.gridTemplateRows = `repeat(${rows}, minmax(0, 1fr))`;
+  const lastStart = (rows - 1) * c;
+  const lastCount = n - lastStart;
+  kids.forEach((k, i) => {
+    k.style.gridColumn = i === lastStart && lastCount < c ? `${c - lastCount + 1} / span 2` : 'span 2';
+  });
 }

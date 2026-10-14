@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { LEVEL_EVERY, award, isGigantoDue, levelFor, selectNextQuest, specialDifficulty, uncollected } from '../../src/domain/progress';
+import { LEVEL_EVERY, award, isGigantoDue, levelFor, selectNextQuest, specialDifficulty, uncollected, type TreasureReady } from '../../src/domain/progress';
 import { createRng } from '../../src/domain/rng';
 import { defaultSave } from '../../src/storage/save';
 import { GENERATOR_VERSION } from '../../src/domain/maze';
-import { TREASURE_ORDER } from '../../src/data/content';
+import { GIGANTO_TREASURE_ORDER, TREASURES, TREASURE_ORDER, treasureHasArt } from '../../src/data/content';
 import type { SaveV1, Session } from '../../src/domain/types';
 
 function sessionFor(_save: SaveV1, id: string, choice: ReturnType<typeof selectNextQuest>['choice']): Session {
@@ -26,13 +26,16 @@ function sessionFor(_save: SaveV1, id: string, choice: ReturnType<typeof selectN
   };
 }
 
+/** Every treasure has art (the game once Codex delivers the new four). */
+const ALL_READY: TreasureReady = () => true;
+
 /** Simulate a child completing `n` mazes in a row. */
-function play(n: number, seed = 'play'): { save: SaveV1; log: Array<ReturnType<typeof selectNextQuest>['choice']> } {
+function play(n: number, seed = 'play', ready: TreasureReady = treasureHasArt): { save: SaveV1; log: Array<ReturnType<typeof selectNextQuest>['choice']> } {
   const rng = createRng(seed);
   let save = defaultSave();
   const log: Array<ReturnType<typeof selectNextQuest>['choice']> = [];
   for (let i = 0; i < n; i++) {
-    const sel = selectNextQuest(save, rng, save.questBag);
+    const sel = selectNextQuest(save, rng, save.questBag, ready);
     save = { ...save, questBag: sel.questBag };
     const id = `s${i}`;
     save = { ...save, activeSession: sessionFor(save, id, sel.choice) };
@@ -97,6 +100,45 @@ describe('quest selection', () => {
     expect(sel.choice.special).toBe(true);
     expect(sel.choice.promptKey).toBe('giganto-generic');
     expect(uncollected(save)).toContain(sel.choice.treasureId);
+  });
+
+  it('treasures without art never appear (the new four wait for Codex)', () => {
+    const { log } = play(80, 'art-gate');
+    for (const c of log) expect(treasureHasArt(c.treasureId), c.treasureId).toBe(true);
+  });
+
+  describe('with all ten treasures in the game', () => {
+    it('friends bring the seven classic treasures before any repeats; Giganto only his own', () => {
+      for (const seed of ['a', 'b', 'c', 'd', 'e', 'f']) {
+        const { log } = play(30, seed, ALL_READY);
+        const ordinary = log.filter((c) => !c.special).map((c) => c.treasureId);
+        expect(new Set(ordinary.slice(0, 7)).size, seed).toBe(7);
+        for (const t of ordinary) expect(TREASURES[t].kind).toBe('classic');
+        const giganto = log.filter((c) => c.special).map((c) => c.treasureId);
+        for (const t of giganto) expect(GIGANTO_TREASURE_ORDER).toContain(t);
+      }
+    });
+
+    it("Giganto's first three quests bring his three different treasures", () => {
+      for (const seed of ['a', 'b', 'c', 'd']) {
+        const { log } = play(16, seed, ALL_READY);
+        const giganto = log.filter((c) => c.special).map((c) => c.treasureId);
+        expect(giganto.length).toBe(3);
+        expect(new Set(giganto).size, seed).toBe(3);
+      }
+    });
+
+    it('offers all fourteen ordinary quests over a long run, feather ones included', () => {
+      const { log } = play(120, 'variety-10', ALL_READY);
+      const ids = new Set(log.filter((c) => !c.special).map((c) => c.quest.id));
+      expect(ids.size).toBe(14);
+      expect(ids.has('tiny-feather') && ids.has('rocky-feather')).toBe(true);
+    });
+
+    it('classic and Giganto treasures add up to ten', () => {
+      expect(TREASURE_ORDER).toHaveLength(7);
+      expect(GIGANTO_TREASURE_ORDER).toHaveLength(3);
+    });
   });
 
   it('special difficulty steps up one level and is capped', () => {
