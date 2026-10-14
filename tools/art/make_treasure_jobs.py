@@ -16,7 +16,7 @@ from __future__ import annotations
 import json
 import os
 
-from make_motion_jobs import CANVAS, PART_RULES, STYLE
+from make_motion_jobs import CANVAS, PART_RULES, STYLE, keep_delivery_records
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = os.path.join(ROOT, "art", "prompts", "jobs-treasures.json")
@@ -148,8 +148,9 @@ def main() -> None:
         "priority": 1,
         "status": "todo",
     })
+    jobs = keep_delivery_records(OUT, jobs)
     with open(OUT, "w") as fh:
-        json.dump({"schemaVersion": 1, "request": "art/CODEX_REQUEST_TREASURES.md", "jobs": jobs}, fh, indent=1, ensure_ascii=False)
+        json.dump({"schemaVersion": 1, "request": "art/CODEX_REQUEST_TREASURES.md", "jobs": jobs}, fh, indent=2, ensure_ascii=False)
     todo = [j for j in jobs if j["status"] == "todo"]
     print(f"wrote {len(jobs)} jobs to {os.path.relpath(OUT, ROOT)} ({len(todo)} to do: {', '.join(j['id'] for j in todo)})")
 

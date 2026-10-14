@@ -91,22 +91,22 @@ ASSETS: list[dict] = [
     {
         "id": "stone",
         "priority": 2,
-        "master": "One smooth turquoise shiny pebble with a soft painted glint, the same design as the stone treasure already in the game.",
+        "master": "One smooth turquoise shiny pebble with fine darker veins and a soft painted glint, the same design as the stone treasure already in the game (refs: source/treasure-kit-v1.png): it must stay recognisably the same pebble.",
         "parts": {
             "body": "the pebble WITHOUT its shine: evenly painted turquoise where the glint was",
-            "glint": "ONLY the bright glint and soft sheen as a separate translucent white shape, everything else transparent",
+            "glint": "ONLY the bright glint and soft sheen as a separate translucent white shape, kept SMALL and well inside the pebble's outline, everything else transparent",
         },
-        "motion": "Still body; the glint sweeps across inside the pebble's silhouette (masked); on find a four-point star flares on the glint.",
+        "motion": "Still body; the glint drifts a little and pulses; on find it slides across inside the pebble and a four-point star flares on it.",
     },
     {
         "id": "shell",
         "priority": 2,
-        "master": "One peach spiral seashell, the same design as the shell treasure already in the game.",
+        "master": "One peach spiral seashell, the same design as the shell treasure already in the game (refs: source/treasure-kit-v1.png): it must stay recognisably the same shell.",
         "parts": {
             "body": "the shell WITHOUT highlights: evenly painted where the shine was",
-            "glint": "ONLY the highlights of the shell as a separate translucent white shape, everything else transparent",
+            "glint": "ONLY the highlights along the spiral as a separate translucent white shape, kept inside the shell's outline, everything else transparent",
         },
-        "motion": "A glint travels along the spiral (Claude traces the spiral path); the shell wobbles and turns over with squash on find.",
+        "motion": "Glints pulse one after another along the spiral; on find the shell wobbles and turns over with a squash.",
     },
     {
         "id": "berries",
@@ -139,50 +139,107 @@ ASSETS: list[dict] = [
     {
         "id": "confetti",
         "priority": 2,
-        "master": "A loose set of six small separate celebration confetti pieces in the game's painted style, spread across the canvas with wide transparent gaps: two different green jungle leaves, two coral-pink flower petals, one small yellow petal and one tiny round pink flower.",
-        "parts": {},
-        "motion": "Painted pieces that flip (scaleX through zero) and drift with drag instead of flat blobs exploding at once.",
+        "master": "Six small separate celebration confetti pieces in the game's painted style, laid out in two rows of three with WIDE transparent gaps (at least a quarter of the canvas between pieces): a slim green jungle leaf, a round green leaf, a coral-pink hibiscus petal, a pink petal, a small yellow petal and a tiny round pink blossom. Each piece flat and simple, readable at 24 px, painted alike on both faces (it will flip).",
+        "parts": {
+            "piece-1": "only the top-left piece (the slim green leaf)",
+            "piece-2": "only the top-middle piece (the round green leaf)",
+            "piece-3": "only the top-right piece (the coral-pink petal)",
+            "piece-4": "only the bottom-left piece (the pink petal)",
+            "piece-5": "only the bottom-middle piece (the yellow petal)",
+            "piece-6": "only the bottom-right piece (the tiny pink blossom)",
+        },
+        "motion": "Replace the code-drawn leaves and petals that burst from a found treasure: painted pieces that flip (scaleX through zero), spin a little and drift down with drag.",
     },
     {
-        "id": "plants",
+        "id": "banana-plant",
         "priority": 2,
-        "master": "The three framing plants already in the game, side by side with wide gaps: a broad-leaf banana plant, a curled fern and a monstera; each plant made of clearly separate leaves / fronds growing from one base.",
+        "master": "The broad-leaf banana plant already in the game (refs: source/foliage-kit-v1.png), the same design: a short base of stems with several big leaves fanning up and out, each leaf clearly separate.",
         "parts": {
-            "banana-base": "only the banana plant's base and stem cluster",
-            "banana-leaves": "only the banana plant's leaves, each still attached at its own root",
-            "fern-base": "only the fern's base",
-            "fern-fronds": "only the fern's fronds",
-            "monstera-base": "only the monstera's stems",
-            "monstera-leaves": "only the monstera's leaves",
+            "base": "only the base and stem cluster, continued a little up into where the leaves start",
+            "leaves-back": "only the leaves at the back (behind the others), each still attached at its own root, roots continued slightly into the stems",
+            "leaves-front": "only the leaves in front, each still attached at its own root, roots continued slightly into the stems",
         },
-        "motion": "The shared wind moves bases a little and leaves/fronds more, each with a delay (follow-through), so gusts ripple through the plant.",
+        "motion": "The shared wind moves the base a little and each leaf layer more, with a delay, so a gust ripples through the plant.",
+    },
+    {
+        "id": "fern",
+        "priority": 2,
+        "master": "The curled fern already in the game (refs: source/foliage-kit-v1.png), the same design: fronds arching out of one low base, each frond clearly separate.",
+        "parts": {
+            "base": "only the low base where the fronds start",
+            "leaves-back": "only the fronds at the back, roots continued slightly into the base",
+            "leaves-front": "only the fronds in front, roots continued slightly into the base",
+        },
+        "motion": "The fronds sway with the shared wind, the front ones a beat after the back ones.",
+    },
+    {
+        "id": "monstera",
+        "priority": 2,
+        "master": "The monstera already in the game (refs: source/foliage-kit-v1.png), the same design: split heart-shaped leaves on long stems from one base, each leaf clearly separate.",
+        "parts": {
+            "base": "only the stems and base, continued a little into the leaf joints",
+            "leaves-back": "only the leaves at the back, each attached at its stem, roots continued slightly",
+            "leaves-front": "only the leaves in front, each attached at its stem, roots continued slightly",
+        },
+        "motion": "The leaves nod on their long stems with the shared wind, front and back out of step.",
     },
     {
         "id": "pointer",
         "priority": 3,
-        "master": "A friendly cartoon child's hand with the index finger pointing up, soft rounded shapes, light skin, the same painted style; seen from the front.",
+        "master": "A friendly cartoon child's hand with the index finger pointing up, soft rounded shapes, light skin, the same painted style, seen from the front; readable at 60 px.",
         "parts": {},
-        "extra": {"press": "The SAME hand pressing down: the fingertip slightly squashed, with a small soft round press shadow under the tip. Same canvas and position."},
+        "extra": {"press": "The SAME hand pressing down: the fingertip slightly squashed, with a small soft round press shadow under the tip. Same canvas; the fingertip at EXACTLY the same point as in the master."},
         "motion": "Replaces the code-drawn hand of the first-maze demo: press (squash), drag along the path with ease-in-out, lift with a little follow-through.",
     },
     {
-        "id": "critters",
+        "id": "ladybug",
         "priority": 3,
-        "master": "Three tiny jungle critters seen from directly above, spread across the canvas with wide gaps: a red ladybug, a small snail with a spiral shell, a little green frog sitting.",
+        "master": "One small red ladybug seen from directly above, black spots and head, six tiny legs, wing cases closed, friendly and round; readable at 30 px.",
         "parts": {
-            "ladybug-shell": "only the ladybug's spotted wing cases",
-            "ladybug-body": "only the ladybug's body, head and legs, continued under the wing cases",
-            "snail-shell": "only the snail's shell",
-            "snail-body": "only the snail's soft body, continued under the shell",
-            "frog": "only the frog",
+            "body": "only the body, head and legs, continued under the wing cases",
+            "shell-left": "only the LEFT wing case, its inner edge continued slightly under the right one",
+            "shell-right": "only the RIGHT wing case, its inner edge continued slightly under the left one",
+            "wings": "only the two thin translucent flight wings, unfolded and fanned out as if under the lifted wing cases, everything else transparent",
         },
-        "motion": "Optional hidden critters on the hedge (never on corridors): the ladybug opens its wing cases and flies off when tapped, the snail pulls into its shell, the frog hops.",
+        "motion": "Hidden on a hedge (never on a corridor): tapped, it lifts its wing cases, buzzes its wings and flies off.",
+    },
+    {
+        "id": "snail",
+        "priority": 3,
+        "master": "One small friendly snail seen from directly above, a spiral shell in warm brown and cream with a soft green-grey body and two little eye stalks; readable at 30 px.",
+        "parts": {
+            "shell": "only the spiral shell, with a dark opening where the body enters it",
+            "body": "only the soft body with the eye stalks, continued under the shell",
+        },
+        "motion": "Creeps a little along a hedge; tapped, it pulls into its shell and peeks out again.",
+    },
+    {
+        "id": "frog",
+        "priority": 3,
+        "master": "One small green frog sitting, seen from directly above, big friendly eyes, legs tucked; readable at 30 px.",
+        "parts": {},
+        "extra": {"jump": "The SAME frog mid-hop seen from above: legs stretched out behind, front legs reaching forward. Same canvas; the body centre at the same point."},
+        "motion": "Sits on a hedge and blinks; tapped, it hops to another spot.",
     },
 ]
 
 
-# Owner-approved masters (art/CLAUDE_HANDOFF_MOTION.md); their parts are to do.
-APPROVED_MASTERS = {"butterfly", "coconut", "nut", "flower", "berries", "chest"}
+# Delivered in full: masters, parts and extra poses (art/CLAUDE_HANDOFF_MOTION.md, 15 Oct 2026).
+DELIVERED = {"butterfly", "coconut", "nut", "flower", "berries", "chest"}
+
+
+def keep_delivery_records(out: str, jobs: list[dict]) -> list[dict]:
+    """Keep what Codex wrote into existing jobs (delivery dates, QA, prompt files, a done status)."""
+    if not os.path.exists(out):
+        return jobs
+    old = {j["id"]: j for j in json.load(open(out)).get("jobs", [])}
+    merged = []
+    for j in jobs:
+        prev = old.get(j["id"], {})
+        extra = {k: v for k, v in prev.items() if k not in j}
+        status = "done" if prev.get("status") == "done" else j.get("status")
+        merged.append({**j, **extra, **({"status": status} if status else {})})
+    return merged
 
 
 def main() -> None:
@@ -196,7 +253,7 @@ def main() -> None:
             "refs": ["source/treasure-kit-v1.png", "source/foliage-kit-v1.png", "source/ui-surfaces-v1.png"],
             "alpha": True,
             "priority": a["priority"],
-            "status": "done" if a["id"] in APPROVED_MASTERS else "todo",
+            "status": "done" if a["id"] in DELIVERED else "todo",
             "motion": a["motion"],
         })
         for name, what in a["parts"].items():
@@ -207,7 +264,7 @@ def main() -> None:
                 "prompt": f"{PART_RULES}The part to keep: {what}. {STYLE}",
                 "alpha": True,
                 "priority": a["priority"],
-                "status": "todo",
+                "status": "done" if a["id"] in DELIVERED else "todo",
             })
         for name, what in a.get("extra", {}).items():
             jobs.append({
@@ -217,10 +274,11 @@ def main() -> None:
                 "prompt": f"Edit image 1. {what} {STYLE}",
                 "alpha": True,
                 "priority": a["priority"],
-                "status": "todo",
+                "status": "done" if a["id"] in DELIVERED else "todo",
             })
+    jobs = keep_delivery_records(OUT, jobs)
     with open(OUT, "w") as fh:
-        json.dump({"schemaVersion": 1, "request": "art/CODEX_REQUEST_MOTION.md", "jobs": jobs}, fh, indent=1, ensure_ascii=False)
+        json.dump({"schemaVersion": 1, "request": "art/CODEX_REQUEST_MOTION.md", "jobs": jobs}, fh, indent=2, ensure_ascii=False)
     by = {}
     for j in jobs:
         by[j["priority"]] = by.get(j["priority"], 0) + 1

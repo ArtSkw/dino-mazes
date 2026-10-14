@@ -1,7 +1,8 @@
 # Codex art request: rigged "living" small assets
 
-> Status, 14 October 2026: the six priority-1 masters are **approved**; their parts are requested
-> in [CODEX_REQUEST_FINISH.md](CODEX_REQUEST_FINISH.md) (framing, registration, stress tests).
+> Status, 15 October 2026: priority 1 is **delivered and in the game**. Priorities 2 and 3 are
+> requested in [CODEX_REQUEST_POLISH.md](CODEX_REQUEST_POLISH.md) (plants and critters split into
+> one asset each, confetti as six pieces, stress tests per asset).
 
 14 October 2026, Claude Code, after the owner approved the motion proposal
 ([../docs/MOTION_PROPOSAL.md](../docs/MOTION_PROPOSAL.md)). Execute with the built-in

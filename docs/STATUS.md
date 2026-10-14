@@ -52,6 +52,14 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Codex plan: the last polish (15 October 2026)
+
+[../art/CODEX_REQUEST_POLISH.md](../art/CODEX_REQUEST_POLISH.md): the motion plan's priorities 2
+and 3 as 37 jobs (stone, shell, confetti, the three plants, the pointer hand, ladybug, snail,
+frog), each with a stress test matching the motion it will get. Plants and critters are now one
+asset per canvas, confetti six separate pieces. The jobs generators keep Codex's delivery
+records (dates, QA, prompt files, done status) when they are run again.
+
 ## Codex delivery: strawberry, badge, parts of the six (15 October 2026)
 
 - **All eleven treasures in the game**, each but the stone and the shell drawn from its painted
