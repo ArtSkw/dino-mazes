@@ -52,6 +52,24 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 10 (14 October 2026): the waist cut in the opening
+
+The friends are busts cut flat at the waist. Their springy rise (Back.easeOut) overshot and
+lifted that edge up to ~29 px into view; greeting hops could stack and leave a friend raised;
+the quest-intro entrance showed it too (`tools/dev/review-cut.mjs` measured every frame).
+
+- **Pinned pop-up** (`src/game/motion.ts`): a damped spring moves the friend until it first
+  arrives, then its overshoot becomes stretch and squash around the base, so the head still
+  bounces while the base stays below the screen. Used by the opening rise and the quest-intro
+  entrance. `spring(t, ζ, f)` is the pure function planned in MOTION_PROPOSAL.md.
+- **Hops** lift only within the hidden band (the rest is stretch), always start from the resting
+  pose, and never stack. A tap bounce also returns the friend to its resting place.
+- **Soft cut:** `tools/art/v3.py` fades the bottom 3 % of every character frame to transparent
+  (`cutFade` in the manifest). At rest that band sits below the screen edge (`baseHidden`), so a
+  camera shake can at most show a soft fade, never a line.
+- Regression test: e2e "the friends' flat waist cut never rises into view" (fails on the old code
+  at -28.5 px, passes now).
+
 ## Owner review, round 9 (14 October 2026)
 
 - **Loader:** a spinning ring of jungle vine (`src/ui/vineSpinner.ts`, canvas): the ring turns at a
@@ -185,8 +203,8 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 197 passed |
-| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 57 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
+| Domain unit + property | `npm test` | 208 passed |
+| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 65 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
 

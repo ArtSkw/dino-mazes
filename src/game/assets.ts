@@ -21,6 +21,8 @@ export interface CharacterAsset {
   /** Stage tier (quest intro pose) frame size. */
   stage: { frameWidth: number; frameHeight: number };
   pivot: { x: number; y: number };
+  /** Fraction of the frame height at the bottom (the waist cut) that fades out. */
+  cutFade: number;
   /** Painted area of idle-00 as fractions of the frame. */
   content: { x: number; y: number; w: number; h: number };
   /** Union of the painted areas of every frame but the celebration. */
@@ -74,6 +76,15 @@ export function friendFrame(id: CharacterId): FriendFrame {
     content: c.contentActive,
     ...(id === 'giganto' ? { flushLeft: true, bleed: 0.12 } : {}),
   };
+}
+
+/**
+ * How far below the screen edge a friend's base rests (px), for a frame shown
+ * `displayHeight` px tall: the faded band of the waist cut plus a little more,
+ * so at rest the bust ends cleanly at the screen edge.
+ */
+export function baseHidden(id: CharacterId, displayHeight: number): number {
+  return Math.ceil(displayHeight * (ASSETS.characters[id].cutFade ?? 0)) + 2;
 }
 
 /** Welcome cast height relative to the base: Giganto a bit taller than the friends. */

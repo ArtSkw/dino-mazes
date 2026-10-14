@@ -11,10 +11,11 @@ import type { Hint } from '../domain/trail';
 import type { CharacterId, Point, TreasureId } from '../domain/types';
 import { castSlots, introCharacterRect, toScreen, type Rect } from '../platform/layout';
 import { CharacterActor } from './actor';
-import { ASSETS, CAST_SCALE, assetUrl, friendFrame, grainTexture, handTexture, pawTexture, leafTexture, ringTexture, sparkTexture, starTexture } from './assets';
+import { ASSETS, CAST_SCALE, assetUrl, baseHidden, friendFrame, grainTexture, handTexture, pawTexture, leafTexture, ringTexture, sparkTexture, starTexture } from './assets';
 import { AmbientWorld } from './ambient';
 import { footprint, paintBoard } from './boardPainter';
 import { CharacterTextures, type AtlasRef } from './characterTextures';
+import { popUp } from './motion';
 import { OpeningDirector, preloadOpening, type OpeningStep } from './opening';
 
 export interface UiBridge {
@@ -449,7 +450,6 @@ export class GameScene extends Phaser.Scene {
     const intro = screen === 'intro';
     let x: number;
     let scale: number;
-    const y = this.vh + 6;
     if (intro) {
       // Intro pose: the exact frame rect, laid out by the painted area.
       const box = introCharacterRect(this.vw, this.vh, friendFrame(actor.id));
@@ -464,8 +464,10 @@ export class GameScene extends Phaser.Scene {
       this.setOriginKeepingPlace(actor.sprite, 0);
     }
     const box = intro ? introCharacterRect(this.vw, this.vh, friendFrame(actor.id)) : layout.character;
+    // The faded waist cut rests just below the screen edge.
+    const y = this.vh + baseHidden(actor.id, box.h);
     this.ui.setCompanionRect(intro || screen === 'welcome' ? null : layout.character);
-    actor.sprite.setData('baseScale', scale);
+    actor.sprite.setData('baseScale', scale).setData('restY', y);
     this.tweens.killTweensOf(actor.sprite);
     if (animate && !this.reduced) {
       this.tweens.add({ targets: actor.sprite, x, y, scale, alpha: 1, duration: 650, ease: 'Cubic.easeInOut' });
@@ -491,8 +493,10 @@ export class GameScene extends Phaser.Scene {
   private boop(sprite: Phaser.GameObjects.Sprite | undefined): void {
     if (!sprite || this.reduced) return;
     const base = (sprite.getData('baseScale') as number | undefined) ?? sprite.scaleX;
+    const restY = sprite.getData('restY') as number | undefined;
     this.tweens.killTweensOf(sprite);
     sprite.setScale(base);
+    if (restY !== undefined) sprite.setY(restY);
     this.tweens.chain({
       targets: sprite,
       tweens: [
@@ -639,8 +643,11 @@ export class GameScene extends Phaser.Scene {
     const slots = this.castSlots();
     this.cast.forEach((a, i) => {
       const box = slots[i] as Rect;
+      const scale = box.h / a.frameHeight;
+      const y = this.vh + baseHidden(a.id, box.h);
       a.sprite.setOrigin(0, 1);
-      a.sprite.setPosition(box.x, this.vh + 8).setScale(box.h / a.frameHeight).setAlpha(1);
+      a.sprite.setPosition(box.x, y).setScale(scale).setAlpha(1);
+      a.sprite.setData('baseScale', scale).setData('restY', y);
     });
     // Plants stand in the seams between friends and at the ends, sized to the
     // friends (not to Giganto) and low enough to cover bodies, never faces.
@@ -732,9 +739,12 @@ export class GameScene extends Phaser.Scene {
   private introEntrance(actor: CharacterActor): void {
     this.placeCompanion(false);
     if (!this.reduced) {
+      // Springs up with its base pinned below the screen edge (motion.ts).
       const targetY = actor.sprite.y;
+      const scale = actor.sprite.scaleY;
       actor.sprite.setY(targetY + actor.sprite.displayHeight * 0.6).setAlpha(0);
-      this.tweens.add({ targets: actor.sprite, y: targetY, alpha: 1, duration: 520, ease: 'Back.easeOut', delay: 120 });
+      popUp(this, actor.sprite, { restY: targetY, scale, zeta: 0.55, freq: 1.8, amount: 0.4, delay: 120 });
+      this.tweens.add({ targets: actor.sprite, alpha: 1, duration: 220, delay: 120 });
     }
     this.time.delayedCall(this.reduced ? 0 : 500, () => actor.react('encouragement', true));
   }
@@ -1361,19 +1371,29 @@ export class GameScene extends Phaser.Scene {
     this.sand.emitParticleAt(p.x, p.y, 3);
   }
 
-  /** A quick hop with squash and stretch (springy landing). */
+  /**
+   * A quick hop with squash and stretch (springy landing). The friends are
+   * busts cut at the waist, so the base may lift only within its hidden band
+   * below the screen; the rest of the hop's height comes from the stretch.
+   * Always starts from the resting pose, and never stacks on a running hop.
+   */
   private hop(sprite: Phaser.GameObjects.Sprite, height: number): void {
-    const y = sprite.y;
-    const sx = sprite.scaleX;
-    const sy = sprite.scaleY;
+    const now = this.time.now;
+    if (now < ((sprite.getData('hopUntil') as number | undefined) ?? 0)) return;
+    sprite.setData('hopUntil', now + 520);
+    const y = (sprite.getData('restY') as number | undefined) ?? sprite.y;
+    const base = (sprite.getData('baseScale') as number | undefined) ?? sprite.scaleY;
     const h = sprite.displayHeight * height;
+    const lift = Math.min(h, Math.max(0, (y - this.vh) * 0.5));
+    const stretch = (h - lift) / Math.max(1, sprite.displayHeight);
+    sprite.setY(y).setScale(base);
     this.tweens.chain({
       targets: sprite,
       tweens: [
-        { scaleX: sx * 1.04, scaleY: sy * 0.95, duration: 90, ease: 'Sine.easeOut' },
-        { y: y - h, scaleX: sx * 0.97, scaleY: sy * 1.04, duration: 170, ease: 'Quad.easeOut' },
-        { y, scaleX: sx, scaleY: sy, duration: 160, ease: 'Quad.easeIn' },
-        { scaleX: sx * 1.03, scaleY: sy * 0.97, duration: 70, yoyo: true, ease: 'Sine.easeOut' },
+        { scaleX: base * 1.04, scaleY: base * 0.95, duration: 90, ease: 'Sine.easeOut' },
+        { y: y - lift, scaleX: base * (0.97 - stretch * 0.4), scaleY: base * (1.04 + stretch), duration: 170, ease: 'Quad.easeOut' },
+        { y, scaleX: base, scaleY: base, duration: 160, ease: 'Quad.easeIn' },
+        { scaleX: base * 1.03, scaleY: base * 0.97, duration: 70, yoyo: true, ease: 'Sine.easeOut' },
       ],
     });
   }

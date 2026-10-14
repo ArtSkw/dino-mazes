@@ -17,7 +17,8 @@
 import Phaser from 'phaser';
 import type { Sfx } from './audio';
 import type { CharacterActor } from './actor';
-import { ASSETS, assetUrl } from './assets';
+import { ASSETS, assetUrl, baseHidden } from './assets';
+import { popUp } from './motion';
 import type { OpeningMode } from '../app/controller';
 import type { Rect } from '../platform/layout';
 
@@ -152,22 +153,34 @@ export class OpeningDirector {
     this.at(7500, () => this.finish());
   }
 
-  /** A friend rises from behind the foreground plants into its welcome place. */
-  private rise(actor: CharacterActor, heavy: boolean): void {
+  /** Where a cast member rests: its slot, with the faded waist cut below the screen. */
+  private restOf(actor: CharacterActor): { y: number; scale: number; slot: Rect } | null {
     const slot = this.host.castSlots()[this.host.cast().indexOf(actor)];
-    if (!slot) return;
-    const y = this.host.vh() + 8;
+    if (!slot) return null;
+    return { y: this.host.vh() + baseHidden(actor.id, slot.h), scale: slot.h / actor.frameHeight, slot };
+  }
+
+  /**
+   * A friend rises from behind the foreground plants into its welcome place.
+   * The friends are busts cut flat at the waist, so the bounce is a stretch
+   * around the base (pinned below the screen edge), never a lift that would
+   * show the cut. No wave here: loading every friend's wave atlas would push
+   * GPU memory past the budget; idle frames are already in.
+   */
+  private rise(actor: CharacterActor, heavy: boolean): void {
+    const rest = this.restOf(actor);
+    if (!rest) return;
     this.scene.tweens.killTweensOf(actor.sprite);
-    this.scene.tweens.add({ targets: actor.sprite, y, duration: heavy ? 520 : 420, ease: 'Back.easeOut' });
-    this.at(heavy ? 260 : 200, () => {
-      const head = { x: slot.x + slot.w * 0.5, y: slot.y + slot.h * 0.2 };
+    const p = popUp(this.scene, actor.sprite, {
+      restY: rest.y,
+      scale: rest.scale,
+      ...(heavy ? { zeta: 0.58, freq: 1.7, amount: 0.42 } : { zeta: 0.5, freq: 2.1, amount: 0.5 }),
+    });
+    this.at(p.arrival * 0.7, () => {
+      const head = { x: rest.slot.x + rest.slot.w * 0.5, y: rest.slot.y + rest.slot.h * 0.2 };
       this.host.sparkle(head.x, head.y, heavy ? 10 : 7);
       if (!heavy) this.host.sfx('pop');
       if (actor.id === 'rocky') this.host.sfx('toot');
-      // A springy landing (no wave: loading every friend's wave atlas here
-      // would push GPU memory past the budget; idle frames are already in).
-      const sx = actor.sprite.scaleX;
-      this.scene.tweens.add({ targets: actor.sprite, scaleY: sx * 1.04, scaleX: sx * 0.97, duration: 120, yoyo: true, ease: 'Sine.easeOut' });
     });
   }
 
@@ -258,7 +271,8 @@ export class OpeningDirector {
     if (this.finished) return;
     for (const a of this.host.cast()) {
       this.scene.tweens.killTweensOf(a.sprite);
-      a.sprite.setY(this.host.vh() + 8);
+      const rest = this.restOf(a);
+      if (rest) a.sprite.setY(rest.y).setScale(rest.scale);
     }
     this.host.step('curtains', 0);
     this.host.step('sign', 0);

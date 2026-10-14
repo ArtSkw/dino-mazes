@@ -36,6 +36,11 @@ STAGE_QUALITY = 76
 ALPHA_QUALITY = 70
 ATLAS_MAX = 2048
 PAD = 2
+# Every character is a bust cut flat at the waist (the bottom edge of the
+# frame). The last CUT_FADE of the frame height fades out to transparent, and
+# the game sinks that band below the screen edge at rest; if a hop or a camera
+# shake ever lifts the base into view, it dissolves instead of showing a line.
+CUT_FADE = 0.03
 CHAR_IDS = ["bill", "tiny", "mazu", "rocky", "giganto"]
 SEQ = {
     "idle": [f"idle-{i:02d}" for i in range(0, 8)],
@@ -81,6 +86,20 @@ def _bbox(alpha: np.ndarray, thr: int) -> tuple[int, int, int, int] | None:
     if len(xs) == 0:
         return None
     return int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1
+
+
+def _fade_cut(im: Image.Image, fraction: float = CUT_FADE) -> Image.Image:
+    """Fade the bottom `fraction` of the frame to transparent (smoothstep)."""
+    arr = np.array(im.convert("RGBA")).astype(np.float32)
+    h = arr.shape[0]
+    band = max(2, round(h * fraction))
+    # Distance from the bottom edge, in band units, at each row's centre.
+    u = np.clip((h - np.arange(h) - 0.5) / band, 0.0, 1.0)
+    k = u * u * (3 - 2 * u)
+    arr[:, :, 3] *= k[:, None]
+    out = np.clip(np.rint(arr), 0, 255).astype(np.uint8)
+    out[out[:, :, 3] == 0, :3] = 0
+    return Image.fromarray(out)
 
 
 def _trim(im: Image.Image) -> tuple[Image.Image, tuple[int, int, int, int]]:
@@ -191,6 +210,7 @@ def process_characters(src_root: str, public_root: str, review_root: str, report
             "decodedBytes": {},
             "bytes": 0,
             "pivot": {"x": pivot_x, "y": 1.0},
+            "cutFade": CUT_FADE,
             "content": content,
             "contentActive": content_active,
             "sequences": SEQ,
@@ -210,7 +230,7 @@ def process_characters(src_root: str, public_root: str, review_root: str, report
                 packed = []
                 for n in gnames:
                     crop = Image.fromarray(frames[n][uy0:uy1, ux0:ux1])
-                    scaled = _premul_resize(crop, (tw, th))
+                    scaled = _fade_cut(_premul_resize(crop, (tw, th)))
                     trimmed, sss = _trim(scaled)
                     packed.append((n, trimmed, sss, (tw, th)))
                 info = pack_atlas(packed, out_dir, group, public_root, quality=quality)

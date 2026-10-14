@@ -21,7 +21,7 @@
    "more": 12569172,
    "stage": 14036596
   },
-  "bytes": 846823,
+  "bytes": 827127,
   "registration": "Codex canvas kept (no automatic shift); see RUNTIME_QA.md"
  },
  "character-tiny-v3": {
@@ -46,7 +46,7 @@
    "more": 18556624,
    "stage": 26127584
   },
-  "bytes": 1645749,
+  "bytes": 1632765,
   "registration": "Codex canvas kept (no automatic shift); see RUNTIME_QA.md"
  },
  "character-mazu-v3": {
@@ -71,7 +71,7 @@
    "more": 19667296,
    "stage": 23434832
   },
-  "bytes": 1370501,
+  "bytes": 1347065,
   "registration": "Codex canvas kept (no automatic shift); see RUNTIME_QA.md"
  },
  "character-rocky-v3": {
@@ -96,7 +96,7 @@
    "more": 13114412,
    "stage": 14762448
   },
-  "bytes": 897774,
+  "bytes": 887302,
   "registration": "Codex canvas kept (no automatic shift); see RUNTIME_QA.md"
  },
  "character-giganto-v3": {
@@ -116,12 +116,12 @@
    871
   ],
   "decodedBytes": {
-   "idle": 9802936,
-   "wave": 9840480,
-   "more": 22039296,
-   "stage": 26288800
+   "idle": 9784060,
+   "wave": 9834240,
+   "more": 22003632,
+   "stage": 26272584
   },
-  "bytes": 2047206,
+  "bytes": 2056876,
   "registration": "Codex canvas kept (no automatic shift); see RUNTIME_QA.md"
  },
  "treasure-kit-v1.png": {
@@ -413,8 +413,8 @@
    "decodedBytes": 1017144
   },
   "sprout": {
-   "width": 336,
-   "height": 261
+   "width": 376,
+   "height": 311
   },
   "titleSign": {
    "width": 862,

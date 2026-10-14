@@ -564,13 +564,49 @@ test.describe('opening animation and V3 characters (14 October 2026)', () => {
     await expect(page.getByRole('button', { name: 'Pomiń' }).first()).toBeVisible();
     // The play button waits for its moment (sprouts near the end).
     await expect(page.locator('.btn-play')).toBeHidden();
-    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { opening: string | null } } } }).__dino.ctrl.state.opening === null, null, { timeout: 15_000 });
+    // 7.5 s of scene time; software GL under parallel load runs the clock slow.
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { opening: string | null } } } }).__dino.ctrl.state.opening === null, null, { timeout: 25_000 });
     await expect(page.getByRole('button', { name: 'Graj', exact: true })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Dino Labirynty' })).toBeVisible();
     await page.waitForTimeout(600);
     const keys = await textures(page);
     expect(keys.filter((k) => k.startsWith('intro-'))).toEqual([]);
     expect(keys).toEqual(['char-bill-idle', 'char-giganto-idle', 'char-mazu-idle', 'char-rocky-idle', 'char-tiny-idle']);
+  });
+
+  test("the friends' flat waist cut never rises into view (rise, greetings, hops)", async ({ page }) => {
+    // Every frame: how far each cast member's base sits below the screen edge
+    // in CSS px (camera shake included). The busts are cut flat at the waist.
+    await page.addInitScript(() => {
+      const w = window as never as { __cut: Record<string, number>; __dino?: { game: { scene: { getScene(k: string): unknown } } } };
+      w.__cut = {};
+      const tick = (): void => {
+        const g = w.__dino?.game.scene.getScene('game') as
+          | { cast?: Array<{ id: string; sprite: { y: number; active: boolean; visible: boolean; alpha: number } }>; vh: number; cameras: { main: { shakeEffect: { isRunning: boolean; _offsetY: number } } } }
+          | undefined;
+        if (g?.cameras?.main) {
+          const shake = g.cameras.main.shakeEffect;
+          const dy = shake.isRunning ? shake._offsetY : 0;
+          for (const a of g.cast ?? []) {
+            if (!a.sprite.active || !a.sprite.visible || a.sprite.alpha < 0.05) continue;
+            w.__cut[a.id] = Math.min(w.__cut[a.id] ?? Infinity, a.sprite.y + dy - g.vh);
+          }
+        }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+    await boot(page, '?test&opening=short');
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { opening: string | null } } } }).__dino.ctrl.state.opening === null, null, { timeout: 15_000 });
+    // Quick repeated greetings make the neighbours hop over and over.
+    for (const id of ['tiny', 'tiny', 'mazu', 'tiny', 'rocky']) {
+      await page.locator(`.cast-btn[data-id="${id}"]`).click({ force: true });
+      await page.waitForTimeout(150);
+    }
+    await page.waitForTimeout(1200);
+    const below = await page.evaluate(() => (window as never as { __cut: Record<string, number> }).__cut);
+    expect(Object.keys(below).sort()).toEqual(['bill', 'giganto', 'mazu', 'rocky', 'tiny']);
+    for (const [id, px] of Object.entries(below)) expect(px, id).toBeGreaterThanOrEqual(0);
   });
 
   test('a tap skips the opening at once; a key does too', async ({ page }) => {
