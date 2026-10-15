@@ -682,11 +682,12 @@
   "voices": [
     {
       "id": "tiny",
-      "name": "Dino Mazes · Miłka (PL)",
-      "description": "An adult female voice actress performing a small, playful triceratops character in a Polish children's cartoon. Native Polish speaker, standard Polish accent. Bright, bubbly and quick, cheeky and warm, with a smile in every word; she lands a joke with a tiny pause and a giggle. Clean studio recording, close microphone.",
+      "name": "Dino Mazes · Miłka / Tiny",
+      "description": "An adult female voice actress performing a small but very strong, playful triceratops in a children's cartoon. A slightly lower, warm, distinctive voice with a bit of texture, full of confidence and cheeky humour; she lands a joke with a sure little pause and a hearty giggle. Bold and friendly, not squeaky. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
       "text": "Cześć, jestem Miłka! Chcesz usłyszeć dowcip? Jak nazywa się śpiący dinozaur? Chrapozaur! Hi, hi! Wyglądam na małą, a jestem najsilniejsza z nas!",
-      "seed": 101,
-      "pick": 1
+      "seed": 127,
+      "note": "Owner, round 5: Miłka lower, more distinctive and confident than Rudzia (as in the cartoon).",
+      "pick": 2
     },
     {
       "id": "rocky",
@@ -707,9 +708,10 @@
     {
       "id": "mazu",
       "name": "Dino Mazes · Rudzia / Mazu",
-      "description": "An adult female voice actress performing a curious, clever young ankylosaurus in a children's cartoon, the little scientist of the group. Clear, articulate, bright and confident, precise diction, warm and patient, never in a hurry. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
+      "description": "An adult female voice actress performing a clever, curious young ankylosaurus scientist in a children's cartoon. A light, bright, higher voice, clear and precise, sweet and earnest, a little dreamy when she talks about stars; articulate and gentle, never shrill. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
       "text": "Cześć, jestem Rudzia! Wiem prawie wszystko o dinozaurach. W Gigantopedii zapisuję wszystko, co robi Giganto. Najpierw patrzymy, potem rysujemy. Tak robią naukowcy!",
-      "seed": 106,
+      "seed": 126,
+      "note": "Owner, round 5: in the cartoon Rudzia sounds a little higher than Miłka; Miłka is lower, more distinctive and confident.",
       "pick": 2
     },
     {
@@ -727,42 +729,6 @@
       "text": "Dudek wywęszył kokos, ale boi się iść sam. Pomożesz mu? Miłka maluje obrazek. Szuka kwiatka, który będzie jej pozował! Nowy skarb: muszelka!",
       "seed": 108,
       "pick": 2
-    },
-    {
-      "id": "mazu-alt",
-      "name": "Dino Mazes · Rudzia / Mazu (alt)",
-      "description": "An adult female voice actress performing a clever, curious young ankylosaurus scientist in a children's cartoon. A light, bright, higher voice, clear and precise, sweet and earnest, a little dreamy when she talks about stars; articulate and gentle, never shrill. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
-      "text": "Cześć, jestem Rudzia! Wiem prawie wszystko o dinozaurach. W Gigantopedii zapisuję wszystko, co robi Giganto. Najpierw patrzymy, potem rysujemy. Tak robią naukowcy!",
-      "seed": 126,
-      "compare": [
-        {
-          "label": "Miłka obecna (dla porównania)",
-          "voice": "tiny"
-        },
-        {
-          "label": "Rudzia, obecna próbka 2",
-          "voice": "mazu"
-        }
-      ],
-      "note": "Owner, round 5: in the cartoon Rudzia sounds a little higher than Miłka; Miłka is lower, more distinctive and confident."
-    },
-    {
-      "id": "tiny-alt",
-      "name": "Dino Mazes · Miłka / Tiny (alt)",
-      "description": "An adult female voice actress performing a small but very strong, playful triceratops in a children's cartoon. A slightly lower, warm, distinctive voice with a bit of texture, full of confidence and cheeky humour; she lands a joke with a sure little pause and a hearty giggle. Bold and friendly, not squeaky. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
-      "text": "Cześć, jestem Miłka! Chcesz usłyszeć dowcip? Jak nazywa się śpiący dinozaur? Chrapozaur! Hi, hi! Wyglądam na małą, a jestem najsilniejsza z nas!",
-      "seed": 127,
-      "compare": [
-        {
-          "label": "Miłka obecna",
-          "voice": "tiny"
-        },
-        {
-          "label": "Rudzia, obecna próbka 2",
-          "voice": "mazu"
-        }
-      ],
-      "note": "Owner, round 5: Miłka lower, more distinctive and confident than Rudzia (as in the cartoon)."
     }
   ],
   "lines": [
@@ -771,48 +737,42 @@
       "voice": "tiny",
       "lang": "pl",
       "text": "Cześć, jestem Miłka! Chcesz usłyszeć dowcip?",
-      "say": "[cheerfully] Cześć, jestem Miłka! Chcesz usłyszeć dowcip?",
-      "pick": 2
+      "say": "[cheerfully] Cześć, jestem Miłka! Chcesz usłyszeć dowcip?"
     },
     {
       "id": "tiny-joke-pl",
       "voice": "tiny",
       "lang": "pl",
       "text": "Jak nazywa się śpiący dinozaur? Chrapozaur!",
-      "say": "Jak nazywa się śpiący dinozaur? [short pause] Chrapozaur! [giggles]",
-      "pick": 2
+      "say": "Jak nazywa się śpiący dinozaur? [short pause] Chrapozaur! [giggles]"
     },
     {
       "id": "tiny-cheer-pl",
       "voice": "tiny",
       "lang": "pl",
       "text": "Ładnie rysujesz! Jak na moich obrazkach.",
-      "say": "[warmly] Ładnie rysujesz! Jak na moich obrazkach.",
-      "pick": 1
+      "say": "[warmly] Ładnie rysujesz! Jak na moich obrazkach."
     },
     {
       "id": "tiny-hello-en",
       "voice": "tiny",
       "lang": "en",
       "text": "Hi, I'm Tiny! Want to hear a joke?",
-      "say": "[cheerfully] Hi, I'm Tiny! Want to hear a joke?",
-      "pick": 2
+      "say": "[cheerfully] Hi, I'm Tiny! Want to hear a joke?"
     },
     {
       "id": "tiny-joke-en",
       "voice": "tiny",
       "lang": "en",
       "text": "What do you call a sleeping dinosaur? A dino-snore!",
-      "say": "What do you call a sleeping dinosaur? [short pause] A dino-snore! [giggles]",
-      "pick": 2
+      "say": "What do you call a sleeping dinosaur? [short pause] A dino-snore! [giggles]"
     },
     {
       "id": "tiny-cheer-en",
       "voice": "tiny",
       "lang": "en",
       "text": "Lovely drawing! Just like my paintings.",
-      "say": "[warmly] Lovely drawing! Just like my paintings.",
-      "pick": 2
+      "say": "[warmly] Lovely drawing! Just like my paintings."
     },
     {
       "id": "rocky-hello-pl",
