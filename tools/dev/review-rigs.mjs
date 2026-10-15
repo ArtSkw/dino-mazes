@@ -8,7 +8,7 @@ mkdirSync(out, { recursive: true });
 const KEY = { up: 'ArrowUp', down: 'ArrowDown', left: 'ArrowLeft', right: 'ArrowRight' };
 const browser = await chromium.launch();
 const errors = [];
-const ALL = [['feather', 'tiny', 'tiny-feather', false], ['amber', 'giganto', 'giganto-amber', true], ['gigaflower', 'giganto', 'giganto-gigaflower', true], ['crystal', 'giganto', 'giganto-crystal', true], ['coconut', 'bill', 'bill-coconut', false], ['nut', 'bill', 'bill-nut', false], ['flower', 'tiny', 'tiny-flower', false], ['berries', 'bill', 'bill-berries', false], ['strawberry', 'bill', 'bill-strawberry', false]];
+const ALL = [['feather', 'tiny', 'tiny-feather', false], ['amber', 'giganto', 'giganto-amber', true], ['gigaflower', 'giganto', 'giganto-gigaflower', true], ['crystal', 'giganto', 'giganto-crystal', true], ['coconut', 'bill', 'bill-coconut', false], ['nut', 'bill', 'bill-nut', false], ['flower', 'tiny', 'tiny-flower', false], ['berries', 'bill', 'bill-berries', false], ['strawberry', 'bill', 'bill-strawberry', false], ['stone', 'mazu', 'mazu-stone', false], ['shell', 'tiny', 'tiny-shell', false]];
 const only = (process.env.ONLY ?? '').split(',').filter(Boolean);
 const QUESTS = only.length ? ALL.filter(([t]) => only.includes(t)) : ALL;
 for (const [tid, cid, qid, special] of QUESTS) {

@@ -1,0 +1,312 @@
+[
+  {
+    "asset": "stone",
+    "nativePath": "review/motion/polish-native/motion-stone-master.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "nativeSha256": "2fdf5dd9c9557cc63f6de292f2aad08210d69b5febb9cc4f4751184b13f34379",
+    "canvas": [
+      1296,
+      1296
+    ],
+    "offset": [
+      22,
+      11
+    ],
+    "nativeBounds": [
+      173,
+      247,
+      1079,
+      1027
+    ],
+    "bounds": [
+      195,
+      258,
+      1101,
+      1038
+    ],
+    "sha256": "975767a8ec5a6f1bbb2e0128961bf596838b8bf4ed0e86d82d3c81e04bc75286",
+    "pixelsPreserved": true
+  },
+  {
+    "asset": "shell",
+    "nativePath": "review/motion/polish-native/motion-shell-master.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "nativeSha256": "977ba1bb03d483137699a543191153c79335f8ca9c0fba2b8a13dc44426a8859",
+    "canvas": [
+      1392,
+      1392
+    ],
+    "offset": [
+      54,
+      52
+    ],
+    "nativeBounds": [
+      158,
+      169,
+      1127,
+      1119
+    ],
+    "bounds": [
+      212,
+      221,
+      1181,
+      1171
+    ],
+    "sha256": "553ddc5ccb83dccf3d010821ef9022d43833f99f633ad7bd6fe2ed3be31954df",
+    "pixelsPreserved": true
+  },
+  {
+    "asset": "confetti",
+    "nativePath": "review/motion/polish-native/motion-confetti-master.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "nativeSha256": "fffaba03b4c50193d70e61da4e72bcaaeb687a5e24f779d1d11c9a34de8e628a",
+    "canvas": [
+      1648,
+      1648
+    ],
+    "offset": [
+      191,
+      180
+    ],
+    "nativeBounds": [
+      61,
+      349,
+      1205,
+      938
+    ],
+    "bounds": [
+      252,
+      529,
+      1396,
+      1118
+    ],
+    "sha256": "1e5af62c6fb251e77c2e50aa671cecad6a36f8f0caca57c459f9c6bff595027e",
+    "pixelsPreserved": true
+  },
+  {
+    "asset": "banana-plant",
+    "nativePath": "review/motion/polish-native/motion-banana-plant-master.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "nativeSha256": "a2145fcca57364198af3d47ae5ffb296ae67629e16662c724b2b8f9e586ea35f",
+    "canvas": [
+      1632,
+      1632
+    ],
+    "offset": [
+      160,
+      180
+    ],
+    "nativeBounds": [
+      88,
+      123,
+      1225,
+      1148
+    ],
+    "bounds": [
+      248,
+      303,
+      1385,
+      1328
+    ],
+    "sha256": "58077758260e77c540e0adb2cf38b0f276c26efc2b5f3e672027d32d865fb18a",
+    "pixelsPreserved": true
+  },
+  {
+    "asset": "fern",
+    "nativePath": "review/motion/polish-native/motion-fern-master.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "nativeSha256": "67b734e16df6938fc8e3349dc8e0d7f1aeefd5d6fc821d99ca0ba1450861acc0",
+    "canvas": [
+      1568,
+      1568
+    ],
+    "offset": [
+      126,
+      136
+    ],
+    "nativeBounds": [
+      142,
+      102,
+      1173,
+      1193
+    ],
+    "bounds": [
+      268,
+      238,
+      1299,
+      1329
+    ],
+    "sha256": "d47133a0993af8e812f7123cbaa147a72f642f179a9307512f2084a44cf01d59",
+    "pixelsPreserved": true
+  },
+  {
+    "asset": "monstera",
+    "nativePath": "review/motion/polish-native/motion-monstera-master.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "nativeSha256": "6debca365d82499e14d59d16fccf6ae1291f296fb2cd9a7e93fd00dc6156790e",
+    "canvas": [
+      1488,
+      1488
+    ],
+    "offset": [
+      102,
+      122
+    ],
+    "nativeBounds": [
+      122,
+      134,
+      1162,
+      1110
+    ],
+    "bounds": [
+      224,
+      256,
+      1264,
+      1232
+    ],
+    "sha256": "0a5b9d1b49d19375489d2765644afe5731f5a2f1f52b1c7d04291433f5d99a12",
+    "pixelsPreserved": true
+  },
+  {
+    "asset": "pointer",
+    "nativePath": "review/motion/polish-native/motion-pointer-master.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "nativeSha256": "6a36749354fb7a9ddd86de3267b5a4e64f01e245cd5915cef1f995cc13aa8f62",
+    "canvas": [
+      1552,
+      1552
+    ],
+    "offset": [
+      112,
+      148
+    ],
+    "nativeBounds": [
+      347,
+      89,
+      982,
+      1167
+    ],
+    "bounds": [
+      459,
+      237,
+      1094,
+      1315
+    ],
+    "sha256": "df200b3e2e4fc196a40947d531584a70328f64c3e696b2fc51d4a0237a9f4c69",
+    "pixelsPreserved": true
+  },
+  {
+    "asset": "ladybug",
+    "nativePath": "review/motion/polish-native/motion-ladybug-master.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "nativeSha256": "ec408600b72075d00761aaa930260de83a75f8ee916f9d29a9a5228337abf639",
+    "canvas": [
+      1296,
+      1296
+    ],
+    "offset": [
+      22,
+      32
+    ],
+    "nativeBounds": [
+      178,
+      215,
+      1075,
+      1018
+    ],
+    "bounds": [
+      200,
+      247,
+      1097,
+      1050
+    ],
+    "sha256": "dceda26aa0814b173ff835daea5cd1589d8754a63c9cf9c9557c4d7c3c39b065",
+    "pixelsPreserved": true
+  },
+  {
+    "asset": "snail",
+    "nativePath": "review/motion/polish-native/motion-snail-master.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "nativeSha256": "6fcf584a337c79677b2ee467618074e14105c33676ef6d1733c7b411779a3f30",
+    "canvas": [
+      1680,
+      1680
+    ],
+    "offset": [
+      190,
+      202
+    ],
+    "nativeBounds": [
+      67,
+      282,
+      1234,
+      993
+    ],
+    "bounds": [
+      257,
+      484,
+      1424,
+      1195
+    ],
+    "sha256": "2e17771b03306d69812f92ec85a63f7ea8715ac2a372ee60d11ca81ec9556075",
+    "pixelsPreserved": true
+  },
+  {
+    "asset": "frog",
+    "nativePath": "review/motion/polish-native/motion-frog-master.png",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "nativeSha256": "dc1339b3eff2a56e34a4881131de567fda572736b1d3bb972a1684b979771f6f",
+    "canvas": [
+      1286,
+      1286
+    ],
+    "offset": [
+      16,
+      26
+    ],
+    "nativeBounds": [
+      236,
+      269,
+      1018,
+      966
+    ],
+    "bounds": [
+      252,
+      295,
+      1034,
+      992
+    ],
+    "sha256": "73a158b3fbcc2c981e7e8c2b405aa295ca32195b1466287a6d1157667e89796e",
+    "pixelsPreserved": true
+  }
+]

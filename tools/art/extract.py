@@ -181,7 +181,13 @@ NEW_TREASURES = ["feather", "strawberry", "amber", "gigaflower", "crystal"]
 NEW_TREASURE_DIR = os.path.join(SRC, "treasures-v2")
 # The approved motion masters replace the kit drawings of these stills, so the
 # still and its rig show the same design (art/CLAUDE_HANDOFF_MOTION.md).
-MOTION_MASTER_STILLS = {"treasures": ["coconut", "nut", "flower", "berries"], "foliage": ["butterfly"]}
+MOTION_MASTER_STILLS = {
+    "treasures": ["coconut", "nut", "flower", "berries", "stone", "shell"],
+    "foliage": ["butterfly", "banana-plant", "fern", "monstera"],
+}
+# Max side of each rig's still (its parts are packed at that scale): what it is
+# drawn at on a tablet at 2x, not more.
+RIG_SIZES = {"butterfly": 320, "banana-plant": 384, "fern": 384, "monstera": 384, "confetti": 320, "pointer": 192, "ladybug": 128, "snail": 128, "frog": 128}
 
 
 def export_still(path: str, rel: str, max_side: int) -> dict:
@@ -215,7 +221,7 @@ def export_motion_master_stills(folder: str, max_side: int, report: dict) -> dic
     for name in MOTION_MASTER_STILLS[folder]:
         path = os.path.join(SRC, "motion", name, "master.png")
         if os.path.exists(path):
-            out[name] = export_still(path, f"assets/{folder}/{name}.webp", max_side)
+            out[name] = export_still(path, f"assets/{folder}/{name}.webp", RIG_SIZES.get(name, max_side))
     report[f"motion-master-stills-{folder}"] = out
     return out
 
@@ -315,7 +321,7 @@ def main() -> int:
     manifest["foliage"].update(export_motion_master_stills("foliage", 320, report))
     # Painted parts (art/CLAUDE_HANDOFF_TREASURES.md, art/CLAUDE_HANDOFF_MOTION.md):
     # every treasure that has them, and the butterfly; the chest goes to the DOM.
-    manifest["rigs"] = rigs.process_rigs(ROOT, SRC, [*manifest["treasures"], "butterfly"], 320, clean_alpha, ALPHA_FLOOR, report)
+    manifest["rigs"] = rigs.process_rigs(ROOT, SRC, {**{t: 320 for t in manifest["treasures"]}, **RIG_SIZES}, clean_alpha, ALPHA_FLOOR, report)
     manifest["chest"] = rigs.export_chest(ROOT, SRC, clean_alpha, ALPHA_FLOOR, save_webp, report)
     manifest["ui"] = export_items("ui-surfaces-v1.png", ["wood-button", "leaf-button", "cream-pill", "cream-panel"], "ui", 720, report)
     split_panel_leaf(manifest["ui"], report)

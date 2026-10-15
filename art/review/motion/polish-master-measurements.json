@@ -1,0 +1,386 @@
+{
+  "stage": "awaiting-owner-approval",
+  "sources": [
+    {
+      "id": "motion-stone-master",
+      "source": "source/motion/stone/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "2fdf5dd9c9557cc63f6de292f2aad08210d69b5febb9cc4f4751184b13f34379",
+      "bytes": 945596,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelFraction": 0.6747651534229222,
+      "alpha40Bounds": [
+        173,
+        247,
+        1079,
+        1027
+      ],
+      "edgeAlphaSum": 0,
+      "occupancyMaxDimension": 0.722488038277512,
+      "approvalStatus": "pending",
+      "paddingStatus": "pending owner approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-stone-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-stone-master.txt": "caa22c689f37d1536d67a7e54bd2f2c31f8540db30a549c0bf5822827948bcc9"
+      },
+      "edgeNote": "Fully transparent canvas edges."
+    },
+    {
+      "id": "motion-shell-master",
+      "source": "source/motion/shell/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "977ba1bb03d483137699a543191153c79335f8ca9c0fba2b8a13dc44426a8859",
+      "bytes": 1103648,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelFraction": 0.5987118732019261,
+      "alpha40Bounds": [
+        158,
+        169,
+        1127,
+        1119
+      ],
+      "edgeAlphaSum": 2,
+      "occupancyMaxDimension": 0.7727272727272727,
+      "approvalStatus": "pending",
+      "paddingStatus": "pending owner approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-shell-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-shell-master.txt": "bdec08fcc7c4c62d3f1ad1356b6ef78cf404bac298e27f8a870f266d6338688f"
+      },
+      "edgeNote": "Trace alpha 1/255 at canvas edges; original preserved, no visible silhouette clipping."
+    },
+    {
+      "id": "motion-confetti-master",
+      "source": "source/motion/confetti/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "fffaba03b4c50193d70e61da4e72bcaaeb687a5e24f779d1d11c9a34de8e628a",
+      "bytes": 207324,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelFraction": 0.9609771856057426,
+      "alpha40Bounds": [
+        61,
+        349,
+        1205,
+        938
+      ],
+      "edgeAlphaSum": 0,
+      "occupancyMaxDimension": 0.9122807017543859,
+      "approvalStatus": "pending",
+      "paddingStatus": "pending owner approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-master.txt",
+        "prompts/polish-executed/motion-confetti-master-spacing.txt",
+        "prompts/polish-executed/motion-confetti-master-spacing-final.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-confetti-master.txt": "e2458f007312dfb4dec6a492bc394ae5e92e6f6835f6fe2f5bd7e1555cd16455",
+        "prompts/polish-executed/motion-confetti-master-spacing.txt": "048d7d4bffd487d429bd7dfdf0d765771b51df984f68f41c4d4de6a87bf65760",
+        "prompts/polish-executed/motion-confetti-master-spacing-final.txt": "e19fc35535791da2743a905268c6f6aa1d71383cb01c6dbdb59634dd18133240"
+      },
+      "edgeNote": "Fully transparent canvas edges.",
+      "sixCellBounds": [
+        [
+          89,
+          349,
+          206,
+          481
+        ],
+        [
+          566,
+          353,
+          697,
+          475
+        ],
+        [
+          1075,
+          350,
+          1185,
+          477
+        ],
+        [
+          61,
+          805,
+          190,
+          938
+        ],
+        [
+          570,
+          810,
+          694,
+          931
+        ],
+        [
+          1073,
+          821,
+          1205,
+          933
+        ]
+      ],
+      "horizontalGapsPixels": [
+        360,
+        378,
+        380,
+        379
+      ],
+      "minimumGapFraction": 0.28708133971291866
+    },
+    {
+      "id": "motion-banana-plant-master",
+      "source": "source/motion/banana-plant/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "a2145fcca57364198af3d47ae5ffb296ae67629e16662c724b2b8f9e586ea35f",
+      "bytes": 1388353,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelFraction": 0.5661309646451927,
+      "alpha40Bounds": [
+        88,
+        123,
+        1225,
+        1148
+      ],
+      "edgeAlphaSum": 2,
+      "occupancyMaxDimension": 0.9066985645933014,
+      "approvalStatus": "pending",
+      "paddingStatus": "pending owner approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-banana-plant-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-banana-plant-master.txt": "2a501d49c1de57cf8e34c322f81abe582091ef463de9661f7d171dd13cf390f0"
+      },
+      "edgeNote": "Trace alpha 1/255 at canvas edges; original preserved, no visible silhouette clipping."
+    },
+    {
+      "id": "motion-fern-master",
+      "source": "source/motion/fern/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "67b734e16df6938fc8e3349dc8e0d7f1aeefd5d6fc821d99ca0ba1450861acc0",
+      "bytes": 1338097,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelFraction": 0.5872309089382874,
+      "alpha40Bounds": [
+        142,
+        102,
+        1173,
+        1193
+      ],
+      "edgeAlphaSum": 2,
+      "occupancyMaxDimension": 0.8700159489633174,
+      "approvalStatus": "pending",
+      "paddingStatus": "pending owner approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-fern-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-fern-master.txt": "7ef7e29f52a8fb3f55fee54adade39a191153b2de7cae4ca87908b50c20807e7"
+      },
+      "edgeNote": "Trace alpha 1/255 at canvas edges; original preserved, no visible silhouette clipping."
+    },
+    {
+      "id": "motion-monstera-master",
+      "source": "source/motion/monstera/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "6debca365d82499e14d59d16fccf6ae1291f296fb2cd9a7e93fd00dc6156790e",
+      "bytes": 1419502,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelFraction": 0.5443200577927347,
+      "alpha40Bounds": [
+        122,
+        134,
+        1162,
+        1110
+      ],
+      "edgeAlphaSum": 3,
+      "occupancyMaxDimension": 0.8293460925039873,
+      "approvalStatus": "pending",
+      "paddingStatus": "pending owner approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-monstera-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-monstera-master.txt": "a9b7d9b786f7e7458e85f4ba108bd95985822a90d8a9e49849e8835213992f76"
+      },
+      "edgeNote": "Trace alpha 1/255 at canvas edges; original preserved, no visible silhouette clipping."
+    },
+    {
+      "id": "motion-pointer-master",
+      "source": "source/motion/pointer/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "6a36749354fb7a9ddd86de3267b5a4e64f01e245cd5915cef1f995cc13aa8f62",
+      "bytes": 748819,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelFraction": 0.7505933166975726,
+      "alpha40Bounds": [
+        347,
+        89,
+        982,
+        1167
+      ],
+      "edgeAlphaSum": 0,
+      "occupancyMaxDimension": 0.8596491228070176,
+      "approvalStatus": "pending",
+      "paddingStatus": "pending owner approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-pointer-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-pointer-master.txt": "e03e28d1151778a96a3e75a4139cb2627b1e93e6fb3fa421188d0d319ee5d392"
+      },
+      "edgeNote": "Fully transparent canvas edges."
+    },
+    {
+      "id": "motion-ladybug-master",
+      "source": "source/motion/ladybug/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "ec408600b72075d00761aaa930260de83a75f8ee916f9d29a9a5228337abf639",
+      "bytes": 789457,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelFraction": 0.7556196566521421,
+      "alpha40Bounds": [
+        178,
+        215,
+        1075,
+        1018
+      ],
+      "edgeAlphaSum": 0,
+      "occupancyMaxDimension": 0.715311004784689,
+      "approvalStatus": "pending",
+      "paddingStatus": "pending owner approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-ladybug-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-ladybug-master.txt": "898cce7f59775f2361b49c5f2de24f351385051d13b5a614abdf6b69e8ddc053"
+      },
+      "edgeNote": "Fully transparent canvas edges."
+    },
+    {
+      "id": "motion-snail-master",
+      "source": "source/motion/snail/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "6fcf584a337c79677b2ee467618074e14105c33676ef6d1733c7b411779a3f30",
+      "bytes": 1043816,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelFraction": 0.6809940248620682,
+      "alpha40Bounds": [
+        67,
+        282,
+        1234,
+        993
+      ],
+      "edgeAlphaSum": 1,
+      "occupancyMaxDimension": 0.930622009569378,
+      "approvalStatus": "pending",
+      "paddingStatus": "pending owner approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-snail-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-snail-master.txt": "38ad03a0bb1066023616c492234618cf9dc48b346f00883f383938ea731e063e"
+      },
+      "edgeNote": "Trace alpha 1/255 at canvas edges; original preserved, no visible silhouette clipping."
+    },
+    {
+      "id": "motion-frog-master",
+      "source": "source/motion/frog/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "dc1339b3eff2a56e34a4881131de567fda572736b1d3bb972a1684b979771f6f",
+      "bytes": 918334,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelFraction": 0.7392287264485703,
+      "alpha40Bounds": [
+        236,
+        269,
+        1018,
+        966
+      ],
+      "edgeAlphaSum": 0,
+      "occupancyMaxDimension": 0.6236044657097288,
+      "approvalStatus": "pending",
+      "paddingStatus": "pending owner approval",
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-frog-master.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-frog-master.txt": "af2cc9a22ca2b3c23307d5eedee6656802a9c6b79290687319a9751f5d30363a"
+      },
+      "edgeNote": "Fully transparent canvas edges."
+    }
+  ],
+  "remainingPartsAndPoses": 27,
+  "stressTests": "Deferred until parts exist and owner approves masters."
+}

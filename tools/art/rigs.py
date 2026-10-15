@@ -45,12 +45,22 @@ def _registrations(root: str) -> dict:
     return out
 
 
-def process_rigs(root: str, src_root: str, wanted: list[str], max_side: int, clean_alpha, alpha_floor: int, report: dict) -> dict:
+def process_rigs(root: str, src_root: str, wanted: dict[str, int], clean_alpha, alpha_floor: int, report: dict) -> dict:
+    """
+    Pack every wanted asset's parts (and extra poses) into one atlas. `wanted`
+    maps an asset to the max side of its still image, the scale its parts are
+    packed at (treasures 320, plants 384, small critters less).
+
+    - Assets with parts: frames `<asset>/<part>`, pivots, opacity, `restVisible`.
+    - Pose-only assets (the pointer, the frog): `<asset>/master` plus each pose,
+      and their landmarks (fingertip, body centre) in canvas pixels.
+    - Confetti: each piece is its own particle; its pivot is its own centre.
+    """
     registration = _registrations(root)
     out_dir = os.path.join(root, "public", "assets", "rigs")
     frames = []
     rigs: dict = {}
-    for asset in wanted:
+    for asset, max_side in wanted.items():
         reg = registration.get(asset)
         if not reg:
             continue
@@ -62,6 +72,7 @@ def process_rigs(root: str, src_root: str, wanted: list[str], max_side: int, cle
         x0, y0, x1, y1 = _box(master, alpha_floor)
         k = min(1.0, max_side / max(x1 - x0, y1 - y0))
         sw, sh = round(cw * k), round(ch * k)
+        scale = lambda pt: [round(pt[0] * k, 2), round(pt[1] * k, 2)]  # noqa: E731
 
         def pack(name: str) -> str:
             im = Image.open(os.path.join(folder, f"{name}.png")).convert("RGBA")
@@ -72,19 +83,28 @@ def process_rigs(root: str, src_root: str, wanted: list[str], max_side: int, cle
             frames.append((frame, trimmed, sss, (sw, sh)))
             return frame
 
-        parts = [
-            {"name": p["name"], "frame": pack(p["name"]), "pivot": [round(p["pivot"][0] * k, 2), round(p["pivot"][1] * k, 2)], "opacity": p.get("opacity", 1)}
-            for p in reg["parts"]
-        ]
+        parts = []
+        for p in reg["parts"]:
+            part = {"name": p["name"], "frame": pack(p["name"]), "pivot": scale(p["pivot"]), "opacity": p.get("opacity", 1)}
+            if p.get("restVisible") is False:
+                part["restVisible"] = False
+            parts.append(part)
         poses = {name: pack(name) for name in reg.get("poses", {}) if asset != "chest"}
-        rigs[asset] = {
+        rig: dict = {
             "canvas": [sw, sh],
             # Centre of the still image inside the scaled canvas: the rig's origin.
             "origin": [round((x0 + x1) / 2 * k, 2), round((y0 + y1) / 2 * k, 2)],
             "size": [round((x1 - x0) * k, 2), round((y1 - y0) * k, 2)],
             "parts": parts,
-            **({"poses": poses} if poses else {}),
         }
+        if poses:
+            rig["poses"] = poses
+        if not parts and poses:
+            rig["master"] = pack("master")
+        landmarks = dict(reg.get("masterLandmarks") or {})
+        if landmarks:
+            rig["landmarks"] = {name: scale(pt) for name, pt in landmarks.items()}
+        rigs[asset] = rig
     if not frames:
         return {}
     info = v3.pack_atlas(frames, out_dir, "rig-parts", os.path.join(root, "public"), quality=86)

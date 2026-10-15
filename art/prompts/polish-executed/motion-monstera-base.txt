@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: registered transparent animation layer or alternate pose
+Input image 1: approved padded master, edit target and sole identity reference.
+Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the stems and base, continued a little into the leaf joints. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.
+
+Do not add objects, labels, checkerboards, tinted backgrounds or a rectangular glow. Preserve the approved colors, shading, orientation and relative placement. Output one square RGBA PNG.

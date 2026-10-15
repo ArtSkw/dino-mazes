@@ -690,21 +690,45 @@ test.describe('living treasures (14 October 2026)', () => {
     // Ten parts plus the centre's light.
     expect(r.parts).toBe(11);
     expect(r.standHidden).toBe(true);
-    // A treasure without parts (the stone) stays a still image.
+    // Since the last delivery every treasure has parts: the stone too (body and glint).
     await host(page, 'stone', 'mazu-stone');
-    expect(await rigState(page)).toEqual({ rig: false, parts: 0, standHidden: false });
+    expect(await rigState(page)).toEqual({ rig: true, parts: 2, standHidden: true });
   });
 
   test('butterflies flap real wings; the collection button is a painted chest', async ({ page }) => {
     await boot(page);
-    await page.waitForFunction(() => (window as never as { __dino: { game: { scene: { getScene(k: string): { followers: unknown[] } } } } }).__dino.game.scene.getScene('game').followers.length >= 3);
+    await page.waitForFunction(() => (window as never as { __dino: { game: { scene: { getScene(k: string): { rigs: { size: number } } } } } }).__dino.game.scene.getScene('game').rigs.size >= 3);
     const flies = await state<{ rigs: number; wings: number }>(
       page,
-      "(() => { const g = d.game.scene.getScene('game'); const f = g.followers.filter((x) => x.stand.texture.key === 'fol-butterfly'); return { rigs: f.length, wings: f[0].rig.container.list.length }; })()",
+      "(() => { const g = d.game.scene.getScene('game'); const f = g.rigs.list.filter((x) => x.stand.texture.key === 'fol-butterfly'); return { rigs: f.length, wings: f[0].rig.container.list.length }; })()",
     );
     // Three wandering butterflies, each a body, four wings and the perched pose.
     expect(flies).toEqual({ rigs: 3, wings: 6 });
     await expect(page.locator('.collection-btn .chest img')).toHaveCount(3);
+  });
+
+  test('plants sway leaf by leaf, the first maze shows the painted hand, a tapped critter reacts', async ({ page }) => {
+    await boot(page);
+    await page.waitForFunction(() => (window as never as { __dino: { game: { scene: { getScene(k: string): { rigs: { size: number } } } } } }).__dino.game.scene.getScene('game').rigs.size >= 9);
+    // Six welcome plants and three butterflies are drawn from their parts.
+    expect(await state<number>(page, "d.game.scene.getScene('game').castPlants.filter((p) => (p.cameraFilter & d.game.scene.getScene('game').cameras.main.id) !== 0).length")).toBe(6);
+    await startQuest(page);
+    expect(await state<string>(page, "d.game.scene.getScene('game').hand.texture.key")).toBe('rig-parts');
+    // A generated maze; put a ladybug on a hedge and tap it.
+    await page.evaluate(() => {
+      const c = (window as never as { __dino: { ctrl: { state: { session: object }; newSession(o: object): void } } }).__dino.ctrl;
+      c.newSession({ keepQuestOf: { ...c.state.session, questId: 'tiny-shell', characterId: 'tiny', treasureId: 'shell', intro: false }, difficultyOverride: 'hard' });
+    });
+    await page.waitForTimeout(400);
+    const at = await state<{ x: number; y: number }>(
+      page,
+      "(() => { const g = d.game.scene.getScene('game'); const st = c.state; g.critters.spawn({ maze: st.maze, transform: st.layout.transform, intro: false, drawing: false, quietFor: 99, playingFor: 99, endpoint: null }, g.time.now, 'ladybug'); const k = g.critters.current; const t = st.layout.transform; return { x: t.ox + k.at.x * t.pitch, y: t.oy + k.at.y * t.pitch }; })()",
+    );
+    await page.waitForTimeout(450);
+    await page.mouse.click(at.x, at.y);
+    expect(await state<{ kind: string; acting: boolean } | null>(page, "d.game.scene.getScene('game').critters.current")).toMatchObject({ kind: 'ladybug', acting: true });
+    // Tapping never drew anything.
+    expect(await state<number>(page, 'c.engine.points.length')).toBe(0);
   });
 
   test('reduced motion shows the still image instead of the rig', async ({ page }) => {
@@ -713,6 +737,9 @@ test.describe('living treasures (14 October 2026)', () => {
     await startQuest(page);
     await host(page, 'crystal', 'giganto-crystal');
     expect(await rigState(page)).toEqual({ rig: false, parts: 0, standHidden: false });
+    // No part rigs at all, and no critters.
+    expect(await state<number>(page, "d.game.scene.getScene('game').rigs.size")).toBe(0);
+    expect(await state<unknown>(page, "d.game.scene.getScene('game').critters.current")).toBeNull();
   });
 });
 

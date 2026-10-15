@@ -149,26 +149,16 @@
   "stone": {
    "image": "assets/treasures/stone.webp",
    "width": 320,
-   "height": 279,
-   "bytes": 27686,
-   "sourceBox": [
-    66,
-    594,
-    478,
-    954
-   ]
+   "height": 276,
+   "bytes": 29562,
+   "sourceSha256": "975767a8ec5a6f1bbb2e0128961bf596838b8bf4ed0e86d82d3c81e04bc75286"
   },
   "shell": {
    "image": "assets/treasures/shell.webp",
-   "width": 315,
-   "height": 320,
-   "bytes": 30836,
-   "sourceBox": [
-    574,
-    558,
-    962,
-    954
-   ]
+   "width": 320,
+   "height": 314,
+   "bytes": 26810,
+   "sourceSha256": "553ddc5ccb83dccf3d010821ef9022d43833f99f633ad7bd6fe2ed3be31954df"
   },
   "berries": {
    "image": "assets/treasures/berries.webp",
@@ -241,6 +231,20 @@
    "height": 301,
    "bytes": 35000,
    "sourceSha256": "7b1800a9dbc4ea41a2e57e77bade192b86539da5ded0e64ac89aab7ae36218ce"
+  },
+  "stone": {
+   "image": "assets/treasures/stone.webp",
+   "width": 320,
+   "height": 276,
+   "bytes": 29562,
+   "sourceSha256": "975767a8ec5a6f1bbb2e0128961bf596838b8bf4ed0e86d82d3c81e04bc75286"
+  },
+  "shell": {
+   "image": "assets/treasures/shell.webp",
+   "width": 320,
+   "height": 314,
+   "bytes": 26810,
+   "sourceSha256": "553ddc5ccb83dccf3d010821ef9022d43833f99f633ad7bd6fe2ed3be31954df"
   }
  },
  "treasures-v2": {
@@ -331,39 +335,24 @@
   },
   "banana-plant": {
    "image": "assets/foliage/banana-plant.webp",
-   "width": 311,
-   "height": 384,
-   "bytes": 47850,
-   "sourceBox": [
-    10,
-    454,
-    426,
-    962
-   ]
+   "width": 384,
+   "height": 346,
+   "bytes": 47630,
+   "sourceSha256": "58077758260e77c540e0adb2cf38b0f276c26efc2b5f3e672027d32d865fb18a"
   },
   "fern": {
    "image": "assets/foliage/fern.webp",
-   "width": 308,
+   "width": 362,
    "height": 384,
-   "bytes": 50668,
-   "sourceBox": [
-    406,
-    490,
-    794,
-    970
-   ]
+   "bytes": 56058,
+   "sourceSha256": "d47133a0993af8e812f7123cbaa147a72f642f179a9307512f2084a44cf01d59"
   },
   "monstera": {
    "image": "assets/foliage/monstera.webp",
-   "width": 373,
-   "height": 384,
-   "bytes": 37274,
-   "sourceBox": [
-    786,
-    522,
-    1226,
-    970
-   ]
+   "width": 384,
+   "height": 360,
+   "bytes": 60414,
+   "sourceSha256": "0a5b9d1b49d19375489d2765644afe5731f5a2f1f52b1c7d04291433f5d99a12"
   },
   "butterfly": {
    "image": "assets/foliage/butterfly.webp",
@@ -380,25 +369,56 @@
    "height": 223,
    "bytes": 27956,
    "sourceSha256": "1581a97275df3be840aac3f14669ff416e79e90255d4b2ae0dda4c8b764ff807"
+  },
+  "banana-plant": {
+   "image": "assets/foliage/banana-plant.webp",
+   "width": 384,
+   "height": 346,
+   "bytes": 47630,
+   "sourceSha256": "58077758260e77c540e0adb2cf38b0f276c26efc2b5f3e672027d32d865fb18a"
+  },
+  "fern": {
+   "image": "assets/foliage/fern.webp",
+   "width": 362,
+   "height": 384,
+   "bytes": 56058,
+   "sourceSha256": "d47133a0993af8e812f7123cbaa147a72f642f179a9307512f2084a44cf01d59"
+  },
+  "monstera": {
+   "image": "assets/foliage/monstera.webp",
+   "width": 384,
+   "height": 360,
+   "bytes": 60414,
+   "sourceSha256": "0a5b9d1b49d19375489d2765644afe5731f5a2f1f52b1c7d04291433f5d99a12"
   }
  },
  "rigs": {
   "assets": [
    "amber",
+   "banana-plant",
    "berries",
    "butterfly",
    "coconut",
+   "confetti",
    "crystal",
    "feather",
+   "fern",
    "flower",
+   "frog",
    "gigaflower",
+   "ladybug",
+   "monstera",
    "nut",
+   "pointer",
+   "shell",
+   "snail",
+   "stone",
    "strawberry"
   ],
-  "frames": 51,
+  "frames": 80,
   "pages": 1,
-  "bytes": 385665,
-  "decodedBytes": 8739900
+  "bytes": 665299,
+  "decodedBytes": 15024912
  },
  "chest": {
   "width": 192,

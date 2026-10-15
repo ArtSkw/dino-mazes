@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { CELEBRATION_S, GLOW_PARTS, PARENTS, RIG_MOTION, poseOf } from '../../src/game/rigMotion';
 import { ASSETS, rigFor } from '../../src/game/assets';
+import { pieceOffset } from '../../src/game/confetti';
+import { PLANT_MAX_RELATIVE } from '../../src/game/rigData';
 import type { TreasureId } from '../../src/domain/types';
 
 const RIGGED = Object.keys(RIG_MOTION) as TreasureId[];
@@ -13,7 +15,8 @@ const CEL = times(0, CELEBRATION_S, 0.01);
 describe('rigs: assets', () => {
   it('every rigged treasure has its motion, still image and parts; the butterfly has its perched pose', () => {
     const assets = ASSETS.rigs?.assets ?? {};
-    expect(Object.keys(assets).sort()).toEqual([...RIGGED, 'butterfly'].sort());
+    const others = ['butterfly', 'banana-plant', 'fern', 'monstera', 'confetti', 'pointer', 'ladybug', 'snail', 'frog'];
+    expect(Object.keys(assets).sort()).toEqual([...RIGGED, ...others].sort());
     for (const id of RIGGED) {
       const rig = rigFor(id)!;
       expect(ASSETS.treasures[id], id).toBeDefined();
@@ -28,6 +31,27 @@ describe('rigs: assets', () => {
     expect(partsOf('butterfly').filter((n) => n.startsWith('wing-'))).toHaveLength(4);
     expect(fly.poses?.['perched']).toBeDefined();
     expect(ASSETS.foliage['butterfly']).toBeDefined();
+  });
+
+  it('plants have a base and two leaf layers on one pivot; the hand and the frog have their poses and landmarks', () => {
+    for (const id of ['banana-plant', 'fern', 'monstera']) {
+      const rig = rigFor(id)!;
+      expect(partsOf(id)).toEqual(['base', 'leaves-back', 'leaves-front']);
+      const pivots = new Set(rig.parts.map((p) => p.pivot.join(',')));
+      expect(pivots.size, id).toBe(1);
+      expect(ASSETS.foliage[id], id).toBeDefined();
+    }
+    expect(PLANT_MAX_RELATIVE).toBeLessThanOrEqual(6);
+    const hand = rigFor('pointer')!;
+    expect(hand.master).toBeDefined();
+    expect(hand.poses?.['press']).toBeDefined();
+    expect(hand.landmarks?.['fingertip']).toBeDefined();
+    const frog = rigFor('frog')!;
+    expect(frog.poses?.['jump']).toBeDefined();
+    expect(frog.landmarks?.['bodyCentre']).toBeDefined();
+    // The ladybug's flight wings are hidden at rest.
+    expect(rigFor('ladybug')!.parts.find((p) => p.name === 'wings')?.restVisible).toBe(false);
+    expect(partsOf('confetti')).toHaveLength(6);
   });
 
   it('the chest for the collection button: closed layers, open pose and the lid hinge on the right', () => {
@@ -100,6 +124,31 @@ describe('rigs: motion stays within what Codex reviewed', () => {
         }
       }
     }
+  });
+
+  it('stone and shell glints stay within ±6 % of the object and 130 % scale', () => {
+    for (const id of ['stone', 'shell'] as const) {
+      const rig = rigFor(id)!;
+      const width = rig.size[0] / rig.canvas[1]; // the object's width in canvas heights
+      for (const c of [null, ...CEL]) {
+        for (const t of c === null ? IDLE : [2.2]) {
+          const p = poseOf(id, 'glint', t, c);
+          expect(Math.abs(p.dx), `${id} dx`).toBeLessThanOrEqual(0.06 * width);
+          expect(Math.abs(p.dy), `${id} dy`).toBeLessThanOrEqual(0.06 * width);
+          expect(p.scale, `${id} scale`).toBeLessThanOrEqual(1.3);
+        }
+      }
+    }
+  });
+
+  it('confetti flies out, slows against the air and drifts down', () => {
+    const f = { vx: 300, vy: -400, gravity: 420, spin: 90, flipHz: 2, phase: 0 };
+    expect(pieceOffset(f, 0).x).toBeCloseTo(0, 9);
+    expect(pieceOffset(f, 0).y).toBeCloseTo(0, 9);
+    expect(pieceOffset(f, 0.2).y).toBeLessThan(0);
+    expect(pieceOffset(f, 1.7).y).toBeGreaterThan(pieceOffset(f, 0.4).y);
+    // Drag bounds the sideways drift.
+    expect(Math.abs(pieceOffset(f, 10).x)).toBeLessThan(300 / 2.2 + 1);
   });
 
   it('flowers close, then have bloomed before the treasure flies to the collection (1.1 s)', () => {

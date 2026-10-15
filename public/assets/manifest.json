@@ -548,26 +548,16 @@
   "stone": {
    "image": "assets/treasures/stone.webp",
    "width": 320,
-   "height": 279,
-   "bytes": 27686,
-   "sourceBox": [
-    66,
-    594,
-    478,
-    954
-   ]
+   "height": 276,
+   "bytes": 29562,
+   "sourceSha256": "975767a8ec5a6f1bbb2e0128961bf596838b8bf4ed0e86d82d3c81e04bc75286"
   },
   "shell": {
    "image": "assets/treasures/shell.webp",
-   "width": 315,
-   "height": 320,
-   "bytes": 30836,
-   "sourceBox": [
-    574,
-    558,
-    962,
-    954
-   ]
+   "width": 320,
+   "height": 314,
+   "bytes": 26810,
+   "sourceSha256": "553ddc5ccb83dccf3d010821ef9022d43833f99f633ad7bd6fe2ed3be31954df"
   },
   "berries": {
    "image": "assets/treasures/berries.webp",
@@ -663,39 +653,24 @@
   },
   "banana-plant": {
    "image": "assets/foliage/banana-plant.webp",
-   "width": 311,
-   "height": 384,
-   "bytes": 47850,
-   "sourceBox": [
-    10,
-    454,
-    426,
-    962
-   ]
+   "width": 384,
+   "height": 346,
+   "bytes": 47630,
+   "sourceSha256": "58077758260e77c540e0adb2cf38b0f276c26efc2b5f3e672027d32d865fb18a"
   },
   "fern": {
    "image": "assets/foliage/fern.webp",
-   "width": 308,
+   "width": 362,
    "height": 384,
-   "bytes": 50668,
-   "sourceBox": [
-    406,
-    490,
-    794,
-    970
-   ]
+   "bytes": 56058,
+   "sourceSha256": "d47133a0993af8e812f7123cbaa147a72f642f179a9307512f2084a44cf01d59"
   },
   "monstera": {
    "image": "assets/foliage/monstera.webp",
-   "width": 373,
-   "height": 384,
-   "bytes": 37274,
-   "sourceBox": [
-    786,
-    522,
-    1226,
-    970
-   ]
+   "width": 384,
+   "height": 360,
+   "bytes": 60414,
+   "sourceSha256": "0a5b9d1b49d19375489d2765644afe5731f5a2f1f52b1c7d04291433f5d99a12"
   },
   "butterfly": {
    "image": "assets/foliage/butterfly.webp",
@@ -796,7 +771,7 @@
  },
  "rigs": {
   "atlas": "assets/rigs/rig-parts.json",
-  "decodedBytes": 8739900,
+  "decodedBytes": 15024912,
   "assets": {
    "coconut": {
     "canvas": [
@@ -969,6 +944,74 @@
        229.42
       ],
       "opacity": 1
+     }
+    ]
+   },
+   "stone": {
+    "canvas": [
+     457,
+     457
+    ],
+    "origin": [
+     228.37,
+     228.02
+    ],
+    "size": [
+     320.0,
+     275.59
+    ],
+    "parts": [
+     {
+      "name": "body",
+      "frame": "stone/body",
+      "pivot": [
+       228.37,
+       228.37
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "glint",
+      "frame": "stone/glint",
+      "pivot": [
+       173.39,
+       171.28
+      ],
+      "opacity": 0.7
+     }
+    ]
+   },
+   "shell": {
+    "canvas": [
+     459,
+     459
+    ],
+    "origin": [
+     229.94,
+     229.77
+    ],
+    "size": [
+     320.0,
+     313.73
+    ],
+    "parts": [
+     {
+      "name": "body",
+      "frame": "shell/body",
+      "pivot": [
+       229.94,
+       229.61
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "glint",
+      "frame": "shell/glint",
+      "pivot": [
+       197.61,
+       246.43
+      ],
+      "opacity": 0.4
      }
     ]
    },
@@ -1410,6 +1453,342 @@
     "poses": {
      "perched": "butterfly/perched"
     }
+   },
+   "banana-plant": {
+    "canvas": [
+     551,
+     551
+    ],
+    "origin": [
+     275.35,
+     275.18
+    ],
+    "size": [
+     384.0,
+     345.87
+    ],
+    "parts": [
+     {
+      "name": "base",
+      "frame": "banana-plant/base",
+      "pivot": [
+       268.26,
+       428.54
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaves-back",
+      "frame": "banana-plant/leaves-back",
+      "pivot": [
+       268.26,
+       428.54
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaves-front",
+      "frame": "banana-plant/leaves-front",
+      "pivot": [
+       268.26,
+       428.54
+      ],
+      "opacity": 1
+     }
+    ]
+   },
+   "fern": {
+    "canvas": [
+     550,
+     550
+    ],
+    "origin": [
+     275.01,
+     274.84
+    ],
+    "size": [
+     361.89,
+     384.0
+    ],
+    "parts": [
+     {
+      "name": "base",
+      "frame": "fern/base",
+      "pivot": [
+       268.87,
+       444.37
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaves-back",
+      "frame": "fern/leaves-back",
+      "pivot": [
+       268.87,
+       444.37
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaves-front",
+      "frame": "fern/leaves-front",
+      "pivot": [
+       268.87,
+       444.37
+      ],
+      "opacity": 1
+     }
+    ]
+   },
+   "monstera": {
+    "canvas": [
+     549,
+     549
+    ],
+    "origin": [
+     274.71,
+     274.71
+    ],
+    "size": [
+     384.0,
+     360.37
+    ],
+    "parts": [
+     {
+      "name": "base",
+      "frame": "monstera/base",
+      "pivot": [
+       266.58,
+       443.82
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaves-back",
+      "frame": "monstera/leaves-back",
+      "pivot": [
+       266.58,
+       443.82
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "leaves-front",
+      "frame": "monstera/leaves-front",
+      "pivot": [
+       266.58,
+       443.82
+      ],
+      "opacity": 1
+     }
+    ]
+   },
+   "confetti": {
+    "canvas": [
+     461,
+     461
+    ],
+    "origin": [
+     230.49,
+     230.21
+    ],
+    "size": [
+     320.0,
+     165.03
+    ],
+    "parts": [
+     {
+      "name": "piece-1",
+      "frame": "confetti/piece-1",
+      "pivot": [
+       94.69,
+       166.43
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "piece-2",
+      "frame": "confetti/piece-2",
+      "pivot": [
+       230.07,
+       166.15
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "piece-3",
+      "frame": "confetti/piece-3",
+      "pivot": [
+       369.51,
+       166.01
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "piece-4",
+      "frame": "confetti/piece-4",
+      "pivot": [
+       88.53,
+       294.13
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "piece-5",
+      "frame": "confetti/piece-5",
+      "pivot": [
+       230.21,
+       293.85
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "piece-6",
+      "frame": "confetti/piece-6",
+      "pivot": [
+       372.03,
+       295.66
+      ],
+      "opacity": 1
+     }
+    ]
+   },
+   "pointer": {
+    "canvas": [
+     276,
+     276
+    ],
+    "origin": [
+     138.3,
+     138.21
+    ],
+    "size": [
+     113.1,
+     192.0
+    ],
+    "parts": [],
+    "poses": {
+     "press": "pointer/press"
+    },
+    "master": "pointer/master",
+    "landmarks": {
+     "fingertip": [
+      120.4,
+      42.21
+     ]
+    }
+   },
+   "ladybug": {
+    "canvas": [
+     185,
+     185
+    ],
+    "origin": [
+     92.51,
+     92.44
+    ],
+    "size": [
+     128.0,
+     114.46
+    ],
+    "parts": [
+     {
+      "name": "body",
+      "frame": "ladybug/body",
+      "pivot": [
+       92.51,
+       92.94
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "wings",
+      "frame": "ladybug/wings",
+      "pivot": [
+       92.51,
+       66.57
+      ],
+      "opacity": 0.7,
+      "restVisible": false
+     },
+     {
+      "name": "shell-left",
+      "frame": "ladybug/shell-left",
+      "pivot": [
+       90.37,
+       70.13
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "shell-right",
+      "frame": "ladybug/shell-right",
+      "pivot": [
+       94.65,
+       70.13
+      ],
+      "opacity": 1
+     }
+    ]
+   },
+   "snail": {
+    "canvas": [
+     184,
+     184
+    ],
+    "origin": [
+     92.05,
+     92.0
+    ],
+    "size": [
+     128.0,
+     77.92
+    ],
+    "parts": [
+     {
+      "name": "body",
+      "frame": "snail/body",
+      "pivot": [
+       115.62,
+       88.99
+      ],
+      "opacity": 1
+     },
+     {
+      "name": "shell",
+      "frame": "snail/shell",
+      "pivot": [
+       115.62,
+       88.99
+      ],
+      "opacity": 1
+     }
+    ]
+   },
+   "frog": {
+    "canvas": [
+     210,
+     210
+    ],
+    "origin": [
+     105.25,
+     105.33
+    ],
+    "size": [
+     128.0,
+     114.09
+    ],
+    "parts": [],
+    "poses": {
+     "jump": "frog/jump"
+    },
+    "master": "frog/master",
+    "landmarks": {
+     "bodyCentre": [
+      105.25,
+      99.19
+     ]
+    }
    }
   }
  },
@@ -1515,5 +1894,5 @@
    "bytes": 37908
   }
  },
- "totalBytes": 9401207
+ "totalBytes": 9427367
 }

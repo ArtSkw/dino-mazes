@@ -1,0 +1,6 @@
+Use case: stylized-concept
+Asset type: transparent 2D game master awaiting owner approval
+One small red ladybug seen from directly above, black spots and head, six tiny legs, wing cases closed, friendly and round; readable at 30 px. Square 1024x1024 canvas; the assembled object is centred and fills about 70% of the canvas, with generous transparent margins on every side. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.
+Input images: 1 treasure kit (identity for treasures, style otherwise); 2 foliage kit (identity for plants, style otherwise); 3 UI kit (painted style only).
+Image 2 is painted nature style only. Strict overhead view, six legs, two closed red wing cases, simple readable round silhouette.
+Extract no background from reference sheets. No glow, gradient rectangle or drop shadow. Preserve generous transparent margins. Only the requested subject.

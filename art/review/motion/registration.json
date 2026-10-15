@@ -881,6 +881,890 @@
           ]
         }
       }
+    },
+    "stone": {
+      "canvas": [
+        1296,
+        1296
+      ],
+      "parts": [
+        {
+          "name": "body",
+          "sourceBounds": [
+            188,
+            249,
+            1067,
+            1004
+          ],
+          "targetBounds": [
+            195,
+            258,
+            1101,
+            1038
+          ],
+          "pivot": [
+            648,
+            648
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            1.030716723549488,
+            0,
+            0,
+            1.033112582781457,
+            1.2252559726962318,
+            0.7549668874172539
+          ]
+        },
+        {
+          "name": "glint",
+          "sourceBounds": [
+            338,
+            317,
+            518,
+            516
+          ],
+          "targetBounds": [
+            422,
+            411,
+            562,
+            561
+          ],
+          "pivot": [
+            492,
+            486
+          ],
+          "opacity": 0.7,
+          "nativeToCanvas": [
+            0.7777777777777778,
+            0,
+            0,
+            0.7537688442211056,
+            159.1111111111111,
+            172.05527638190952
+          ]
+        }
+      ],
+      "ownerApproved": true,
+      "approvalDate": "2026-10-15"
+    },
+    "shell": {
+      "canvas": [
+        1392,
+        1392
+      ],
+      "parts": [
+        {
+          "name": "body",
+          "sourceBounds": [
+            98,
+            144,
+            1199,
+            1200
+          ],
+          "targetBounds": [
+            212,
+            221,
+            1181,
+            1171
+          ],
+          "pivot": [
+            697,
+            696
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.8801089918256131,
+            0,
+            0,
+            0.8996212121212122,
+            125.74931880108991,
+            91.45454545454544
+          ]
+        },
+        {
+          "name": "glint",
+          "sourceBounds": [
+            232,
+            449,
+            544,
+            776
+          ],
+          "targetBounds": [
+            484,
+            632,
+            714,
+            862
+          ],
+          "pivot": [
+            599,
+            747
+          ],
+          "opacity": 0.4,
+          "nativeToCanvas": [
+            0.7371794871794872,
+            0,
+            0,
+            0.7033639143730887,
+            312.97435897435895,
+            316.1896024464832
+          ]
+        }
+      ],
+      "ownerApproved": true,
+      "approvalDate": "2026-10-15"
+    },
+    "banana-plant": {
+      "canvas": [
+        1632,
+        1632
+      ],
+      "parts": [
+        {
+          "name": "base",
+          "sourceBounds": [
+            330,
+            472,
+            945,
+            1036
+          ],
+          "targetBounds": [
+            600,
+            1010,
+            950,
+            1300
+          ],
+          "pivot": [
+            795,
+            1270
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.5691056910569106,
+            0,
+            0,
+            0.5141843971631206,
+            412.1951219512195,
+            767.3049645390071
+          ]
+        },
+        {
+          "name": "leaves-back",
+          "sourceBounds": [
+            88,
+            124,
+            1199,
+            1136
+          ],
+          "targetBounds": [
+            250,
+            303,
+            1360,
+            1300
+          ],
+          "pivot": [
+            795,
+            1270
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.9990999099909991,
+            0,
+            0,
+            0.9851778656126482,
+            162.0792079207921,
+            180.83794466403162
+          ]
+        },
+        {
+          "name": "leaves-front",
+          "sourceBounds": [
+            85,
+            464,
+            1219,
+            1100
+          ],
+          "targetBounds": [
+            248,
+            710,
+            1385,
+            1328
+          ],
+          "pivot": [
+            795,
+            1270
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            1.0026455026455026,
+            0,
+            0,
+            0.9716981132075472,
+            162.77513227513228,
+            259.1320754716981
+          ]
+        }
+      ],
+      "ownerApproved": true,
+      "approvalDate": "2026-10-15"
+    },
+    "fern": {
+      "canvas": [
+        1568,
+        1568
+      ],
+      "parts": [
+        {
+          "name": "base",
+          "sourceBounds": [
+            212,
+            709,
+            999,
+            1066
+          ],
+          "targetBounds": [
+            566,
+            1111,
+            976,
+            1316
+          ],
+          "pivot": [
+            766,
+            1266
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.5209656925031766,
+            0,
+            0,
+            0.5742296918767507,
+            455.55527318932656,
+            703.8711484593838
+          ]
+        },
+        {
+          "name": "leaves-back",
+          "sourceBounds": [
+            132,
+            152,
+            1165,
+            1140
+          ],
+          "targetBounds": [
+            268,
+            238,
+            1299,
+            1276
+          ],
+          "pivot": [
+            766,
+            1266
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.9980638915779284,
+            0,
+            0,
+            1.0506072874493928,
+            136.25556631171344,
+            78.30769230769229
+          ]
+        },
+        {
+          "name": "leaves-front",
+          "sourceBounds": [
+            125,
+            569,
+            1145,
+            1141
+          ],
+          "targetBounds": [
+            268,
+            751,
+            1299,
+            1329
+          ],
+          "pivot": [
+            766,
+            1266
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            1.0107843137254902,
+            0,
+            0,
+            1.0104895104895104,
+            141.65196078431373,
+            176.0314685314686
+          ]
+        }
+      ],
+      "ownerApproved": true,
+      "approvalDate": "2026-10-15"
+    },
+    "monstera": {
+      "canvas": [
+        1488,
+        1488
+      ],
+      "parts": [
+        {
+          "name": "base",
+          "sourceBounds": [
+            240,
+            405,
+            1006,
+            1086
+          ],
+          "targetBounds": [
+            542,
+            872,
+            922,
+            1232
+          ],
+          "pivot": [
+            722,
+            1202
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.4960835509138381,
+            0,
+            0,
+            0.5286343612334802,
+            422.93994778067884,
+            657.9030837004406
+          ]
+        },
+        {
+          "name": "leaves-back",
+          "sourceBounds": [
+            114,
+            178,
+            1170,
+            1074
+          ],
+          "targetBounds": [
+            224,
+            256,
+            1264,
+            1232
+          ],
+          "pivot": [
+            722,
+            1202
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.9848484848484849,
+            0,
+            0,
+            1.0892857142857142,
+            111.72727272727272,
+            62.10714285714286
+          ]
+        },
+        {
+          "name": "leaves-front",
+          "sourceBounds": [
+            132,
+            435,
+            1189,
+            1087
+          ],
+          "targetBounds": [
+            224,
+            592,
+            1264,
+            1232
+          ],
+          "pivot": [
+            722,
+            1202
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.9839167455061495,
+            0,
+            0,
+            0.9815950920245399,
+            94.12298959318827,
+            165.00613496932516
+          ]
+        }
+      ],
+      "ownerApproved": true,
+      "approvalDate": "2026-10-15"
+    },
+    "ladybug": {
+      "canvas": [
+        1296,
+        1296
+      ],
+      "parts": [
+        {
+          "name": "body",
+          "sourceBounds": [
+            112,
+            124,
+            1142,
+            1099
+          ],
+          "targetBounds": [
+            200,
+            247,
+            1097,
+            1050
+          ],
+          "pivot": [
+            649,
+            652
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.870873786407767,
+            0,
+            0,
+            0.8235897435897436,
+            102.46213592233009,
+            144.8748717948718
+          ]
+        },
+        {
+          "name": "wings",
+          "sourceBounds": [
+            47,
+            415,
+            1207,
+            902
+          ],
+          "targetBounds": [
+            132,
+            452,
+            1162,
+            932
+          ],
+          "pivot": [
+            649,
+            467
+          ],
+          "opacity": 0.7,
+          "nativeToCanvas": [
+            0.8879310344827587,
+            0,
+            0,
+            0.9856262833675564,
+            90.26724137931035,
+            42.96509240246411
+          ],
+          "restVisible": false,
+          "note": "Show only during flight; supplied unfolded wings are hidden in the rest stack."
+        },
+        {
+          "name": "shell-left",
+          "sourceBounds": [
+            295,
+            242,
+            797,
+            1065
+          ],
+          "targetBounds": [
+            337,
+            477,
+            657,
+            1012
+          ],
+          "pivot": [
+            634,
+            492
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.6374501992031872,
+            0,
+            0,
+            0.6500607533414338,
+            148.95219123505976,
+            319.685297691373
+          ]
+        },
+        {
+          "name": "shell-right",
+          "sourceBounds": [
+            424,
+            242,
+            926,
+            1051
+          ],
+          "targetBounds": [
+            642,
+            477,
+            962,
+            1012
+          ],
+          "pivot": [
+            664,
+            492
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.6374501992031872,
+            0,
+            0,
+            0.6613102595797281,
+            371.7211155378486,
+            316.9629171817058
+          ]
+        }
+      ],
+      "ownerApproved": true,
+      "approvalDate": "2026-10-15"
+    },
+    "snail": {
+      "canvas": [
+        1680,
+        1680
+      ],
+      "parts": [
+        {
+          "name": "body",
+          "sourceBounds": [
+            109,
+            352,
+            1148,
+            907
+          ],
+          "targetBounds": [
+            257,
+            484,
+            1424,
+            1195
+          ],
+          "pivot": [
+            1055,
+            812
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            1.1231953801732435,
+            0,
+            0,
+            1.281081081081081,
+            134.57170356111646,
+            33.05945945945945
+          ]
+        },
+        {
+          "name": "shell",
+          "sourceBounds": [
+            261,
+            321,
+            1052,
+            980
+          ],
+          "targetBounds": [
+            360,
+            492,
+            1220,
+            1195
+          ],
+          "pivot": [
+            1055,
+            812
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            1.0872313527180784,
+            0,
+            0,
+            1.0667678300455234,
+            76.23261694058152,
+            149.56752655538696
+          ]
+        }
+      ],
+      "ownerApproved": true,
+      "approvalDate": "2026-10-15"
+    },
+    "confetti": {
+      "canvas": [
+        1648,
+        1648
+      ],
+      "parts": [
+        {
+          "name": "piece-1",
+          "sourceBounds": [
+            196,
+            398,
+            425,
+            651
+          ],
+          "targetBounds": [
+            280,
+            529,
+            397,
+            661
+          ],
+          "pivot": [
+            338.5,
+            595.0
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.5109170305676856,
+            0,
+            0,
+            0.5217391304347826,
+            179.86026200873363,
+            321.3478260869565
+          ],
+          "note": "Independent particle. Crop by targetBounds and subtract trim offset from pivot; do not draw the entire sheet as one particle."
+        },
+        {
+          "name": "piece-2",
+          "sourceBounds": [
+            457,
+            395,
+            802,
+            720
+          ],
+          "targetBounds": [
+            757,
+            533,
+            888,
+            655
+          ],
+          "pivot": [
+            822.5,
+            594.0
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.37971014492753624,
+            0,
+            0,
+            0.37538461538461537,
+            583.472463768116,
+            384.7230769230769
+          ],
+          "note": "Independent particle. Crop by targetBounds and subtract trim offset from pivot; do not draw the entire sheet as one particle."
+        },
+        {
+          "name": "piece-3",
+          "sourceBounds": [
+            954,
+            401,
+            1075,
+            543
+          ],
+          "targetBounds": [
+            1266,
+            530,
+            1376,
+            657
+          ],
+          "pivot": [
+            1321.0,
+            593.5
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.9090909090909091,
+            0,
+            0,
+            0.8943661971830986,
+            398.72727272727275,
+            171.35915492957747
+          ],
+          "note": "Independent particle. Crop by targetBounds and subtract trim offset from pivot; do not draw the entire sheet as one particle."
+        },
+        {
+          "name": "piece-4",
+          "sourceBounds": [
+            156,
+            733,
+            472,
+            1043
+          ],
+          "targetBounds": [
+            252,
+            985,
+            381,
+            1118
+          ],
+          "pivot": [
+            316.5,
+            1051.5
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.40822784810126583,
+            0,
+            0,
+            0.4290322580645161,
+            188.31645569620252,
+            670.5193548387097
+          ],
+          "note": "Independent particle. Crop by targetBounds and subtract trim offset from pivot; do not draw the entire sheet as one particle."
+        },
+        {
+          "name": "piece-5",
+          "sourceBounds": [
+            529,
+            741,
+            753,
+            954
+          ],
+          "targetBounds": [
+            761,
+            990,
+            885,
+            1111
+          ],
+          "pivot": [
+            823.0,
+            1050.5
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            0.5535714285714286,
+            0,
+            0,
+            0.568075117370892,
+            468.1607142857143,
+            569.056338028169
+          ],
+          "note": "Independent particle. Crop by targetBounds and subtract trim offset from pivot; do not draw the entire sheet as one particle."
+        },
+        {
+          "name": "piece-6",
+          "sourceBounds": [
+            960,
+            762,
+            1063,
+            849
+          ],
+          "targetBounds": [
+            1264,
+            1001,
+            1396,
+            1113
+          ],
+          "pivot": [
+            1330.0,
+            1057.0
+          ],
+          "opacity": 1,
+          "nativeToCanvas": [
+            1.2815533980582525,
+            0,
+            0,
+            1.2873563218390804,
+            33.70873786407765,
+            20.034482758620697
+          ],
+          "note": "Independent particle. Crop by targetBounds and subtract trim offset from pivot; do not draw the entire sheet as one particle."
+        }
+      ],
+      "ownerApproved": true,
+      "approvalDate": "2026-10-15"
+    },
+    "pointer": {
+      "canvas": [
+        1552,
+        1552
+      ],
+      "parts": [],
+      "poses": {
+        "press": {
+          "sourceBounds": [
+            366,
+            195,
+            892,
+            1066
+          ],
+          "targetBounds": [
+            455,
+            237,
+            1090,
+            1288
+          ],
+          "nativeToCanvas": [
+            1.2072243346007605,
+            0,
+            0,
+            1.2072243346007605,
+            12.322504286885874,
+            1.591254752851711
+          ],
+          "fingertip": [
+            676.0,
+            237
+          ],
+          "nativeLandmark": [
+            549.7549019607843,
+            195
+          ],
+          "landmarkRegistrationErrorPx": 0.0
+        }
+      },
+      "masterLandmarks": {
+        "fingertip": [
+          676.0,
+          237
+        ]
+      },
+      "ownerApproved": true,
+      "note": "Whole-pose replacement; do not stack master and pose."
+    },
+    "frog": {
+      "canvas": [
+        1286,
+        1286
+      ],
+      "parts": [],
+      "poses": {
+        "jump": {
+          "sourceBounds": [
+            43,
+            71,
+            1215,
+            1169
+          ],
+          "targetBounds": [
+            88,
+            44,
+            1201,
+            1087
+          ],
+          "nativeToCanvas": [
+            0.95,
+            0,
+            0,
+            0.95,
+            47.35000000000002,
+            -23.850000000000023
+          ],
+          "bodyCentre": [
+            643,
+            606
+          ],
+          "nativeLandmark": [
+            627,
+            663
+          ],
+          "landmarkRegistrationErrorPx": 0.0
+        }
+      },
+      "masterLandmarks": {
+        "bodyCentre": [
+          643,
+          606
+        ]
+      },
+      "ownerApproved": true,
+      "note": "Whole-pose replacement; do not stack master and pose."
     }
   }
 }

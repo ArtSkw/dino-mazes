@@ -1,5 +1,7 @@
 # Codex art request: the last polish (motion priorities 2 and 3)
 
+> Status, 15 October 2026: **delivered and in the game** (art/CLAUDE_HANDOFF_MOTION.md).
+
 15 October 2026, Claude Code. The owner asked to finish every remaining asset of the motion plan
 so the whole game is painted and alive. Execute with the built-in **GPT Imagegen** skill. Jobs:
 [prompts/jobs-motion.json](prompts/jobs-motion.json), **37 jobs with `status: "todo"`**

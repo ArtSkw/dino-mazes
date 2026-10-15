@@ -454,8 +454,22 @@
       ],
       "alpha": true,
       "priority": 2,
-      "status": "todo",
-      "motion": "Still body; the glint drifts a little and pulses; on find it slides across inside the pebble and a four-point star flares on it."
+      "status": "done",
+      "motion": "Still body; the glint drifts a little and pulses; on find it slides across inside the pebble and a four-point star flares on it.",
+      "approvalStatus": "approved",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1296,
+        1296
+      ],
+      "sha256": "975767a8ec5a6f1bbb2e0128961bf596838b8bf4ed0e86d82d3c81e04bc75286",
+      "promptFiles": [
+        "prompts/polish-executed/motion-stone-master.txt"
+      ],
+      "qa": "Master candidate generated and reviewed; awaiting owner approval. Padding, parts, poses and rig stress tests remain pending.",
+      "measurements": "review/motion/polish-master-measurements.json",
+      "ownerApprovalDate": "2026-10-15",
+      "paddingMeasurements": "review/motion/polish-padded-masters.json"
     },
     {
       "id": "motion-stone-body",
@@ -464,7 +478,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: the pebble WITHOUT its shine: evenly painted turquoise where the glint was. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1296,
+        1296
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "4a462682be2dcf510c430238c64bc0768b8455691a07a58b3379ca9e5a87987a",
+      "promptFiles": [
+        "prompts/polish-executed/motion-stone-body.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-stone-glint",
@@ -473,7 +498,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: ONLY the bright glint and soft sheen as a separate translucent white shape, kept SMALL and well inside the pebble's outline, everything else transparent. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1296,
+        1296
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "e6aef199f51b90cf14981e27f53d63f1067e73e531acf909fbb734f555203c89",
+      "promptFiles": [
+        "prompts/polish-executed/motion-stone-glint.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-shell-master",
@@ -486,8 +522,22 @@
       ],
       "alpha": true,
       "priority": 2,
-      "status": "todo",
-      "motion": "Glints pulse one after another along the spiral; on find the shell wobbles and turns over with a squash."
+      "status": "done",
+      "motion": "Glints pulse one after another along the spiral; on find the shell wobbles and turns over with a squash.",
+      "approvalStatus": "approved",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1392,
+        1392
+      ],
+      "sha256": "553ddc5ccb83dccf3d010821ef9022d43833f99f633ad7bd6fe2ed3be31954df",
+      "promptFiles": [
+        "prompts/polish-executed/motion-shell-master.txt"
+      ],
+      "qa": "Master candidate generated and reviewed; awaiting owner approval. Padding, parts, poses and rig stress tests remain pending.",
+      "measurements": "review/motion/polish-master-measurements.json",
+      "ownerApprovalDate": "2026-10-15",
+      "paddingMeasurements": "review/motion/polish-padded-masters.json"
     },
     {
       "id": "motion-shell-body",
@@ -496,7 +546,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: the shell WITHOUT highlights: evenly painted where the shine was. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1392,
+        1392
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "9ff1c6fbdd9c43f79ee1c7165864caa947f9c4e7542ef9346f4509821f992e64",
+      "promptFiles": [
+        "prompts/polish-executed/motion-shell-body.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-shell-glint",
@@ -505,7 +566,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: ONLY the highlights along the spiral as a separate translucent white shape, kept inside the shell's outline, everything else transparent. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1392,
+        1392
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "1ea0006f7b4db934381a4db9f8d11f57f419b8244cfdc2edec95c0cddef0e33f",
+      "promptFiles": [
+        "prompts/polish-executed/motion-shell-glint.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-berries-master",
@@ -737,8 +809,24 @@
       ],
       "alpha": true,
       "priority": 2,
-      "status": "todo",
-      "motion": "Replace the code-drawn leaves and petals that burst from a found treasure: painted pieces that flip (scaleX through zero), spin a little and drift down with drag."
+      "status": "done",
+      "motion": "Replace the code-drawn leaves and petals that burst from a found treasure: painted pieces that flip (scaleX through zero), spin a little and drift down with drag.",
+      "approvalStatus": "approved",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1648,
+        1648
+      ],
+      "sha256": "1e5af62c6fb251e77c2e50aa671cecad6a36f8f0caca57c459f9c6bff595027e",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-master.txt",
+        "prompts/polish-executed/motion-confetti-master-spacing.txt",
+        "prompts/polish-executed/motion-confetti-master-spacing-final.txt"
+      ],
+      "qa": "Master candidate generated and reviewed; awaiting owner approval. Padding, parts, poses and rig stress tests remain pending.",
+      "measurements": "review/motion/polish-master-measurements.json",
+      "ownerApprovalDate": "2026-10-15",
+      "paddingMeasurements": "review/motion/polish-padded-masters.json"
     },
     {
       "id": "motion-confetti-piece-1",
@@ -747,7 +835,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the top-left piece (the slim green leaf). Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1648,
+        1648
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "1486ee7f66c267e113d9080d270a723c11af7f5cece1a8015f0bffa9da8f2172",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-1.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-confetti-piece-2",
@@ -756,7 +855,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the top-middle piece (the round green leaf). Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1648,
+        1648
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "55a1a70abd4ce0e321601f4866c8edc088d26aa69037a8d3a98debad58e7fa61",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-2.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-confetti-piece-3",
@@ -765,7 +875,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the top-right piece (the coral-pink petal). Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1648,
+        1648
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "beca976d1abb67c93b40621818a81e4de6cfe008b43e105f3c3dc22929471545",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-3.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-confetti-piece-4",
@@ -774,7 +895,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the bottom-left piece (the pink petal). Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1648,
+        1648
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "3a681822bc39466d1366c67aff316e0dcef26b8bc767ef2f8d39b6968c7e4f78",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-4.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-confetti-piece-5",
@@ -783,7 +915,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the bottom-middle piece (the yellow petal). Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1648,
+        1648
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "c33f6b88b33312fd391b2c86a1bad491580ef81e937a71b839a5b518c40ded86",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-5.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-confetti-piece-6",
@@ -792,7 +935,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the bottom-right piece (the tiny pink blossom). Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1648,
+        1648
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "8ba784eac21afdcbd4c2781fa464eae5898d435e5ead87c074b7698895a07c39",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-6.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-banana-plant-master",
@@ -805,8 +959,22 @@
       ],
       "alpha": true,
       "priority": 2,
-      "status": "todo",
-      "motion": "The shared wind moves the base a little and each leaf layer more, with a delay, so a gust ripples through the plant."
+      "status": "done",
+      "motion": "The shared wind moves the base a little and each leaf layer more, with a delay, so a gust ripples through the plant.",
+      "approvalStatus": "approved",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1632,
+        1632
+      ],
+      "sha256": "58077758260e77c540e0adb2cf38b0f276c26efc2b5f3e672027d32d865fb18a",
+      "promptFiles": [
+        "prompts/polish-executed/motion-banana-plant-master.txt"
+      ],
+      "qa": "Master candidate generated and reviewed; awaiting owner approval. Padding, parts, poses and rig stress tests remain pending.",
+      "measurements": "review/motion/polish-master-measurements.json",
+      "ownerApprovalDate": "2026-10-15",
+      "paddingMeasurements": "review/motion/polish-padded-masters.json"
     },
     {
       "id": "motion-banana-plant-base",
@@ -815,7 +983,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the base and stem cluster, continued a little up into where the leaves start. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1632,
+        1632
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "c436e75c37692012b8a7a5320797caf74c9a352cc7a5e7d65cd44b0bbe909dab",
+      "promptFiles": [
+        "prompts/polish-executed/motion-banana-plant-base.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-banana-plant-leaves-back",
@@ -824,7 +1003,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the leaves at the back (behind the others), each still attached at its own root, roots continued slightly into the stems. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1632,
+        1632
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "4df52a80ef1511477acc25a3b234a471fab15f265546fdae2c30d293c5d1087f",
+      "promptFiles": [
+        "prompts/polish-executed/motion-banana-plant-leaves-back.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-banana-plant-leaves-front",
@@ -833,7 +1023,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the leaves in front, each still attached at its own root, roots continued slightly into the stems. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1632,
+        1632
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "b8b62863d368e0fc1cd61a0c31fd13f6269406a3e8c5a1e0f5f0c42cf8107397",
+      "promptFiles": [
+        "prompts/polish-executed/motion-banana-plant-leaves-front.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-fern-master",
@@ -846,8 +1047,22 @@
       ],
       "alpha": true,
       "priority": 2,
-      "status": "todo",
-      "motion": "The fronds sway with the shared wind, the front ones a beat after the back ones."
+      "status": "done",
+      "motion": "The fronds sway with the shared wind, the front ones a beat after the back ones.",
+      "approvalStatus": "approved",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1568,
+        1568
+      ],
+      "sha256": "d47133a0993af8e812f7123cbaa147a72f642f179a9307512f2084a44cf01d59",
+      "promptFiles": [
+        "prompts/polish-executed/motion-fern-master.txt"
+      ],
+      "qa": "Master candidate generated and reviewed; awaiting owner approval. Padding, parts, poses and rig stress tests remain pending.",
+      "measurements": "review/motion/polish-master-measurements.json",
+      "ownerApprovalDate": "2026-10-15",
+      "paddingMeasurements": "review/motion/polish-padded-masters.json"
     },
     {
       "id": "motion-fern-base",
@@ -856,7 +1071,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the low base where the fronds start. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1568,
+        1568
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "8dace0626d3e5bb436a5e470bd8e1b685e5d6bbf9064469e4b85a7379480ebb3",
+      "promptFiles": [
+        "prompts/polish-executed/motion-fern-base.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-fern-leaves-back",
@@ -865,7 +1091,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the fronds at the back, roots continued slightly into the base. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1568,
+        1568
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "ee43ac788444e2eb5b84346faeef01d39ca4c72497592ce3fa7e96a4434f5f38",
+      "promptFiles": [
+        "prompts/polish-executed/motion-fern-leaves-back.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-fern-leaves-front",
@@ -874,7 +1111,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the fronds in front, roots continued slightly into the base. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1568,
+        1568
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "90f1c3106ff5a48044430eb2f549019f56f67da9736bd46850f5015adf302792",
+      "promptFiles": [
+        "prompts/polish-executed/motion-fern-leaves-front.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-monstera-master",
@@ -887,8 +1135,22 @@
       ],
       "alpha": true,
       "priority": 2,
-      "status": "todo",
-      "motion": "The leaves nod on their long stems with the shared wind, front and back out of step."
+      "status": "done",
+      "motion": "The leaves nod on their long stems with the shared wind, front and back out of step.",
+      "approvalStatus": "approved",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1488,
+        1488
+      ],
+      "sha256": "0a5b9d1b49d19375489d2765644afe5731f5a2f1f52b1c7d04291433f5d99a12",
+      "promptFiles": [
+        "prompts/polish-executed/motion-monstera-master.txt"
+      ],
+      "qa": "Master candidate generated and reviewed; awaiting owner approval. Padding, parts, poses and rig stress tests remain pending.",
+      "measurements": "review/motion/polish-master-measurements.json",
+      "ownerApprovalDate": "2026-10-15",
+      "paddingMeasurements": "review/motion/polish-padded-masters.json"
     },
     {
       "id": "motion-monstera-base",
@@ -897,7 +1159,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the stems and base, continued a little into the leaf joints. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1488,
+        1488
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "01230446c236c7751ca64b00d67ffa3ac002df0134aae3d8a3d90c750af65419",
+      "promptFiles": [
+        "prompts/polish-executed/motion-monstera-base.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-monstera-leaves-back",
@@ -906,7 +1179,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the leaves at the back, each attached at its stem, roots continued slightly. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1488,
+        1488
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "007e141ff91368ee7019671263f433c6b0d837ebd20e3f410cf89f9709929e16",
+      "promptFiles": [
+        "prompts/polish-executed/motion-monstera-leaves-back.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-monstera-leaves-front",
@@ -915,7 +1199,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the leaves in front, each attached at its stem, roots continued slightly. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 2,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1488,
+        1488
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "916b6a8ec3d30bedcd7885e4b052669135eba451af9ab509e3aec49aca43abd7",
+      "promptFiles": [
+        "prompts/polish-executed/motion-monstera-leaves-front.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-pointer-master",
@@ -928,8 +1223,22 @@
       ],
       "alpha": true,
       "priority": 3,
-      "status": "todo",
-      "motion": "Replaces the code-drawn hand of the first-maze demo: press (squash), drag along the path with ease-in-out, lift with a little follow-through."
+      "status": "done",
+      "motion": "Replaces the code-drawn hand of the first-maze demo: press (squash), drag along the path with ease-in-out, lift with a little follow-through.",
+      "approvalStatus": "approved",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1552,
+        1552
+      ],
+      "sha256": "df200b3e2e4fc196a40947d531584a70328f64c3e696b2fc51d4a0237a9f4c69",
+      "promptFiles": [
+        "prompts/polish-executed/motion-pointer-master.txt"
+      ],
+      "qa": "Master candidate generated and reviewed; awaiting owner approval. Padding, parts, poses and rig stress tests remain pending.",
+      "measurements": "review/motion/polish-master-measurements.json",
+      "ownerApprovalDate": "2026-10-15",
+      "paddingMeasurements": "review/motion/polish-padded-masters.json"
     },
     {
       "id": "motion-pointer-press",
@@ -938,7 +1247,18 @@
       "prompt": "Edit image 1. The SAME hand pressing down: the fingertip slightly squashed, with a small soft round press shadow under the tip. Same canvas; the fingertip at EXACTLY the same point as in the master. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 3,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1552,
+        1552
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "11c7434fda047c34a2ab4d9804848d8d24ebb98f97f5fac0851bdcc14839761c",
+      "promptFiles": [
+        "prompts/polish-executed/motion-pointer-press.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-ladybug-master",
@@ -951,8 +1271,22 @@
       ],
       "alpha": true,
       "priority": 3,
-      "status": "todo",
-      "motion": "Hidden on a hedge (never on a corridor): tapped, it lifts its wing cases, buzzes its wings and flies off."
+      "status": "done",
+      "motion": "Hidden on a hedge (never on a corridor): tapped, it lifts its wing cases, buzzes its wings and flies off.",
+      "approvalStatus": "approved",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1296,
+        1296
+      ],
+      "sha256": "dceda26aa0814b173ff835daea5cd1589d8754a63c9cf9c9557c4d7c3c39b065",
+      "promptFiles": [
+        "prompts/polish-executed/motion-ladybug-master.txt"
+      ],
+      "qa": "Master candidate generated and reviewed; awaiting owner approval. Padding, parts, poses and rig stress tests remain pending.",
+      "measurements": "review/motion/polish-master-measurements.json",
+      "ownerApprovalDate": "2026-10-15",
+      "paddingMeasurements": "review/motion/polish-padded-masters.json"
     },
     {
       "id": "motion-ladybug-body",
@@ -961,7 +1295,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the body, head and legs, continued under the wing cases. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 3,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1296,
+        1296
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "06f208e4f49ef4aac173c65dc7e242ed2de40a2b670c398331a44915aeb00b24",
+      "promptFiles": [
+        "prompts/polish-executed/motion-ladybug-body.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-ladybug-shell-left",
@@ -970,7 +1315,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the LEFT wing case, its inner edge continued slightly under the right one. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 3,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1296,
+        1296
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "1afcf9d95e832aef513c35cd4edb8ded6efaef14e99081b2080e7c9bb84cdb32",
+      "promptFiles": [
+        "prompts/polish-executed/motion-ladybug-shell-left.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-ladybug-shell-right",
@@ -979,7 +1335,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the RIGHT wing case, its inner edge continued slightly under the left one. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 3,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1296,
+        1296
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "7e48f0176cf4a3d9c4a77699acd7cacd8dce44ccbc4cab4e8df5ac3605efe8ce",
+      "promptFiles": [
+        "prompts/polish-executed/motion-ladybug-shell-right.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-ladybug-wings",
@@ -988,7 +1355,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the two thin translucent flight wings, unfolded and fanned out as if under the lifted wing cases, everything else transparent. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 3,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1296,
+        1296
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "0e9676f55e9bf7d8cfce9c73ea089c8a4035a277625a540a86d9bcb386f34fa4",
+      "promptFiles": [
+        "prompts/polish-executed/motion-ladybug-wings.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-snail-master",
@@ -1001,8 +1379,22 @@
       ],
       "alpha": true,
       "priority": 3,
-      "status": "todo",
-      "motion": "Creeps a little along a hedge; tapped, it pulls into its shell and peeks out again."
+      "status": "done",
+      "motion": "Creeps a little along a hedge; tapped, it pulls into its shell and peeks out again.",
+      "approvalStatus": "approved",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1680,
+        1680
+      ],
+      "sha256": "2e17771b03306d69812f92ec85a63f7ea8715ac2a372ee60d11ca81ec9556075",
+      "promptFiles": [
+        "prompts/polish-executed/motion-snail-master.txt"
+      ],
+      "qa": "Master candidate generated and reviewed; awaiting owner approval. Padding, parts, poses and rig stress tests remain pending.",
+      "measurements": "review/motion/polish-master-measurements.json",
+      "ownerApprovalDate": "2026-10-15",
+      "paddingMeasurements": "review/motion/polish-padded-masters.json"
     },
     {
       "id": "motion-snail-shell",
@@ -1011,7 +1403,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the spiral shell, with a dark opening where the body enters it. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 3,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1680,
+        1680
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "c901f7d7572800e736276eeb77c40e1fecd05e4bb627e0079b277459071a8bac",
+      "promptFiles": [
+        "prompts/polish-executed/motion-snail-shell.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-snail-body",
@@ -1020,7 +1423,18 @@
       "prompt": "Edit image 1. Keep the canvas size, scale and the exact position of this part identical to image 1. ERASE everything except the named part, leaving true transparency. Repaint the part as a COMPLETE piece: where another part used to cover it (a joint, a root, an overlap), continue its shape and painting naturally for a short distance under that area, so the part can rotate without revealing a gap. Do not move, resize, re-angle or restyle the part. The part to keep: only the soft body with the eye stalks, continued under the shell. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 3,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1680,
+        1680
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "4b47e3be9cfb371d48de1e87f622f90507f4eeb8e28ce12201a16fa29f6b2ca7",
+      "promptFiles": [
+        "prompts/polish-executed/motion-snail-body.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     },
     {
       "id": "motion-frog-master",
@@ -1033,8 +1447,22 @@
       ],
       "alpha": true,
       "priority": 3,
-      "status": "todo",
-      "motion": "Sits on a hedge and blinks; tapped, it hops to another spot."
+      "status": "done",
+      "motion": "Sits on a hedge and blinks; tapped, it hops to another spot.",
+      "approvalStatus": "approved",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1286,
+        1286
+      ],
+      "sha256": "73a158b3fbcc2c981e7e8c2b405aa295ca32195b1466287a6d1157667e89796e",
+      "promptFiles": [
+        "prompts/polish-executed/motion-frog-master.txt"
+      ],
+      "qa": "Master candidate generated and reviewed; awaiting owner approval. Padding, parts, poses and rig stress tests remain pending.",
+      "measurements": "review/motion/polish-master-measurements.json",
+      "ownerApprovalDate": "2026-10-15",
+      "paddingMeasurements": "review/motion/polish-padded-masters.json"
     },
     {
       "id": "motion-frog-jump",
@@ -1043,7 +1471,18 @@
       "prompt": "Edit image 1. The SAME frog mid-hop seen from above: legs stretched out behind, front legs reaching forward. Same canvas; the body centre at the same point. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit: softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated colour. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark.",
       "alpha": true,
       "priority": 3,
-      "status": "todo"
+      "status": "done",
+      "deliveredDate": "2026-10-15",
+      "actualCanvas": [
+        1286,
+        1286
+      ],
+      "registration": "review/motion/registration.json",
+      "sha256": "6f2cf4c598809062a70ba38a34897b022e90f6d445d3d2db3cf93559f9237d24",
+      "promptFiles": [
+        "prompts/polish-executed/motion-frog-jump.txt"
+      ],
+      "qa": "Registered source delivered; tested ranges and painted-reconstruction limits in CLAUDE_HANDOFF_MOTION.md and review/motion/polish-delivery-qa.json"
     }
   ]
 }

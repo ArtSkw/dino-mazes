@@ -88,7 +88,9 @@ export type GameEvent =
   | { type: 'reveal' }
   | { type: 'layout' }
   | { type: 'announce'; text: string }
-  | { type: 'collection-pulse' };
+  | { type: 'collection-pulse' }
+  /** A press on the board that did not start drawing (a hidden critter may react). */
+  | { type: 'board-tap'; point: Point };
 
 type Listener = (e: GameEvent) => void;
 
@@ -419,6 +421,11 @@ export class Controller {
     if (!r) return false;
     this.afterMove(r, true);
     return true;
+  }
+
+  /** A press on the board that did not draw: tell the scene (critters, critters.ts). */
+  boardTap(p: Point): void {
+    if (this.state.screen === 'play' && !this.state.overlay && !this.state.celebrating) this.emit({ type: 'board-tap', point: p });
   }
 
   pointerMove(p: Point): void {

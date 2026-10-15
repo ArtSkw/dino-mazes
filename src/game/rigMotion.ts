@@ -44,6 +44,27 @@ export const PARENTS: Partial<Record<TreasureId, Record<string, string>>> = {
 
 /** Treasures whose whole body hops on find (the stand-in still does the hop). */
 export const HOPPERS: ReadonlySet<TreasureId> = new Set(['strawberry']);
+/** Treasures that turn over on find instead of the pop (the stand-in still flips). */
+export const TURNERS: ReadonlySet<TreasureId> = new Set(['shell']);
+/** Treasures whose glint flares into a four-point star on find. */
+export const STAR_FLARE: ReadonlySet<TreasureId> = new Set(['stone']);
+
+/**
+ * A glint layer: drifts and breathes inside its object; on find it slides
+ * across and flares. Offsets stay within ±0.025 of the canvas (about ±4 % of
+ * the object) and scale within 125 %, inside Codex's tested ±6 % / 130 %.
+ */
+function glint(t: number, c: number | null, phase: number): Partial<PartPose> {
+  const flare = c === null ? 0 : bump(c, 0.05, 0.75);
+  const slide = c === null ? 0 : smooth(0.05, 0.8, c) * 2 - 1;
+  const across = c !== null && c < 0.8 ? 0.025 * slide : 0;
+  return {
+    alpha: 0.8 + 0.2 * Math.sin((TAU * t) / 2.7 + phase) + 0.5 * flare,
+    scale: 1 + 0.06 * Math.sin((TAU * t) / 3.3 + phase) + 0.18 * flare,
+    dx: 0.012 * Math.sin((TAU * t) / 5.6 + phase) * (1 - flare) + across * flare,
+    dy: 0.008 * Math.sin((TAU * t) / 4.3 + phase),
+  };
+}
 
 const TAU = Math.PI * 2;
 const REST: PartPose = { angle: 0, scale: 1, sy: 1, alpha: 1, dx: 0, dy: 0, glow: 0 };
@@ -169,6 +190,9 @@ export const RIG_MOTION: Partial<Record<TreasureId, (part: string, t: number, c:
     return {};
   },
 };
+
+RIG_MOTION.stone = (part, t, c) => (part === 'glint' ? glint(t, c, 0) : {});
+RIG_MOTION.shell = (part, t, c) => (part === 'glint' ? glint(t, c, 1.7) : {});
 
 export function poseOf(id: TreasureId, part: string, t: number, c: number | null): PartPose {
   return { ...REST, ...(RIG_MOTION[id]?.(part, t, c) ?? {}) };

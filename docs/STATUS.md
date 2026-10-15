@@ -52,6 +52,34 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Codex delivery: the last polish (15 October 2026)
+
+Every asset of the motion plan is in the game.
+
+- **Stone and shell** became rigs like the other nine treasures (stills from the approved
+  masters): glints drift and pulse within Codex's tested ±6 % / 130 %; on find the stone's glint
+  slides and a star flares, the shell turns over.
+- **Painted confetti** (`src/game/confetti.ts`) replaces the code-drawn leaves: six painted
+  pieces burst, flip edge-on only briefly, spin and drift down with drag (a unit test caught an
+  upside-down gravity before it shipped).
+- **Plants** (banana, fern, monstera) on the welcome screen and in the maze corner are rigs that
+  share out the existing wind: the base sways less, the back and front leaves follow a beat later,
+  never more than ±6° against the base.
+- **The first-maze hand** is the painted one: fingertip down while it draws, up as it leaves,
+  swapped without a crossfade.
+- **Hidden critters** (`src/game/critters.ts`, spots in `src/domain/critterSpots.ts`): at most one
+  per maze on about half the mazes, never in the first maze or with reduced motion, only on hedge
+  (wall middles and the frame, never a corridor, away from the entrance and the treasure), after
+  ten seconds of play and four quiet ones, still while the child draws. Tapped: the ladybug opens
+  its wing cases and flies off, the snail hides and peeks out, the frog hops to another hedge. A tap
+  on a critter never draws.
+- **Refactor:** rig data and limits in a Phaser-free `rigData.ts`; one `RigFollowers` manager for
+  every stand-in (butterflies, plants, the flying treasure), released at once when reduced motion
+  is switched on.
+- **Budgets:** one atlas of 20 rigs (80 frames, 650 KB, 14.3 MiB on the GPU, inside the 96 MiB
+  test), offline total 9.43 MB, first visit 4.9 MB, maze drawable in about 4 s on the production
+  build; `npm audit` clean.
+
 ## Sound plan (15 October 2026)
 
 [SOUND_PLAN.md](SOUND_PLAN.md): effects, music and fully voiced friends in Polish and English with
@@ -310,8 +338,8 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 231 passed |
-| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 71 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
+| Domain unit + property | `npm test` | 236 passed |
+| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 73 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
 

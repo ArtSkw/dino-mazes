@@ -11,13 +11,15 @@ import type { Hint } from '../domain/trail';
 import type { CharacterId, Point, TreasureId } from '../domain/types';
 import { castSlots, introCharacterRect, toScreen, type Rect } from '../platform/layout';
 import { CharacterActor } from './actor';
-import { ASSETS, CAST_SCALE, assetUrl, baseHidden, friendFrame, rigFor, grainTexture, handTexture, pawTexture, leafTexture, ringTexture, sparkTexture, starTexture } from './assets';
+import { ASSETS, CAST_SCALE, assetUrl, baseHidden, friendFrame, rigFor, grainTexture, handTexture, pawTexture, ringTexture, sparkTexture, starTexture } from './assets';
 import { AmbientWorld } from './ambient';
 import { footprint, paintBoard } from './boardPainter';
 import { CharacterTextures, type AtlasRef } from './characterTextures';
 import { popUp } from './motion';
-import { PartRig, RIG_ATLAS_KEY } from './rig';
-import { HOPPERS } from './rigMotion';
+import { PartRig, RIG_ATLAS_KEY, RigFollowers } from './rig';
+import { HOPPERS, STAR_FLARE, TURNERS } from './rigMotion';
+import { confettiBurst } from './confetti';
+import { Critters } from './critters';
 import { OpeningDirector, preloadOpening, type OpeningStep } from './opening';
 
 export interface UiBridge {
@@ -71,14 +73,20 @@ export class GameScene extends Phaser.Scene {
   private treasure: Phaser.GameObjects.Image | null = null;
   private treasureGlow: Phaser.GameObjects.Image | null = null;
   private treasureRig: PartRig | null = null;
-  /** Rigs that follow other stand-ins: butterflies, the flying treasure. */
-  private followers: Array<{ stand: Phaser.GameObjects.Image; rig: PartRig }> = [];
+  /** Rigs that follow other stand-ins: butterflies, plants, the flying treasure. */
+  private rigs!: RigFollowers;
+  private critters!: Critters;
+  /** When the current maze began and when the child last drew (critters wait for quiet). */
+  private critterMaze: { seed: string; since: number } | null = null;
+  private lastDrawAt = 0;
   private treasureFlown = false;
   private companion: CharacterActor | null = null;
   private companionPlants: Phaser.GameObjects.Image[] = [];
   private cast: CharacterActor[] = [];
   private castPlants: Phaser.GameObjects.Image[] = [];
   private hand!: Phaser.GameObjects.Image;
+  /** Frames of the painted hand (up, pressing) and its height in still pixels. */
+  private handFrames: { up: string; press: string; height: number } | null = null;
   private handTween: Phaser.Tweens.Tween | null = null;
   private hintFly: Phaser.GameObjects.Image | null = null;
   /** Pollen dots the hint butterfly leaves along the next two moves. */
@@ -92,7 +100,6 @@ export class GameScene extends Phaser.Scene {
   /** Last time the child did anything on the maze screen (for the sleepy friend). */
   private lastActivity = 0;
   private zTimer: Phaser.Time.TimerEvent | null = null;
-  private bursts: Phaser.GameObjects.Particles.ParticleEmitter[] = [];
   private sparkle!: Phaser.GameObjects.Particles.ParticleEmitter;
   private celebration: { timers: Phaser.Time.TimerEvent[]; flyer: Phaser.GameObjects.Image | null; done: boolean } | null = null;
   private unsubscribe: (() => void) | null = null;
@@ -133,9 +140,6 @@ export class GameScene extends Phaser.Scene {
     this.textures.addCanvas('star', starTexture());
     this.textures.addCanvas('ring', ringTexture());
     this.textures.addCanvas('hand', handTexture());
-    this.textures.addCanvas('leaf-a', leafTexture('#5fae3a'));
-    this.textures.addCanvas('leaf-b', leafTexture('#8fcf4a'));
-    this.textures.addCanvas('petal', leafTexture('#ff9a8a'));
 
     this.bg = this.add.image(0, 0, 'bg-jungle').setOrigin(0.5).setDepth(D.bg);
     this.trailGfx = this.add.graphics().setDepth(D.trail);
@@ -144,22 +148,15 @@ export class GameScene extends Phaser.Scene {
     this.markerGlow = this.add.image(0, 0, 'spark').setDepth(D.marker).setBlendMode(Phaser.BlendModes.ADD).setTint(TRAIL.glow).setVisible(false);
     this.marker = this.add.graphics().setDepth(D.marker + 1);
     this.ring = this.add.image(0, 0, 'ring').setDepth(D.marker).setTint(0xffe9a0).setVisible(false);
-    this.hand = this.add.image(0, 0, 'hand').setOrigin(0.46, 0.04).setDepth(D.hand).setVisible(false);
+    // The painted demo hand (two poses, origin at the fingertip) or the drawn one.
+    const pointer = rigFor('pointer');
+    const tip = pointer?.landmarks?.['fingertip'];
+    if (pointer?.master && pointer.poses?.['press'] && tip && this.textures.exists(RIG_ATLAS_KEY)) {
+      this.hand = this.add.image(0, 0, RIG_ATLAS_KEY, pointer.master).setOrigin(tip[0] / pointer.canvas[0], tip[1] / pointer.canvas[1]);
+      this.handFrames = { up: pointer.master, press: pointer.poses['press'], height: pointer.size[1] };
+    } else this.hand = this.add.image(0, 0, 'hand').setOrigin(0.46, 0.04);
+    this.hand.setDepth(D.hand).setVisible(false);
 
-    this.bursts = ['leaf-a', 'leaf-b', 'petal'].map((key) =>
-      this.add
-        .particles(0, 0, key, {
-          speed: { min: 120, max: 320 },
-          angle: { min: 0, max: 360 },
-          rotate: { start: 0, end: 360 },
-          lifespan: { min: 900, max: 1500 },
-          scale: { start: 0.9, end: 0.4 },
-          alpha: { start: 1, end: 0 },
-          gravityY: 160,
-          emitting: false,
-        })
-        .setDepth(D.fx),
-    );
     this.sparkle = this.add.particles(0, 0, 'star', {
       speed: { min: 20, max: 90 },
       lifespan: { min: 500, max: 900 },
@@ -202,7 +199,29 @@ export class GameScene extends Phaser.Scene {
       depth: { light: D.ambient - 1, flies: D.ambient, leaves: D.ambient, twinkle: D.treasure + 1 },
       backdrop: this.bg,
     });
-    this.followAmbientFliers();
+    this.rigs = new RigFollowers(this, rigFor);
+    this.followAmbient();
+    this.critters = new Critters({
+      scene: this,
+      rigFor,
+      depth: D.board + 1,
+      reduced: () => this.reduced,
+      play: () => {
+        const st = this.ctrl.state;
+        if (st.screen !== 'play' || st.celebrating || st.overlay || !st.maze || !st.layout || !st.session) return null;
+        const now = this.time.now;
+        if (this.critterMaze?.seed !== st.maze.seed) this.critterMaze = { seed: st.maze.seed, since: now };
+        return {
+          maze: st.maze,
+          transform: st.layout.transform,
+          intro: st.session.intro,
+          drawing: st.drawing,
+          quietFor: (now - this.lastDrawAt) / 1000,
+          playingFor: (now - this.critterMaze.since) / 1000,
+          endpoint: this.ctrl.engine?.endpoint ?? null,
+        };
+      },
+    });
     this.nextFootsteps = this.time.now + 40000;
     this.unsubscribe = this.ctrl.on((e) => this.onEvent(e));
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.unsubscribe?.());
@@ -217,13 +236,19 @@ export class GameScene extends Phaser.Scene {
       this.lastActivity = this.time.now;
       if (this.companion?.isSleeping) this.wakeCompanion();
     }
+    if (e.type === 'trail' || e.type === 'drawing-start') this.lastDrawAt = this.time.now;
     switch (e.type) {
+      case 'board-tap':
+        this.critters.tap(e.point);
+        break;
       case 'state': {
         this.applyScreen();
         // Reduced motion switched: the treasure goes back to its still (or to its rig).
         const id = this.ctrl.state.session?.treasureId;
         if (this.treasure && id && (!this.reduced && !!rigFor(id)) !== !!this.treasureRig) this.refreshTreasureRig();
-        if (!this.reduced) this.followAmbientFliers();
+        // Reduced motion: every rig goes back to its still; otherwise rigs return.
+        if (this.reduced) this.rigs.release();
+        else this.followAmbient();
         this.companion?.setReduced(this.reduced);
         for (const a of this.cast) a.setReduced(this.reduced);
         this.updateHandDemo();
@@ -434,29 +459,14 @@ export class GameScene extends Phaser.Scene {
    * Draw `stand` from its painted parts (rig.ts) for as long as it lives: the
    * camera stops drawing the still, the rig follows it. Not with reduced motion.
    */
-  private follow(stand: Phaser.GameObjects.Image, id: string, kind: 'treasure' | 'flier'): void {
-    const asset = rigFor(id);
-    if (!asset || this.reduced || !this.textures.exists(RIG_ATLAS_KEY) || this.followers.some((f) => f.stand === stand)) return;
-    const rig = new PartRig(this, id, asset, stand.depth, kind);
-    this.cameras.main.ignore(stand);
-    rig.sync(stand, this.time.now);
-    this.followers.push({ stand, rig });
+  private follow(stand: Phaser.GameObjects.Image, id: string, kind: 'treasure' | 'flier' | 'plant'): void {
+    if (!this.reduced) this.rigs.follow(stand, id, kind);
   }
 
-  private followAmbientFliers(): void {
+  /** Butterflies and the framing plants (welcome cast, maze corner) follow their rigs. */
+  private followAmbient(): void {
     for (const img of this.ambient.flierImages()) this.follow(img, 'butterfly', 'flier');
-  }
-
-  private syncFollowers(): void {
-    const now = this.time.now;
-    this.followers = this.followers.filter(({ stand, rig }) => {
-      if (stand.active) {
-        rig.sync(stand, now);
-        return true;
-      }
-      rig.destroy();
-      return false;
-    });
+    for (const p of [...this.castPlants, ...this.companionPlants]) this.follow(p, p.texture.key.replace(/^fol-/, ''), 'plant');
   }
 
   /**
@@ -503,6 +513,7 @@ export class GameScene extends Phaser.Scene {
       this.add.image(0, 0, 'fol-fern').setOrigin(0.5, 1).setDepth(D.foreground),
       this.add.image(0, 0, 'fol-monstera').setOrigin(0.5, 1).setDepth(D.foreground),
     ];
+    this.followAmbient();
   }
 
   /** Place the companion in its reserved corner (or the intro pose). */
@@ -687,6 +698,7 @@ export class GameScene extends Phaser.Scene {
     }
     const plants = ['fern', 'banana-plant', 'monstera', 'fern', 'banana-plant', 'monstera'];
     this.castPlants = plants.map((n) => this.add.image(0, 0, `fol-${n}`).setOrigin(0.5, 1).setDepth(D.foreground));
+    this.followAmbient();
   }
 
   private castSlots(): Rect[] {
@@ -966,8 +978,10 @@ export class GameScene extends Phaser.Scene {
       }
       return pts[pts.length - 1] as Point;
     };
-    const handScale = Math.max(0.5, Math.min(0.9, layout.transform.pitch / 120));
+    // The drawn hand was 120 px tall at scale 1; the painted one matches its size.
+    const handScale = Math.max(0.5, Math.min(0.9, layout.transform.pitch / 120)) * (this.handFrames ? 120 / this.handFrames.height : 1);
     this.hand.setScale(handScale).setVisible(true);
+    this.setHandPose('up');
     const w = this.inkWidth();
     if (this.reduced) {
       this.handTween?.stop();
@@ -989,6 +1003,8 @@ export class GameScene extends Phaser.Scene {
         const t = Math.min(1, v);
         const p = at(t * total);
         this.hand.setPosition(p.x, p.y);
+        // Fingertip down while it draws, up as it arrives and leaves (no crossfade).
+        this.setHandPose(v >= 0.1 && v <= 1.02 ? 'press' : 'up');
         this.hand.setAlpha(v < 0.08 ? v / 0.08 : v > 1.05 ? Math.max(0, 1 - (v - 1.05) / 0.25) : 1);
         this.ghostGfx.clear();
         const trace: Point[] = [];
@@ -997,6 +1013,11 @@ export class GameScene extends Phaser.Scene {
         this.strokeTrail(this.ghostGfx, trace, w, TRAIL.core, Math.min(0.5, this.hand.alpha * 0.5), false);
       },
     });
+  }
+
+  private setHandPose(pose: 'up' | 'press'): void {
+    const f = this.handFrames;
+    if (f && this.hand.frame.name !== f[pose]) this.hand.setFrame(f[pose], false, false);
   }
 
   // ---------------------------------------------------------------------------
@@ -1289,9 +1310,21 @@ export class GameScene extends Phaser.Scene {
         // A rigged treasure performs with its parts, held a little larger;
         // a hopper jumps as a whole (its parts squash on landing).
         const s = treasure.getData('baseScale') as number;
+        const id = reward.treasureId;
         this.treasureRig.celebrate(this.time.now);
-        this.tweens.add({ targets: treasure, scale: s * 1.3, duration: 320, hold: 520, yoyo: true, ease: 'Sine.easeInOut' });
-        if (HOPPERS.has(reward.treasureId)) {
+        if (TURNERS.has(id)) {
+          // Turns over as a whole (the rig mirrors with it), a little lifted.
+          const y = treasure.getData('baseY') as number;
+          this.tweens.chain({
+            targets: treasure,
+            tweens: [
+              { scaleX: -s * 1.15, scaleY: s * 1.15, y: y - layout.transform.pitch * 0.06, duration: 380, ease: 'Sine.easeInOut' },
+              { scaleX: s, scaleY: s, y, duration: 420, ease: 'Sine.easeInOut' },
+            ],
+          });
+        } else this.tweens.add({ targets: treasure, scale: s * 1.3, duration: 320, hold: 520, yoyo: true, ease: 'Sine.easeInOut' });
+        if (STAR_FLARE.has(id)) this.starFlare(treasure);
+        if (HOPPERS.has(id)) {
           const y = treasure.getData('baseY') as number;
           const p = layout.transform.pitch;
           this.tweens.chain({
@@ -1305,7 +1338,8 @@ export class GameScene extends Phaser.Scene {
           });
         }
       } else this.signatureMotion(reward.treasureId, treasure, layout.transform.pitch);
-      this.bursts.forEach((b, i) => b.explode(i === 0 ? 10 : 8, treasure.x, treasure.y));
+      // Painted leaves and petals burst out, flip and drift down (confetti.ts).
+      confettiBurst(this, rigFor('confetti'), treasure.x, treasure.y, layout.transform.pitch * 0.3, D.fx, 18);
       this.sparkle.explode(12, treasure.x, treasure.y);
     });
 
@@ -1345,12 +1379,10 @@ export class GameScene extends Phaser.Scene {
         this.tweens.add({ targets: img, angle: { from: -12, to: 12 }, duration: 260, yoyo: true, repeat: 2, ease: 'Sine.easeInOut', onComplete: () => img.setAngle(0) });
         this.tweens.add({ targets: img, scale: s * 1.12, duration: 300, yoyo: true, ease: 'Sine.easeInOut' });
         break;
-      case 'glint': {
-        const star = this.add.image(img.x - img.displayWidth * 0.25, img.y - img.displayHeight * 0.2, 'star').setDepth(D.fx + 2).setBlendMode(Phaser.BlendModes.ADD).setScale(0.2);
-        this.tweens.add({ targets: star, scale: 1.3, angle: 90, alpha: { from: 1, to: 0 }, duration: 700, ease: 'Sine.easeOut', onComplete: () => star.destroy() });
+      case 'glint':
+        this.starFlare(img);
         this.tweens.add({ targets: img, scale: s * 1.14, duration: 260, yoyo: true, repeat: 1, ease: 'Sine.easeInOut' });
         break;
-      }
       case 'turn':
         this.tweens.chain({
           targets: img,
@@ -1373,6 +1405,12 @@ export class GameScene extends Phaser.Scene {
         });
         break;
     }
+  }
+
+  /** A four-point star flares on a treasure's highlight (upper left). */
+  private starFlare(img: Phaser.GameObjects.Image): void {
+    const star = this.add.image(img.x - img.displayWidth * 0.25, img.y - img.displayHeight * 0.2, 'star').setDepth(D.fx + 2).setBlendMode(Phaser.BlendModes.ADD).setScale(0.2);
+    this.tweens.add({ targets: star, scale: 1.3, angle: 90, alpha: { from: 1, to: 0 }, duration: 700, delay: 120, ease: 'Sine.easeOut', onComplete: () => star.destroy() });
   }
 
   private flyToCollection(reward: Reward): void {
@@ -1614,7 +1652,8 @@ export class GameScene extends Phaser.Scene {
   override update(time: number): void {
     // Scene clock (not the loop's time): it is the clock the celebration starts on.
     if (this.treasureRig && this.treasure) this.treasureRig.sync(this.treasure, this.time.now);
-    this.syncFollowers();
+    this.rigs.sync(this.time.now);
+    this.critters.update(this.time.now);
     this.ambient.update(time);
     this.distantFootsteps(time);
     this.sleepyFriend(time);

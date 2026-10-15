@@ -5,7 +5,7 @@
 import manifestJson from '../data/assetManifest.json';
 import type { CharacterId, TreasureId } from '../domain/types';
 import { FRIEND_SIZE, type FriendFrame } from '../platform/layout';
-import type { RigAsset } from './rig';
+import type { RigAsset } from './rigData';
 
 export type Reaction = 'idle' | 'drawing' | 'encouragement' | 'celebration' | 'talk';
 /** Corner-tier atlas groups (loaded and released independently) and the stage tier. */
@@ -177,25 +177,6 @@ export function starTexture(): HTMLCanvasElement {
   }
   g.closePath();
   g.fill();
-  return c;
-}
-
-/** Small painted leaf for celebration confetti. */
-export function leafTexture(color: string): HTMLCanvasElement {
-  const [c, g] = canvas(40, 24);
-  g.translate(20, 12);
-  g.fillStyle = color;
-  g.beginPath();
-  g.moveTo(-18, 0);
-  g.quadraticCurveTo(-4, -12, 18, 0);
-  g.quadraticCurveTo(-4, 12, -18, 0);
-  g.fill();
-  g.strokeStyle = 'rgba(255,255,255,0.45)';
-  g.lineWidth = 1.5;
-  g.beginPath();
-  g.moveTo(-14, 0);
-  g.lineTo(15, 0);
-  g.stroke();
   return c;
 }
 

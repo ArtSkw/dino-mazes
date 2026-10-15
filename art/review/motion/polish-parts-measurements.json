@@ -1,0 +1,1650 @@
+{
+  "count": 27,
+  "assets": [
+    {
+      "id": "motion-stone-body",
+      "path": "source/motion/stone/body.png",
+      "size": [
+        1296,
+        1296
+      ],
+      "nativePath": "review/motion/polish-parts-native/stone/body.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        188,
+        249,
+        1067,
+        1004
+      ],
+      "targetBounds": [
+        195,
+        258,
+        1101,
+        1038
+      ],
+      "transform": [
+        1.030716723549488,
+        0,
+        0,
+        1.033112582781457,
+        1.2252559726962318,
+        0.7549668874172539
+      ],
+      "pivot": [
+        648,
+        648
+      ],
+      "opacity": 1,
+      "sha256": "4a462682be2dcf510c430238c64bc0768b8455691a07a58b3379ca9e5a87987a",
+      "bytes": 969169,
+      "nativeSha256": "28d08e72cfa3d27edba1f41f412173cda7513b3598f2321e2eaa4f84aa685855",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        195,
+        258,
+        1101,
+        1038
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-stone-body.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-stone-body.txt": "4d058ebaa0513d9d3cfcc110a2d1c308e74d31b364b6e3ea05d606f060ad5a90"
+      }
+    },
+    {
+      "id": "motion-stone-glint",
+      "path": "source/motion/stone/glint.png",
+      "size": [
+        1296,
+        1296
+      ],
+      "nativePath": "review/motion/polish-parts-native/stone/glint.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        338,
+        317,
+        518,
+        516
+      ],
+      "targetBounds": [
+        422,
+        411,
+        562,
+        561
+      ],
+      "transform": [
+        0.7777777777777778,
+        0,
+        0,
+        0.7537688442211056,
+        159.1111111111111,
+        172.05527638190952
+      ],
+      "pivot": [
+        492,
+        486
+      ],
+      "opacity": 0.7,
+      "sha256": "e6aef199f51b90cf14981e27f53d63f1067e73e531acf909fbb734f555203c89",
+      "bytes": 67166,
+      "nativeSha256": "51d95b33afd3ce97a13d21c5d13d2d7b9ef062a1a4a4d89b5a55e4f7b756d1c1",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "boundsAlpha40": [
+        422,
+        411,
+        562,
+        561
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-stone-glint.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-stone-glint.txt": "f0062d6acbe1034628a1ae88de728bcec957920ba6d32a8f1962c7be4b49ae28"
+      }
+    },
+    {
+      "id": "motion-shell-body",
+      "path": "source/motion/shell/body.png",
+      "size": [
+        1392,
+        1392
+      ],
+      "nativePath": "review/motion/polish-parts-native/shell/body.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        98,
+        144,
+        1199,
+        1200
+      ],
+      "targetBounds": [
+        212,
+        221,
+        1181,
+        1171
+      ],
+      "transform": [
+        0.8801089918256131,
+        0,
+        0,
+        0.8996212121212122,
+        125.74931880108991,
+        91.45454545454544
+      ],
+      "pivot": [
+        697,
+        696
+      ],
+      "opacity": 1,
+      "sha256": "9ff1c6fbdd9c43f79ee1c7165864caa947f9c4e7542ef9346f4509821f992e64",
+      "bytes": 1114003,
+      "nativeSha256": "caa30391a4fc9743d0049071cca6c7b76a228de5acc528b733b4e7adf19e3e1e",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        212,
+        221,
+        1181,
+        1171
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-shell-body.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-shell-body.txt": "ad12c426efed0704e3cd576dc4254abb37d39ea33ea0b03a03f70026c5eb2190"
+      }
+    },
+    {
+      "id": "motion-shell-glint",
+      "path": "source/motion/shell/glint.png",
+      "size": [
+        1392,
+        1392
+      ],
+      "nativePath": "review/motion/polish-parts-native/shell/glint.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        232,
+        449,
+        544,
+        776
+      ],
+      "targetBounds": [
+        484,
+        632,
+        714,
+        862
+      ],
+      "transform": [
+        0.7371794871794872,
+        0,
+        0,
+        0.7033639143730887,
+        312.97435897435895,
+        316.1896024464832
+      ],
+      "pivot": [
+        599,
+        747
+      ],
+      "opacity": 0.4,
+      "sha256": "1ea0006f7b4db934381a4db9f8d11f57f419b8244cfdc2edec95c0cddef0e33f",
+      "bytes": 89937,
+      "nativeSha256": "14387a0fb2defe0746a415e9b4d2b92aab7422bf8b277dbbcbe2272c09153a87",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        484,
+        632,
+        714,
+        862
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-shell-glint.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-shell-glint.txt": "c16ae988463758e86be7ff7f632bff684e15e8521039970f23c06c6d98a4c10b"
+      }
+    },
+    {
+      "id": "motion-banana-plant-base",
+      "path": "source/motion/banana-plant/base.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "nativePath": "review/motion/polish-parts-native/banana-plant/base.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        330,
+        472,
+        945,
+        1036
+      ],
+      "targetBounds": [
+        600,
+        1010,
+        950,
+        1300
+      ],
+      "transform": [
+        0.5691056910569106,
+        0,
+        0,
+        0.5141843971631206,
+        412.1951219512195,
+        767.3049645390071
+      ],
+      "pivot": [
+        795,
+        1270
+      ],
+      "opacity": 1,
+      "sha256": "c436e75c37692012b8a7a5320797caf74c9a352cc7a5e7d65cd44b0bbe909dab",
+      "bytes": 144973,
+      "nativeSha256": "47a0999028bfb8c75269c5ca3925d367168537562add27cedcbc5ffae33b2f5a",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        600,
+        1010,
+        950,
+        1300
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-banana-plant-base.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-banana-plant-base.txt": "d4b8c95d94b0137058938ddd7f9297193f788e8bbdcd565762cbf8339b2f4830"
+      }
+    },
+    {
+      "id": "motion-banana-plant-leaves-back",
+      "path": "source/motion/banana-plant/leaves-back.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "nativePath": "review/motion/polish-parts-native/banana-plant/leaves-back.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        88,
+        124,
+        1199,
+        1136
+      ],
+      "targetBounds": [
+        250,
+        303,
+        1360,
+        1300
+      ],
+      "transform": [
+        0.9990999099909991,
+        0,
+        0,
+        0.9851778656126482,
+        162.0792079207921,
+        180.83794466403162
+      ],
+      "pivot": [
+        795,
+        1270
+      ],
+      "opacity": 1,
+      "sha256": "4df52a80ef1511477acc25a3b234a471fab15f265546fdae2c30d293c5d1087f",
+      "bytes": 753215,
+      "nativeSha256": "ec8961f9d3d7345e6e6645515f9637ecfc17e2a371a8535ebb9c0dc7e202206d",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        250,
+        303,
+        1360,
+        1300
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-banana-plant-leaves-back.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-banana-plant-leaves-back.txt": "ba5e771c8b1fdb29b33931dea31eb2452080eba7983b1f35f182a38c8d08d441"
+      }
+    },
+    {
+      "id": "motion-banana-plant-leaves-front",
+      "path": "source/motion/banana-plant/leaves-front.png",
+      "size": [
+        1632,
+        1632
+      ],
+      "nativePath": "review/motion/polish-parts-native/banana-plant/leaves-front.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        85,
+        464,
+        1219,
+        1100
+      ],
+      "targetBounds": [
+        248,
+        710,
+        1385,
+        1328
+      ],
+      "transform": [
+        1.0026455026455026,
+        0,
+        0,
+        0.9716981132075472,
+        162.77513227513228,
+        259.1320754716981
+      ],
+      "pivot": [
+        795,
+        1270
+      ],
+      "opacity": 1,
+      "sha256": "b8b62863d368e0fc1cd61a0c31fd13f6269406a3e8c5a1e0f5f0c42cf8107397",
+      "bytes": 822010,
+      "nativeSha256": "94ead8563b3e73c1827c1326794cbd2a0d33db23e5af42fd0b720e0d38440ae9",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        248,
+        710,
+        1385,
+        1328
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-banana-plant-leaves-front.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-banana-plant-leaves-front.txt": "d0df1bd7b34b23e39f03e3a1c959f971eaa3488e7174e8016e76b8f04446e43b"
+      }
+    },
+    {
+      "id": "motion-fern-base",
+      "path": "source/motion/fern/base.png",
+      "size": [
+        1568,
+        1568
+      ],
+      "nativePath": "review/motion/polish-parts-native/fern/base.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        212,
+        709,
+        999,
+        1066
+      ],
+      "targetBounds": [
+        566,
+        1111,
+        976,
+        1316
+      ],
+      "transform": [
+        0.5209656925031766,
+        0,
+        0,
+        0.5742296918767507,
+        455.55527318932656,
+        703.8711484593838
+      ],
+      "pivot": [
+        766,
+        1266
+      ],
+      "opacity": 1,
+      "sha256": "8dace0626d3e5bb436a5e470bd8e1b685e5d6bbf9064469e4b85a7379480ebb3",
+      "bytes": 170000,
+      "nativeSha256": "d39a01d3423acdf9b85101dcf81c955fb34948c148e29dcadab9eba9d74ef0df",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        566,
+        1111,
+        976,
+        1316
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-fern-base.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-fern-base.txt": "6d5d694bc8ed2c13903b99c7c09aa5423412d1973f7f710e984ac6b6c9c15643"
+      }
+    },
+    {
+      "id": "motion-fern-leaves-back",
+      "path": "source/motion/fern/leaves-back.png",
+      "size": [
+        1568,
+        1568
+      ],
+      "nativePath": "review/motion/polish-parts-native/fern/leaves-back.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        132,
+        152,
+        1165,
+        1140
+      ],
+      "targetBounds": [
+        268,
+        238,
+        1299,
+        1276
+      ],
+      "transform": [
+        0.9980638915779284,
+        0,
+        0,
+        1.0506072874493928,
+        136.25556631171344,
+        78.30769230769229
+      ],
+      "pivot": [
+        766,
+        1266
+      ],
+      "opacity": 1,
+      "sha256": "ee43ac788444e2eb5b84346faeef01d39ca4c72497592ce3fa7e96a4434f5f38",
+      "bytes": 1128330,
+      "nativeSha256": "96a3b6d7274ff1dd57cdf736d097d60e79a48ab518963bfd6d7d91b16b8c76fb",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        268,
+        238,
+        1299,
+        1276
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-fern-leaves-back.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-fern-leaves-back.txt": "cb19821d2e0806c8a3ae2ab7dc02ff0fdd65d98a64376ea0313ac79ce56c4d02"
+      }
+    },
+    {
+      "id": "motion-fern-leaves-front",
+      "path": "source/motion/fern/leaves-front.png",
+      "size": [
+        1568,
+        1568
+      ],
+      "nativePath": "review/motion/polish-parts-native/fern/leaves-front.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        125,
+        569,
+        1145,
+        1141
+      ],
+      "targetBounds": [
+        268,
+        751,
+        1299,
+        1329
+      ],
+      "transform": [
+        1.0107843137254902,
+        0,
+        0,
+        1.0104895104895104,
+        141.65196078431373,
+        176.0314685314686
+      ],
+      "pivot": [
+        766,
+        1266
+      ],
+      "opacity": 1,
+      "sha256": "90f1c3106ff5a48044430eb2f549019f56f67da9736bd46850f5015adf302792",
+      "bytes": 868712,
+      "nativeSha256": "6502eab8772a93856fcbede1b6472dfa6dda6c65e5f325a6dc7e1ad0b2aa24cd",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        268,
+        751,
+        1299,
+        1329
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-fern-leaves-front.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-fern-leaves-front.txt": "3d22a36296e9043fe26b6555edd3803d1c64183a20a37a84eca003bab0d339f5"
+      }
+    },
+    {
+      "id": "motion-monstera-base",
+      "path": "source/motion/monstera/base.png",
+      "size": [
+        1488,
+        1488
+      ],
+      "nativePath": "review/motion/polish-parts-native/monstera/base.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        240,
+        405,
+        1006,
+        1086
+      ],
+      "targetBounds": [
+        542,
+        872,
+        922,
+        1232
+      ],
+      "transform": [
+        0.4960835509138381,
+        0,
+        0,
+        0.5286343612334802,
+        422.93994778067884,
+        657.9030837004406
+      ],
+      "pivot": [
+        722,
+        1202
+      ],
+      "opacity": 1,
+      "sha256": "01230446c236c7751ca64b00d67ffa3ac002df0134aae3d8a3d90c750af65419",
+      "bytes": 117603,
+      "nativeSha256": "c686a066d1298dcb3ae6c540e91e56463468424c3b107ecf0542af8d6a0ab2ba",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        542,
+        872,
+        922,
+        1232
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-monstera-base.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-monstera-base.txt": "e25f6a9e518b3dc95cb4a7b4b63834c07a3437907f86bbdc27a2b6fb182a96f5"
+      }
+    },
+    {
+      "id": "motion-monstera-leaves-back",
+      "path": "source/motion/monstera/leaves-back.png",
+      "size": [
+        1488,
+        1488
+      ],
+      "nativePath": "review/motion/polish-parts-native/monstera/leaves-back.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        114,
+        178,
+        1170,
+        1074
+      ],
+      "targetBounds": [
+        224,
+        256,
+        1264,
+        1232
+      ],
+      "transform": [
+        0.9848484848484849,
+        0,
+        0,
+        1.0892857142857142,
+        111.72727272727272,
+        62.10714285714286
+      ],
+      "pivot": [
+        722,
+        1202
+      ],
+      "opacity": 1,
+      "sha256": "007e141ff91368ee7019671263f433c6b0d837ebd20e3f410cf89f9709929e16",
+      "bytes": 879647,
+      "nativeSha256": "8f9e4e2d3194bb2354cb411e90e9686bfaa525ab778bbf33006eab03efa0c3d9",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        224,
+        257,
+        1264,
+        1232
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-monstera-leaves-back.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-monstera-leaves-back.txt": "666d53b26075fd2851e13d017affa920634c812fd1f594e88e3943c7740f71a2"
+      }
+    },
+    {
+      "id": "motion-monstera-leaves-front",
+      "path": "source/motion/monstera/leaves-front.png",
+      "size": [
+        1488,
+        1488
+      ],
+      "nativePath": "review/motion/polish-parts-native/monstera/leaves-front.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        132,
+        435,
+        1189,
+        1087
+      ],
+      "targetBounds": [
+        224,
+        592,
+        1264,
+        1232
+      ],
+      "transform": [
+        0.9839167455061495,
+        0,
+        0,
+        0.9815950920245399,
+        94.12298959318827,
+        165.00613496932516
+      ],
+      "pivot": [
+        722,
+        1202
+      ],
+      "opacity": 1,
+      "sha256": "916b6a8ec3d30bedcd7885e4b052669135eba451af9ab509e3aec49aca43abd7",
+      "bytes": 882532,
+      "nativeSha256": "080c7d5e4e604ef8286e62dbce7f2d419e198cce5a02c8b3af44c4ae5277c8a3",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        224,
+        592,
+        1264,
+        1232
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-monstera-leaves-front.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-monstera-leaves-front.txt": "3cb3207743328be1cdd0334213f882fd8d6a536a577cef245794190e102e314b"
+      }
+    },
+    {
+      "id": "motion-ladybug-body",
+      "path": "source/motion/ladybug/body.png",
+      "size": [
+        1296,
+        1296
+      ],
+      "nativePath": "review/motion/polish-parts-native/ladybug/body.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        112,
+        124,
+        1142,
+        1099
+      ],
+      "targetBounds": [
+        200,
+        247,
+        1097,
+        1050
+      ],
+      "transform": [
+        0.870873786407767,
+        0,
+        0,
+        0.8235897435897436,
+        102.46213592233009,
+        144.8748717948718
+      ],
+      "pivot": [
+        649,
+        652
+      ],
+      "opacity": 1,
+      "sha256": "06f208e4f49ef4aac173c65dc7e242ed2de40a2b670c398331a44915aeb00b24",
+      "bytes": 789752,
+      "nativeSha256": "0a8e7a754135cf48ac6edaddd3461c780bb57fb21d4bc9129c4e626a979e88c9",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        200,
+        247,
+        1097,
+        1050
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-ladybug-body.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-ladybug-body.txt": "d72016c0201a27fa135a0c7ce70990fcf9c94cb594cc83ad42688015a6af49c4"
+      }
+    },
+    {
+      "id": "motion-ladybug-wings",
+      "path": "source/motion/ladybug/wings.png",
+      "size": [
+        1296,
+        1296
+      ],
+      "nativePath": "review/motion/polish-parts-native/ladybug/wings.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        47,
+        415,
+        1207,
+        902
+      ],
+      "targetBounds": [
+        132,
+        452,
+        1162,
+        932
+      ],
+      "transform": [
+        0.8879310344827587,
+        0,
+        0,
+        0.9856262833675564,
+        90.26724137931035,
+        42.96509240246411
+      ],
+      "pivot": [
+        649,
+        467
+      ],
+      "opacity": 0.7,
+      "sha256": "0e9676f55e9bf7d8cfce9c73ea089c8a4035a277625a540a86d9bcb386f34fa4",
+      "bytes": 595567,
+      "nativeSha256": "9b2c4bba547cd9e22624860680751931636f74df231ab19d0cb628d72113af71",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        132,
+        452,
+        1162,
+        932
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-ladybug-wings.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-ladybug-wings.txt": "0e3c6f7d619a795a78bd60179a9747115a430abac05d004ba5229fe832d37728"
+      }
+    },
+    {
+      "id": "motion-ladybug-shell-left",
+      "path": "source/motion/ladybug/shell-left.png",
+      "size": [
+        1296,
+        1296
+      ],
+      "nativePath": "review/motion/polish-parts-native/ladybug/shell-left.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        295,
+        242,
+        797,
+        1065
+      ],
+      "targetBounds": [
+        337,
+        477,
+        657,
+        1012
+      ],
+      "transform": [
+        0.6374501992031872,
+        0,
+        0,
+        0.6500607533414338,
+        148.95219123505976,
+        319.685297691373
+      ],
+      "pivot": [
+        634,
+        492
+      ],
+      "opacity": 1,
+      "sha256": "1afcf9d95e832aef513c35cd4edb8ded6efaef14e99081b2080e7c9bb84cdb32",
+      "bytes": 298318,
+      "nativeSha256": "28fd8fb63fc2383984c8f7a00f69402e1bbe2284e8692137fc32e3f30f695cc2",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        337,
+        477,
+        657,
+        1012
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-ladybug-shell-left.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-ladybug-shell-left.txt": "878023f72e1db7c60bfa4a067eb79d0f337399e1ef508b27e2a57867798cfb3d"
+      }
+    },
+    {
+      "id": "motion-ladybug-shell-right",
+      "path": "source/motion/ladybug/shell-right.png",
+      "size": [
+        1296,
+        1296
+      ],
+      "nativePath": "review/motion/polish-parts-native/ladybug/shell-right.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        424,
+        242,
+        926,
+        1051
+      ],
+      "targetBounds": [
+        642,
+        477,
+        962,
+        1012
+      ],
+      "transform": [
+        0.6374501992031872,
+        0,
+        0,
+        0.6613102595797281,
+        371.7211155378486,
+        316.9629171817058
+      ],
+      "pivot": [
+        664,
+        492
+      ],
+      "opacity": 1,
+      "sha256": "7e48f0176cf4a3d9c4a77699acd7cacd8dce44ccbc4cab4e8df5ac3605efe8ce",
+      "bytes": 298102,
+      "nativeSha256": "2d5255d25e338fa51b9a0707322e73ae036e612fb0ab58b2fcd077235808e8d7",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        642,
+        477,
+        962,
+        1012
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-ladybug-shell-right.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-ladybug-shell-right.txt": "93eb56a21e2fbebc7805af952dd2627a9a5382cd842cfac6add22d957033381b"
+      }
+    },
+    {
+      "id": "motion-snail-body",
+      "path": "source/motion/snail/body.png",
+      "size": [
+        1680,
+        1680
+      ],
+      "nativePath": "review/motion/polish-parts-native/snail/body.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        109,
+        352,
+        1148,
+        907
+      ],
+      "targetBounds": [
+        257,
+        484,
+        1424,
+        1195
+      ],
+      "transform": [
+        1.1231953801732435,
+        0,
+        0,
+        1.281081081081081,
+        134.57170356111646,
+        33.05945945945945
+      ],
+      "pivot": [
+        1055,
+        812
+      ],
+      "opacity": 1,
+      "sha256": "4b47e3be9cfb371d48de1e87f622f90507f4eeb8e28ce12201a16fa29f6b2ca7",
+      "bytes": 663010,
+      "nativeSha256": "c553ec7ba483a5c026e2aa160c7d6e6ae9c6c3c7215f2a9e55fb9b2e17ea2095",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        258,
+        485,
+        1424,
+        1195
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-snail-body.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-snail-body.txt": "c113070f8fe2f769067ba4dae2d35a9a417e499be3460238baaea4f82c2f2e9f"
+      }
+    },
+    {
+      "id": "motion-snail-shell",
+      "path": "source/motion/snail/shell.png",
+      "size": [
+        1680,
+        1680
+      ],
+      "nativePath": "review/motion/polish-parts-native/snail/shell.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        261,
+        321,
+        1052,
+        980
+      ],
+      "targetBounds": [
+        360,
+        492,
+        1220,
+        1195
+      ],
+      "transform": [
+        1.0872313527180784,
+        0,
+        0,
+        1.0667678300455234,
+        76.23261694058152,
+        149.56752655538696
+      ],
+      "pivot": [
+        1055,
+        812
+      ],
+      "opacity": 1,
+      "sha256": "c901f7d7572800e736276eeb77c40e1fecd05e4bb627e0079b277459071a8bac",
+      "bytes": 917844,
+      "nativeSha256": "3d245073d6f27bf265623f22ac63d37b4d6a04a2e71f7d7544493f9818d0fdce",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        360,
+        493,
+        1220,
+        1195
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-snail-shell.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-snail-shell.txt": "8dd0cda5965e2ce7457814fa1c3f5afed746a2f37f659f85f001e32c75ee911d"
+      }
+    },
+    {
+      "id": "motion-confetti-piece-1",
+      "path": "source/motion/confetti/piece-1.png",
+      "size": [
+        1648,
+        1648
+      ],
+      "nativePath": "review/motion/polish-parts-native/confetti/piece-1.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        196,
+        398,
+        425,
+        651
+      ],
+      "targetBounds": [
+        280,
+        529,
+        397,
+        661
+      ],
+      "transform": [
+        0.5109170305676856,
+        0,
+        0,
+        0.5217391304347826,
+        179.86026200873363,
+        321.3478260869565
+      ],
+      "pivot": [
+        338.5,
+        595.0
+      ],
+      "opacity": 1,
+      "sha256": "1486ee7f66c267e113d9080d270a723c11af7f5cece1a8015f0bffa9da8f2172",
+      "bytes": 32245,
+      "nativeSha256": "2c18f9b0a692b67280bebb59884062ec625a8273d32da0862cc56c5d3a576cca",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        280,
+        529,
+        397,
+        661
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-1.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-confetti-piece-1.txt": "32e84f26aa7da2f2f489242233b27ed29ea3e29bb2726d68ee80f13f56e702af"
+      }
+    },
+    {
+      "id": "motion-confetti-piece-2",
+      "path": "source/motion/confetti/piece-2.png",
+      "size": [
+        1648,
+        1648
+      ],
+      "nativePath": "review/motion/polish-parts-native/confetti/piece-2.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        457,
+        395,
+        802,
+        720
+      ],
+      "targetBounds": [
+        757,
+        533,
+        888,
+        655
+      ],
+      "transform": [
+        0.37971014492753624,
+        0,
+        0,
+        0.37538461538461537,
+        583.472463768116,
+        384.7230769230769
+      ],
+      "pivot": [
+        822.5,
+        594.0
+      ],
+      "opacity": 1,
+      "sha256": "55a1a70abd4ce0e321601f4866c8edc088d26aa69037a8d3a98debad58e7fa61",
+      "bytes": 48384,
+      "nativeSha256": "85a5d0f2e87dd8e77fd087c4f3a325cd92beab00d43354bee0ae009f4158e742",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        757,
+        533,
+        888,
+        655
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-2.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-confetti-piece-2.txt": "62b049203095464342438e606c1e068fa63e8e7a1e4bee9cf9f7b5e11c71abe0"
+      }
+    },
+    {
+      "id": "motion-confetti-piece-3",
+      "path": "source/motion/confetti/piece-3.png",
+      "size": [
+        1648,
+        1648
+      ],
+      "nativePath": "review/motion/polish-parts-native/confetti/piece-3.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        954,
+        401,
+        1075,
+        543
+      ],
+      "targetBounds": [
+        1266,
+        530,
+        1376,
+        657
+      ],
+      "transform": [
+        0.9090909090909091,
+        0,
+        0,
+        0.8943661971830986,
+        398.72727272727275,
+        171.35915492957747
+      ],
+      "pivot": [
+        1321.0,
+        593.5
+      ],
+      "opacity": 1,
+      "sha256": "beca976d1abb67c93b40621818a81e4de6cfe008b43e105f3c3dc22929471545",
+      "bytes": 38622,
+      "nativeSha256": "885004a26671a1eca685ea4b85a914879e1d186215a1d6669336d768ad68ec4d",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        1266,
+        530,
+        1376,
+        657
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-3.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-confetti-piece-3.txt": "1b70c29d5952e458020f4292d765bc51e0a9465d31c78965e4362b9ccea7dde3"
+      }
+    },
+    {
+      "id": "motion-confetti-piece-4",
+      "path": "source/motion/confetti/piece-4.png",
+      "size": [
+        1648,
+        1648
+      ],
+      "nativePath": "review/motion/polish-parts-native/confetti/piece-4.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        156,
+        733,
+        472,
+        1043
+      ],
+      "targetBounds": [
+        252,
+        985,
+        381,
+        1118
+      ],
+      "transform": [
+        0.40822784810126583,
+        0,
+        0,
+        0.4290322580645161,
+        188.31645569620252,
+        670.5193548387097
+      ],
+      "pivot": [
+        316.5,
+        1051.5
+      ],
+      "opacity": 1,
+      "sha256": "3a681822bc39466d1366c67aff316e0dcef26b8bc767ef2f8d39b6968c7e4f78",
+      "bytes": 39022,
+      "nativeSha256": "4116504cb3a5d1332761c38dc7fa4500ee5e536f79bcd74d4acb0b8b49835f51",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        252,
+        985,
+        381,
+        1118
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-4.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-confetti-piece-4.txt": "4c33384a13259e3023fa6ef7bf141a9b919ee9e96a84ee06c5f12b3b3907702a"
+      }
+    },
+    {
+      "id": "motion-confetti-piece-5",
+      "path": "source/motion/confetti/piece-5.png",
+      "size": [
+        1648,
+        1648
+      ],
+      "nativePath": "review/motion/polish-parts-native/confetti/piece-5.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        529,
+        741,
+        753,
+        954
+      ],
+      "targetBounds": [
+        761,
+        990,
+        885,
+        1111
+      ],
+      "transform": [
+        0.5535714285714286,
+        0,
+        0,
+        0.568075117370892,
+        468.1607142857143,
+        569.056338028169
+      ],
+      "pivot": [
+        823.0,
+        1050.5
+      ],
+      "opacity": 1,
+      "sha256": "c33f6b88b33312fd391b2c86a1bad491580ef81e937a71b839a5b518c40ded86",
+      "bytes": 36300,
+      "nativeSha256": "122240d2a67567be7de3b2db908251105fb2fdc5696a6fa9f6ce7824f1a9ced4",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        761,
+        990,
+        885,
+        1111
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-5.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-confetti-piece-5.txt": "82c4ac2a67ab681703c166ba4f266ae265e10c1cb01ae3838117500e3f960ae6"
+      }
+    },
+    {
+      "id": "motion-confetti-piece-6",
+      "path": "source/motion/confetti/piece-6.png",
+      "size": [
+        1648,
+        1648
+      ],
+      "nativePath": "review/motion/polish-parts-native/confetti/piece-6.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        960,
+        762,
+        1063,
+        849
+      ],
+      "targetBounds": [
+        1264,
+        1001,
+        1396,
+        1113
+      ],
+      "transform": [
+        1.2815533980582525,
+        0,
+        0,
+        1.2873563218390804,
+        33.70873786407765,
+        20.034482758620697
+      ],
+      "pivot": [
+        1330.0,
+        1057.0
+      ],
+      "opacity": 1,
+      "sha256": "8ba784eac21afdcbd4c2781fa464eae5898d435e5ead87c074b7698895a07c39",
+      "bytes": 43026,
+      "nativeSha256": "335ece1ef7b30a1a582e5f463c72f67b47ab5779ef80a80af8b2d7442567b0c9",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        1264,
+        1001,
+        1396,
+        1114
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-confetti-piece-6.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-confetti-piece-6.txt": "daf34c197c4a543a73d342d85953e684650b825fd83fac2f91aee0d1a5a71469"
+      }
+    },
+    {
+      "id": "motion-pointer-press",
+      "path": "source/motion/pointer/press.png",
+      "size": [
+        1552,
+        1552
+      ],
+      "nativePath": "review/motion/polish-parts-native/pointer/press.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        366,
+        195,
+        892,
+        1066
+      ],
+      "targetBounds": [
+        455,
+        237,
+        1090,
+        1288
+      ],
+      "transform": [
+        1.2072243346007605,
+        0,
+        0,
+        1.2072243346007605,
+        12.322504286885874,
+        1.591254752851711
+      ],
+      "landmarks": {
+        "sourceBounds": [
+          366,
+          195,
+          892,
+          1066
+        ],
+        "targetBounds": [
+          455,
+          237,
+          1090,
+          1288
+        ],
+        "nativeToCanvas": [
+          1.2072243346007605,
+          0,
+          0,
+          1.2072243346007605,
+          12.322504286885874,
+          1.591254752851711
+        ],
+        "fingertip": [
+          676.0,
+          237
+        ],
+        "nativeLandmark": [
+          549.7549019607843,
+          195
+        ],
+        "landmarkRegistrationErrorPx": 0.0
+      },
+      "sha256": "11c7434fda047c34a2ab4d9804848d8d24ebb98f97f5fac0851bdcc14839761c",
+      "bytes": 659296,
+      "nativeSha256": "a3757ad0a083e647a6528ec4dce8a8e78d635b4187b0f9369b7d3fdd7b614d05",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        455,
+        237,
+        1090,
+        1288
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-pointer-press.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-pointer-press.txt": "6779a71bc2cb27d045dc9572f218b924a2af1ba8a5d1c1be3f0c760232bb8a07"
+      }
+    },
+    {
+      "id": "motion-frog-jump",
+      "path": "source/motion/frog/jump.png",
+      "size": [
+        1286,
+        1286
+      ],
+      "nativePath": "review/motion/polish-parts-native/frog/jump.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "sourceBounds": [
+        43,
+        71,
+        1215,
+        1169
+      ],
+      "targetBounds": [
+        88,
+        44,
+        1201,
+        1087
+      ],
+      "transform": [
+        0.95,
+        0,
+        0,
+        0.95,
+        47.35000000000002,
+        -23.850000000000023
+      ],
+      "landmarks": {
+        "sourceBounds": [
+          43,
+          71,
+          1215,
+          1169
+        ],
+        "targetBounds": [
+          88,
+          44,
+          1201,
+          1087
+        ],
+        "nativeToCanvas": [
+          0.95,
+          0,
+          0,
+          0.95,
+          47.35000000000002,
+          -23.850000000000023
+        ],
+        "bodyCentre": [
+          643,
+          606
+        ],
+        "nativeLandmark": [
+          627,
+          663
+        ],
+        "landmarkRegistrationErrorPx": 0.0
+      },
+      "sha256": "6f2cf4c598809062a70ba38a34897b022e90f6d445d3d2db3cf93559f9237d24",
+      "bytes": 1099601,
+      "nativeSha256": "4784e309d908eae3b553c2d6c2cd8f48da211ddda4113c22cdddc6ba92c4803a",
+      "hasAlpha": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "boundsAlpha40": [
+        88,
+        44,
+        1201,
+        1087
+      ],
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/polish-executed/motion-frog-jump.txt"
+      ],
+      "promptHashes": {
+        "prompts/polish-executed/motion-frog-jump.txt": "b93276a3d9a9878491790fa8c5bb2ecc2fde355357c053df632c011856db0cf3"
+      }
+    }
+  ]
+}

@@ -4,7 +4,8 @@ from PIL import Image,ImageDraw
 import json,hashlib,math
 HERE=Path(__file__).resolve().parent; ART=HERE.parents[1]
 rig=json.loads((HERE/'registration.json').read_text()); tr=json.loads((ART/'review/treasures/registration.json').read_text())
-assets={**rig['assets'],'strawberry':tr['assets']['strawberry']}; measurements=[]
+# This historical builder only handles priority-1 rigs; preserve later registration entries.
+assets={**{k:rig['assets'][k] for k in ('butterfly','coconut','nut','flower','berries','chest')},'strawberry':tr['assets']['strawberry']}; measurements=[]
 S=360
 sheet=Image.new('RGB',(S*4,len(assets)*(S+28)),'#203f35'); d=ImageDraw.Draw(sheet)
 def affine(im,size,b,t):

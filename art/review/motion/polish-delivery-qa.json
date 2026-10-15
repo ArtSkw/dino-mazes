@@ -1,0 +1,115 @@
+{
+  "samplesPerLoop": 40,
+  "backgrounds": [
+    "#fff3d8",
+    "#163d32"
+  ],
+  "assets": {
+    "stone": {
+      "gif": "review/motion/polish-stone-stress.gif",
+      "frames": 40,
+      "sha256": "58aae3b9de7641ee5b5c7bf00fa024fb0085e8f8956c74f97fb17fdd37794d12",
+      "clippedSampleIndices": [],
+      "glintMaxOutsideFractionAlpha10": 0.0,
+      "glintTest": "9 extreme positions at +/-6% object width on both axes, scale130%; alpha>10 against body alpha>128"
+    },
+    "shell": {
+      "gif": "review/motion/polish-shell-stress.gif",
+      "frames": 40,
+      "sha256": "4d2b991b8c4277cf6e05ea6d62031d21dfe2dc54929a093ca6bce62f21aeb754",
+      "clippedSampleIndices": [],
+      "glintMaxOutsideFractionAlpha10": 0.0,
+      "glintTest": "9 extreme positions at +/-6% object width on both axes, scale130%; alpha>10 against body alpha>128"
+    },
+    "confetti": {
+      "gif": "review/motion/polish-confetti-stress.gif",
+      "frames": 40,
+      "sha256": "8e418e0aeb2df262ec9e32c4775c7ba934905ba94b1fb13c83529c06d3e21b4f",
+      "clippedSampleIndices": []
+    },
+    "banana-plant": {
+      "gif": "review/motion/polish-banana-plant-stress.gif",
+      "frames": 40,
+      "sha256": "a8e1152d3bbfc733196192de26bb7a116191ee778abbd672d4da6116f9edffb0",
+      "clippedSampleIndices": [],
+      "minimumRootOverlapPixelsAt320": [
+        474,
+        565
+      ]
+    },
+    "fern": {
+      "gif": "review/motion/polish-fern-stress.gif",
+      "frames": 40,
+      "sha256": "0e4d72b21bcb6119eceb784438ef98fcf2958dc2d4425c0776e772739f5f2b7b",
+      "clippedSampleIndices": [],
+      "minimumRootOverlapPixelsAt320": [
+        387,
+        608
+      ]
+    },
+    "monstera": {
+      "gif": "review/motion/polish-monstera-stress.gif",
+      "frames": 40,
+      "sha256": "9beea5d1e0294ceef81001580423416c15e73af7bc6149ead6051794ecbbeda0",
+      "clippedSampleIndices": [],
+      "minimumRootOverlapPixelsAt320": [
+        358,
+        205
+      ]
+    },
+    "pointer": {
+      "gif": "review/motion/polish-pointer-stress.gif",
+      "frames": 3,
+      "sha256": "a1c4e7ae6f775a0d3145d62c8317759164065957d3ee0395eb2c90caec94bea8",
+      "clippedSampleIndices": [],
+      "landmarkRegistrationErrorPx": 0.0,
+      "landmark": [
+        676.0,
+        237
+      ]
+    },
+    "ladybug": {
+      "gif": "review/motion/polish-ladybug-stress.gif",
+      "frames": 40,
+      "sha256": "3c481ff46355f971e67a74819532a5acd1d240fce29df24efb076c90ca2e9384",
+      "clippedSampleIndices": []
+    },
+    "snail": {
+      "gif": "review/motion/polish-snail-stress.gif",
+      "frames": 40,
+      "sha256": "3a8a4407f84dfe6ea04adb23b0a14e9f2b227235df4450ee4c329b62b1d26279",
+      "clippedSampleIndices": []
+    },
+    "frog": {
+      "gif": "review/motion/polish-frog-stress.gif",
+      "frames": 3,
+      "sha256": "d286b590fcdb9381699c4403f854b4b38dac0fe7479fbb63ddf08eb69fa5b97e",
+      "clippedSampleIndices": [],
+      "landmarkRegistrationErrorPx": 0.0,
+      "landmark": [
+        643,
+        606
+      ]
+    }
+  },
+  "reviewedDate": "2026-10-15",
+  "browser": {
+    "gallery": "review/motion/polish-parts.html",
+    "imagesLoaded": 13,
+    "consoleErrorsOrWarnings": [],
+    "capture": "review/motion/polish-browser-critters.png"
+  },
+  "visualQA": {
+    "backgrounds": "cream and dark green",
+    "reviewed": "All ten assemblies, stress phases, pose overlays, confetti 24px/10% width; browser gallery loaded and sampled.",
+    "limitations": [
+      "Painted reconstructions are close approximations, not pixel-identical master segmentations.",
+      "Confetti at 10% width is an edge-on colored sliver; use a brief moving flip.",
+      "Ladybug wings must be hidden at rest and revealed with wing-case opening.",
+      "Snail shell opening is more prominent than the master; draw shell over retracting body.",
+      "Pointer and frog have two discrete poses; no continuous in-between frames.",
+      "Affine landmark error measures mapping of selected anchors, not pixel-identical anatomy.",
+      "Runtime GPU, tablet and gameplay integration tests remain with Claude."
+    ]
+  }
+}
