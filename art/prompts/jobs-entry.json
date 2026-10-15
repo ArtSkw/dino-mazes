@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "request": "art/CODEX_REQUEST_ENTRY.md",
+  "jobs": [
+    {
+      "id": "entry-curtain-left-back",
+      "output": "source/entry/curtain-left-back.png",
+      "size": "1024x1536",
+      "alpha": true,
+      "prompt": "The deepest layer of a jungle leaf curtain for the left half of a children's game title screen: dense far-away tropical foliage (monstera, banana and palm leaves, fern fronds) in deep teal and shaded green, softer contrast and slightly cooler, filling the whole height and the left three quarters of the canvas; its right edge is an irregular, organic silhouette of leaf tips and gaps (never a straight line), fading into transparency. Must tile vertically with nothing cut at the top and bottom edges except the foliage itself. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit (reference: source/intro-leaf-curtain-left.png and source/intro-leaf-curtain-right.png for palette, leaf shapes and light): softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated greens with teal shadows and golden-lime highlights. High fidelity: visible leaf veins, gentle surface texture, a few tiny dew drops, no noise or grain. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark. No animals or characters.",
+      "status": "todo",
+      "priority": 1
+    },
+    {
+      "id": "entry-curtain-left-mid",
+      "output": "source/entry/curtain-left-mid.png",
+      "size": "1024x1536",
+      "alpha": true,
+      "prompt": "The middle layer of a jungle leaf curtain for the left half of a children's game title screen: medium-size tropical leaves (split monstera leaves, banana leaves, broad heart-shaped leaves, a few fern fronds and one or two thin brown stems) overlapping in two or three depths, sunlit on their tops; rooted at the left edge and reaching about two thirds across the canvas toward the right, with an open, airy, irregular right edge. Full height of the canvas. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit (reference: source/intro-leaf-curtain-left.png and source/intro-leaf-curtain-right.png for palette, leaf shapes and light): softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated greens with teal shadows and golden-lime highlights. High fidelity: visible leaf veins, gentle surface texture, a few tiny dew drops, no noise or grain. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark. No animals or characters.",
+      "status": "todo",
+      "priority": 1
+    },
+    {
+      "id": "entry-curtain-left-front-top",
+      "output": "source/entry/curtain-left-front-top.png",
+      "size": "1024x1536",
+      "alpha": true,
+      "prompt": "The front layer, upper half, of a jungle leaf curtain for the left half of a children's game title screen: two or three huge hero leaves seen close up (one large split monstera leaf and one long banana leaf, plus a small palm tip), hanging in from the top and the left edge, every vein crisp, warm light raking across them, a few glistening dew drops. They fill the upper part of the canvas and point down and toward the right; transparent elsewhere. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit (reference: source/intro-leaf-curtain-left.png and source/intro-leaf-curtain-right.png for palette, leaf shapes and light): softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated greens with teal shadows and golden-lime highlights. High fidelity: visible leaf veins, gentle surface texture, a few tiny dew drops, no noise or grain. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark. No animals or characters.",
+      "status": "todo",
+      "priority": 1
+    },
+    {
+      "id": "entry-curtain-left-front-bottom",
+      "output": "source/entry/curtain-left-front-bottom.png",
+      "size": "1024x1536",
+      "alpha": true,
+      "prompt": "The front layer, lower half, of a jungle leaf curtain for the left half of a children's game title screen: two or three huge hero leaves seen close up growing up from the bottom and the left edge (a big monstera leaf, a broad elephant-ear leaf and a curling fern frond), every vein crisp, warm light from the upper left, a few dew drops. They fill the lower part of the canvas and point up and toward the right; transparent elsewhere. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit (reference: source/intro-leaf-curtain-left.png and source/intro-leaf-curtain-right.png for palette, leaf shapes and light): softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated greens with teal shadows and golden-lime highlights. High fidelity: visible leaf veins, gentle surface texture, a few tiny dew drops, no noise or grain. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark. No animals or characters.",
+      "status": "todo",
+      "priority": 1
+    },
+    {
+      "id": "entry-curtain-right-back",
+      "output": "source/entry/curtain-right-back.png",
+      "size": "1024x1536",
+      "alpha": true,
+      "prompt": "The deepest layer of a jungle leaf curtain for the right half of a children's game title screen: dense far-away tropical foliage (monstera, banana and palm leaves, fern fronds) in deep teal and shaded green, softer contrast and slightly cooler, filling the whole height and the right three quarters of the canvas; its left edge is an irregular, organic silhouette of leaf tips and gaps (never a straight line), fading into transparency. Must tile vertically with nothing cut at the top and bottom edges except the foliage itself. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit (reference: source/intro-leaf-curtain-left.png and source/intro-leaf-curtain-right.png for palette, leaf shapes and light): softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated greens with teal shadows and golden-lime highlights. High fidelity: visible leaf veins, gentle surface texture, a few tiny dew drops, no noise or grain. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark. No animals or characters.",
+      "status": "todo",
+      "priority": 1
+    },
+    {
+      "id": "entry-curtain-right-mid",
+      "output": "source/entry/curtain-right-mid.png",
+      "size": "1024x1536",
+      "alpha": true,
+      "prompt": "The middle layer of a jungle leaf curtain for the right half of a children's game title screen: medium-size tropical leaves (split monstera leaves, banana leaves, broad heart-shaped leaves, a few fern fronds and one or two thin brown stems) overlapping in two or three depths, sunlit on their tops; rooted at the right edge and reaching about two thirds across the canvas toward the left, with an open, airy, irregular left edge. Full height of the canvas. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit (reference: source/intro-leaf-curtain-left.png and source/intro-leaf-curtain-right.png for palette, leaf shapes and light): softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated greens with teal shadows and golden-lime highlights. High fidelity: visible leaf veins, gentle surface texture, a few tiny dew drops, no noise or grain. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark. No animals or characters.",
+      "status": "todo",
+      "priority": 1
+    },
+    {
+      "id": "entry-curtain-right-front-top",
+      "output": "source/entry/curtain-right-front-top.png",
+      "size": "1024x1536",
+      "alpha": true,
+      "prompt": "The front layer, upper half, of a jungle leaf curtain for the right half of a children's game title screen: two or three huge hero leaves seen close up (one large split monstera leaf and one long banana leaf, plus a small palm tip), hanging in from the top and the right edge, every vein crisp, warm light raking across them, a few glistening dew drops. They fill the upper part of the canvas and point down and toward the left; transparent elsewhere. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit (reference: source/intro-leaf-curtain-left.png and source/intro-leaf-curtain-right.png for palette, leaf shapes and light): softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated greens with teal shadows and golden-lime highlights. High fidelity: visible leaf veins, gentle surface texture, a few tiny dew drops, no noise or grain. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark. No animals or characters.",
+      "status": "todo",
+      "priority": 1
+    },
+    {
+      "id": "entry-curtain-right-front-bottom",
+      "output": "source/entry/curtain-right-front-bottom.png",
+      "size": "1024x1536",
+      "alpha": true,
+      "prompt": "The front layer, lower half, of a jungle leaf curtain for the right half of a children's game title screen: two or three huge hero leaves seen close up growing up from the bottom and the right edge (a big monstera leaf, a broad elephant-ear leaf and a curling fern frond), every vein crisp, warm light from the upper left, a few dew drops. They fill the lower part of the canvas and point up and toward the left; transparent elsewhere. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit (reference: source/intro-leaf-curtain-left.png and source/intro-leaf-curtain-right.png for palette, leaf shapes and light): softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated greens with teal shadows and golden-lime highlights. High fidelity: visible leaf veins, gentle surface texture, a few tiny dew drops, no noise or grain. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark. No animals or characters.",
+      "status": "todo",
+      "priority": 1
+    },
+    {
+      "id": "entry-backing",
+      "output": "source/entry/backing.png",
+      "size": "1536x1024",
+      "alpha": false,
+      "prompt": "What a child glimpses between closed jungle curtains: a deep, softly out-of-focus rainforest clearing far away, a warm golden glow in the middle where sunlight falls through the canopy, slanting light shafts, dark teal-green foliage framing the edges, tiny floating pollen specks catching the light. Calm, magical, inviting, no hard details (it sits behind the leaves). Full-bleed opaque painting, no transparency. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit (reference: source/intro-leaf-curtain-left.png and source/intro-leaf-curtain-right.png for palette, leaf shapes and light): softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated greens with teal shadows and golden-lime highlights. High fidelity: visible leaf veins, gentle surface texture, a few tiny dew drops, no noise or grain. No text, letters, numbers, logos or watermark. No animals or characters.",
+      "status": "todo",
+      "priority": 1
+    },
+    {
+      "id": "entry-leaves",
+      "output": "source/entry/leaves.png",
+      "size": "1536x1024",
+      "alpha": true,
+      "prompt": "A sprite sheet of six single small jungle leaves, each alone in its own cell of a 3 × 2 grid with wide empty gaps (no leaf touches another cell or the canvas edge): a small monstera leaf, a fresh lime-green heart-shaped leaf, a short fern frond, a slim banana-leaf piece, a round glossy leaf with a curled tip, a tiny two-leaf sprig. Each seen flat from above, about 70 % of its cell, softly lit, readable at 40 px. These burst out of the green start button and drift down when the curtains open. Polished 2D cartoon illustration matching the Gigantosaurus TV series and the existing Dino Mazes painted kit (reference: source/intro-leaf-curtain-left.png and source/intro-leaf-curtain-right.png for palette, leaf shapes and light): softly shaded dimensional shapes, crisp clean antialiased outlines, warm light from the upper left, rich but not oversaturated greens with teal shadows and golden-lime highlights. High fidelity: visible leaf veins, gentle surface texture, a few tiny dew drops, no noise or grain. TRUE transparent alpha background (no checkerboard, no matte, no halo, no floor shadow). No text, letters, numbers, logos or watermark. No animals or characters.",
+      "status": "todo",
+      "priority": 1
+    }
+  ]
+}
