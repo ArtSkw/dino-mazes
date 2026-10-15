@@ -1103,10 +1103,14 @@ export class Ui implements UiBridge {
     }
     show(this.rotateToast, wantRotate);
     if (wantRotate && L) {
-      // Between the butterfly's corner and the right-hand buttons.
+      // Between the butterfly's corner and the right-hand buttons; on a narrow
+      // phone that gap is too small, so it sits just under the top bar instead.
       const left = L.hint.x + L.hint.w + 10;
-      this.rotateToast.style.left = `${left}px`;
-      this.rotateToast.style.maxWidth = `${Math.max(160, Math.min(L.home.x, L.clusterRect.x) - 10 - left)}px`;
+      const room = Math.min(L.home.x, L.clusterRect.x) - 10 - left;
+      const under = room < 240;
+      this.rotateToast.style.left = `${under ? 12 : left}px`;
+      this.rotateToast.style.top = under ? `${L.clusterRect.y + L.clusterRect.h + 10}px` : '';
+      this.rotateToast.style.maxWidth = under ? `${vw - 24}px` : `${room}px`;
     }
   }
 

@@ -874,3 +874,37 @@ test.describe('living world details (14 October 2026)', () => {
     await context.close();
   });
 });
+
+test.describe('phones (15 October 2026)', () => {
+  for (const [w, h] of [[390, 844], [844, 390]] as const) {
+    test(`${w}×${h}: big round buttons, a centred maze, settings and collection that fit the screen`, async ({ page }) => {
+      await page.setViewportSize({ width: w, height: h });
+      await boot(page);
+      await startQuest(page);
+      await page.waitForTimeout(400);
+      // Round buttons are easy to hit.
+      for (const name of ['Ekran startowy', 'Moje skarby', 'Ustawienia']) {
+        const box = await page.getByRole('button', { name }).boundingBox();
+        expect(box!.width, name).toBeGreaterThanOrEqual(56);
+      }
+      // Mazes stay simple on a phone.
+      expect(await state<string>(page, 'c.state.session.effectiveDifficulty')).toMatch(/^(easy|medium)$/);
+      // Settings: nothing sticks out of the screen sideways.
+      await page.getByRole('button', { name: 'Ustawienia' }).click({ force: true });
+      const overflow = await page.evaluate(() => [...document.querySelectorAll('.settings button')].filter((b) => {
+        const r = b.getBoundingClientRect();
+        return r.width > 0 && (r.left < -1 || r.right > window.innerWidth + 1);
+      }).length);
+      expect(overflow).toBe(0);
+      await page.keyboard.press('Escape');
+      // Collection: every slot on screen.
+      await page.getByRole('button', { name: 'Moje skarby' }).click({ force: true });
+      await page.waitForTimeout(400);
+      const off = await page.evaluate(() => [...document.querySelectorAll('.collection .slot')].filter((s) => {
+        const r = s.getBoundingClientRect();
+        return r.top < 0 || r.bottom > window.innerHeight + 1 || r.left < 0 || r.right > window.innerWidth + 1;
+      }).length);
+      expect(off).toBe(0);
+    });
+  }
+});

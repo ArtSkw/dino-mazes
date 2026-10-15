@@ -62,6 +62,17 @@ export function levelFor(save: Pick<SaveV1, 'totalCompleted' | 'introDone'>): Di
 }
 
 /** Giganto requests one level above the current one, capped at the hardest. */
+/**
+ * On a phone mazes stay simple (owner request, 15 Oct 2026): the board is small
+ * and a fingertip is wide, so the level never climbs past this one there.
+ */
+export const PHONE_LEVEL: Difficulty = 'medium';
+
+/** `d`, or `max` when `d` is harder. */
+export function capDifficulty(d: Difficulty, max: Difficulty): Difficulty {
+  return LEVELS.indexOf(d) > LEVELS.indexOf(max) ? max : d;
+}
+
 export function specialDifficulty(d: Difficulty): Difficulty {
   const i = LEVELS.indexOf(d);
   return LEVELS[Math.min(LEVELS.length - 1, Math.max(0, i) + 1)] as Difficulty;

@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { FRIEND_CORNER, FRIEND_SIZE, MIN_CONTROL_PX, MIN_CORRIDOR_PX, castSlots, clusterSpec, computeLayout, fitGrid, introLayout, peekRest, toLogical, toScreen, type Layout, type Rect } from '../../src/platform/layout';
+import { FRIEND_CORNER, FRIEND_SIZE, MIN_CONTROL_PX, MIN_CORRIDOR_PX, castSlots, clusterSpec, computeLayout, fitGrid, introLayout, isPhone, peekRest, portraitTopBar, toLogical, toScreen, type Layout, type Rect } from '../../src/platform/layout';
 import type { Difficulty } from '../../src/domain/types';
 import { CORRIDOR_RADIUS, ENTRANCE_REACH, FRAME_MARGIN, LEVELS, entranceAxes } from '../../src/domain/maze';
 import { ASSETS, FACING, friendFrame } from '../../src/game/assets';
+import { PHONE_LEVEL, capDifficulty } from '../../src/domain/progress';
 import type { GridSpec, Side } from '../../src/domain/types';
 
 const VIEWPORTS: Array<[number, number]> = [
@@ -240,5 +241,47 @@ describe("the opening's Giganto peek", () => {
       // Giganto himself is still well in view (no more than a tenth of the cell hidden on the left).
       expect(-rest.x).toBeLessThan(size * 0.1);
     }
+  });
+});
+
+describe('phones (owner request, 15 October 2026)', () => {
+  const PHONES: Array<[number, number]> = [[390, 844], [360, 780], [375, 667], [844, 390], [780, 360]];
+
+  it('round buttons grow to 62 px on phones; tablets keep their sizes', () => {
+    for (const [w, h] of PHONES) {
+      expect(isPhone(w, h)).toBe(true);
+      expect(clusterSpec(w, h).size).toBe(62);
+    }
+    expect(isPhone(1180, 820)).toBe(false);
+    expect(clusterSpec(1180, 820).size).toBeLessThanOrEqual(68);
+  });
+
+  it('the maze sits in the middle of a portrait phone, clear of the top bar and the corner friend', () => {
+    for (const [w, h] of PHONES.filter(([w, h]) => h > w)) {
+      const fit = fitGrid('medium', w, h);
+      const L = computeLayout({ vw: w, vh: h, grid: fit.grid, entranceSide: 'bottom' });
+      const mid = L.board.y + L.board.h / 2;
+      // On the shortest phones the strip for the friend and "Wróć" keeps it a little above the middle.
+      expect(Math.abs(mid - h / 2)).toBeLessThan(h * 0.08);
+      expect(L.board.y).toBeGreaterThan(L.clusterRect.y + L.clusterRect.h);
+      expect(L.board.x).toBeGreaterThanOrEqual(0);
+      expect(L.board.x + L.board.w).toBeLessThanOrEqual(w);
+    }
+  });
+
+  it('the quest card is near the middle and the smaller friend never reaches under it', () => {
+    for (const [w, h] of PHONES.filter(([w, h]) => h > w)) {
+      const { card, character } = introLayout(w, h);
+      expect(character.h).toBeLessThanOrEqual(h * 0.32 + 0.5);
+      expect(card.y).toBeGreaterThanOrEqual(portraitTopBar(w, h) - 0.5);
+      expect(card.y + card.h).toBeLessThanOrEqual(character.y + character.h * 0.07);
+      expect(Math.abs(card.y + card.h / 2 - h / 2)).toBeLessThan(h * 0.15);
+    }
+  });
+
+  it('mazes stay simple on phones: the level is capped, easier levels stay as they are', () => {
+    expect(capDifficulty('grand', PHONE_LEVEL)).toBe('medium');
+    expect(capDifficulty('easy', PHONE_LEVEL)).toBe('easy');
+    expect(capDifficulty('medium', PHONE_LEVEL)).toBe('medium');
   });
 });

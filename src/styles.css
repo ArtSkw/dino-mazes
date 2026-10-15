@@ -1732,3 +1732,86 @@ button:focus-visible,
     opacity: 0;
   }
 }
+
+/* ---------- Phones (owner request, 15 Oct 2026) ----------
+   Made for tablets; on a phone the parents' settings fill the screen with
+   room to breathe, and the collection keeps its treasures together. */
+
+@media (max-width: 600px), (max-height: 500px) {
+  .overlay.settings {
+    place-items: stretch;
+  }
+
+  .settings-panel {
+    width: 100vw;
+    height: 100dvh;
+    max-height: none;
+    padding: env(safe-area-inset-top) max(6px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(6px, env(safe-area-inset-left));
+    border-width: 22px;
+    border-image-width: 22px;
+  }
+
+  /* The corner leaf would sit over the close button on a full-screen panel. */
+  .settings-panel::after {
+    display: none;
+  }
+
+  .settings-body {
+    flex: 1;
+  }
+}
+
+/* Portrait phones: each setting is its label over a full-width switch. */
+@media (max-width: 600px) and (orientation: portrait) {
+  .setting-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin: 14px 0;
+  }
+
+  .setting-row .segmented {
+    display: flex;
+    width: 100%;
+  }
+
+  .setting-row .segmented .seg {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .setting-row.actions {
+    align-items: center;
+  }
+
+  /* Collection: treasures in two compact rows of four, Giganto's box below, all in the middle. */
+  .collection-inner {
+    width: 94vw;
+    height: auto;
+    max-height: 88dvh;
+  }
+
+  .collection-body {
+    flex: none;
+    gap: 18px;
+  }
+
+  .slots-classic {
+    flex: none;
+    grid-auto-rows: auto;
+    grid-template-rows: none !important;
+    row-gap: 10px;
+  }
+
+  .slots-classic .slot {
+    height: clamp(92px, 24vw, 128px);
+  }
+
+  .giganto-box {
+    flex: none;
+  }
+
+  .slots-giganto .slot {
+    height: clamp(96px, 26vw, 132px);
+  }
+}

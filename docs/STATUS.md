@@ -52,6 +52,31 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 20 (15 October 2026): phones
+
+The game is made for tablets; phones (shorter side under 500 px, `isPhone`) now get their own
+touches:
+
+- Round buttons (home, chest, settings, butterfly) are 62 px instead of 56.
+- Portrait: the maze sits in the middle of the screen (clamped so the friend and "Wróć" keep their
+  strip); the quest card is centred with the friend smaller (32 % of the height instead of 42 %)
+  and clear of the card; the "rotate" suggestion sits under the top bar, full width, instead of
+  squeezing between the buttons.
+- Mazes stay simple on phones: the level is capped at `medium` (`PHONE_LEVEL`, `capDifficulty`);
+  the grid is 5×5 there anyway, so this keeps the topology gentle. Progress still counts.
+- Settings fill the screen (safe areas respected); in portrait each setting is its label over a
+  full-width switch. The collection keeps its treasures together (two compact rows of four, then
+  Giganto's box) instead of stretching rows over the whole height.
+- Found on the way: a visitor started before the maze's first frame was sent away at once (the
+  layout counted as new); `Visitors.start` now records the layout. This was the occasional WebKit
+  failure of the visitor test.
+
+Checks: unit tests for button size, centring, the quest card and the level cap at five phone sizes;
+a browser test at 390×844 and 844×390 (buttons ≥ 56 px, settings and collection inside the screen);
+`tools/dev/review-phone.mjs` screenshots every screen at phone sizes. Security: `npm audit` clean,
+no secrets tracked or built, the only HTML sink takes the bundle's own SVG icons. Performance
+(production, 10 Mbps profile): welcome 3.5 s, drawable maze 3.9 s, 4.95 MB before play.
+
 ## Owner review, round 19 (15 October 2026): consistent buttons, a livelier start
 
 - The confirm dialog's two buttons ("Anuluj", "Tak, od nowa") are one size: a two-column grid,
@@ -455,8 +480,8 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 246 passed |
-| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 81 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
+| Domain unit + property | `npm test` | 250 passed |
+| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 85 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 3 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
 
@@ -476,8 +501,8 @@ parity; welcome wave.
 
 | Target (PRD §9) | Measured | Notes |
 |---|---|---|
-| Initial transfer ≤ 5 MB, complete ≤ 12 MB | **3.26 MB** total (everything) | gzip for text; images are WebP. 49 precached files. |
-| First playable ≤ 4 s at 10 Mbps | **3.05–3.10 s** (3 cold runs) | Chromium, 10 Mbps down / 5 up / 40 ms, cache + SW disabled, local preview server. |
+| Initial transfer ≤ 5 MB, complete ≤ 12 MB | **4.95 MB** before play (15 Oct 2026); complete about 15 MB with one language's voices (see Deviations) | gzip for text; images WebP, audio AAC. |
+| First playable ≤ 4 s at 10 Mbps | **3.9 s** drawable, welcome 3.5 s (3 cold runs, 15 Oct 2026; was 3.05–3.10 s before the motion and sound) | Chromium, 10 Mbps down / 5 up / 40 ms, cache + SW disabled, local preview server. |
 | GPU memory ≤ 96 MiB, atlas edge ≤ 2048 | ≈ 50 MiB estimated | Characters 24.6 MiB decoded (all five), board ≤ 2048² (≤ 16 MiB), backgrounds 6 MiB, kits ≈ 7 MiB. |
 | 60 fps / ≥ 30 fps oldest tablet | **pending on devices** | Headless WebKit: median 17 ms, p95 22 ms per frame while drawing a 9×9 maze. Headless Chromium uses software GL at 2880×1800 (83 ms/frame), not representative. |
 | Input response ≤ 50 ms | engine ≈ 0.001 ms/move; frame JS ≈ 0.8 ms | Trail redraw cost cut from 4.4 ms to 0.8 ms per frame (600-point trail) by drawing joints only at bends. |

@@ -66,6 +66,15 @@ export interface Layout {
   next: Rect;
 }
 
+/**
+ * Phones (owner request, 15 Oct 2026): the game is made for tablets, but on a
+ * phone the round buttons grow, the board and the quest card sit in the
+ * middle, the friend is a little smaller, and mazes stay simple (PHONE_LEVEL).
+ */
+export function isPhone(vw: number, vh: number): boolean {
+  return Math.min(vw, vh) < 500;
+}
+
 export function orientationOf(vw: number, vh: number): Orientation {
   return vw / Math.max(1, vh) >= 1.12 ? 'landscape' : 'portrait';
 }
@@ -106,8 +115,9 @@ export function clusterSpec(vw: number, vh: number): ClusterSpec {
   return { size, gap, direction, rect: { x: vw - margin - w, y: margin, w, h } };
 }
 
-/** Round control size: 56–68 CSS px depending on the viewport. */
+/** Round control size: 56–68 CSS px depending on the viewport; 62 on phones, easier for small fingers. */
 export function controlSize(vw: number, vh: number): number {
+  if (isPhone(vw, vh)) return 62;
   return Math.max(MIN_CONTROL_PX, Math.min(68, Math.round(Math.min(vw, vh) * 0.075)));
 }
 
@@ -117,7 +127,7 @@ export function boardAreaFor(vw: number, vh: number): Rect {
     const rw = railWidth(vw);
     return { x: rw, y: pad, w: Math.max(100, vw - 2 * rw), h: Math.max(100, vh - 2 * pad) };
   }
-  const top = 84;
+  const top = Math.max(84, portraitTopBar(vw, vh));
   const bottom = Math.round(Math.min(220, Math.max(160, vh * 0.2)));
   return { x: pad, y: top, w: Math.max(100, vw - 2 * pad), h: Math.max(100, vh - top - bottom) };
 }
@@ -230,7 +240,10 @@ export function computeLayout(input: LayoutInput): Layout {
   const slack = Math.max(0, area.w - bw);
   const lean = orientation === 'landscape' ? slack * LEAN * (corner === 'left' ? 1 : -1) : 0;
   const bx = area.x + (area.w - bw) / 2 + lean;
-  const by = area.y + (area.h - bh) / 2;
+  // Portrait: in the middle of the screen when the strips above and below allow
+  // it (phones leave a tall gap under the board otherwise), else in its area.
+  const inArea = area.y + (area.h - bh) / 2;
+  const by = orientation === 'portrait' ? Math.min(Math.max((vh - bh) / 2, area.y), Math.max(area.y, area.y + area.h - bh)) : inArea;
   const transform: BoardTransform = { pitch, ox: bx - xMin * pitch, oy: by - yMin * pitch };
   const board: Rect = {
     x: transform.ox - FRAME_MARGIN * pitch,
@@ -378,14 +391,17 @@ export function introLayout(vw: number, vh: number, friend: Pick<FriendFrame, 'a
       card: { x: start + visible + gap, y: (vh - cardH) / 2 - vh * 0.02, w: cardW, h: cardH },
     };
   }
-  const ch = Math.min(vh * 0.42, 440);
+  // A phone gets a smaller friend, so the card can sit in the middle of the screen.
+  const ch = Math.min(vh * (isPhone(vw, vh) ? 0.32 : 0.42), 440);
   const cw = ch * aspect;
   const w = Math.min(560, vw - 40);
-  // Below the top-right control row, above the friend's head.
+  // Below the top-right control row, above the friend's head; centred on the screen when there is room.
   const top = portraitTopBar(vw, vh);
-  const h = Math.min(vh * 0.5, 470, vh - ch * 0.88 - top - 12);
+  const floor = vh - ch * 0.93 - 16;
+  const h = Math.min(vh * 0.5, 470, floor - top);
+  const y = Math.min(Math.max((vh - h) / 2 - vh * 0.04, top), Math.max(top, floor - h));
   const visibleCenter = cw * (content.x + content.w / 2);
-  return { character: { x: vw / 2 - visibleCenter, y: vh - ch, w: cw, h: ch }, card: { x: (vw - w) / 2, y: top, w, h } };
+  return { character: { x: vw / 2 - visibleCenter, y: vh - ch, w: cw, h: ch }, card: { x: (vw - w) / 2, y, w, h } };
 }
 
 const INTRO_DEFAULT = { aspect: 0.9, content: { x: 0.11, y: 0, w: 0.78, h: 1 } };

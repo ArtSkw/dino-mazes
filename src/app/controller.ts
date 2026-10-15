@@ -11,13 +11,13 @@
 import { CHARACTERS, GIGANTO_GENERIC, INTRO_PROMPT, TREASURE_OBJECT, TREASURES, VOICES, questById } from '../data/content';
 import { t, type StringKey } from '../data/i18n';
 import { GENERATOR_VERSION, generateMaze, introMaze, profileFor, rebuildMaze } from '../domain/maze';
-import { award, levelFor, selectNextQuest, specialDifficulty } from '../domain/progress';
+import { PHONE_LEVEL, award, capDifficulty, levelFor, selectNextQuest, specialDifficulty } from '../domain/progress';
 import { createRng, freshSeed } from '../domain/rng';
 import { TrailEngine, computeHint, type Dir, type Hint } from '../domain/trail';
 import type { CharacterId, Difficulty, Lang, Localized, Maze, Point, SaveV1, Session, Settings, TreasureId } from '../domain/types';
 import { friendFrame } from '../game/assets';
 import type { MusicId, SoundBoard, Sfx, Speaker } from '../game/audio';
-import { computeLayout, fitGrid, type Layout } from '../platform/layout';
+import { computeLayout, fitGrid, isPhone, type Layout } from '../platform/layout';
 import { restartedSave, type LoadStatus, type SaveStore } from '../storage/save';
 
 export type Screen = 'loading' | 'welcome' | 'intro' | 'play' | 'reward';
@@ -387,6 +387,11 @@ export class Controller {
     });
   }
 
+  /** Phones keep mazes simple (PHONE_LEVEL); the progress itself still counts. */
+  private screenCap(d: Difficulty): Difficulty {
+    return isPhone(this.viewport.width(), this.viewport.height()) ? capDifficulty(d, PHONE_LEVEL) : d;
+  }
+
   private newSession(opts: { keepQuestOf?: Session; difficultyOverride?: Difficulty } = {}): void {
     let save = this.store.get();
     let session: Session;
@@ -395,7 +400,7 @@ export class Controller {
     const difficulty = levelFor(save);
     if (opts.keepQuestOf) {
       const prev = opts.keepQuestOf;
-      const eff = opts.difficultyOverride ?? prev.effectiveDifficulty;
+      const eff = this.screenCap(opts.difficultyOverride ?? prev.effectiveDifficulty);
       const fit = fitGrid(eff, this.viewport.width(), this.viewport.height());
       maze = this.freshMaze(eff, fit.grid, save);
       session = { ...prev, id: freshSeed(), seed: maze.seed, effectiveDifficulty: eff, difficulty: prev.difficulty, grid: { cols: maze.width, rows: maze.height }, trail: [], status: 'ready', hintUsed: false, resets: 0, layoutHash: maze.layoutHash };
@@ -403,7 +408,7 @@ export class Controller {
       const sel = selectNextQuest(save, this.rng, save.questBag);
       const choice = sel.choice;
       save = { ...save, questBag: sel.questBag };
-      const eff = choice.special ? specialDifficulty(difficulty) : difficulty;
+      const eff = this.screenCap(choice.special ? specialDifficulty(difficulty) : difficulty);
       if (choice.intro) {
         maze = introMaze();
       } else {

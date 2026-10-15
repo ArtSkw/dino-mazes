@@ -134,6 +134,8 @@ export class Visitors {
     if (asset.master) add('master', asset.master, [cw / 2, ch / 2], 1);
     if (asset.poses?.['jump']) add('jump', asset.poses['jump'], [cw / 2, ch / 2], 1).setVisible(false);
     const visit = planVisit(kind, rail, L.vw, size, Math.random);
+    // This layout is now the current one: the next update must not take it for a new maze and send the visitor away.
+    this.layoutRef = L;
     this.live = { visit, t0: now, container, parts, scale: size / Math.max(asset.size[0], asset.size[1]), sounded: false };
     this.update(now);
   }
