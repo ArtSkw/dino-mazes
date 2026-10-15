@@ -61,7 +61,9 @@ where the butterflies fly, wanders over the stones and leaves and goes back off 
 ladybug opens its wing cases and flies away, the snail pulls into its shell for a moment, the frog
 hops). Only in landscape, only on the free side strips (below the corner buttons, above the friend
 or "Wróć", never over the board), one at a time: the first after 12–20 s, then every 25–45 s;
-never with reduced motion. The hedge spot finder and the board-tap event were removed. Tests: every
+never with reduced motion; each rests a random 2–3 s longer than its base (owner request), so it
+is easy to spot and no two visits feel the same. The hedge spot finder and the board-tap event
+were removed. Tests: every
 visit starts and ends beyond the edge and stays on its strip (5 viewports × 3 kinds × 25 seeds),
 strips clear of every control, none in portrait; a browser test watches a frog come in.
 
@@ -351,7 +353,7 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 237 passed |
+| Domain unit + property | `npm test` | 238 passed |
 | Browser flows (Chromium + WebKit) | `npm run test:e2e` | 73 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |

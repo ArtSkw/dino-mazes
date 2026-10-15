@@ -38,7 +38,7 @@ describe('jungle visitors at the screen edges', () => {
             const v = planVisit(kind, rail, vw, 40, rng(seed * 7 + vw));
             const total = visitDuration(v);
             expect(total, kind).toBeGreaterThan(3);
-            expect(total, kind).toBeLessThan(15);
+            expect(total, kind).toBeLessThan(18);
             const off = (x: number): boolean => x < 0 || x > vw;
             expect(off(v.enter.x) && off(v.exit.x), kind).toBe(true);
             for (let t = 0; t <= total; t += 0.05) {
@@ -57,6 +57,20 @@ describe('jungle visitors at the screen edges', () => {
           }
         }
       }
+    }
+  });
+
+  it('each visitor rests 2–3 s longer than its base, a different length each time', () => {
+    const L = layoutFor(1180, 820);
+    const rail = visitorRails(L, 40)[0]!;
+    const base = { ladybug: 1.8, snail: 3.2, frog: 2.6 };
+    for (const kind of VISITOR_KINDS) {
+      const rests = Array.from({ length: 20 }, (_, i) => planVisit(kind, rail, 1180, 40, rng((i + 1) * 2654435761)).restS);
+      for (const r of rests) {
+        expect(r - base[kind]).toBeGreaterThanOrEqual(2);
+        expect(r - base[kind]).toBeLessThanOrEqual(3);
+      }
+      expect(new Set(rests.map((r) => r.toFixed(2))).size).toBeGreaterThan(10);
     }
   });
 

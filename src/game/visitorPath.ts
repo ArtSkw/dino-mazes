@@ -89,7 +89,9 @@ export function planVisit(kind: VisitorKind, rail: Rail, vw: number, size: numbe
   const hopping = 2 * (HOP_S + HOP_REST_S);
   const inS = kind === 'frog' ? hopping : dIn / SPEED[kind];
   const outS = kind === 'frog' ? hopping : kind === 'ladybug' ? 0.6 + 1.5 : dOut / SPEED[kind];
-  const restS = kind === 'snail' ? 3.2 : kind === 'frog' ? 2.6 : 1.8;
+  // A random 2–3 s more to look around, so a child has time to spot it and
+  // no two visits feel the same (owner request, 15 Oct 2026).
+  const restS = (kind === 'snail' ? 3.2 : kind === 'frog' ? 2.6 : 1.8) + 2 + rand();
   return { kind, side: rail.side, size, enter, stop, exit, inS, restS, outS };
 }
 
