@@ -52,6 +52,13 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Sound phase 1: the pilot (15 October 2026)
+
+The ElevenLabs pilot is generated (docs/SOUND_PLAN.md §0): offline tools in `tools/audio/`
+(generator, Scribe check, listening page), cues in `audio/cues.json`; the key stays in
+`.env.local`, takes in `art/source/audio/` (both ignored). Nothing ships to the game yet; the
+owner picks takes, the model and the casting on the listening page first.
+
 ## Owner review, round 16 (15 October 2026): a Giganto favicon
 
 The favicon and app icons still showed the first version's Bill. They are now Giganto peeking

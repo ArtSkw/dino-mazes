@@ -4,6 +4,36 @@
 production-quality sound, add a short intro theme and give the friends real voices, using the
 owner's ElevenLabs subscription and API.
 
+## 0. Pilot (15 October 2026): made, waiting for the owner's picks
+
+Made with `tools/audio/` from `audio/cues.json` (takes, transcripts and saved voice IDs stay in
+`art/source/audio/`, not committed):
+
+| Step | Tool | What it does |
+|---|---|---|
+| generate | `node tools/audio/generate.mjs [--only=id,prefix] [--dry]` | makes only missing or changed cues (request hash per folder), so a run never pays twice; designs voices and saves the picked preview (`pick`, default 1) to the account |
+| check | `node tools/audio/check.mjs` | Scribe speech-to-text on every line take: word error rate, tags read aloud, laughter heard (cached transcripts) |
+| review | `node tools/audio/review.mjs` | loudness-matched copies and a listening page with stars and "copy picks" (`art/source/audio/review/index.html`) |
+
+Made: 6 effects (13 takes), the opening theme (2 takes, 7.55 s on `music_v2_5` with two chunks),
+4 designed voices (Miłka PL, Tiny EN, Czupur PL, Rocky EN; 3 previews each, preview 1 saved),
+12 lines in `eleven_v3` and `eleven_v4` (2 takes each) and 4 lines where the Polish voice speaks
+English. **About 2,200 credits.**
+
+Findings so far:
+
+- **The account is Starter, not Creator:** 58,341 credits a month (reset 1 November), **10 voice
+  slots, 6 used** (2 earlier + 4 pilot). Lines cost about 30 credits per take; the full voicing
+  (about 240 clips × 2 takes) is about 15,000 credits, so the whole plan fits this month.
+- **Voice slots decide the casting:** separate PL and EN voices for 5 characters and the narrator
+  need 12 slots (only 4 are free); **one voice per character for both languages needs 6**. The
+  pilot's cross-language lines test that (Scribe understood all four English lines perfectly; the
+  accent is the owner's call).
+- **eleven_v4 is the better Polish model:** v3 said "w Jungli" instead of "w dżungli" in both of
+  Czupur's takes; v4 got it right. v4 performed the laugh tags in every take (v3 in 3 of 4 in
+  Polish); no take read a tag aloud.
+- Effects and music did not move the credit counter noticeably; check the account's usage page.
+
 ## 1. Recommendation in short
 
 - **Everything is generated offline, never in the browser.** A local script calls the API with the

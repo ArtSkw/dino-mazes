@@ -1,0 +1,131 @@
+{
+  "about": "Every sound, music piece, voice and line generated with ElevenLabs (docs/SOUND_PLAN.md). tools/audio/generate.mjs makes the missing or changed ones into art/source/audio/ (local); tools/audio/review.mjs builds the listening page. Phase 1 (pilot): 6 effects, the opening theme, Miłka's and Czupur's voices in Polish and English with 3 lines each.",
+  "palette": "Warm, round, playful children's cartoon sound, no harsh highs, nothing scary.",
+  "effects": [
+    {
+      "id": "tap",
+      "label": "Stuknięcie przycisku",
+      "event": "button tap",
+      "prompt": "A single soft wooden 'tok' of a small hollow log tapped with a felt mallet, a cartoon button click for a children's game, short and dry.",
+      "seconds": 0.5,
+      "influence": 0.6,
+      "takes": 3
+    },
+    {
+      "id": "bum",
+      "label": "Krok Giganto w otwarciu",
+      "event": "Giganto's footstep in the opening",
+      "prompt": "One deep, friendly footstep of a cartoon giant dinosaur: a soft heavy thump on jungle ground with a gentle low rumble and a few leaves shaking. Playful, no roar.",
+      "seconds": 1.5,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "pop",
+      "label": "Przyjaciel wyskakuje z krzaka",
+      "event": "a friend pops out of a bush",
+      "prompt": "A little cartoon dinosaur pops up out of a leafy bush: a quick leaf rustle into a bubbly cartoon 'pop'. Cheerful.",
+      "seconds": 0.8,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "success",
+      "label": "Labirynt rozwiązany",
+      "event": "maze solved",
+      "prompt": "A short cheerful success jingle for a children's maze game: a quick marimba and kalimba run up, a little slide whistle, ending on a giggly cartoon 'boing'. Bright and warm.",
+      "seconds": 2,
+      "influence": 0.45,
+      "takes": 2
+    },
+    {
+      "id": "treasure-coconut",
+      "label": "Znaleziony kokos (dźwięk skarbu)",
+      "event": "the coconut is found (treasure sting)",
+      "prompt": "A cartoon coconut is found: a hollow wooden 'donk' of a coconut, a short bouncy roll, and a tiny marimba sparkle at the end.",
+      "seconds": 1.5,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "flutter",
+      "label": "Przylatuje motylek z podpowiedzią",
+      "event": "the hint butterfly arrives",
+      "prompt": "A cartoon butterfly flutters in: soft papery wing flutters with a tiny glassy chime. Gentle and a little magical.",
+      "seconds": 1.5,
+      "influence": 0.5,
+      "takes": 2
+    }
+  ],
+  "music": [
+    {
+      "id": "theme-opening",
+      "event": "the full opening (7.5 s: curtains, two footsteps, Giganto peeks, friends pop up, the sign drops, 'Graj' sprouts)",
+      "model": "music_v2_5",
+      "takes": 2,
+      "chunks": [
+        {
+          "text": "[Instrumental intro]",
+          "ms": 3900,
+          "styles": ["cheerful, curious children's cartoon intro", "jungle adventure", "marimba", "kalimba", "soft pizzicato strings", "light wooden percussion", "two soft low tuba notes like friendly giant footsteps", "sparse, leaves space"],
+          "avoid": ["vocals", "singing", "epic", "scary", "dark", "trailer", "heavy drums", "electric guitar"]
+        },
+        {
+          "text": "[Instrumental outro]",
+          "ms": 3600,
+          "styles": ["playful, bouncy burst of joy", "ukulele", "marimba", "pizzicato strings", "wooden percussion", "soft tuba bass", "ends on a happy little flourish"],
+          "avoid": ["vocals", "singing", "epic", "scary", "dark", "trailer", "heavy drums", "electric guitar"]
+        }
+      ]
+    }
+  ],
+  "voices": [
+    {
+      "id": "tiny-pl",
+      "name": "Dino Mazes · Miłka (PL)",
+      "description": "An adult female voice actress performing a small, playful triceratops character in a Polish children's cartoon. Native Polish speaker, standard Polish accent. Bright, bubbly and quick, cheeky and warm, with a smile in every word; she lands a joke with a tiny pause and a giggle. Clean studio recording, close microphone.",
+      "text": "Cześć, jestem Miłka! Chcesz usłyszeć dowcip? Jak nazywa się śpiący dinozaur? Chrapozaur! Hi, hi! Wyglądam na małą, a jestem najsilniejsza z nas!",
+      "seed": 101
+    },
+    {
+      "id": "tiny-en",
+      "name": "Dino Mazes · Tiny (EN)",
+      "description": "An adult female voice actress performing a small, playful triceratops character in an English children's cartoon. Native British English speaker. Bright, bubbly and quick, cheeky and warm, with a smile in every word; she lands a joke with a tiny pause and a giggle. Clean studio recording, close microphone.",
+      "text": "Hi, I'm Tiny! Want to hear a joke? What do you call a sleeping dinosaur? A dino-snore! Hee hee! I may be Tiny, but I'm the strongest of us all!",
+      "seed": 102
+    },
+    {
+      "id": "rocky-pl",
+      "name": "Dino Mazes · Czupur (PL)",
+      "description": "An adult male voice actor performing an energetic young parasaurolophus character in a Polish children's cartoon. Native Polish speaker, standard Polish accent. Bold, fast and excitable, slightly raspy, always in a hurry, with loud happy shouts; a proud little show-off, but warm and friendly. Clean studio recording, close microphone.",
+      "text": "Cześć, jestem Czupur! Najszybszy dinozaur w dżungli! Mam trąbkę na głowie. Tuuu, tuuu! Kiedyś przybiję piątkę z Giganto. Zobaczysz!",
+      "seed": 103
+    },
+    {
+      "id": "rocky-en",
+      "name": "Dino Mazes · Rocky (EN)",
+      "description": "An adult male voice actor performing an energetic young parasaurolophus character in an English children's cartoon. Native British English speaker. Bold, fast and excitable, slightly raspy, always in a hurry, with loud happy shouts; a proud little show-off, but warm and friendly. Clean studio recording, close microphone.",
+      "text": "Hi, I'm Rocky! The fastest dino in the jungle! I've got a trumpet on my head. Toot, toot! One day I'll high-five Giganto. You'll see!",
+      "seed": 104
+    }
+  ],
+  "lines": [
+    { "id": "tiny-hello-pl", "voice": "tiny-pl", "lang": "pl", "text": "Cześć, jestem Miłka! Chcesz usłyszeć dowcip?", "say": "[cheerfully] Cześć, jestem Miłka! Chcesz usłyszeć dowcip?" },
+    { "id": "tiny-joke-pl", "voice": "tiny-pl", "lang": "pl", "text": "Jak nazywa się śpiący dinozaur? Chrapozaur!", "say": "Jak nazywa się śpiący dinozaur? [short pause] Chrapozaur! [giggles]" },
+    { "id": "tiny-cheer-pl", "voice": "tiny-pl", "lang": "pl", "text": "Ładnie rysujesz! Jak na moich obrazkach.", "say": "[warmly] Ładnie rysujesz! Jak na moich obrazkach." },
+    { "id": "tiny-hello-en", "voice": "tiny-en", "lang": "en", "text": "Hi, I'm Tiny! Want to hear a joke?", "say": "[cheerfully] Hi, I'm Tiny! Want to hear a joke?" },
+    { "id": "tiny-joke-en", "voice": "tiny-en", "lang": "en", "text": "What do you call a sleeping dinosaur? A dino-snore!", "say": "What do you call a sleeping dinosaur? [short pause] A dino-snore! [giggles]" },
+    { "id": "tiny-cheer-en", "voice": "tiny-en", "lang": "en", "text": "Lovely drawing! Just like my paintings.", "say": "[warmly] Lovely drawing! Just like my paintings." },
+    { "id": "rocky-hello-pl", "voice": "rocky-pl", "lang": "pl", "text": "Cześć, jestem Czupur! Najszybszy dinozaur w dżungli!", "say": "[excited] Cześć, jestem Czupur! Najszybszy dinozaur w dżungli!" },
+    { "id": "rocky-species-pl", "voice": "rocky-pl", "lang": "pl", "text": "Jestem parazaur… paralozaur… Jestem dinozaurem z trąbką!", "say": "Jestem parazaur… paralozaur… [laughs] Jestem dinozaurem z trąbką!" },
+    { "id": "rocky-cheer-pl", "voice": "rocky-pl", "lang": "pl", "text": "Ty rysujesz, a ja trąbię. Tuuu! To dla ciebie!", "say": "[excited] Ty rysujesz, a ja trąbię. Tuuu! To dla ciebie!" },
+    { "id": "rocky-hello-en", "voice": "rocky-en", "lang": "en", "text": "Hi, I'm Rocky! The fastest dino in the jungle!", "say": "[excited] Hi, I'm Rocky! The fastest dino in the jungle!" },
+    { "id": "rocky-species-en", "voice": "rocky-en", "lang": "en", "text": "I'm a parasaur… a paralo… I'm a dino with a trumpet!", "say": "I'm a parasaur… a paralo… [laughs] I'm a dino with a trumpet!" },
+    { "id": "rocky-cheer-en", "voice": "rocky-en", "lang": "en", "text": "You draw, I toot. Toot! That one's for you!", "say": "[excited] You draw, I toot. Toot! That one's for you!" },
+    { "id": "tiny-hello-en-plvoice", "voice": "tiny-pl", "lang": "en", "text": "Hi, I'm Tiny! Want to hear a joke?", "say": "[cheerfully] Hi, I'm Tiny! Want to hear a joke?", "models": ["eleven_v4"], "takes": 1, "test": "one voice for both languages" },
+    { "id": "tiny-joke-en-plvoice", "voice": "tiny-pl", "lang": "en", "text": "What do you call a sleeping dinosaur? A dino-snore!", "say": "What do you call a sleeping dinosaur? [short pause] A dino-snore! [giggles]", "models": ["eleven_v4"], "takes": 1, "test": "one voice for both languages" },
+    { "id": "rocky-hello-en-plvoice", "voice": "rocky-pl", "lang": "en", "text": "Hi, I'm Rocky! The fastest dino in the jungle!", "say": "[excited] Hi, I'm Rocky! The fastest dino in the jungle!", "models": ["eleven_v4"], "takes": 1, "test": "one voice for both languages" },
+    { "id": "rocky-cheer-en-plvoice", "voice": "rocky-pl", "lang": "en", "text": "You draw, I toot. Toot! That one's for you!", "say": "[excited] You draw, I toot. Toot! That one's for you!", "models": ["eleven_v4"], "takes": 1, "test": "one voice for both languages" }
+  ],
+  "lineDefaults": { "models": ["eleven_v3", "eleven_v4"], "takes": 2 }
+}
