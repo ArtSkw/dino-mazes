@@ -16,7 +16,7 @@ import { createRng, freshSeed } from '../domain/rng';
 import { TrailEngine, computeHint, type Dir, type Hint } from '../domain/trail';
 import type { CharacterId, Difficulty, Lang, Localized, Maze, Point, SaveV1, Session, Settings, TreasureId } from '../domain/types';
 import { friendFrame } from '../game/assets';
-import type { SoundBoard, Sfx } from '../game/audio';
+import type { MusicId, SoundBoard, Sfx, Speaker } from '../game/audio';
 import { computeLayout, fitGrid, type Layout } from '../platform/layout';
 import { restartedSave, type LoadStatus, type SaveStore } from '../storage/save';
 
@@ -118,13 +118,17 @@ export class Controller {
   private systemReducedMotion = false;
   /** Taps on the companion in the current maze (drives which line it says). */
   private talks = 0;
+  private musicNow: MusicId | null = null;
+  /** Length of the last spoken greeting / maze line (ms, 0 when silent), for bubble timing. */
+  greetMs = 0;
+  talkMs = 0;
 
   constructor(store: SaveStore, sound: SoundBoard, viewport: Viewport) {
     this.store = store;
     this.sound = sound;
     this.viewport = viewport;
     const save = store.get();
-    sound.setMuted(save.settings.muted);
+    sound.setChannels(channels(save.settings));
     this.state = {
       screen: 'loading',
       overlay: null,
@@ -159,6 +163,7 @@ export class Controller {
 
   private set(patch: Partial<AppState>): void {
     this.state = { ...this.state, ...patch };
+    if ('screen' in patch || 'opening' in patch || 'overlay' in patch) this.music();
     this.emit({ type: 'state' });
   }
 
@@ -170,8 +175,44 @@ export class Controller {
     return t(this.lang, key, vars);
   }
 
-  sfx(name: Sfx): void {
-    this.sound.play(name);
+  sfx(name: Sfx, gain?: number): void {
+    this.sound.play(name, gain);
+  }
+
+  get audio(): SoundBoard {
+    return this.sound;
+  }
+
+  /**
+   * Say a line aloud in a friend's or the narrator's voice (when it has a
+   * clip and voices are on). Returns the clip's length in ms (0 if silent).
+   */
+  speak(speaker: Speaker, text: string): number {
+    return Math.round(this.sound.say(this.lang, speaker, text) * 1000);
+  }
+
+  /** The narrator reads the quest card (after the friend has arrived on stage). */
+  narrateQuest(): void {
+    const text = this.questPrompt();
+    if (text) this.speak('narrator', text);
+  }
+
+  /** Background music follows the screen: the theme with the opening, a calm bed on the welcome screen, silence in mazes. */
+  private music(): void {
+    const { screen, opening, overlay } = this.state;
+    let want: MusicId | null = null;
+    if (opening === 'full') want = 'theme-opening';
+    else if (opening === 'short') want = 'theme-short';
+    else if (screen === 'welcome' && overlay !== 'settings') want = 'welcome-bed';
+    if (want === this.musicNow) return;
+    // The opening's theme ends on its own; the bed fades in after it.
+    if (this.musicNow?.startsWith('theme-') && want === 'welcome-bed') this.sound.playMusic(want, true, 2.5);
+    else if (want) this.sound.playMusic(want, want === 'welcome-bed', want === 'welcome-bed' ? 1.5 : 0);
+    else this.sound.stopMusic(0.8);
+    this.sound.setAmbience(screen === 'welcome' && !opening);
+    // The sleepy friend's snore never follows the child off the maze.
+    if (screen !== 'play') this.sound.stopLoop('snore');
+    this.musicNow = want;
   }
 
   private announce(text: string): void {
@@ -383,6 +424,7 @@ export class Controller {
   reveal(): void {
     if (this.state.screen !== 'intro') return;
     this.set({ screen: 'play' });
+    this.sfx('maze-reveal');
     this.emit({ type: 'reveal' });
     this.announce(this.tr('srObjective'));
   }
@@ -415,8 +457,11 @@ export class Controller {
     if (!this.canDraw()) return false;
     const engine = this.engine as TrailEngine;
     if (this.state.showHandDemo) this.set({ showHandDemo: false });
+    const fresh = !engine.started;
     const r = engine.begin(p);
     if (!r) return false;
+    // The first step on the path, not every touch that continues it.
+    if (fresh) this.sfx('maze-start');
     this.afterMove(r, true);
     return true;
   }
@@ -429,7 +474,10 @@ export class Controller {
       // Sliding into the entrance pad counts as starting inside it.
       if (!engine.canBegin(p)) return;
       const r = engine.begin(p);
-      if (r) this.afterMove(r, true);
+      if (r) {
+        this.sfx('maze-start');
+        this.afterMove(r, true);
+      }
       return;
     }
     const r = engine.move(p);
@@ -499,7 +547,11 @@ export class Controller {
     this.emit({ type: 'trail' });
     const ready = !wasAvailable && this.hintAvailable();
     this.announce(ready ? `${this.tr('srReset')} ${this.tr('hintReady')}` : this.tr('srReset'));
-    if (ready) this.emit({ type: 'hint-ready' });
+    if (ready) {
+      this.emit({ type: 'hint-ready' });
+      // Most players cannot read yet: the narrator says the butterfly is here.
+      window.setTimeout(() => this.speak('narrator', this.tr('hintReady')), 900);
+    }
   }
 
   /** The butterfly is offered only after a few fresh starts in this maze. */
@@ -609,6 +661,7 @@ export class Controller {
     const save = this.store.get();
     const settings = { ...save.settings, ...patch };
     this.store.commit({ ...save, ...extra, settings });
+    this.sound.setChannels(channels(settings));
     this.set({ settings, reducedMotion: settings.motion === 'reduced' || this.systemReducedMotion });
   }
 
@@ -623,9 +676,16 @@ export class Controller {
 
   setMuted(muted: boolean): void {
     if (muted === this.state.settings.muted) return;
-    this.sound.setMuted(muted);
     this.saveSettings({ muted });
-    if (!muted) this.sfx('tap');
+    if (!muted) this.sfx('ui-toggle');
+  }
+
+  setMusic(music: boolean): void {
+    if (music !== this.state.settings.music) this.saveSettings({ music });
+  }
+
+  setVoices(voices: boolean): void {
+    if (voices !== this.state.settings.voices) this.saveSettings({ voices });
   }
 
   setMotion(motion: Settings['motion']): void {
@@ -661,7 +721,7 @@ export class Controller {
   }
 
   wave(characterId: string): void {
-    this.sfx('wave');
+    this.sfx('friend-tap');
     this.emit({ type: 'wave', characterId });
   }
 
@@ -673,8 +733,9 @@ export class Controller {
     const n = this.greetings.get(characterId) ?? 0;
     this.greetings.set(characterId, n + 1);
     const voice = VOICES[characterId];
-    if (n === 0) return voice.hello[this.lang];
-    return (voice.lines[(n - 1) % voice.lines.length] as Localized)[this.lang];
+    const text = n === 0 ? voice.hello[this.lang] : (voice.lines[(n - 1) % voice.lines.length] as Localized)[this.lang];
+    this.greetMs = this.speak(characterId, text);
+    return text;
   }
 
   /**
@@ -687,15 +748,17 @@ export class Controller {
     const session = this.state.session;
     if (!session) return '';
     const n = this.talks++;
-    this.sfx('wave');
+    this.sfx('friend-tap');
     const { lines, cheers } = VOICES[session.characterId];
     const cycle = lines.length + cheers.length + 1;
     const k = n % cycle;
     const i = Math.floor((k - 1) / 2);
     const line = k === 0 ? null : (k - 1) % 2 === 0 ? lines[i % lines.length] : cheers[i % cheers.length];
     const text = line ? line[this.lang] : this.askLine(session);
-    // Mouth poses for roughly the time it takes to read the line aloud.
-    this.emit({ type: 'talk', characterId: session.characterId, ms: Math.min(3200, Math.max(1200, 600 + text.length * 40)) });
+    // Mouth poses for as long as the clip plays (or roughly the time to read the line aloud).
+    const spoken = this.speak(session.characterId, text);
+    this.talkMs = spoken;
+    this.emit({ type: 'talk', characterId: session.characterId, ms: spoken > 0 ? spoken : Math.min(3200, Math.max(1200, 600 + text.length * 40)) });
     return text;
   }
 
@@ -705,7 +768,7 @@ export class Controller {
   }
 
   tapTreasure(treasureId: TreasureId): void {
-    this.sfx('pickup');
+    this.sfx(`treasure-${treasureId}`);
     this.emit({ type: 'treasure-tap', treasureId });
   }
 
@@ -753,4 +816,9 @@ export class Controller {
       storage: this.state.storage,
     };
   }
+}
+
+/** The sound channels a parent's settings allow. */
+function channels(s: Settings): { effects: boolean; music: boolean; voices: boolean } {
+  return { effects: !s.muted, music: s.music, voices: s.voices };
 }

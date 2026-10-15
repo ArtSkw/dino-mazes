@@ -488,16 +488,43 @@ test.describe('owner review fixes (13 October 2026)', () => {
     expect(await state<boolean>(page, 'c.state.session.intro')).toBe(true);
   });
 
-  test('settings is the only place for language and sound', async ({ page }) => {
+  test('settings is the only place for language and sound (sounds, music and voices apart)', async ({ page }) => {
     await boot(page);
     await expect(page.locator('.cluster button')).toHaveCount(2);
     await page.getByRole('button', { name: 'Ustawienia' }).click({ force: true });
-    const off = page.getByRole('group', { name: 'Dźwięk' }).getByRole('button', { name: 'Wyłączony' });
+    const off = page.getByRole('group', { name: 'Dźwięki' }).getByRole('button', { name: 'Wyłączony' });
     await off.click();
     expect(await state<boolean>(page, 's.get().settings.muted')).toBe(true);
     await expect(off).toHaveAttribute('aria-pressed', 'true');
-    await page.getByRole('group', { name: 'Dźwięk' }).getByRole('button', { name: 'Włączony' }).click();
+    await page.getByRole('group', { name: 'Dźwięki' }).getByRole('button', { name: 'Włączony' }).click();
     expect(await state<boolean>(page, 's.get().settings.muted')).toBe(false);
+    for (const [group, key] of [['Muzyka', 'music'], ['Głosy', 'voices']] as const) {
+      const g = page.getByRole('group', { name: group });
+      await g.getByRole('button', { name: 'Wyłączony' }).click();
+      expect(await state<boolean>(page, `s.get().settings.${key}`)).toBe(false);
+      await expect(g.getByRole('button', { name: 'Wyłączony' })).toHaveAttribute('aria-pressed', 'true');
+      await g.getByRole('button', { name: 'Włączony' }).click();
+      expect(await state<boolean>(page, `s.get().settings.${key}`)).toBe(true);
+    }
+  });
+
+  test('sound: a tapped friend speaks its line, the welcome screen has its music bed, voices can be switched off', async ({ page }) => {
+    await boot(page);
+    const voice = page.waitForRequest(/assets\/audio\/voice\/pl\/tiny-hello-[0-9a-f]{8}\.m4a$/);
+    const bed = page.waitForRequest(/assets\/audio\/music\/welcome-bed-[0-9a-f]{8}\.m4a$/);
+    await page.getByRole('button', { name: 'Miłka' }).click({ force: true });
+    await voice;
+    await bed;
+    // Voices off: the next tap shows the bubble but fetches no clip.
+    await page.evaluate(() => (window as never as { __dino: { ctrl: { setVoices(v: boolean): void } } }).__dino.ctrl.setVoices(false));
+    let fetched = false;
+    page.on('request', (r) => {
+      if (/audio\/voice\//.test(r.url())) fetched = true;
+    });
+    await page.getByRole('button', { name: 'Miłka' }).click({ force: true });
+    await expect(page.locator('.cast-bubble')).toBeVisible();
+    await page.waitForTimeout(400);
+    expect(fetched).toBe(false);
   });
 
   test('no UI overlap: welcome, settings close button, play controls, next button', async ({ page }) => {

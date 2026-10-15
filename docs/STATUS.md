@@ -52,6 +52,38 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Sound phase 2 and 3: sound in the game (15 October 2026)
+
+The owner's picks are mastered into the game (`tools/audio/master.mjs`: loudness-matched AAC,
+content-hashed names, `src/data/audioManifest.json`): 37 effects, 4 music pieces and 206 voice
+clips (six voices, Polish and English, `eleven_v4`). The new player (`src/game/audio.ts`) has
+three channels the parents switch apart in settings (Dźwięki, Muzyka, Głosy; older saves that were
+silenced stay silent), dips the music under speech, plays one voice at a time and varies effect
+pitch slightly; synthesised stand-ins cover the moment before a file is decoded, and sounds asked
+for by the first tap wait for Safari's asynchronous audio start.
+
+What sounds where: the opening (curtains, footsteps, bush pops, Czupur's toot, the sign, the
+sprout, the theme), the welcome screen (a looping music bed over a quiet rainforest; distant
+footsteps), every button, the maze (reveal, the first step, "Wróć" sweeps the path, the line
+reaching the clearing, the win tune, each treasure's own sting, the flight and the chest, the
+badge), the hint (butterfly, pollen, and the narrator saying the butterfly is here), the friends
+(tap, hops, the sleepy friend's snore and yawn). Voices: a tapped friend says its line (bubbles
+last at least as long as the clip), the narrator reads every quest card and announces each
+treasure. Music never plays in a maze.
+
+Offline: effects and music are precached; voices are fetched in the background for the chosen
+language only into the service worker's `dino-voices` cache and pruned when re-recorded.
+Download: the build was already about 12.4 MB before sound (the art grew in rounds 12–14);
+effects and music add 0.9 MB and one language's voices 1.9 MB, about 15 MB in all (deviation from
+PRD §9's 12 MB, accepted for full voicing; see Deviations). Tests: every line the game can show has
+a clip in both languages, every manifest file exists with a hashed name, budgets per channel; the
+settings switches; a tapped friend fetches its line and the welcome screen its bed (Chromium and
+WebKit); offline, the chosen language's voices are kept and a friend still speaks.
+
+Known limit: browsers allow sound only after a tap, and a tap skips the opening, so the opening's
+theme is heard only where autoplay is allowed (e.g. a returning desktop Chrome). Options for the
+owner: a "tap to start" curtain before the opening.
+
 ## Sound phase 1: the pilot (15 October 2026)
 
 The ElevenLabs pilot is generated (docs/SOUND_PLAN.md §0): offline tools in `tools/audio/`
@@ -383,9 +415,9 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 241 passed |
-| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 75 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
-| Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
+| Domain unit + property | `npm test` | 246 passed |
+| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 77 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
+| Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 3 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
 
 E2E coverage: fresh install in Polish under an English browser locale; language
@@ -416,6 +448,11 @@ easy 5×5 everywhere; medium 7×7 (7×5 at 1024×600); harder 9×9 at 1440×900,
 9×7 at 1366×768, 7×7 at 1024×768 / 1180×820, 7×5 at 1024×600, 7×7 portrait.
 
 ## Deviations from the plan (and why)
+
+- **Complete download about 15 MB instead of ≤ 12 MB (15 Oct 2026).** The painted art and its
+  motion already reached about 12.4 MB; full voicing adds 1.9 MB per language and effects and
+  music 0.9 MB. Voices are cached for the chosen language only, so the second language never
+  downloads unless chosen. First playable is unchanged (sound loads after the first tap).
 
 1. **Corridor geometry instead of wall polygons.** Walkable space is the union of
    round-capped capsules around graph edges; walls are its exact complement. One

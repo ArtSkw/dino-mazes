@@ -94,6 +94,7 @@ export class GameScene extends Phaser.Scene {
   private sand!: Phaser.GameObjects.Particles.ParticleEmitter;
   private lastPuff = { t: 0, x: 0, y: 0 };
   private nextFootsteps = 0;
+  private lastHopSound = -Infinity;
   /** Last time the child did anything on the maze screen (for the sleepy friend). */
   private lastActivity = 0;
   private zTimer: Phaser.Time.TimerEvent | null = null;
@@ -246,7 +247,7 @@ export class GameScene extends Phaser.Scene {
         break;
       case 'trail-reset':
         this.companion?.react('encouragement');
-        this.ctrl.sfx('whoosh');
+        this.ctrl.sfx('maze-reset');
         this.clearHint();
         this.drawTrail();
         break;
@@ -1167,6 +1168,7 @@ export class GameScene extends Phaser.Scene {
     if (!layout || hint.kind === 'none') return;
     this.clearHint();
     this.ctrl.sfx('flutter');
+    this.time.delayedCall(700, () => this.ctrl.sfx('hint-pollen'));
     const size = Math.max(58, layout.transform.pitch * 0.72);
     const btn = this.ui.rectOf('hint');
     const start = btn ? { x: btn.x + btn.width / 2, y: btn.y + btn.height / 2 } : { x: layout.friendVisible.x, y: layout.friendVisible.y };
@@ -1239,7 +1241,10 @@ export class GameScene extends Phaser.Scene {
     };
     this.companion?.react('celebration', true);
     this.ui.celebrationBanner(reward);
-    this.ctrl.sfx('success');
+    // The line reaches the clearing, the win tune plays, then the treasure's own sound.
+    this.ctrl.sfx('maze-arrive');
+    later(300, () => this.ctrl.audio.jingle('jingle-success'));
+    later(this.reduced ? 450 : 1500, () => this.ctrl.sfx(`treasure-${reward.treasureId}`));
     if (!layout || !maze || !this.treasure) {
       later(400, () => this.finishCelebration(false));
       return;
@@ -1249,7 +1254,7 @@ export class GameScene extends Phaser.Scene {
       later(500, () => {
         this.fade(this.treasure, 0, 200);
         this.fade(this.treasureGlow, 0, 200);
-        this.ctrl.sfx('pickup');
+        this.ctrl.sfx('chest');
         this.ui.pulse('collection');
       });
       later(900, () => this.finishCelebration(false));
@@ -1397,6 +1402,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   private flyToCollection(reward: Reward): void {
+    this.ctrl.sfx('reward-fly');
     const c = this.celebration;
     if (!c || !this.treasure) return;
     const btn = this.ui.rectOf('collection');
@@ -1425,7 +1431,8 @@ export class GameScene extends Phaser.Scene {
       },
       onComplete: () => {
         this.sparkle.explode(10, to.x, to.y);
-        this.ctrl.sfx('pickup');
+        this.ctrl.sfx('chest');
+        if (reward.firstFind) this.time.delayedCall(450, () => this.ctrl.sfx('badge'));
         this.ui.pulse('collection');
         flyer.destroy();
         if (c.flyer === flyer) c.flyer = null;
@@ -1488,6 +1495,10 @@ export class GameScene extends Phaser.Scene {
     const now = this.time.now;
     if (now < ((sprite.getData('hopUntil') as number | undefined) ?? 0)) return;
     sprite.setData('hopUntil', now + 520);
+    if (now - this.lastHopSound > 250) {
+      this.lastHopSound = now;
+      this.ctrl.sfx('hop', 0.6);
+    }
     const y = (sprite.getData('restY') as number | undefined) ?? sprite.y;
     const base = (sprite.getData('baseScale') as number | undefined) ?? sprite.scaleY;
     const h = sprite.displayHeight * height;
@@ -1567,6 +1578,8 @@ export class GameScene extends Phaser.Scene {
     }
     if (time - this.lastActivity < 50000) return;
     c.sleep();
+    // A very quiet snore while it sleeps (stops with a yawn when it wakes).
+    this.ctrl.audio.loop('snore', 0.5);
     if (this.reduced) return;
     this.zTimer = this.time.addEvent({ delay: 1500, loop: true, callback: () => this.floatZ(), callbackScope: this });
     this.floatZ();
@@ -1605,6 +1618,8 @@ export class GameScene extends Phaser.Scene {
     const c = this.companion;
     if (!c) return;
     c.wake();
+    this.ctrl.audio.stopLoop('snore');
+    this.ctrl.sfx('yawn', 0.8);
     if (!this.reduced) this.hop(c.sprite, 0.03);
   }
 
@@ -1622,7 +1637,7 @@ export class GameScene extends Phaser.Scene {
     [0, 520].forEach((delay) =>
       this.time.delayedCall(delay, () => {
         if (this.ctrl.state.screen !== 'welcome') return;
-        this.ctrl.sfx('bumFar');
+        this.ctrl.sfx('bum-far');
         this.cameras.main.shake(140, 0.0018);
         this.ambient.shiver(2.6);
         if (giganto) this.hop(giganto.sprite, 0.02);

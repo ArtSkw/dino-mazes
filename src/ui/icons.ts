@@ -11,6 +11,8 @@ import arrowCounterClockwise from '@phosphor-icons/core/assets/bold/arrow-counte
 import arrowRight from '@phosphor-icons/core/assets/bold/arrow-right-bold.svg?raw';
 import arrowUUpLeft from '@phosphor-icons/core/assets/bold/arrow-u-up-left-bold.svg?raw';
 import gearSix from '@phosphor-icons/core/assets/bold/gear-six-bold.svg?raw';
+import musicNotes from '@phosphor-icons/core/assets/bold/music-notes-bold.svg?raw';
+import userSound from '@phosphor-icons/core/assets/bold/user-sound-bold.svg?raw';
 import house from '@phosphor-icons/core/assets/bold/house-bold.svg?raw';
 import play from '@phosphor-icons/core/assets/bold/play-bold.svg?raw';
 import sparkle from '@phosphor-icons/core/assets/bold/sparkle-bold.svg?raw';
@@ -28,6 +30,8 @@ export const ICONS = {
   restart: decorative(arrowUUpLeft),
   soundOn: decorative(speakerHigh),
   soundOff: decorative(speakerSlash),
+  music: decorative(musicNotes),
+  voices: decorative(userSound),
   gear: decorative(gearSix),
   close: decorative(x),
   next: decorative(arrowRight),

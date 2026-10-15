@@ -71,3 +71,25 @@ test('painted UI surfaces and the welcome/opening art load in the production bui
     expect(res.headers()['content-type'], url).toContain('image/');
   }
 });
+
+test("the chosen language's voices are kept for offline play, the other language's are not", async ({ page, context }) => {
+  await page.goto('./?test');
+  await page.waitForFunction(() => (window as never as { __dino?: { ctrl: { state: { screen: string } } } }).__dino?.ctrl.state.screen === 'welcome', null, { timeout: 30_000 });
+  // The service worker controls the page (a reload makes it the controller), then the page keeps the Polish voices.
+  await page.waitForFunction(async () => !!(await navigator.serviceWorker.getRegistration())?.active, null, { timeout: 60_000 });
+  await page.reload();
+  await page.waitForFunction(() => (window as never as { __dino?: { ctrl: { state: { screen: string } } } }).__dino?.ctrl.state.screen === 'welcome', null, { timeout: 30_000 });
+  const counts = async (): Promise<{ pl: number; en: number }> =>
+    page.evaluate(async () => {
+      const keys = await (await caches.open('dino-voices')).keys();
+      return { pl: keys.filter((k) => k.url.includes('/voice/pl/')).length, en: keys.filter((k) => k.url.includes('/voice/en/')).length };
+    });
+  await expect.poll(async () => (await counts()).pl, { timeout: 90_000, intervals: [1000] }).toBeGreaterThan(90);
+  expect((await counts()).en).toBe(0);
+  // Offline, a friend still speaks: the clip comes from the voice cache.
+  await context.setOffline(true);
+  const played = page.waitForResponse((r) => /\/voice\/pl\/tiny-hello-[0-9a-f]{8}\.m4a$/.test(r.url()) && r.ok());
+  await page.getByRole('button', { name: 'Miłka' }).click({ force: true });
+  await played;
+  await context.setOffline(false);
+});

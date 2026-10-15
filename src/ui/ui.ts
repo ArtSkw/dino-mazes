@@ -39,6 +39,7 @@ export class Ui implements UiBridge {
   /** Vine-ring loaders: the loading screen and the closed-curtain loader. */
   private spinners = [new VineSpinner(80), new VineSpinner(80, 'curtain-spinner')];
   private shownScreen = '';
+  private narrateTimer = 0;
   surface!: HTMLDivElement;
 
   // Elements
@@ -88,6 +89,8 @@ export class Ui implements UiBridge {
   private settings!: HTMLElement;
   private settingsLang!: HTMLButtonElement[];
   private settingsSound!: HTMLButtonElement[];
+  private settingsMusic!: HTMLButtonElement[];
+  private settingsVoices!: HTMLButtonElement[];
   private settingsMotion!: HTMLButtonElement[];
   private easierRow!: HTMLElement;
   private restartRow!: HTMLElement;
@@ -169,7 +172,7 @@ export class Ui implements UiBridge {
     // Welcome
     this.playLabel = h('span', { class: 'label' });
     this.playBtn = this.button('btn btn-leaf btn-play', () => {
-      c.sfx('tap');
+      c.sfx('ui-play');
       c.play();
     }, this.icon('play'), this.playLabel);
     this.castLayer = h('div', { class: 'cast-layer' });
@@ -218,7 +221,7 @@ export class Ui implements UiBridge {
     this.introTreasure = h('img', { class: 'intro-treasure', alt: '' });
     this.introTreasureName = h('p', { class: 'intro-treasure-name' });
     this.goBtn = this.button('btn btn-leaf btn-go', () => {
-      c.sfx('pop');
+      c.sfx('ui-play');
       c.reveal();
       window.setTimeout(() => this.surface.focus({ preventScroll: true }), 50);
     });
@@ -260,12 +263,12 @@ export class Ui implements UiBridge {
 
     this.badge = h('span', { class: 'badge', 'aria-hidden': 'true' });
     this.collectionBtn = this.button('btn-round collection-btn', () => {
-      c.sfx('tap');
+      c.sfx('ui-open');
       this.openOverlay('collection');
     }, this.chestOrIcon(), this.badge);
     this.tr(this.collectionBtn, 'myTreasures', 'aria-label');
     this.settingsBtn = this.button('btn-round settings-btn', () => {
-      c.sfx('tap');
+      c.sfx('ui-open');
       this.openOverlay('settings');
     }, this.icon('gear'));
     this.tr(this.settingsBtn, 'settings', 'aria-label');
@@ -279,15 +282,15 @@ export class Ui implements UiBridge {
     this.tr(this.homeBtn, 'home', 'aria-label');
 
     this.resetLabel = this.tr(h('span', { class: 'label' }), 'startOver');
+    // Its sound is the leaf broom sweeping the path (scene, 'trail-reset').
     this.resetBtn = this.button('btn btn-wood reset-btn', () => {
-      c.sfx('tap');
       c.resetTrail();
     }, this.icon('restart'), this.resetLabel);
     this.tr(this.resetBtn, 'startOverA11y', 'aria-label');
     this.hintBtn = this.button('btn-round hint-btn', () => c.hint(), h('img', { src: assetUrl(ASSETS.foliage['butterfly']?.image ?? ''), alt: '' }));
     this.tr(this.hintBtn, 'hint', 'aria-label');
     this.nextBtn = this.button('btn btn-wood next-btn', () => {
-      c.sfx('pop');
+      c.sfx('ui-play');
       c.next();
     }, this.tr(h('span', { class: 'label' }), 'next'), this.icon('next'));
     this.skipLayer = this.button('skip-layer', () => c.skipCelebration());
@@ -356,6 +359,18 @@ export class Ui implements UiBridge {
       ['on', () => c.setMuted(false), 'soundOn'],
       ['off', () => c.setMuted(true), 'soundOff'],
     ]);
+    const toggle = (fn: () => void): (() => void) => () => {
+      c.sfx('ui-toggle');
+      fn();
+    };
+    this.settingsMusic = seg([
+      ['on', toggle(() => c.setMusic(true))],
+      ['off', toggle(() => c.setMusic(false))],
+    ]);
+    this.settingsVoices = seg([
+      ['on', toggle(() => c.setVoices(true))],
+      ['off', toggle(() => c.setVoices(false))],
+    ]);
     this.settingsMotion = seg([
       ['motionSystem', () => c.setMotion('system')],
       ['motionReduced', () => c.setMotion('reduced')],
@@ -391,6 +406,8 @@ export class Ui implements UiBridge {
           { class: 'settings-body' },
           row('language', 'language', group('language', this.settingsLang)),
           row('soundOn', 'sound', group('sound', this.settingsSound)),
+          row('music', 'music', group('music', this.settingsMusic)),
+          row('voices', 'voices', group('voices', this.settingsVoices)),
           row('motion', 'motion', group('motion', this.settingsMotion)),
           this.easierRow,
           this.restartRow,
@@ -443,7 +460,7 @@ export class Ui implements UiBridge {
   // Commands
 
   private setLang(lang: Lang): void {
-    this.ctrl.sfx('tap');
+    this.ctrl.sfx('ui-toggle');
     this.ctrl.setLang(lang);
   }
 
@@ -455,7 +472,7 @@ export class Ui implements UiBridge {
   }
 
   private closeOverlay(): void {
-    this.ctrl.sfx('tap');
+    this.ctrl.sfx('ui-close');
     this.ctrl.closeOverlay();
     this.lastNewTreasure = null;
     this.lastFocus?.focus?.({ preventScroll: true });
@@ -495,8 +512,8 @@ export class Ui implements UiBridge {
     show(this.bubble, true);
     this.placeBubble();
     flash(this.bubble, 'bubble-in', 320);
-    // Long enough for a parent to read it aloud.
-    const ms = Math.min(7000, Math.max(3600, 2400 + text.length * 55));
+    // Long enough for a parent to read it aloud, and never shorter than the spoken line.
+    const ms = Math.max(Math.min(7000, Math.max(3600, 2400 + text.length * 55)), this.ctrl.talkMs + 700);
     this.bubbleTimer = window.setTimeout(() => this.hideBubble(), ms);
   }
 
@@ -766,7 +783,9 @@ export class Ui implements UiBridge {
     b.style.setProperty('--accent', CHARACTERS[id].accent);
     flash(b, 'bubble-in', 320);
     window.clearTimeout(this.castBubbleTimer);
-    this.castBubbleTimer = window.setTimeout(() => show(b, false), Math.min(6000, Math.max(3000, 1800 + text.length * 55)));
+    // Long enough to read, and never shorter than the spoken line.
+    const read = Math.min(6000, Math.max(3000, 1800 + text.length * 55));
+    this.castBubbleTimer = window.setTimeout(() => show(b, false), Math.max(read, this.ctrl.greetMs + 700));
     this.announce(`${CHARACTERS[id].name[this.ctrl.lang]}: ${text}`);
   }
 
@@ -828,7 +847,7 @@ export class Ui implements UiBridge {
       this.sproutImgs.forEach((_, i) =>
         later(() => {
           this.sproutImgs.forEach((o, j) => show(o, j === i));
-          if (i === 0) this.ctrl.sfx('sparkle');
+          if (i === 0) this.ctrl.sfx('sprout');
         }, i * each),
       );
       later(() => {
@@ -875,6 +894,9 @@ export class Ui implements UiBridge {
     this.renderBadge();
     show(this.banner, true);
     flash(this.banner, 'banner-in', 2600);
+    // The narrator announces it, after the win tune has started.
+    const said = this.banner.textContent ?? '';
+    window.setTimeout(() => this.ctrl.speak('narrator', said), 1100);
     window.clearTimeout(this.bannerTimer);
     this.bannerTimer = window.setTimeout(() => show(this.banner, false), 2600);
   }
@@ -953,6 +975,13 @@ export class Ui implements UiBridge {
     }
     if (screen !== this.shownScreen) {
       this.shownScreen = screen;
+      // The quest card is read aloud once the friend has stepped on stage.
+      if (screen === 'intro') {
+        window.clearTimeout(this.narrateTimer);
+        this.narrateTimer = window.setTimeout(() => {
+          if (this.ctrl.state.screen === 'intro') this.ctrl.narrateQuest();
+        }, 900);
+      }
       if (!inGame) this.hideBubble(true);
     }
 
@@ -960,6 +989,8 @@ export class Ui implements UiBridge {
     const pressed = (btns: HTMLButtonElement[], i: number): void => btns.forEach((b, j) => b.setAttribute('aria-pressed', String(i === j)));
     pressed(this.settingsLang, lang === 'pl' ? 0 : 1);
     pressed(this.settingsSound, s.settings.muted ? 1 : 0);
+    pressed(this.settingsMusic, s.settings.music ? 0 : 1);
+    pressed(this.settingsVoices, s.settings.voices ? 0 : 1);
     pressed(this.settingsMotion, s.settings.motion === 'system' ? 0 : 1);
     show(this.easierRow, this.ctrl.canUseEasierMaze());
     show(this.restartRow, (screen === 'intro' || screen === 'play' || screen === 'reward') && !!s.session);

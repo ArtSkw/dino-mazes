@@ -35,7 +35,7 @@ The experience is a living 2D storybook: lush jungle framing, broad sandy paths,
 | World | Actual Gigantosaurus characters; private family game. |
 | Progression | Next maze plus treasure collection. No adventure map in v1. |
 | Content production | Codex owns GPT Imagegen artwork and revisions. Claude owns implementation, asset packaging, animation, testing, and deployment setup. |
-| Audio default | Gentle effects after first user interaction; sound on/off lives in the parents' settings panel (owner decision, 13 Oct 2026). Narration and music deferred, with extension points. |
+| Audio default | Gentle effects, music and voices after the first user interaction; separate switches for sounds, music and voices in the parents' settings panel (owner decisions, 13 and 15 Oct 2026). Everything original, made offline with ElevenLabs ([docs/SOUND_PLAN.md](docs/SOUND_PLAN.md)). |
 | Saving | Device-local settings, collection, and resumable maze. No account or server required. |
 
 Audio/narration scope, difficulty numbers, and content quantities below are practical v1 defaults, not additional user approvals. The final game must not require a child to read or listen to understand the objective.
@@ -59,7 +59,7 @@ One Bill/coconut quest, one real-art jungle scene, simple generated mazes, drawi
 
 ### Deferred
 
-Music, recorded narration, other habitats, adventure atlas, multiple player profiles, cloud sync, public distribution, multiplayer, runtime AI, 3D, enemies, collectible currencies, purchases, and daily streaks.
+Other habitats, adventure atlas, multiple player profiles, cloud sync, public distribution, multiplayer, runtime AI, 3D, enemies, collectible currencies, purchases, and daily streaks.
 
 ## 4. Experience and screens
 
@@ -209,7 +209,7 @@ Large reset button combines a curved return arrow with “Wróć”; accessible 
 
 Quiet UI tap, soft treasure pickup, and short success flourish. No continuous sound while drawing, error buzzers, loud roars, autoplay before interaction, or ripped cartoon dialogue/music. Claude may create a small original Web Audio effects set; Imagegen generates images, not audio. Audio must pause when hidden and respect the saved mute setting.
 
-Reserve IDs and localized optional narration paths for later. No automatic browser speech synthesis in v1. Music is deferred.
+Update, 15 October 2026 (owner request): full voicing and music are in. Every friend line, quest card (read by a narrator) and treasure announcement has a recorded clip in Polish and English, from six original designed voices (no imitation of the cartoon's actors); a short opening theme, a calm welcome bed, a win tune and a quiet rainforest ambience; about forty effects, each treasure with its own sting. Voices are looked up by the exact text shown, so speech bubbles stay as subtitles and a changed text simply stays silent until voiced. No browser speech synthesis. Music never plays in a maze. Details: [docs/SOUND_PLAN.md](docs/SOUND_PLAN.md).
 
 Reduced motion removes ambient sway, treasure flights, and bounce; use immediate pose/collection changes with short fades. All rewards and actions remain available. Avoid flashes, camera shake, and forced camera movement.
 

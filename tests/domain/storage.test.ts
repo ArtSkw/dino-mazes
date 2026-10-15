@@ -50,7 +50,7 @@ describe('restart the game', () => {
   it('clears treasures, the current maze and all progress but keeps parent settings', () => {
     const played = {
       ...defaultSave(),
-      settings: { lang: 'en' as const, muted: true, motion: 'reduced' as const },
+      settings: { lang: 'en' as const, muted: true, music: false, voices: true, motion: 'reduced' as const },
       langChosen: true,
       collection: { coconut: { count: 3, firstFoundAt: 'x' } },
       activeSession: { ...session } as never,
@@ -95,7 +95,7 @@ describe('save loading', () => {
     const { save, status } = loadSave(new MemStorage());
     expect(status).toBe('fresh');
     expect(save.settings.lang).toBe('pl');
-    expect(save.settings).toEqual({ lang: 'pl', muted: false, motion: 'system' });
+    expect(save.settings).toEqual({ lang: 'pl', muted: false, music: true, voices: true, motion: 'system' });
   });
 
   it('corrupt JSON falls back to a playable default', () => {
@@ -142,6 +142,9 @@ describe('save loading', () => {
     const r = validateSave(raw)!;
     expect(r.save.settings.lang).toBe('en');
     expect(r.save.settings.muted).toBe(true);
+    // Saves from before music and voices: a silenced game stays silent.
+    expect(r.save.settings.music).toBe(false);
+    expect(r.save.settings.voices).toBe(false);
     expect(r.save.collection.stone?.count).toBe(1);
     expect(r.save.activeSession).toBeUndefined();
   });

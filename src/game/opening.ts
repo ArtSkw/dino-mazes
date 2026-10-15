@@ -124,7 +124,10 @@ export class OpeningDirector {
     const vh = this.host.vh();
     const cast = this.host.cast();
     const giganto = cast.find((a) => a.id === 'giganto');
-    this.at(150, () => this.host.step('curtains', 1000));
+    this.at(150, () => {
+      this.host.step('curtains', 1000);
+      this.host.sfx('curtains');
+    });
     this.shafts();
     // Two giant footsteps and a shadow sweeping over the clearing.
     this.at(1150, () => this.giantShadow());
@@ -148,7 +151,10 @@ export class OpeningDirector {
       const actor = cast.find((a) => a.id === id);
       if (actor) this.at(4300 + i * 430, () => this.popup(actor));
     });
-    this.at(6050, () => this.host.step('sign', 800));
+    this.at(6050, () => {
+      this.host.step('sign', 800);
+      this.host.sfx('sign');
+    });
     this.at(6850, () => this.host.step('sprout', 520));
     this.at(7500, () => this.finish());
   }

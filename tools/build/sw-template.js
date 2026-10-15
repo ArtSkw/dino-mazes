@@ -2,11 +2,17 @@
  * App-shell strategy: every file of one build is precached under a versioned
  * cache. A new version installs in the background and waits; the page asks it to
  * activate only at a safe boundary (never mid-drawing), and old caches are
- * removed on activation. Saves live in localStorage and are never touched here.
+ * removed on activation (the voices' own cache stays). Saves live in
+ * localStorage and are never touched here.
  */
 const VERSION = '__VERSION__';
 const CACHE = `dino-mazes-${VERSION}`;
 const PRECACHE = __PRECACHE__;
+// Voices are kept per language, outside the build's cache: the page asks for the
+// chosen language's clips (src/platform/offline.ts) and they stay across builds.
+// File names carry a content hash, so a re-recorded line is a new file.
+const VOICE_CACHE = 'dino-voices';
+const VOICE_PATH = /\/assets\/audio\/voice\//;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -33,6 +39,19 @@ self.addEventListener('fetch', (event) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  if (VOICE_PATH.test(url.pathname)) {
+    event.respondWith(
+      (async () => {
+        const cache = await caches.open(VOICE_CACHE);
+        const hit = await cache.match(req, { ignoreSearch: true, ignoreVary: true });
+        if (hit) return hit;
+        const res = await fetch(req);
+        if (res.ok) await cache.put(req, res.clone());
+        return res;
+      })(),
+    );
+    return;
+  }
   event.respondWith(
     (async () => {
       const cache = await caches.open(CACHE);

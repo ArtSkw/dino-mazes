@@ -145,7 +145,12 @@ export interface CollectionEntry {
 /** Parent settings. Difficulty is not a setting: it grows with progress (levelFor). */
 export interface Settings {
   lang: Lang;
+  /** Effects off (the first switch, kept from the first version). */
   muted: boolean;
+  /** Music and the jungle bed (welcome screen and opening). */
+  music: boolean;
+  /** The friends' and the narrator's voices. */
+  voices: boolean;
   motion: 'system' | 'reduced';
 }
 

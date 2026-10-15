@@ -19,7 +19,7 @@ export type LoadStatus = 'fresh' | 'loaded' | 'recovered' | 'unavailable';
 
 export function defaultSettings(): Settings {
   // Polish on a fresh install regardless of browser language (PRD §4.1).
-  return { lang: 'pl', muted: false, motion: 'system' };
+  return { lang: 'pl', muted: false, music: true, voices: true, motion: 'system' };
 }
 
 /**
@@ -109,9 +109,13 @@ export function validateSave(raw: unknown): { save: SaveV1; recovered: boolean }
   const base = defaultSave();
   let recovered = false;
   const s = isObj(raw.settings) ? raw.settings : {};
+  const muted = typeof s.muted === 'boolean' ? s.muted : base.settings.muted;
   const settings: Settings = {
     lang: isLang(s.lang) ? s.lang : base.settings.lang,
-    muted: typeof s.muted === 'boolean' ? s.muted : base.settings.muted,
+    muted,
+    // Saves from before music and voices: a family that silenced the game keeps silence.
+    music: typeof s.music === 'boolean' ? s.music : !muted,
+    voices: typeof s.voices === 'boolean' ? s.voices : !muted,
     motion: s.motion === 'reduced' ? 'reduced' : 'system',
   };
   const collection: SaveV1['collection'] = {};

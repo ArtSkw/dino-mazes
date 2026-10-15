@@ -64,6 +64,10 @@ the Scribe check ignores growls and yawns, and each flagged take earns a retake 
 change how a line is performed: Giganto's "Ziiiew…" was heard as "Jezu", now `[yawns]`). 178 lines
 voiced (all but Rudzia's), 0 flagged. About 9,800 credits used.
 
+**In the game (15 October 2026):** owner round 5 chose the new Miłka (preview 2) and Rudzia
+(alt preview 2); everything is mastered and wired in (docs/STATUS.md, "Sound phase 2 and 3").
+About 10,700 credits used of 58,341.
+
 ## 1. Recommendation in short
 
 - **Everything is generated offline, never in the browser.** A local script calls the API with the
