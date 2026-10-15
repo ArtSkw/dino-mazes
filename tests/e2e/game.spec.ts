@@ -880,6 +880,8 @@ test.describe('phones (15 October 2026)', () => {
     test(`${w}×${h}: big round buttons, a centred maze, settings and collection that fit the screen`, async ({ page }) => {
       await page.setViewportSize({ width: w, height: h });
       await boot(page);
+      // The tab says "Dino Mazes" in either language.
+      await expect(page).toHaveTitle('Dino Mazes');
       await startQuest(page);
       await page.waitForTimeout(400);
       // Round buttons are easy to hit.

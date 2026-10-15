@@ -983,7 +983,8 @@ export class Ui implements UiBridge {
     const s = this.ctrl.state;
     const lang = s.settings.lang;
     document.documentElement.lang = lang;
-    document.title = this.ctrl.tr('appTitle');
+    // The tab says "Dino Mazes" in every language (owner, 16 Oct 2026); the sign keeps the local name.
+    document.title = 'Dino Mazes';
     for (const { el, key, attr } of this.i18n) {
       const text = this.ctrl.tr(key);
       if (attr === 'text') el.textContent = text;
@@ -1082,8 +1083,14 @@ export class Ui implements UiBridge {
       place(this.resetBtn, L.reset);
       place(this.hintBtn, L.hint);
       place(this.nextBtn, L.next);
-      const banner = { x: L.board.x + L.board.w / 2 - 170, y: Math.max(8, L.board.y + 12), w: 340, h: 74 };
-      place(this.banner, banner);
+      // "Nowy skarb": in the free space above the maze when there is room (phones
+      // in portrait), centred on the board; otherwise over the board's top edge.
+      const bw = Math.min(340, L.vw - 24);
+      const bh = 74;
+      const topBar = Math.max(L.clusterRect.y + L.clusterRect.h, L.home.y + L.home.h);
+      const gap = L.board.y - topBar;
+      const by = gap >= bh + 16 ? topBar + (gap - bh) / 2 : Math.max(8, L.board.y + 12);
+      place(this.banner, { x: Math.min(L.vw - bw - 12, Math.max(12, L.board.x + L.board.w / 2 - bw / 2)), y: by, w: bw, h: bh });
       const playing = screen === 'play' && !s.celebrating;
       show(this.resetBtn, playing);
       show(this.hintBtn, playing && this.ctrl.hintAvailable());
@@ -1094,7 +1101,8 @@ export class Ui implements UiBridge {
     }
 
     // Gentle rotate suggestion (never blocks play; hides itself after a while).
-    const wantRotate = inGame && orientationOf(vw, vh) === 'portrait' && !this.rotateDismissed;
+    // Only while drawing: the win banner takes its place above the maze.
+    const wantRotate = screen === 'play' && !s.celebrating && orientationOf(vw, vh) === 'portrait' && !this.rotateDismissed;
     if (wantRotate && this.rotateToast.hidden) {
       window.setTimeout(() => {
         this.rotateDismissed = true;

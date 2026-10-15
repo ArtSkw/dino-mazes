@@ -1,5 +1,7 @@
 # Dino Mazes
 
+![The welcome screen: a wooden "Dino Mazes" sign on jungle vines above the Play button, with Giganto, Rocky, Tiny, Mazu and Bill standing among the leaves](.github/preview.jpg)
+
 A maze game for children aged 4 to 6, inspired by *Gigantosaurus*. In each
 round a friend from the jungle needs help reaching a treasure, and the child
 draws the way.
@@ -22,7 +24,11 @@ project, not an official game.
 - Four jungle friends with their own quests, and Giganto as a special guest.
 - A collection of treasures to fill.
 - Draw with a finger, a pen, a mouse or a trackpad.
+- Every line spoken: each friend has its own voice, a narrator reads the quests,
+  and the jungle sounds around the maze. Music, sounds and voices switch off
+  separately.
 - Polish by default, English in the parents' settings.
+- Made for tablets, and fits phones too.
 - Works offline after the first visit and keeps progress on the device.
 
 ## How it's built
@@ -34,6 +40,9 @@ TypeScript and Vite. Phaser renders the board; the interface is plain HTML.
 - Every maze is generated from a seed and has exactly one route. The tests
   check 1,000 seeds for each difficulty level.
 - A Python script cuts the generated art into sprite atlases for the game.
+- Sound, music and voices were made with ElevenLabs by offline scripts: generate,
+  check every line with speech-to-text, pick takes on a listening page, master.
+  The game only plays the finished files.
 - Playwright runs the main flows in Chromium and WebKit, offline relaunch
   included.
 

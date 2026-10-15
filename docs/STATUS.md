@@ -52,6 +52,18 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 21 (16 October 2026): banner, quest card, name, README
+
+- "Nowy skarb" sits in the free space above the maze when there is room (portrait phones),
+  centred on the board; on tablets it stays over the board's top edge. The rotate hint shows only
+  while drawing, so it never covers the banner.
+- Portrait quest card: balanced between the top bar and the friend's head (45 % of the gap above,
+  55 % below) instead of hugging the friend.
+- The browser tab and the installed app are called "Dino Mazes" in every language (title, web app
+  manifest, iOS home-screen title); the painted sign keeps "Dino Labirynty" in Polish.
+- README: a preview of the welcome screen (`.github/preview.jpg`, English, 1600×1000) and lines
+  on the voices, sound and phones.
+
 ## Owner review, round 20 (15 October 2026): phones
 
 The game is made for tablets; phones (shorter side under 500 px, `isPhone`) now get their own
