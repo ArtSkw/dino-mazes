@@ -64,6 +64,11 @@ Measured visible-content boxes per character frame are now part of the asset man
 - The jungle visitors have one quiet sound each from their side of the screen (stereo pan): the
   ladybug's wings at take-off, the frog's croak once it sits, the snail's rustle as it arrives.
 - The new takes are in the game provisionally (take 1) and on the listening page for the owner.
+- Round 7: the leaf press (take 2) and the frog (take 2) chosen. The ladybug and snail were too
+  strong and hard: remade "barely audible" and mastered at −24 LUFS (frog −22), played at 0.45. No
+  wooden click was liked: remade as one plain knock, and mastering keeps only its first 0.18 s
+  (`maxSeconds`), so nothing rings after it; takes 1 and 4 measure as one clean hit, take 1 is in
+  the game until the owner picks.
 
 ## Sound phase 2 and 3: sound in the game (15 October 2026)
 

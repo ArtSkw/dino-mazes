@@ -60,7 +60,7 @@ for (const e of cues.effects ?? []) {
     continue;
   }
   const take = rec(join(SRC, 'effects', cue.id)).takes[cue.pick - 1];
-  manifest.fx[e.id] = encode(join(SRC, 'effects', cue.id, take.file), `fx/${e.id}.m4a`, { lufs: e.id === 'ambience' ? -30 : -16, mono: true, kbps: e.id === 'ambience' ? 48 : 56, trim: !e.loop });
+  manifest.fx[e.id] = encode(join(SRC, 'effects', cue.id, take.file), `fx/${e.id}.m4a`, { lufs: e.lufs ?? (e.id === 'ambience' ? -30 : -16), mono: true, kbps: e.id === 'ambience' ? 48 : 56, trim: !e.loop, maxSeconds: e.maxSeconds ?? 0 });
 }
 
 // Music.

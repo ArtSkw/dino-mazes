@@ -28,9 +28,9 @@ rmSync(join(OUT, 'files'), { recursive: true, force: true });
 mkdirSync(join(OUT, 'files'), { recursive: true });
 
 /** Loudness-matched copy for the page; returns its relative path. */
-function copy(rel, lufs) {
+function copy(rel, lufs, maxSeconds = 0) {
   const name = rel.replace(/\//g, '__');
-  normalize(join(SRC, rel), join(OUT, 'files', name), { lufs });
+  normalize(join(SRC, rel), join(OUT, 'files', name), { lufs, trim: maxSeconds > 0, maxSeconds });
   return `files/${name}`;
 }
 
@@ -45,7 +45,7 @@ const sections = [];
   const rows = open(cues.effects).map((e) => {
     const r = rec(join(SRC, 'effects', e.id));
     if (!r) return '';
-    let takes = r.takes.map((t, i) => take(`efekt: ${e.id}`, `wersja ${i + 1}`, copy(`effects/${e.id}/${t.file}`, -16))).join('');
+    let takes = r.takes.map((t, i) => take(`efekt: ${e.id}`, `wersja ${i + 1}`, copy(`effects/${e.id}/${t.file}`, e.lufs ?? -16, e.maxSeconds))).join('');
     // `compare`: the take already picked for another cue plays first, for comparison.
     const base = e.compare && (cues.effects ?? []).find((c) => c.id === e.compare);
     const baseRec = base?.pick && rec(join(SRC, 'effects', base.id));

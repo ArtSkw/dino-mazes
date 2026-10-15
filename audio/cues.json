@@ -496,14 +496,15 @@
       "id": "ui-wood",
       "label": "Przycisk drewniany (stuknięcie)",
       "event": "wooden and round buttons",
-      "prompt": "A single soft, warm click of a small smooth wooden button, like tapping a polished wooden toy block with a fingertip. Close, cosy and pleasant, short and dry, no echo, nothing harsh.",
+      "prompt": "One single soft knock of a fingertip on a small piece of smooth hardwood: just one short, clean, natural 'tok'. Nothing else: no echo, no reverb, no music, no second hit.",
       "seconds": 0.5,
-      "influence": 0.6,
-      "takes": 3,
+      "influence": 0.8,
+      "takes": 4,
       "plain": true,
-      "note": "Owner, round 6: button sounds sounded odd; simple, pleasant wooden clicks, a cosy close feeling; the green leaf buttons like a leaf pressed into soil.",
+      "note": "Owner, round 7: none of the first takes; a single pretty, pleasant knock without any effects. Mastering keeps only the first 0.18 s.",
       "pick": 1,
-      "provisional": true
+      "provisional": true,
+      "maxSeconds": 0.18
     },
     {
       "id": "ui-leaf",
@@ -515,21 +516,21 @@
       "takes": 3,
       "plain": true,
       "note": "Owner, round 6: button sounds sounded odd; simple, pleasant wooden clicks, a cosy close feeling; the green leaf buttons like a leaf pressed into soil.",
-      "pick": 1,
-      "provisional": true
+      "pick": 2
     },
     {
       "id": "visitor-ladybug",
       "label": "Biedronka odlatuje",
       "event": "the ladybug opens its wings and flies off",
-      "prompt": "A tiny ladybug lifts off a leaf: a very soft, delicate flutter of little insect wings, close and quiet, natural rainforest sound.",
+      "prompt": "Barely audible: a tiny ladybug quietly opens its wings and flies away, a faint, airy whisper of tiny wings. Very gentle, delicate and distant, no buzzing.",
       "seconds": 1.0,
       "influence": 0.5,
-      "takes": 2,
+      "takes": 3,
       "plain": true,
-      "note": "Owner, round 6: the visitors get a subtle, delicate sound of their own that fits the jungle.",
+      "note": "Owner, round 7: too strong and hard; subtle and delicate.",
       "pick": 1,
-      "provisional": true
+      "provisional": true,
+      "lufs": -24
     },
     {
       "id": "visitor-frog",
@@ -541,21 +542,22 @@
       "takes": 2,
       "plain": true,
       "note": "Owner, round 6: the visitors get a subtle, delicate sound of their own that fits the jungle.",
-      "pick": 1,
-      "provisional": true
+      "pick": 2,
+      "lufs": -22
     },
     {
       "id": "visitor-snail",
       "label": "Ślimak na liściu",
       "event": "the snail crawls onto a leaf",
-      "prompt": "A tiny snail slides slowly onto a damp leaf: a very gentle, soft leafy rustle, calm and quiet, natural.",
+      "prompt": "Barely audible: a faint, soft, slow whisper of a damp leaf moving as a tiny snail crawls over it. Very gentle, delicate and calm.",
       "seconds": 1.2,
       "influence": 0.5,
-      "takes": 2,
+      "takes": 3,
       "plain": true,
-      "note": "Owner, round 6: the visitors get a subtle, delicate sound of their own that fits the jungle.",
+      "note": "Owner, round 7: too strong and hard; subtle and delicate.",
       "pick": 1,
-      "provisional": true
+      "provisional": true,
+      "lufs": -24
     }
   ],
   "music": [
