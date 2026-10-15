@@ -52,6 +52,17 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 16 (15 October 2026): a Giganto favicon
+
+The favicon and app icons still showed the first version's Bill. They are now Giganto peeking
+in from the jungle (the opening's painted peek cell, his straight cuts clipped outside a round
+sand-coloured window), made by `tools/art/make_icons.py` into `public/icons/giganto-*.png`:
+a rounded green tile for the manifest (192, 512), a full square for iOS (180), a maskable 512
+with the window inside the safe zone, and favicons (16, 32, 48) that are the window alone,
+closer on his face with a thicker ring, so the red spikes, eye and teeth read in a browser tab.
+New file names, so browsers and installed apps fetch the new icons instead of the cached Bill.
+Test: every icon the page and the manifest point to exists at its declared size.
+
 ## Owner review, round 15 (15 October 2026): Giganto's peek without a cut
 
 In the opening, Giganto leans in from the left after the two footsteps. His peek cells are cut
@@ -365,7 +376,7 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 239 passed |
+| Domain unit + property | `npm test` | 241 passed |
 | Browser flows (Chromium + WebKit) | `npm run test:e2e` | 75 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
