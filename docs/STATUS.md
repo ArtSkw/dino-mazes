@@ -57,8 +57,10 @@ Measured visible-content boxes per character frame are now part of the asset man
 - "Nowy skarb" sits in the free space above the maze when there is room (portrait phones),
   centred on the board; on tablets it stays over the board's top edge. The rotate hint shows only
   while drawing, so it never covers the banner.
-- Portrait quest card: balanced between the top bar and the friend's head (45 % of the gap above,
-  55 % below) instead of hugging the friend.
+- Portrait quest card: even gaps above (to the top bar) and below (to the friend's head), 43 px on
+  a 390×844 phone (round 22: one spacing step lower than round 21's 45/55 split).
+- Round 22: on a portrait phone the friend's speech bubble stands above its head and may use the
+  screen's width (up to 300 px) instead of the narrow strip beside it, so lines read in two rows.
 - The browser tab and the installed app are called "Dino Mazes" in every language (title, web app
   manifest, iOS home-screen title); the painted sign keeps "Dino Labirynty" in Polish.
 - README: a preview of the welcome screen (`.github/preview.jpg`, English, 1600×1000) and lines

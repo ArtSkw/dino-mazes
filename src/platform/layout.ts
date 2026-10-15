@@ -399,8 +399,8 @@ export function introLayout(vw: number, vh: number, friend: Pick<FriendFrame, 'a
   const top = portraitTopBar(vw, vh);
   const floor = vh - ch * 0.93 - 16;
   const h = Math.min(vh * 0.5, 470, floor - top);
-  // Balanced between the top bar and the friend's head, a touch above the middle of that gap.
-  const y = top + Math.max(0, floor - top - h) * 0.45;
+  // Even gaps above (to the top bar) and below (to the friend's head).
+  const y = Math.min(floor - h, top + Math.max(0, floor + 16 - top - h) / 2);
   const visibleCenter = cw * (content.x + content.w / 2);
   return { character: { x: vw / 2 - visibleCenter, y: vh - ch, w: cw, h: ch }, card: { x: (vw - w) / 2, y, w, h } };
 }

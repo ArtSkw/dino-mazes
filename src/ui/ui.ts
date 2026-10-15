@@ -605,8 +605,10 @@ export class Ui implements UiBridge {
       b.style.left = `${Math.round(L.corner === 'left' ? area.x : area.x + area.w - w)}px`;
       b.style.top = `${Math.round(Math.max(area.y, Math.min(r.y + r.h * 0.1, area.y + area.h - b.offsetHeight, vh - b.offsetHeight - 12)))}px`;
     } else {
-      // Shrink-wrap the text, then keep the bubble inside the friend's strip.
-      const maxW = Math.max(150, Math.min(300, area.w));
+      // Shrink-wrap the text, then keep the bubble inside the friend's strip. A
+      // portrait phone's strip beside the friend is too narrow, so the bubble
+      // stands above the friend's head and may use the screen's width.
+      const maxW = area.side === 'beside' ? Math.min(300, vw - 24) : Math.max(150, Math.min(300, area.w));
       b.style.width = 'max-content';
       b.style.maxWidth = `${Math.round(maxW)}px`;
       b.style.left = '0px';
