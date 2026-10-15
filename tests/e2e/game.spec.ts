@@ -611,6 +611,38 @@ test.describe('opening animation and V3 characters (14 October 2026)', () => {
     for (const [id, px] of Object.entries(below)) expect(px, id).toBeGreaterThanOrEqual(0);
   });
 
+  test("Giganto's peek never shows the cell's straight left or bottom cut", async ({ page }) => {
+    // Every frame: the peek's cut edges in CSS px against the screen edges (camera shake included).
+    await page.addInitScript(() => {
+      const w = window as never as { __peek: { left: number; bottom: number; seen: number }; __dino?: { game: { scene: { getScene(k: string): unknown } } } };
+      w.__peek = { left: -Infinity, bottom: Infinity, seen: 0 };
+      const tick = (): void => {
+        const g = w.__dino?.game.scene.getScene('game') as
+          | { opening?: { objects: Array<{ texture?: { key: string }; active: boolean; x: number; y: number; scaleX: number; scaleY: number }> } | null; vh: number; cameras: { main: { zoom: number; shakeEffect: { isRunning: boolean; _offsetX: number; _offsetY: number } } } }
+          | undefined;
+        const peek = g?.opening?.objects.find((o) => o.active && o.texture?.key === 'intro-peek');
+        if (g && peek) {
+          const cut = { left: 0.0176, bottom: 0.9707 };
+          // The shake moves the picture in canvas pixels (CSS px × zoom).
+          const { shakeEffect: sh, zoom } = g.cameras.main;
+          const dx = sh.isRunning ? sh._offsetX / zoom : 0;
+          const dy = sh.isRunning ? sh._offsetY / zoom : 0;
+          w.__peek.left = Math.max(w.__peek.left, peek.x + cut.left * 512 * peek.scaleX + dx);
+          w.__peek.bottom = Math.min(w.__peek.bottom, peek.y - (1 - cut.bottom) * 512 * peek.scaleY + dy - g.vh);
+          w.__peek.seen++;
+        }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+    await boot(page, '?test&opening=full');
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { opening: string | null } } } }).__dino.ctrl.state.opening === null, null, { timeout: 25_000 });
+    const peek = await page.evaluate(() => (window as never as { __peek: { left: number; bottom: number; seen: number } }).__peek);
+    expect(peek.seen).toBeGreaterThan(10);
+    expect(peek.left, 'left cut stays left of the screen').toBeLessThan(0);
+    expect(peek.bottom, 'bottom cut stays below the screen').toBeGreaterThan(0);
+  });
+
   test('a tap skips the opening at once; a key does too', async ({ page }) => {
     await boot(page, '?test&opening=full');
     await page.waitForTimeout(900);

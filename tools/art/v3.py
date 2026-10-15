@@ -41,6 +41,9 @@ PAD = 2
 # the game sinks that band below the screen edge at rest; if a hop or a camera
 # shake ever lifts the base into view, it dissolves instead of showing a line.
 CUT_FADE = 0.03
+# The opening's Giganto peek is cut straight on its left and bottom: those edges
+# fade out over this share of the 512 cell.
+PEEK_FADE = 0.06
 CHAR_IDS = ["bill", "tiny", "mazu", "rocky", "giganto"]
 SEQ = {
     "idle": [f"idle-{i:02d}" for i in range(0, 8)],
@@ -300,16 +303,42 @@ def process_intro(src_root: str, public_root: str, measurements_path: str, cell_
     path = os.path.join(out_dir, "light-shafts.webp")
     m["lightShafts"] = {"image": rel(path), "width": im.width, "height": im.height, "bytes": _save_webp(im, path, 80)}
 
-    # Giganto peek: six 512 cells, packed trimmed on the shared 512 canvas.
+    # Giganto peek: six 512 cells, packed trimmed on the shared 512 canvas. The
+    # painted cell is cut straight on its left and bottom (a little inside the
+    # canvas): those edges fade out over PEEK_FADE of the canvas, measured on the
+    # union of all cells so the fade never moves, and the game keeps them
+    # beyond the screen edge (opening.ts, peekRest in layout.ts).
     peek_src = src("intro-giganto-peek")
-    peek_cells = _cells(peek_src, [c["rect"] for c in meas["intro-giganto-peek"]["cells"]])
+    peek_cells = [_floor_alpha(np.array(c)) for c in _cells(peek_src, [c["rect"] for c in meas["intro-giganto-peek"]["cells"]])]
+    union = np.max(np.stack([c[:, :, 3] for c in peek_cells]), axis=0)
+    cols = np.nonzero((union >= 40).any(axis=0))[0]
+    rows = np.nonzero((union >= 40).any(axis=1))[0]
+    cut_left, cut_bottom = int(cols.min()), int(rows.max()) + 1
+    size = peek_cells[0].shape[0]
+    band = round(size * PEEK_FADE)
     packed = []
-    for i, cell in enumerate(peek_cells):
-        cell = Image.fromarray(_floor_alpha(np.array(cell)))
+    for i, arr in enumerate(peek_cells):
+        a = arr.astype(np.float32)
+        h, w = a.shape[:2]
+        ux = np.clip((np.arange(w) + 0.5 - cut_left) / band, 0, 1)
+        uy = np.clip((cut_bottom - np.arange(h) - 0.5) / band, 0, 1)
+        k = (ux * ux * (3 - 2 * ux))[None, :] * (uy * uy * (3 - 2 * uy))[:, None]
+        a[:, :, 3] *= k
+        out = np.clip(np.rint(a), 0, 255).astype(np.uint8)
+        out[out[:, :, 3] == 0, :3] = 0
+        cell = Image.fromarray(out)
         t, sss = _trim(cell)
         packed.append((f"peek-{i}", t, sss, cell.size))
     info = pack_atlas(packed, out_dir, "giganto-peek", public_root, quality=88)
-    m["gigantoPeek"] = {"atlas": info["json"], "frames": [f"peek-{i}" for i in range(6)], "frameSize": 512, "bytes": info["bytes"], "decodedBytes": info["decodedBytes"]}
+    m["gigantoPeek"] = {
+        "atlas": info["json"],
+        "frames": [f"peek-{i}" for i in range(6)],
+        "frameSize": 512,
+        # The straight cut edges as fractions of the cell, and the fade band.
+        "cut": {"left": round(cut_left / size, 4), "bottom": round(cut_bottom / size, 4), "band": round(band / size, 4)},
+        "bytes": info["bytes"],
+        "decodedBytes": info["decodedBytes"],
+    }
 
     # Friend pop-ups: register each pose's bush to the first pose (Codex's
     # bounds-based translations), scale 0.8, one shared atlas.

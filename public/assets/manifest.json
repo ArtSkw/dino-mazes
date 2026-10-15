@@ -1833,8 +1833,13 @@
     "peek-5"
    ],
    "frameSize": 512,
-   "bytes": 289129,
-   "decodedBytes": 7112424
+   "cut": {
+    "left": 0.0176,
+    "bottom": 0.9707,
+    "band": 0.0605
+   },
+   "bytes": 285125,
+   "decodedBytes": 7082496
   },
   "popups": {
    "atlas": "assets/intro/popups.json",
@@ -1894,5 +1899,5 @@
    "bytes": 37908
   }
  },
- "totalBytes": 9427367
+ "totalBytes": 9423363
 }

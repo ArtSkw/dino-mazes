@@ -442,3 +442,21 @@ export function castSlots(vw: number, vh: number, items: Array<{ aspect: number;
   });
   return out;
 }
+
+/** Where a painted cell is cut straight (fractions of the cell) and how wide its fade is. */
+export interface CellCut {
+  left: number;
+  bottom: number;
+  band: number;
+}
+
+/**
+ * Resting place of the opening's Giganto peek (a `size` px cell, origin at its
+ * bottom-left corner): its straight left and bottom cuts, and most of their
+ * fade, stay beyond the screen's left and bottom edges, even at the top of
+ * its `lift` (the little bob while it sniffs).
+ */
+export function peekRest(vh: number, size: number, cut: CellCut, lift: number): { x: number; y: number } {
+  const hidden = 0.7 * cut.band;
+  return { x: -(cut.left + hidden) * size, y: vh + (1 - cut.bottom + hidden) * size + lift };
+}

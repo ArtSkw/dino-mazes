@@ -20,7 +20,7 @@ import type { CharacterActor } from './actor';
 import { ASSETS, assetUrl, baseHidden } from './assets';
 import { popUp } from './motion';
 import type { OpeningMode } from '../app/controller';
-import type { Rect } from '../platform/layout';
+import { peekRest, type Rect } from '../platform/layout';
 
 export type OpeningStep = 'curtains' | 'sign' | 'sprout' | 'finish';
 
@@ -214,21 +214,25 @@ export class OpeningDirector {
 
   /**
    * Giganto leans in over the bottom-left plants (where he will stand up a
-   * moment later): in, sniff, look, grin, blink, and back down. The cell's
-   * flat bottom edge stays below the screen.
+   * moment later): in, sniff, look, grin, blink, and back down. The cell is
+   * cut straight on its left and bottom; those edges fade out (tools/art/v3.py)
+   * and stay beyond the screen edges the whole time, sniffing bob included
+   * (peekRest), so he seems to lean in from the jungle, not from a picture.
    */
   private gigantoPeek(): void {
     if (!this.scene.textures.exists(KEYS.peek)) return;
     const vh = this.host.vh();
-    const frames = ASSETS.intro.gigantoPeek.frames;
+    const peek = ASSETS.intro.gigantoPeek;
+    const frames = peek.frames;
     const size = Math.min(vh * 0.46, 380);
-    const s = this.keep(this.scene.add.sprite(0, vh + size * 0.04, KEYS.peek, frames[0]).setOrigin(0, 1).setDepth(this.host.depth.peek));
-    const scale = size / ASSETS.intro.gigantoPeek.frameSize;
-    s.setScale(scale).setX(-size * 0.6);
-    this.scene.tweens.add({ targets: s, x: 0, duration: 420, ease: 'Sine.easeOut' });
+    const lift = size * 0.02;
+    const rest = peekRest(vh, size, peek.cut ?? { left: 0, bottom: 1, band: 0 }, lift);
+    const s = this.keep(this.scene.add.sprite(0, rest.y, KEYS.peek, frames[0]).setOrigin(0, 1).setDepth(this.host.depth.peek));
+    s.setScale(size / peek.frameSize).setX(rest.x - size * 0.6);
+    this.scene.tweens.add({ targets: s, x: rest.x, duration: 420, ease: 'Sine.easeOut' });
     const beats: Array<[number, number]> = [[0, 0], [260, 1], [560, 2], [900, 3], [1180, 4], [1480, 5], [1600, 4]];
     for (const [t, f] of beats) this.at(t, () => s.active && s.setFrame(frames[f] as string));
-    this.at(560, () => this.scene.tweens.add({ targets: s, y: s.y - size * 0.02, duration: 140, yoyo: true, repeat: 1 }));
+    this.at(560, () => this.scene.tweens.add({ targets: s, y: rest.y - lift, duration: 140, yoyo: true, repeat: 1 }));
     this.at(1850, () => this.scene.tweens.add({ targets: s, y: vh + size * 1.05, duration: 380, ease: 'Sine.easeIn', onComplete: () => s.destroy() }));
   }
 

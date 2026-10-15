@@ -4,7 +4,7 @@
  */
 import manifestJson from '../data/assetManifest.json';
 import type { CharacterId, TreasureId } from '../domain/types';
-import { FRIEND_SIZE, type FriendFrame } from '../platform/layout';
+import { FRIEND_SIZE, type CellCut, type FriendFrame } from '../platform/layout';
 import type { RigAsset } from './rigData';
 
 export type Reaction = 'idle' | 'drawing' | 'encouragement' | 'celebration' | 'talk';
@@ -49,7 +49,8 @@ export interface IntroAssets {
   curtainLeft: ItemAsset;
   curtainRight: ItemAsset;
   lightShafts: ItemAsset;
-  gigantoPeek: AtlasAsset & { frames: string[]; frameSize: number };
+  /** `cut`: the cell's straight left and bottom edges and their fade (tools/art/v3.py). */
+  gigantoPeek: AtlasAsset & { frames: string[]; frameSize: number; cut?: CellCut };
   popups: AtlasAsset & { cellSize: number };
   dust: AtlasAsset & { frames: string[] };
   sprout: { stages: string[]; width: number; height: number; soil: { x: number; y: number } };

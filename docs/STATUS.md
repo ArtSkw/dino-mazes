@@ -52,6 +52,18 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 15 (15 October 2026): Giganto's peek without a cut
+
+In the opening, Giganto leans in from the left after the two footsteps. His peek cells are cut
+straight on the left and bottom, and the sprite sat at the screen edge, so the cut showed as a
+straight line along his side. Now `tools/art/v3.py` fades the cells' left and bottom cut edges
+(smoothstep over 6 % of the cell, `PEEK_FADE`) and records where the cut is (`cut` in the
+manifest); the peek rests so the cut edges and most of their fade stay beyond the screen edges
+the whole time, including the slide in, the sniffing bob and the third footstep's shake
+(`peekRest` in `src/platform/layout.ts`). Giganto shows as before; only about 6 % of the cell is
+moved off screen. Tests: a unit test across five viewport heights, and a browser test that
+follows the peek in every frame of the full opening (shake included) in Chromium and WebKit.
+
 ## Owner review, round 14 (15 October 2026): critters at the screen's edges
 
 The hidden critters on the hedges were hard to see on the detailed hedge texture. They are now
@@ -353,8 +365,8 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 238 passed |
-| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 73 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
+| Domain unit + property | `npm test` | 239 passed |
+| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 75 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
 

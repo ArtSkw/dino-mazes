@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { FRIEND_CORNER, FRIEND_SIZE, MIN_CONTROL_PX, MIN_CORRIDOR_PX, castSlots, clusterSpec, computeLayout, fitGrid, introLayout, toLogical, toScreen, type Layout, type Rect } from '../../src/platform/layout';
+import { FRIEND_CORNER, FRIEND_SIZE, MIN_CONTROL_PX, MIN_CORRIDOR_PX, castSlots, clusterSpec, computeLayout, fitGrid, introLayout, peekRest, toLogical, toScreen, type Layout, type Rect } from '../../src/platform/layout';
 import type { Difficulty } from '../../src/domain/types';
 import { CORRIDOR_RADIUS, ENTRANCE_REACH, FRAME_MARGIN, LEVELS, entranceAxes } from '../../src/domain/maze';
-import { FACING, friendFrame } from '../../src/game/assets';
+import { ASSETS, FACING, friendFrame } from '../../src/game/assets';
 import type { GridSpec, Side } from '../../src/domain/types';
 
 const VIEWPORTS: Array<[number, number]> = [
@@ -220,6 +220,25 @@ describe('layout', () => {
         expect(L.character.x).toBeLessThan(L.board.x);
         expect(L.reset.x).toBeGreaterThan(L.board.x + L.board.w);
       }
+    }
+  });
+});
+
+describe("the opening's Giganto peek", () => {
+  it('keeps its straight left and bottom cuts beyond the screen edges, sniffing bob included', () => {
+    const cut = ASSETS.intro.gigantoPeek.cut!;
+    expect(cut.left).toBeGreaterThan(0);
+    expect(cut.bottom).toBeLessThan(1);
+    for (const vh of [375, 600, 768, 820, 1024]) {
+      const size = Math.min(vh * 0.46, 380);
+      const lift = size * 0.02;
+      const rest = peekRest(vh, size, cut, lift);
+      // The left cut sits left of the screen, with most of its fade.
+      expect(rest.x + cut.left * size).toBeLessThanOrEqual(-0.6 * cut.band * size);
+      // The bottom cut stays below the screen even at the top of the bob.
+      expect(rest.y - lift - (1 - cut.bottom) * size).toBeGreaterThanOrEqual(vh + 0.6 * cut.band * size);
+      // Giganto himself is still well in view (no more than a tenth of the cell hidden on the left).
+      expect(-rest.x).toBeLessThan(size * 0.1);
     }
   });
 });
