@@ -42,7 +42,8 @@
       "seconds": 1.5,
       "influence": 0.5,
       "takes": 2,
-      "pick": 2
+      "pick": 2,
+      "replacedBy": "treasure-coconut-magic"
     },
     {
       "id": "flutter",
@@ -213,7 +214,8 @@
       "influence": 0.5,
       "takes": 3,
       "style": "gentle",
-      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal)."
+      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal).",
+      "pick": 1
     },
     {
       "id": "treasure-stone",
@@ -236,7 +238,8 @@
       "influence": 0.5,
       "takes": 3,
       "style": "gentle",
-      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal)."
+      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal).",
+      "pick": 3
     },
     {
       "id": "treasure-berries",
@@ -247,7 +250,8 @@
       "influence": 0.5,
       "takes": 3,
       "style": "gentle",
-      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal)."
+      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal).",
+      "pick": 1
     },
     {
       "id": "treasure-feather",
@@ -270,7 +274,8 @@
       "influence": 0.5,
       "takes": 3,
       "style": "gentle",
-      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal)."
+      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal).",
+      "pick": 1
     },
     {
       "id": "treasure-amber",
@@ -281,7 +286,8 @@
       "influence": 0.5,
       "takes": 3,
       "style": "gentle",
-      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal)."
+      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal).",
+      "pick": 3
     },
     {
       "id": "treasure-gigaflower",
@@ -426,7 +432,8 @@
       "takes": 2,
       "loop": true,
       "note": "Owner, round 3: did not sound natural; real jungle sounds, no cartoon palette.",
-      "plain": true
+      "plain": true,
+      "pick": 2
     },
     {
       "id": "treasure-coconut-magic",
@@ -438,7 +445,8 @@
       "takes": 2,
       "style": "gentle",
       "compare": "treasure-coconut",
-      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick."
+      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick.",
+      "pick": 2
     },
     {
       "id": "treasure-nut-magic",
@@ -450,7 +458,8 @@
       "takes": 2,
       "style": "gentle",
       "compare": "treasure-nut",
-      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick."
+      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick.",
+      "pick": 0
     },
     {
       "id": "treasure-stone-magic",
@@ -462,7 +471,8 @@
       "takes": 2,
       "style": "gentle",
       "compare": "treasure-stone",
-      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick."
+      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick.",
+      "pick": 0
     },
     {
       "id": "treasure-feather-magic",
@@ -474,7 +484,8 @@
       "takes": 2,
       "style": "gentle",
       "compare": "treasure-feather",
-      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick."
+      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick.",
+      "pick": 0
     }
   ],
   "music": [
@@ -690,28 +701,50 @@
       "name": "Dino Mazes · Dudek / Bill",
       "description": "An adult male voice actor performing a gentle, timid young brachiosaurus in a children's cartoon. Soft, warm, a little breathy and hesitant, slower pace, sweet and kind; he lights up and giggles when food is mentioned. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
       "text": "Cześć, jestem Dudek! Masz coś do jedzenia? Mam najlepszy nos w dżungli. Wywęszę każdy owoc! Boję się nawet ważek. Ale z tobą jest mi raźniej.",
-      "seed": 105
+      "seed": 105,
+      "pick": 3
     },
     {
       "id": "mazu",
       "name": "Dino Mazes · Rudzia / Mazu",
       "description": "An adult female voice actress performing a curious, clever young ankylosaurus in a children's cartoon, the little scientist of the group. Clear, articulate, bright and confident, precise diction, warm and patient, never in a hurry. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
       "text": "Cześć, jestem Rudzia! Wiem prawie wszystko o dinozaurach. W Gigantopedii zapisuję wszystko, co robi Giganto. Najpierw patrzymy, potem rysujemy. Tak robią naukowcy!",
-      "seed": 106
+      "seed": 106,
+      "pick": 2
     },
     {
       "id": "giganto",
       "name": "Dino Mazes · Giganto",
       "description": "An adult male voice actor performing a huge, gentle giant dinosaur in a children's cartoon. Very deep, slow, soft and kind, a warm rumbling voice that speaks only a word or two, with friendly growls and a cosy, funny side. Never scary. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
       "text": "GRRRAU! …Cześć. Mrrr… Lubię cię. Tup. Tup. TUP! Ziiiew… Dużo dziś tupania. Mrrr… Ładnie rysujesz. GRRRAU! …Przepraszam. To z radości.",
-      "seed": 107
+      "seed": 107,
+      "pick": 1
     },
     {
       "id": "narrator",
       "name": "Dino Mazes · Narrator",
       "description": "An adult female storyteller narrating a gentle children's cartoon: warm, calm and smiling, clear and friendly, like reading a bedtime story to a small child, with a little sparkle of wonder. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
       "text": "Dudek wywęszył kokos, ale boi się iść sam. Pomożesz mu? Miłka maluje obrazek. Szuka kwiatka, który będzie jej pozował! Nowy skarb: muszelka!",
-      "seed": 108
+      "seed": 108,
+      "pick": 2
+    },
+    {
+      "id": "mazu-alt",
+      "name": "Dino Mazes · Rudzia / Mazu (alt)",
+      "description": "An adult female voice actress performing a clever, curious young ankylosaurus scientist in a children's cartoon. A lower, warm alto voice, clearly deeper and calmer than a bubbly cartoon voice: thoughtful, measured, a little slower, precise diction, a gentle smile and a slight soft huskiness. Patient and kind, never squeaky. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
+      "text": "Cześć, jestem Rudzia! Wiem prawie wszystko o dinozaurach. W Gigantopedii zapisuję wszystko, co robi Giganto. Najpierw patrzymy, potem rysujemy. Tak robią naukowcy!",
+      "seed": 116,
+      "compare": [
+        {
+          "label": "Miłka (dla porównania)",
+          "voice": "tiny"
+        },
+        {
+          "label": "Rudzia, obecna próbka 2",
+          "voice": "mazu"
+        }
+      ],
+      "note": "Owner, round 4: Rudzia (preview 2) may sound like Miłka; measured 296 Hz vs 327 Hz median pitch."
     }
   ],
   "lines": [
@@ -818,5 +851,11 @@
     ],
     "takes": 2
   },
-  "gentle": "Gentle, sweet and playful: soft attack, music-box delicate, a little airy room. Never harsh or dry."
+  "gentle": "Gentle, sweet and playful: soft attack, music-box delicate, a little airy room. Never harsh or dry.",
+  "pickZero": "pick 0: none of the takes; the cue in `compare` keeps its own pick.",
+  "bulkTakes": 1,
+  "say": {
+    "giganto-line3-pl": "[yawns] Dużo dziś tupania."
+  },
+  "sayAbout": "`say`: how a game line is performed when its plain text is misread (owner never sees it). giganto-line3-pl: 'Ziiiew…' was heard as 'Jezu'."
 }

@@ -71,7 +71,13 @@ const sections = [];
     const r = rec(join(SRC, 'voices', v.id));
     if (!r) return '';
     const pick = saved[v.id]?.pick;
-    const takes = r.previews.map((p, i) => take(`głos: ${v.id}`, `próbka ${i + 1}`, copy(`voices/${v.id}/${p.file}`, -19), i + 1 === pick ? 'zapisana, mówi kwestie poniżej' : '')).join('');
+    let takes = r.previews.map((p, i) => take(`głos: ${v.id}`, `próbka ${i + 1}`, copy(`voices/${v.id}/${p.file}`, -19), i + 1 === pick ? 'zapisana, mówi kwestie poniżej' : '')).join('');
+    // `compare`: picked previews of other voices play first (e.g. to tell two voices apart).
+    for (const c of [...(v.compare ?? [])].reverse()) {
+      const other = (cues.voices ?? []).find((o) => o.id === c.voice);
+      const orec = other && rec(join(SRC, 'voices', other.id));
+      if (orec) takes = take(`głos: ${v.id}`, c.label, copy(`voices/${other.id}/${orec.previews[(other.pick ?? 1) - 1].file}`, -19), 'do porównania') + takes;
+    }
     return `<div class="cue"><h3>${esc(v.name)}</h3><p class="prompt">${esc(v.description)}</p><div class="takes">${takes}</div></div>`;
   });
   sections.push(`<section><h2>3. Głosy: trzy próbki każdego</h2><p>Każdy głos jest zaprojektowany od zera (bez naśladowania aktorów z serialu). Kwestie niżej mówi próbka 1; jeśli wolisz inną, zaznacz ją, a podmienię głos.</p>${rows.join('')}</section>`);
@@ -92,9 +98,24 @@ const lineRow = (l) => {
   return `<div class="cue"><h3>${esc(l.text)} <code>${esc(l.id)}</code></h3>${l.say !== l.text ? `<p class="prompt">z tagami: ${esc(l.say)}</p>` : ''}<div class="takes">${cells.join('')}</div></div>`;
 };
 const main = open(cues.lines);
-sections.push(
+if (main.length)
+  sections.push(
   `<section><h2>4. Kwestie</h2><p>Model v4, jeden głos na postać w obu językach, po dwa podejścia. Pod nagraniem: co usłyszała automatyczna transkrypcja (sprawdzam, czy tekst jest poprawny i czy tag typu [giggles] nie został przeczytany na głos); <b>pogrubione</b> = usłyszany śmiech.</p>${main.map(lineRow).join('')}</section>`,
 );
+
+// Every game line (audio/lines.json), one take each unless the check asked for more:
+// collapsed per speaker, so the owner can spot-check; flagged lines open first.
+{
+  const game = existsSync(resolve(ROOT, 'audio/lines.json')) ? JSON.parse(readFileSync(resolve(ROOT, 'audio/lines.json'), 'utf8')).lines : [];
+  const names = { bill: 'Dudek / Bill', tiny: 'Miłka / Tiny', mazu: 'Rudzia / Mazu', rocky: 'Czupur / Rocky', giganto: 'Giganto', narrator: 'Narrator' };
+  const groups = Object.keys(names).map((who) => {
+    const own = game.filter((l) => l.voice === who && existsSync(join(SRC, 'lines', l.id, 'eleven_v4', 'cue.json')));
+    if (!own.length) return '';
+    const bad = own.filter((l) => Object.entries(checks).some(([k, c]) => k.startsWith(`${l.id}/`) && !c.ok)).length;
+    return `<details${bad ? ' open' : ''}><summary><b>${names[who]}</b>: ${own.length} kwestii${bad ? `, ${bad} do sprawdzenia` : ''}</summary>${own.map((l) => lineRow({ ...l, models: ['eleven_v4'] })).join('')}</details>`;
+  });
+  sections.push(`<section><h2>5. Wszystkie kwestie z gry</h2><p>Po jednym nagraniu na kwestię; jeśli transkrypcja coś zakwestionowała, jest dodatkowe podejście. Nie musisz wybierać: biorę pierwsze poprawne. Posłuchaj kilku i zaznacz ★ tylko tam, gdzie wolisz inne podejście, a w uwagach opisz, co brzmi źle.</p>${groups.join('')}</section>`);
+}
 
 const page = `<!doctype html>
 <html lang="pl"><head><meta charset="utf-8"><title>Dino Labirynty: odsłuch dźwięków</title>
@@ -102,6 +123,7 @@ const page = `<!doctype html>
 body{font:15px/1.45 -apple-system,system-ui,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px;background:#f7f1df;color:#2f3a1f}
 h1{color:#3d7a1c}h2{margin-top:36px;border-bottom:2px solid #9cc46a;padding-bottom:4px}h3{margin:0 0 4px;font-size:16px}
 code{font-size:12px;color:#7a6a3a;background:#efe5c4;padding:1px 4px;border-radius:4px}
+summary{cursor:pointer;padding:8px 0;font-size:16px}details{margin:8px 0}
 .cue{background:#fffaf0;border:1px solid #e3d6ad;border-radius:12px;padding:12px 14px;margin:12px 0}
 .prompt{margin:0 0 8px;color:#6b6450;font-size:13px}
 .takes{display:flex;flex-wrap:wrap;gap:10px}

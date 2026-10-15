@@ -55,6 +55,15 @@ fairy-tale stings like the Giga Flower and the crystal; the coconut, nut, stone 
 magical alternatives (`compare` shows the current pick next to them). Voices designed for Dudek,
 Rudzia, Giganto and the narrator (8 of 10 slots). About 6,900 credits used.
 
+**Owner round 4 (15 October 2026):** treasure stings and the ambience picked; the coconut takes its
+magical version, the nut, stone and feather keep theirs. Voices: Dudek preview 3, Giganto 1,
+narrator 2. Rudzia (preview 2) measured close to Miłka (296 vs 327 Hz median pitch), so an
+alternative alto Rudzia (`mazu-alt`, 250–286 Hz) waits for the owner. Every game text is now
+collected by `tools/audio/lines.mjs` into `audio/lines.json` (198 lines) and voiced with one take;
+the Scribe check ignores growls and yawns, and each flagged take earns a retake (`cues.say` can
+change how a line is performed: Giganto's "Ziiiew…" was heard as "Jezu", now `[yawns]`). 178 lines
+voiced (all but Rudzia's), 0 flagged. About 9,800 credits used.
+
 ## 1. Recommendation in short
 
 - **Everything is generated offline, never in the browser.** A local script calls the API with the

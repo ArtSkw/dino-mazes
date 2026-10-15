@@ -11,7 +11,7 @@
 // Each folder keeps cue.json with the request's hash: an unchanged cue is
 // skipped, a changed one is made again, so runs never pay twice.
 //
-//   node tools/audio/generate.mjs [--only=tap,tiny-] [--dry]
+//   node tools/audio/generate.mjs [--only=tap,tiny-] [--voices=bill,giganto] [--dry]
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -171,10 +171,15 @@ async function speak(voiceId, model, text, lang, seed) {
   }
 }
 
+// All lines: the hand-written ones in cues.json plus every game text (audio/lines.json, tools/audio/lines.mjs).
+const gameLines = readJson(resolve(ROOT, 'audio/lines.json'), { lines: [] }).lines.map((l) => ({ ...l, say: cues.say?.[l.id], bulk: true }));
+const voicesOnly = args.find((a) => a.startsWith('--voices='))?.slice(9).split(',');
+const checks = readJson(join(OUT, 'checks.json'), {});
+
 async function lines(saved) {
   const d = cues.lineDefaults ?? { models: ['eleven_v3'], takes: 1 };
-  for (const l of cues.lines ?? []) {
-    if (!wanted(l.id)) continue;
+  for (const l of [...(cues.lines ?? []), ...gameLines]) {
+    if (!wanted(l.id) || (voicesOnly && !voicesOnly.includes(l.voice))) continue;
     const voice = saved[l.voice];
     if (!voice) {
       if (!dry) console.error(`✗ ${l.id}: voice ${l.voice} is not saved yet`);
@@ -183,7 +188,11 @@ async function lines(saved) {
     }
     for (const model of l.models ?? d.models) {
       const request = { text: l.say ?? l.text, model, lang: l.lang, voice: voice.voice_id };
-      await guarded(`${l.id} ${model}`, () => takes(join(OUT, 'lines', l.id, model), request, l.takes ?? d.takes, (i) => speak(voice.voice_id, model, request.text, l.lang, 1 + i)));
+      // Game lines start with one take; each take the Scribe check flagged earns another (up to three).
+      const dir = join(OUT, 'lines', l.id, model);
+      const flagged = Object.entries(checks).filter(([k, c]) => k.startsWith(`${l.id}/${model}/`) && !c.ok).length;
+      const count = l.bulk ? Math.min(3, (cues.bulkTakes ?? 1) + flagged) : (l.takes ?? d.takes);
+      await guarded(`${l.id} ${model}`, () => takes(dir, request, count, (i) => speak(voice.voice_id, model, request.text, l.lang, 1 + i)));
     }
   }
 }

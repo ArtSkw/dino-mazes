@@ -23,9 +23,16 @@ const words = (s) =>
     .split(/\s+/)
     .filter(Boolean);
 
+// Growls, roars, yawns and toots are sounds, not words: Scribe may write them
+// as an event, as letters, or leave them out; none of that is a mistake.
+const SOUND = /^(g*r{2,}\w*|grr\w*|m+r+\w*|r+o+a+r+|zi+e+w|ya+wn|tu+u|tuu+|hmm+|mm+)$/;
+const speech = (s) => words(s).filter((w) => !SOUND.test(w));
+
 function wer(expected, heard) {
-  const a = words(expected);
-  const b = words(heard);
+  // Compound names may be heard as two words ("giga kwiat").
+  if (speech(expected).join('') === speech(heard).join('')) return 0;
+  const a = speech(expected);
+  const b = speech(heard);
   const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
   for (let j = 1; j <= b.length; j++) d[0][j] = j;
   for (let i = 1; i <= a.length; i++)
@@ -49,7 +56,8 @@ async function transcribe(file, lang) {
 
 const results = {};
 let flagged = 0;
-for (const l of cues.lines ?? []) {
+const gameLines = existsSync(resolve(ROOT, 'audio/lines.json')) ? JSON.parse(readFileSync(resolve(ROOT, 'audio/lines.json'), 'utf8')).lines.map((l) => ({ ...l, say: cues.say?.[l.id] })) : [];
+for (const l of [...(cues.lines ?? []), ...gameLines]) {
   for (const model of l.models ?? cues.lineDefaults.models) {
     const dir = join(OUT, 'lines', l.id, model);
     if (!existsSync(join(dir, 'cue.json'))) continue;
