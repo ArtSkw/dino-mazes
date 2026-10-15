@@ -53,7 +53,7 @@ const missing = [];
 
 // Effects.
 for (const e of cues.effects ?? []) {
-  if (e.id.endsWith('-magic')) continue; // alternatives: used through `replacedBy`
+  if (e.id.endsWith('-magic') || e.retired) continue; // alternatives (used through `replacedBy`) and retired sounds
   const cue = e.replacedBy ? cues.effects.find((x) => x.id === e.replacedBy) : e;
   if (!cue?.pick) {
     missing.push(`effect ${e.id}`);

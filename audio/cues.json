@@ -10,7 +10,8 @@
       "seconds": 0.5,
       "influence": 0.6,
       "takes": 3,
-      "pick": 1
+      "pick": 1,
+      "retired": "Owner, round 6: replaced by ui-wood and ui-leaf."
     },
     {
       "id": "bum",
@@ -65,7 +66,8 @@
       "takes": 2,
       "style": "gentle",
       "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
-      "pick": 1
+      "pick": 1,
+      "retired": "Owner, round 6: replaced by ui-wood and ui-leaf."
     },
     {
       "id": "ui-close",
@@ -77,7 +79,8 @@
       "takes": 1,
       "style": "gentle",
       "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
-      "pick": 1
+      "pick": 1,
+      "retired": "Owner, round 6: replaced by ui-wood and ui-leaf."
     },
     {
       "id": "ui-toggle",
@@ -89,7 +92,8 @@
       "takes": 1,
       "style": "gentle",
       "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
-      "pick": 1
+      "pick": 1,
+      "retired": "Owner, round 6: replaced by ui-wood and ui-leaf."
     },
     {
       "id": "ui-play",
@@ -99,7 +103,8 @@
       "seconds": 0.8,
       "influence": 0.5,
       "takes": 2,
-      "pick": 2
+      "pick": 2,
+      "retired": "Owner, round 6: replaced by ui-wood and ui-leaf."
     },
     {
       "id": "maze-reveal",
@@ -486,6 +491,71 @@
       "compare": "treasure-feather",
       "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick.",
       "pick": 0
+    },
+    {
+      "id": "ui-wood",
+      "label": "Przycisk drewniany (stuknięcie)",
+      "event": "wooden and round buttons",
+      "prompt": "A single soft, warm click of a small smooth wooden button, like tapping a polished wooden toy block with a fingertip. Close, cosy and pleasant, short and dry, no echo, nothing harsh.",
+      "seconds": 0.5,
+      "influence": 0.6,
+      "takes": 3,
+      "plain": true,
+      "note": "Owner, round 6: button sounds sounded odd; simple, pleasant wooden clicks, a cosy close feeling; the green leaf buttons like a leaf pressed into soil.",
+      "pick": 1,
+      "provisional": true
+    },
+    {
+      "id": "ui-leaf",
+      "label": "Przycisk zielony (listek w ziemię)",
+      "event": "the green leaf buttons (Graj, Szukajmy)",
+      "prompt": "A big fresh green leaf pressed gently into soft, damp forest soil with a fingertip: a soft muffled pat with a tiny leafy crinkle. Short, cosy, sweet and pleasant.",
+      "seconds": 0.5,
+      "influence": 0.6,
+      "takes": 3,
+      "plain": true,
+      "note": "Owner, round 6: button sounds sounded odd; simple, pleasant wooden clicks, a cosy close feeling; the green leaf buttons like a leaf pressed into soil.",
+      "pick": 1,
+      "provisional": true
+    },
+    {
+      "id": "visitor-ladybug",
+      "label": "Biedronka odlatuje",
+      "event": "the ladybug opens its wings and flies off",
+      "prompt": "A tiny ladybug lifts off a leaf: a very soft, delicate flutter of little insect wings, close and quiet, natural rainforest sound.",
+      "seconds": 1.0,
+      "influence": 0.5,
+      "takes": 2,
+      "plain": true,
+      "note": "Owner, round 6: the visitors get a subtle, delicate sound of their own that fits the jungle.",
+      "pick": 1,
+      "provisional": true
+    },
+    {
+      "id": "visitor-frog",
+      "label": "Żabka kumka",
+      "event": "the little frog sits at the edge",
+      "prompt": "A small tree frog gives two soft, cute, gentle croaks. Natural rainforest frog, quiet and friendly.",
+      "seconds": 1.0,
+      "influence": 0.5,
+      "takes": 2,
+      "plain": true,
+      "note": "Owner, round 6: the visitors get a subtle, delicate sound of their own that fits the jungle.",
+      "pick": 1,
+      "provisional": true
+    },
+    {
+      "id": "visitor-snail",
+      "label": "Ślimak na liściu",
+      "event": "the snail crawls onto a leaf",
+      "prompt": "A tiny snail slides slowly onto a damp leaf: a very gentle, soft leafy rustle, calm and quiet, natural.",
+      "seconds": 1.2,
+      "influence": 0.5,
+      "takes": 2,
+      "plain": true,
+      "note": "Owner, round 6: the visitors get a subtle, delicate sound of their own that fits the jungle.",
+      "pick": 1,
+      "provisional": true
     }
   ],
   "music": [

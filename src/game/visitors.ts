@@ -8,7 +8,10 @@
  *   - only where a side strip is free: below the corner buttons, above the
  *     friend (left) or above "Wróć" (right), never over the board;
  *   - the first one after 12–20 s of play, then one every 25–45 s, one at a
- *     time; a new maze or the end of a maze sends it away.
+ *     time; a new maze or the end of a maze sends it away;
+ *   - each has one quiet sound from its side of the screen (owner, round 6):
+ *     the ladybug's wings as it takes off, the frog's croak once it sits, the
+ *     snail's rustle as it crawls onto the leaves.
  */
 import Phaser from 'phaser';
 import type { Layout } from '../platform/layout';
@@ -25,6 +28,8 @@ export interface VisitorHost {
   /** The maze screen's layout while a maze is played (not celebrating, no overlay), else null. */
   layout(): Layout | null;
   reduced(): boolean;
+  /** A quiet effect, panned to the visitor's side (−1 left … 1 right). */
+  sound(kind: VisitorKind, pan: number): void;
 }
 
 interface Live {
@@ -33,6 +38,7 @@ interface Live {
   container: Phaser.GameObjects.Container;
   parts: Map<string, Phaser.GameObjects.Image>;
   scale: number;
+  sounded: boolean;
 }
 
 export class Visitors {
@@ -73,6 +79,12 @@ export class Visitors {
       this.clear();
       this.nextAt = now + 1000 * rand(NEXT_VISIT_S);
       return;
+    }
+    // Its one sound: the ladybug at take-off, the frog once it sits, the snail while it crawls in.
+    const cue = v.visit.kind === 'ladybug' ? v.visit.inS + v.visit.restS : v.visit.kind === 'frog' ? v.visit.inS + 0.5 : v.visit.inS * 0.5;
+    if (!v.sounded && t >= cue) {
+      v.sounded = true;
+      this.host.sound(v.visit.kind, v.visit.side === 'left' ? -0.6 : 0.6);
     }
     const fade = Math.min(1, t / 0.3);
     v.container
@@ -122,7 +134,7 @@ export class Visitors {
     if (asset.master) add('master', asset.master, [cw / 2, ch / 2], 1);
     if (asset.poses?.['jump']) add('jump', asset.poses['jump'], [cw / 2, ch / 2], 1).setVisible(false);
     const visit = planVisit(kind, rail, L.vw, size, Math.random);
-    this.live = { visit, t0: now, container, parts, scale: size / Math.max(asset.size[0], asset.size[1]) };
+    this.live = { visit, t0: now, container, parts, scale: size / Math.max(asset.size[0], asset.size[1]), sounded: false };
     this.update(now);
   }
 

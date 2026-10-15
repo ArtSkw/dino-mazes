@@ -30,6 +30,8 @@ interface Clip {
 }
 
 const MUSIC_LEVEL = 0.8;
+/** Voices sit a little under full level (owner, round 6: they stood out over everything). */
+const VOICE_LEVEL = 0.7;
 const DUCKED = 0.3;
 
 /** Voice clips are looked up by the exact words shown (case and spacing aside). */
@@ -69,6 +71,7 @@ export class SoundBoard {
   private ready = new Map<string, AudioBuffer>();
   private music: { id: MusicId; loop: boolean; node: AudioBufferSourceNode | null; gain: GainNode | null; token: number; at: number } | null = null;
   private ambience: { node: AudioBufferSourceNode | null; gain: GainNode | null; token: number } | null = null;
+  private ambienceLevel = 0;
   private voice: AudioBufferSourceNode | null = null;
   private voiceToken = 0;
   private token = 0;
@@ -80,7 +83,7 @@ export class SoundBoard {
     if (!ctx || !this.fxBus || !this.musicBus || !this.voiceBus) return;
     this.fxBus.gain.setTargetAtTime(c.effects ? 1 : 0, ctx.currentTime, 0.03);
     this.musicBus.gain.setTargetAtTime(c.music ? MUSIC_LEVEL : 0, ctx.currentTime, 0.08);
-    this.voiceBus.gain.setTargetAtTime(c.voices ? 1 : 0, ctx.currentTime, 0.03);
+    this.voiceBus.gain.setTargetAtTime(c.voices ? VOICE_LEVEL : 0, ctx.currentTime, 0.03);
     if (!c.voices) this.stopVoice();
     if (!c.effects) for (const id of [...this.loops.keys()]) this.stopLoop(id);
   }
@@ -111,7 +114,7 @@ export class SoundBoard {
           return g;
         };
         this.fxBus = bus(this.channels.effects ? 1 : 0);
-        this.voiceBus = bus(this.channels.voices ? 1 : 0);
+        this.voiceBus = bus(this.channels.voices ? VOICE_LEVEL : 0);
         this.duck = bus(1);
         this.musicBus = ctx.createGain();
         this.musicBus.gain.value = this.channels.music ? MUSIC_LEVEL : 0;
@@ -154,7 +157,10 @@ export class SoundBoard {
   private resumed(): void {
     const m = this.music;
     if (m && !m.node && (m.loop || performance.now() - m.at < 1500)) this.startMusic(m.id, m.loop, 1.5);
-    if (this.ambience && !this.ambience.node) this.setAmbience(true);
+    if (this.ambience && !this.ambience.node) {
+      this.ambience = null;
+      this.setAmbience(this.ambienceLevel);
+    }
   }
 
   private load(src: string): Promise<AudioBuffer | null> {
@@ -179,25 +185,29 @@ export class SoundBoard {
     return p;
   }
 
-  private source(buf: AudioBuffer, bus: AudioNode, gain = 1, rate = 1): { node: AudioBufferSourceNode; gain: GainNode } {
+  private source(buf: AudioBuffer, bus: AudioNode, gain = 1, rate = 1, pan = 0): { node: AudioBufferSourceNode; gain: GainNode } {
     const ctx = this.ctx as AudioContext;
     const node = ctx.createBufferSource();
     node.buffer = buf;
     node.playbackRate.value = rate;
     const g = ctx.createGain();
     g.gain.value = gain;
-    node.connect(g).connect(bus);
+    if (pan !== 0 && ctx.createStereoPanner) {
+      const p = ctx.createStereoPanner();
+      p.pan.value = pan;
+      node.connect(g).connect(p).connect(bus);
+    } else node.connect(g).connect(bus);
     return { node, gain: g };
   }
 
-  /** An effect. A missing or not-yet-decoded file falls back to a synthesised stand-in. */
-  play(id: Sfx, gain = 1): void {
+  /** An effect (`pan` −1 left … 1 right). A missing or not-yet-decoded file falls back to a synthesised stand-in. */
+  play(id: Sfx, gain = 1, pan = 0): void {
     if (!this.channels.effects || !this.fxBus) return;
-    if (!this.running) return this.whenRunning(() => this.play(id, gain));
+    if (!this.running) return this.whenRunning(() => this.play(id, gain, pan));
     const clip = manifest.fx[id];
     const buf = clip && this.ready.get(clip.src);
     if (buf) {
-      this.source(buf, this.fxBus, gain, 0.97 + Math.random() * 0.06).node.start();
+      this.source(buf, this.fxBus, gain, 0.97 + Math.random() * 0.06, pan).node.start();
       return;
     }
     if (clip) void this.load(clip.src);
@@ -272,10 +282,15 @@ export class SoundBoard {
     m.node.stop(this.ctx.currentTime + fade + 0.1);
   }
 
-  /** The quiet jungle bed under the welcome screen (music channel). */
-  setAmbience(on: boolean): void {
+  /**
+   * The rainforest around the game (music channel): full on the welcome
+   * screen, quieter in the maze so the child still draws in the heart of the
+   * jungle (owner, round 6); 0 stops it.
+   */
+  setAmbience(level: number): void {
     const ctx = this.ctx;
-    if (!on) {
+    this.ambienceLevel = level;
+    if (level <= 0) {
       const a = this.ambience;
       this.ambience = null;
       if (a?.node && a.gain && ctx) {
@@ -284,7 +299,11 @@ export class SoundBoard {
       }
       return;
     }
-    if (this.ambience?.node) return;
+    if (this.ambience?.node) {
+      if (ctx) this.ambience.gain?.gain.setTargetAtTime(level, ctx.currentTime, 0.6);
+      return;
+    }
+    if (this.ambience) return;
     const token = ++this.token;
     this.ambience = { node: null, gain: null, token };
     if (!this.running) return;
@@ -292,7 +311,7 @@ export class SoundBoard {
       if (!buf || !this.ctx || !this.musicBus || this.ambience?.token !== token) return;
       const s = this.source(buf, this.musicBus, 0);
       s.node.loop = true;
-      s.gain.gain.setTargetAtTime(1, this.ctx.currentTime, 0.8);
+      s.gain.gain.setTargetAtTime(this.ambienceLevel, this.ctx.currentTime, 0.8);
       s.node.start();
       this.ambience = { node: s.node, gain: s.gain, token };
     });
@@ -353,13 +372,10 @@ export class SoundBoard {
     if (!this.ctx || !this.fxBus) return;
     const t = this.ctx.currentTime + 0.005;
     switch (id) {
-      case 'tap':
-      case 'ui-toggle':
-      case 'ui-close':
+      case 'ui-wood':
+      case 'ui-leaf':
         this.tone(660, t, 0.09, 'sine', 0.12, 0.004);
         break;
-      case 'ui-open':
-      case 'ui-play':
       case 'pop':
       case 'friend-tap':
         this.marimba(783.99, t, 0.09);

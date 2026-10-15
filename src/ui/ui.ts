@@ -172,7 +172,7 @@ export class Ui implements UiBridge {
     // Welcome
     this.playLabel = h('span', { class: 'label' });
     this.playBtn = this.button('btn btn-leaf btn-play', () => {
-      c.sfx('ui-play');
+      c.sfx('ui-leaf');
       c.play();
     }, this.icon('play'), this.playLabel);
     this.castLayer = h('div', { class: 'cast-layer' });
@@ -221,7 +221,7 @@ export class Ui implements UiBridge {
     this.introTreasure = h('img', { class: 'intro-treasure', alt: '' });
     this.introTreasureName = h('p', { class: 'intro-treasure-name' });
     this.goBtn = this.button('btn btn-leaf btn-go', () => {
-      c.sfx('ui-play');
+      c.sfx('ui-leaf');
       c.reveal();
       window.setTimeout(() => this.surface.focus({ preventScroll: true }), 50);
     });
@@ -263,12 +263,12 @@ export class Ui implements UiBridge {
 
     this.badge = h('span', { class: 'badge', 'aria-hidden': 'true' });
     this.collectionBtn = this.button('btn-round collection-btn', () => {
-      c.sfx('ui-open');
+      c.sfx('ui-wood');
       this.openOverlay('collection');
     }, this.chestOrIcon(), this.badge);
     this.tr(this.collectionBtn, 'myTreasures', 'aria-label');
     this.settingsBtn = this.button('btn-round settings-btn', () => {
-      c.sfx('ui-open');
+      c.sfx('ui-wood');
       this.openOverlay('settings');
     }, this.icon('gear'));
     this.tr(this.settingsBtn, 'settings', 'aria-label');
@@ -276,7 +276,7 @@ export class Ui implements UiBridge {
     // Back to the welcome screen: beside the cluster on maze screens only
     // (never inside settings, never on the welcome screen itself).
     this.homeBtn = this.button('btn-round home-btn', () => {
-      c.sfx('tap');
+      c.sfx('ui-wood');
       c.goHome();
     }, this.icon('home'));
     this.tr(this.homeBtn, 'home', 'aria-label');
@@ -290,7 +290,7 @@ export class Ui implements UiBridge {
     this.hintBtn = this.button('btn-round hint-btn', () => c.hint(), h('img', { src: assetUrl(ASSETS.foliage['butterfly']?.image ?? ''), alt: '' }));
     this.tr(this.hintBtn, 'hint', 'aria-label');
     this.nextBtn = this.button('btn btn-wood next-btn', () => {
-      c.sfx('ui-play');
+      c.sfx('ui-wood');
       c.next();
     }, this.tr(h('span', { class: 'label' }), 'next'), this.icon('next'));
     this.skipLayer = this.button('skip-layer', () => c.skipCelebration());
@@ -360,7 +360,7 @@ export class Ui implements UiBridge {
       ['off', () => c.setMuted(true), 'soundOff'],
     ]);
     const toggle = (fn: () => void): (() => void) => () => {
-      c.sfx('ui-toggle');
+      c.sfx('ui-wood', 0.7);
       fn();
     };
     this.settingsMusic = seg([
@@ -460,7 +460,7 @@ export class Ui implements UiBridge {
   // Commands
 
   private setLang(lang: Lang): void {
-    this.ctrl.sfx('ui-toggle');
+    this.ctrl.sfx('ui-wood', 0.7);
     this.ctrl.setLang(lang);
   }
 
@@ -472,7 +472,7 @@ export class Ui implements UiBridge {
   }
 
   private closeOverlay(): void {
-    this.ctrl.sfx('ui-close');
+    this.ctrl.sfx('ui-wood');
     this.ctrl.closeOverlay();
     this.lastNewTreasure = null;
     this.lastFocus?.focus?.({ preventScroll: true });

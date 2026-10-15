@@ -52,6 +52,19 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 17 (15 October 2026): sound after the tablet test
+
+- The rainforest no longer falls silent in the maze: the same ambience keeps playing at about
+  45 % of its welcome level on the quest card, the maze and the reward (music channel), so the
+  child draws in the heart of the jungle (PRD §7 updated: the soft bed is the one continuous sound).
+- Voices are 3 dB quieter (voice channel at 0.7), and the tap on a friend at half level.
+- Buttons: new plain sounds instead of the pilot's: a soft wooden click for the wooden and round
+  buttons and toggles (`ui-wood`), a leaf pressed into soil for the green ones, "Graj" and
+  "Szukajmy!" (`ui-leaf`); the old five UI sounds are retired.
+- The jungle visitors have one quiet sound each from their side of the screen (stereo pan): the
+  ladybug's wings at take-off, the frog's croak once it sits, the snail's rustle as it arrives.
+- The new takes are in the game provisionally (take 1) and on the listening page for the owner.
+
 ## Sound phase 2 and 3: sound in the game (15 October 2026)
 
 The owner's picks are mastered into the game (`tools/audio/master.mjs`: loudness-matched AAC,

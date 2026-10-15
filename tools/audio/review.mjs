@@ -20,7 +20,8 @@ const checks = existsSync(join(SRC, 'checks.json')) ? JSON.parse(readFileSync(jo
 const saved = existsSync(join(SRC, 'voices.json')) ? JSON.parse(readFileSync(join(SRC, 'voices.json'), 'utf8')) : {};
 const rec = (dir) => (existsSync(join(dir, 'cue.json')) ? JSON.parse(readFileSync(join(dir, 'cue.json'), 'utf8')) : null);
 const all = process.argv.includes('--all');
-const open = (list) => (list ?? []).filter((c) => all || c.pick === undefined);
+// `provisional` picks are in the game already but still wait for the owner's ear.
+const open = (list) => (list ?? []).filter((c) => all || c.pick === undefined || c.provisional);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
 rmSync(join(OUT, 'files'), { recursive: true, force: true });

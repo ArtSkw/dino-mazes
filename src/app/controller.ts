@@ -175,8 +175,8 @@ export class Controller {
     return t(this.lang, key, vars);
   }
 
-  sfx(name: Sfx, gain?: number): void {
-    this.sound.play(name, gain);
+  sfx(name: Sfx, gain?: number, pan?: number): void {
+    this.sound.play(name, gain, pan);
   }
 
   get audio(): SoundBoard {
@@ -209,7 +209,8 @@ export class Controller {
     if (this.musicNow?.startsWith('theme-') && want === 'welcome-bed') this.sound.playMusic(want, true, 2.5);
     else if (want) this.sound.playMusic(want, want === 'welcome-bed', want === 'welcome-bed' ? 1.5 : 0);
     else this.sound.stopMusic(0.8);
-    this.sound.setAmbience(screen === 'welcome' && !opening);
+    // The rainforest: full on the welcome screen, quieter but always there in the mazes.
+    this.sound.setAmbience(opening ? 0 : screen === 'welcome' ? 1 : ['intro', 'play', 'reward'].includes(screen) ? 0.45 : 0);
     // The sleepy friend's snore never follows the child off the maze.
     if (screen !== 'play') this.sound.stopLoop('snore');
     this.musicNow = want;
@@ -677,7 +678,7 @@ export class Controller {
   setMuted(muted: boolean): void {
     if (muted === this.state.settings.muted) return;
     this.saveSettings({ muted });
-    if (!muted) this.sfx('ui-toggle');
+    if (!muted) this.sfx('ui-wood', 0.7);
   }
 
   setMusic(music: boolean): void {
@@ -721,7 +722,7 @@ export class Controller {
   }
 
   wave(characterId: string): void {
-    this.sfx('friend-tap');
+    this.sfx('friend-tap', 0.5);
     this.emit({ type: 'wave', characterId });
   }
 
@@ -748,7 +749,7 @@ export class Controller {
     const session = this.state.session;
     if (!session) return '';
     const n = this.talks++;
-    this.sfx('friend-tap');
+    this.sfx('friend-tap', 0.5);
     const { lines, cheers } = VOICES[session.characterId];
     const cycle = lines.length + cheers.length + 1;
     const k = n % cycle;

@@ -205,6 +205,7 @@ export class GameScene extends Phaser.Scene {
       // In the jungle at the screen's edges, with the butterflies; plants in front hide them.
       depth: D.ambient + 1,
       reduced: () => this.reduced,
+      sound: (kind, pan) => this.ctrl.sfx(`visitor-${kind}`, 0.55, pan),
       layout: () => {
         const st = this.ctrl.state;
         return st.screen === 'play' && !st.celebrating && !st.overlay ? st.layout : null;
