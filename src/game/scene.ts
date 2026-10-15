@@ -19,7 +19,7 @@ import { popUp } from './motion';
 import { PartRig, RIG_ATLAS_KEY, RigFollowers } from './rig';
 import { HOPPERS, STAR_FLARE, TURNERS } from './rigMotion';
 import { confettiBurst } from './confetti';
-import { Critters } from './critters';
+import { Visitors } from './visitors';
 import { OpeningDirector, preloadOpening, type OpeningStep } from './opening';
 
 export interface UiBridge {
@@ -75,10 +75,7 @@ export class GameScene extends Phaser.Scene {
   private treasureRig: PartRig | null = null;
   /** Rigs that follow other stand-ins: butterflies, plants, the flying treasure. */
   private rigs!: RigFollowers;
-  private critters!: Critters;
-  /** When the current maze began and when the child last drew (critters wait for quiet). */
-  private critterMaze: { seed: string; since: number } | null = null;
-  private lastDrawAt = 0;
+  private visitors!: Visitors;
   private treasureFlown = false;
   private companion: CharacterActor | null = null;
   private companionPlants: Phaser.GameObjects.Image[] = [];
@@ -201,25 +198,15 @@ export class GameScene extends Phaser.Scene {
     });
     this.rigs = new RigFollowers(this, rigFor);
     this.followAmbient();
-    this.critters = new Critters({
+    this.visitors = new Visitors({
       scene: this,
       rigFor,
-      depth: D.board + 1,
+      // In the jungle at the screen's edges, with the butterflies; plants in front hide them.
+      depth: D.ambient + 1,
       reduced: () => this.reduced,
-      play: () => {
+      layout: () => {
         const st = this.ctrl.state;
-        if (st.screen !== 'play' || st.celebrating || st.overlay || !st.maze || !st.layout || !st.session) return null;
-        const now = this.time.now;
-        if (this.critterMaze?.seed !== st.maze.seed) this.critterMaze = { seed: st.maze.seed, since: now };
-        return {
-          maze: st.maze,
-          transform: st.layout.transform,
-          intro: st.session.intro,
-          drawing: st.drawing,
-          quietFor: (now - this.lastDrawAt) / 1000,
-          playingFor: (now - this.critterMaze.since) / 1000,
-          endpoint: this.ctrl.engine?.endpoint ?? null,
-        };
+        return st.screen === 'play' && !st.celebrating && !st.overlay ? st.layout : null;
       },
     });
     this.nextFootsteps = this.time.now + 40000;
@@ -236,11 +223,7 @@ export class GameScene extends Phaser.Scene {
       this.lastActivity = this.time.now;
       if (this.companion?.isSleeping) this.wakeCompanion();
     }
-    if (e.type === 'trail' || e.type === 'drawing-start') this.lastDrawAt = this.time.now;
     switch (e.type) {
-      case 'board-tap':
-        this.critters.tap(e.point);
-        break;
       case 'state': {
         this.applyScreen();
         // Reduced motion switched: the treasure goes back to its still (or to its rig).
@@ -1653,7 +1636,7 @@ export class GameScene extends Phaser.Scene {
     // Scene clock (not the loop's time): it is the clock the celebration starts on.
     if (this.treasureRig && this.treasure) this.treasureRig.sync(this.treasure, this.time.now);
     this.rigs.sync(this.time.now);
-    this.critters.update(this.time.now);
+    this.visitors.update(this.time.now);
     this.ambient.update(time);
     this.distantFootsteps(time);
     this.sleepyFriend(time);

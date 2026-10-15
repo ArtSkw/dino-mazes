@@ -54,9 +54,8 @@ export class PointerAdapter {
       /* capture is best-effort */
     }
     // A press away from the endpoint is tracked but draws nothing until the
-    // pointer reaches the endpoint (or the entrance pad for a fresh start);
-    // such a press may also be a tap on a hidden critter.
-    if (!this.ctrl.pointerDown(p)) this.ctrl.boardTap(p);
+    // pointer reaches the endpoint (or the entrance pad for a fresh start).
+    this.ctrl.pointerDown(p);
   };
 
   private move = (e: PointerEvent): void => {

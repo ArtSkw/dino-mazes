@@ -52,6 +52,19 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 14 (15 October 2026): critters at the screen's edges
+
+The hidden critters on the hedges were hard to see on the detailed hedge texture. They are now
+**jungle visitors** (`src/game/visitors.ts`, paths in `src/game/visitorPath.ts`): during play,
+now and then a ladybug, snail or frog comes out of the jungle at the left or right screen edge,
+where the butterflies fly, wanders over the stones and leaves and goes back off screen (the
+ladybug opens its wing cases and flies away, the snail pulls into its shell for a moment, the frog
+hops). Only in landscape, only on the free side strips (below the corner buttons, above the friend
+or "Wróć", never over the board), one at a time: the first after 12–20 s, then every 25–45 s;
+never with reduced motion. The hedge spot finder and the board-tap event were removed. Tests: every
+visit starts and ends beyond the edge and stays on its strip (5 viewports × 3 kinds × 25 seeds),
+strips clear of every control, none in portrait; a browser test watches a frog come in.
+
 ## Codex delivery: the last polish (15 October 2026)
 
 Every asset of the motion plan is in the game.
@@ -338,7 +351,7 @@ inside the wall (`closestInCapsule`).
 
 | Suite | Command | Result |
 |---|---|---|
-| Domain unit + property | `npm test` | 236 passed |
+| Domain unit + property | `npm test` | 237 passed |
 | Browser flows (Chromium + WebKit) | `npm run test:e2e` | 73 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 2 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |

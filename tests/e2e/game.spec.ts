@@ -707,28 +707,25 @@ test.describe('living treasures (14 October 2026)', () => {
     await expect(page.locator('.collection-btn .chest img')).toHaveCount(3);
   });
 
-  test('plants sway leaf by leaf, the first maze shows the painted hand, a tapped critter reacts', async ({ page }) => {
+  test('plants sway leaf by leaf, the first maze shows the painted hand, a visitor walks in at the screen edge', async ({ page }) => {
     await boot(page);
     await page.waitForFunction(() => (window as never as { __dino: { game: { scene: { getScene(k: string): { rigs: { size: number } } } } } }).__dino.game.scene.getScene('game').rigs.size >= 9);
     // Six welcome plants and three butterflies are drawn from their parts.
     expect(await state<number>(page, "d.game.scene.getScene('game').castPlants.filter((p) => (p.cameraFilter & d.game.scene.getScene('game').cameras.main.id) !== 0).length")).toBe(6);
     await startQuest(page);
     expect(await state<string>(page, "d.game.scene.getScene('game').hand.texture.key")).toBe('rig-parts');
-    // A generated maze; put a ladybug on a hedge and tap it.
-    await page.evaluate(() => {
-      const c = (window as never as { __dino: { ctrl: { state: { session: object }; newSession(o: object): void } } }).__dino.ctrl;
-      c.newSession({ keepQuestOf: { ...c.state.session, questId: 'tiny-shell', characterId: 'tiny', treasureId: 'shell', intro: false }, difficultyOverride: 'hard' });
-    });
-    await page.waitForTimeout(400);
-    const at = await state<{ x: number; y: number }>(
-      page,
-      "(() => { const g = d.game.scene.getScene('game'); const st = c.state; g.critters.spawn({ maze: st.maze, transform: st.layout.transform, intro: false, drawing: false, quietFor: 99, playingFor: 99, endpoint: null }, g.time.now, 'ladybug'); const k = g.critters.current; const t = st.layout.transform; return { x: t.ox + k.at.x * t.pitch, y: t.oy + k.at.y * t.pitch }; })()",
-    );
-    await page.waitForTimeout(450);
-    await page.mouse.click(at.x, at.y);
-    expect(await state<{ kind: string; acting: boolean } | null>(page, "d.game.scene.getScene('game').critters.current")).toMatchObject({ kind: 'ladybug', acting: true });
-    // Tapping never drew anything.
-    expect(await state<number>(page, 'c.engine.points.length')).toBe(0);
+    // A jungle visitor: it comes from beyond the edge onto a side strip, never over the board.
+    const first = await state<{ kind: string; side: string; x: number }>(page, "(() => { const g = d.game.scene.getScene('game'); g.visitors.start(c.state.layout, g.time.now, 'frog'); return g.visitors.current; })()");
+    expect(first.kind).toBe('frog');
+    const vw = await page.evaluate(() => window.innerWidth);
+    expect(first.x < 0 || first.x > vw).toBe(true);
+    await page.waitForTimeout(1800);
+    const later = await state<{ x: number; side: string }>(page, "d.game.scene.getScene('game').visitors.current");
+    const board = await state<{ x: number; w: number }>(page, 'c.state.layout.board');
+    if (later.side === 'left') expect(later.x).toBeLessThan(board.x);
+    else expect(later.x).toBeGreaterThan(board.x + board.w);
+    expect(later.x).toBeGreaterThan(-1);
+    expect(later.x).toBeLessThan(vw + 1);
   });
 
   test('reduced motion shows the still image instead of the rig', async ({ page }) => {
@@ -737,9 +734,9 @@ test.describe('living treasures (14 October 2026)', () => {
     await startQuest(page);
     await host(page, 'crystal', 'giganto-crystal');
     expect(await rigState(page)).toEqual({ rig: false, parts: 0, standHidden: false });
-    // No part rigs at all, and no critters.
+    // No part rigs at all, and no jungle visitors.
     expect(await state<number>(page, "d.game.scene.getScene('game').rigs.size")).toBe(0);
-    expect(await state<unknown>(page, "d.game.scene.getScene('game').critters.current")).toBeNull();
+    expect(await state<unknown>(page, "(() => { const g = d.game.scene.getScene('game'); g.visitors.start(c.state.layout, g.time.now); g.visitors.update(g.time.now); return g.visitors.current; })()")).toBeNull();
   });
 });
 

@@ -21,27 +21,20 @@ await page.getByRole('button', { name: 'Szukajmy!' }).click({ force: true });
 await page.waitForTimeout(1300);
 const hand = await page.evaluate(() => { const g = window.__dino.game.scene.getScene('game'); return { key: g.hand.texture.key, frame: g.hand.frame.name, visible: g.hand.visible }; });
 await page.screenshot({ path: `${out}/2-hand.png` });
-// A generated maze, then each critter: on the board, then tapped.
+// A generated maze, then each jungle visitor at the screen edge, frame by frame.
 await page.evaluate(() => { const c = window.__dino.ctrl; c.newSession({ keepQuestOf: { ...c.state.session, characterId: 'tiny', questId: 'tiny-shell', treasureId: 'shell', intro: false }, difficultyOverride: 'hard' }); });
 await page.waitForTimeout(1200);
 const report = [];
 for (const kind of ['ladybug', 'snail', 'frog']) {
-  const at = await page.evaluate((kind) => {
-    const g = window.__dino.game.scene.getScene('game');
-    const st = window.__dino.ctrl.state;
-    g.critters.spawn({ maze: st.maze, transform: st.layout.transform, intro: false, drawing: false, quietFor: 99, playingFor: 99, endpoint: null }, g.time.now, kind);
-    const c = g.critters.current; const t = st.layout.transform;
-    return { x: t.ox + c.at.x * t.pitch, y: t.oy + c.at.y * t.pitch, pitch: t.pitch };
-  }, kind);
-  await page.waitForTimeout(700);
-  const clip = { x: at.x - at.pitch * 1.2, y: at.y - at.pitch * 1.2, width: at.pitch * 2.4, height: at.pitch * 2.4 };
-  await page.screenshot({ path: `${out}/3-${kind}-rest.png`, clip });
-  await page.mouse.click(at.x, at.y);
-  await page.waitForTimeout(kind === 'ladybug' ? 450 : 250);
-  const acting = await page.evaluate(() => window.__dino.game.scene.getScene('game').critters.current);
-  await page.screenshot({ path: `${out}/3-${kind}-tapped.png`, clip });
-  report.push({ kind, acting });
-  await page.waitForTimeout(2500);
+  const info = await page.evaluate((kind) => { const g = window.__dino.game.scene.getScene('game'); g.visitors.start(window.__dino.ctrl.state.layout, g.time.now, kind); return g.visitors.current; }, kind);
+  const steps = 6;
+  for (let i = 0; i < steps; i++) {
+    await page.waitForTimeout((info.total * 1000) / steps);
+    const v = await page.evaluate(() => window.__dino.game.scene.getScene('game').visitors.current);
+    const clipX = info.side === 'left' ? 0 : 1180 - 300;
+    await page.screenshot({ path: `${out}/3-${kind}-${i}.png`, clip: { x: clipX, y: 100, width: 300, height: 560 } });
+    report.push({ kind, i, at: v ? [Math.round(v.x), Math.round(v.y)] : null });
+  }
 }
 console.log(JSON.stringify({ welcome, hand, report }));
 console.log(errors.join('\n') || 'no errors');
