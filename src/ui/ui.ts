@@ -54,6 +54,7 @@ export class Ui implements UiBridge {
   private curtains!: HTMLElement;
   private curtainsOpened = false;
   private openingSkip!: HTMLButtonElement;
+  private startBtn!: HTMLButtonElement;
   private openingTimers: number[] = [];
   private playBtn!: HTMLButtonElement;
   private playLabel!: HTMLElement;
@@ -105,6 +106,10 @@ export class Ui implements UiBridge {
     this.build();
     ctrl.on((e) => this.onEvent(e));
     document.addEventListener('keydown', (e) => {
+      if (this.ctrl.state.awaitingTap) {
+        this.ctrl.start();
+        return;
+      }
       if (this.ctrl.state.opening) {
         this.ctrl.skipOpening();
         return;
@@ -211,6 +216,14 @@ export class Ui implements UiBridge {
       curtain('right'),
       this.spinners[1]!.el,
     );
+    // Before the opening: a tap anywhere on the closed curtains starts it (and allows sound).
+    this.startBtn = this.button(
+      'tap-start',
+      () => c.start(),
+      h('span', { class: 'btn btn-leaf start-pill', 'aria-hidden': 'true' }, this.icon('play'), this.tr(h('span', { class: 'label' }), 'tapToStart')),
+    );
+    this.tr(this.startBtn, 'tapToStart', 'aria-label');
+    show(this.startBtn, false);
     this.openingSkip = this.button('opening-skip', () => c.skipOpening());
     this.tr(this.openingSkip, 'skip', 'aria-label');
     show(this.openingSkip, false);
@@ -447,7 +460,7 @@ export class Ui implements UiBridge {
 
     this.live = h('div', { class: 'sr-only', 'aria-live': 'polite', role: 'status' });
 
-    this.root.append(this.loading, this.welcome, this.intro, this.surface, this.hud, this.cluster, this.homeBtn, this.collection, this.settings, this.confirm, this.rotateToast, this.curtains, this.openingSkip, this.live);
+    this.root.append(this.loading, this.welcome, this.intro, this.surface, this.hud, this.cluster, this.homeBtn, this.collection, this.settings, this.confirm, this.rotateToast, this.curtains, this.startBtn, this.openingSkip, this.live);
 
     if (new URLSearchParams(window.location.search).has('debug')) {
       this.debug = h('pre', { class: 'debug' });
@@ -955,7 +968,9 @@ export class Ui implements UiBridge {
     show(this.loading, screen === 'loading' && (!s.openingPlan || s.loadError));
     for (const sp of this.spinners) sp.setReduced(s.reducedMotion);
     this.spinners[0]?.setActive(!this.loading.hidden && !s.loadError);
-    this.spinners[1]?.setActive(!this.curtains.hidden && !s.opening);
+    this.spinners[1]?.setActive(!this.curtains.hidden && !s.opening && !s.awaitingTap);
+    show(this.startBtn, s.awaitingTap && !s.loadError);
+    this.curtains.classList.toggle('waiting', s.awaitingTap);
     show(this.loadError, s.loadError);
     show(this.loadingText, !s.loadError);
     show(this.openingSkip, !!s.opening);

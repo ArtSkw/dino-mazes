@@ -35,6 +35,9 @@ await page.addInitScript(() => {
   requestAnimationFrame(tick);
 });
 await page.goto(url);
+// An opening with sound waits behind the closed curtains for the first tap.
+await page.waitForFunction(() => window.__dino?.ctrl?.state?.screen === 'welcome' || window.__dino?.ctrl?.state?.awaitingTap, null, { timeout: 30000 });
+if (await page.evaluate(() => window.__dino.ctrl.state.awaitingTap)) await page.locator('.tap-start').click();
 await page.waitForFunction(() => window.__dino?.ctrl?.state?.screen === 'welcome', null, { timeout: 30000 });
 await page.evaluate(() => (window.__cut.phase = 'opening'));
 // Slow stills of the rise (scene time at 0.25x), then let it finish.

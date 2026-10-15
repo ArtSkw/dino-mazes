@@ -7,6 +7,14 @@ const KEY: Record<Dir, string> = { up: 'ArrowUp', down: 'ArrowDown', left: 'Arro
 
 async function boot(page: Page, query = '?test'): Promise<void> {
   await page.goto(query);
+  // An opening with sound waits behind the closed curtains for the first tap.
+  await page.waitForFunction(() => {
+    const st = (window as never as { __dino?: { ctrl: { state: { screen: string; awaitingTap: boolean } } } }).__dino?.ctrl.state;
+    return st?.screen === 'welcome' || !!st?.awaitingTap;
+  }, null, { timeout: 30_000 });
+  if (await page.evaluate(() => (window as never as { __dino: { ctrl: { state: { awaitingTap: boolean } } } }).__dino.ctrl.state.awaitingTap)) {
+    await page.locator('.tap-start').click();
+  }
   await page.waitForFunction(() => (window as never as { __dino?: { ctrl: { state: { screen: string } } } }).__dino?.ctrl.state.screen === 'welcome', null, { timeout: 30_000 });
 }
 
@@ -668,6 +676,27 @@ test.describe('opening animation and V3 characters (14 October 2026)', () => {
     expect(peek.seen).toBeGreaterThan(10);
     expect(peek.left, 'left cut stays left of the screen').toBeLessThan(0);
     expect(peek.bottom, 'bottom cut stays below the screen').toBeGreaterThan(0);
+  });
+
+  test('an opening with sound waits behind the curtains for the first tap, then plays with its theme', async ({ page }) => {
+    await page.goto('?test&opening=full');
+    await page.waitForFunction(() => (window as never as { __dino?: { ctrl: { state: { awaitingTap: boolean } } } }).__dino?.ctrl.state.awaitingTap === true, null, { timeout: 30_000 });
+    await expect(page.locator('.tap-start')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Dotknij, żeby zacząć' })).toBeVisible();
+    expect(await state<string>(page, 'c.state.screen')).toBe('loading');
+    expect(await state<string | null>(page, 'c.state.opening')).toBeNull();
+    const theme = page.waitForRequest(/assets\/audio\/music\/theme-opening-[0-9a-f]{8}\.m4a$/);
+    await page.locator('.tap-start').click();
+    await theme;
+    expect(await state<string>(page, 'c.state.opening')).toBe('full');
+    await expect(page.locator('.tap-start')).toBeHidden();
+  });
+
+  test('reduced motion: no opening, so no start screen either', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('?test&opening=auto');
+    await page.waitForFunction(() => (window as never as { __dino?: { ctrl: { state: { screen: string } } } }).__dino?.ctrl.state.screen === 'welcome', null, { timeout: 30_000 });
+    expect(await state<boolean>(page, 'c.state.awaitingTap')).toBe(false);
   });
 
   test('a tap skips the opening at once; a key does too', async ({ page }) => {

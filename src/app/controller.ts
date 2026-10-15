@@ -65,6 +65,12 @@ export interface AppState {
   openingPlan: OpeningMode | null;
   /** Opening animation currently playing on the welcome screen. */
   opening: OpeningMode | null;
+  /**
+   * Loaded, curtains closed, waiting for the first tap (owner request, 15 Oct
+   * 2026): browsers allow sound only after a tap, and the opening's footsteps
+   * and theme deserve to be heard.
+   */
+  awaitingTap: boolean;
   /** Drawing is connected right now (finger/mouse down and following). */
   drawing: boolean;
   loadError: boolean;
@@ -144,6 +150,7 @@ export class Controller {
       showHandDemo: false,
       openingPlan: null,
       opening: null,
+      awaitingTap: false,
       drawing: false,
       loadError: false,
     };
@@ -244,8 +251,25 @@ export class Controller {
   }
 
   ready(): void {
+    // An opening with sound waits behind the closed curtains for the first tap.
+    const plan = this.state.openingPlan;
+    if (plan === 'full' || plan === 'short') {
+      this.set({ awaitingTap: true });
+      return;
+    }
+    this.begin();
+  }
+
+  /** The first tap on the closed curtains: sound is allowed now, the opening plays. */
+  start(): void {
+    if (!this.state.awaitingTap) return;
+    this.sfx('ui-leaf');
+    this.begin();
+  }
+
+  private begin(): void {
     const save = this.store.get();
-    this.set({ screen: 'welcome', canContinue: this.isResumable(save), opening: this.state.openingPlan });
+    this.set({ screen: 'welcome', canContinue: this.isResumable(save), opening: this.state.openingPlan, awaitingTap: false });
   }
 
   /** The renderer finished (or skipped) the opening: the welcome screen is live. */

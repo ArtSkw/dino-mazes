@@ -82,6 +82,7 @@ export const STRINGS = {
   right: { pl: 'w prawo', en: 'right' },
   specialGuest: { pl: 'Gość specjalny', en: 'Special guest' },
   skip: { pl: 'Pomiń', en: 'Skip' },
+  tapToStart: { pl: 'Dotknij, żeby zacząć', en: 'Tap to start' },
   waveHello: { pl: '{name} macha do ciebie!', en: '{name} waves hello!' },
   parentHelp: {
     pl: 'Dziecko rysuje drogę palcem albo myszką. „Wróć” czyści ścieżkę, ale labirynt zostaje ten sam. Po trzecim „Wróć” przylatuje motylek i pokazuje dwa kolejne ruchy. Gdy dziecko dotknie przyjaciela w rogu, ten przypomni, czego szuka. Co cztery przygody labirynty robią się trochę trudniejsze.',

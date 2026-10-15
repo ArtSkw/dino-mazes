@@ -52,6 +52,16 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 18 (15 October 2026): tap to start
+
+Browsers allow sound only after a tap, and a tap skipped the opening, so its footsteps and theme
+were rarely heard. Now, when an opening with sound is planned (full or short), the game loads
+behind the closed leaf curtains and waits: a large glowing leaf button "Dotknij, żeby zacząć" /
+"Tap to start" sits on the curtains, and a tap anywhere (or any key) starts the opening with sound
+(`awaitingTap`, `Controller.start`). Reduced motion has no opening and no start screen. Tests: the
+gate holds the welcome screen until the tap, then the opening plays and its theme is fetched; no
+gate with reduced motion; the e2e boot helper and the opening review tools press start.
+
 ## Owner review, round 17 (15 October 2026): sound after the tablet test
 
 - The rainforest no longer falls silent in the maze: the same ambience keeps playing at about
@@ -100,9 +110,8 @@ a clip in both languages, every manifest file exists with a hashed name, budgets
 settings switches; a tapped friend fetches its line and the welcome screen its bed (Chromium and
 WebKit); offline, the chosen language's voices are kept and a friend still speaks.
 
-Known limit: browsers allow sound only after a tap, and a tap skips the opening, so the opening's
-theme is heard only where autoplay is allowed (e.g. a returning desktop Chrome). Options for the
-owner: a "tap to start" curtain before the opening.
+Browsers allow sound only after a tap: since round 18 a "tap to start" curtain comes before the
+opening, so its footsteps and theme are heard.
 
 ## Sound phase 1: the pilot (15 October 2026)
 
@@ -436,7 +445,7 @@ inside the wall (`closestInCapsule`).
 | Suite | Command | Result |
 |---|---|---|
 | Domain unit + property | `npm test` | 246 passed |
-| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 77 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
+| Browser flows (Chromium + WebKit) | `npm run test:e2e` | 81 passed, 1 skipped (synthetic-touch test is Chromium-only by design) |
 | Production build (offline relaunch, painted UI surfaces) | `npm run test:offline` | 3 passed |
 | Types / lint | `npm run typecheck`, `npm run lint` | clean |
 

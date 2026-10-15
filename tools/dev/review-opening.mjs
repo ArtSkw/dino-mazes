@@ -7,6 +7,9 @@ const errors = [];
 page.on('pageerror', (e) => errors.push(`pageerror: ${e.message}`));
 page.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') errors.push(`${m.type()}: ${m.text()}`); });
 await page.goto(url);
+// An opening with sound waits behind the closed curtains for the first tap.
+await page.waitForFunction(() => window.__dino?.ctrl?.state?.screen === 'welcome' || window.__dino?.ctrl?.state?.awaitingTap, null, { timeout: 30000 });
+if (await page.evaluate(() => window.__dino.ctrl.state.awaitingTap)) await page.locator('.tap-start').click();
 await page.waitForFunction(() => window.__dino?.ctrl?.state?.screen === 'welcome', null, { timeout: 30000 });
 const t0 = Date.now();
 const times = (process.env.TIMES ?? '300,900,1500,2000,2700,3300,4200,4800,5400,6100,6600,7200,8200').split(',').map(Number);
