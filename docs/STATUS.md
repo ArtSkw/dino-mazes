@@ -69,6 +69,8 @@ Measured visible-content boxes per character frame are now part of the asset man
   wooden click was liked: remade as one plain knock, and mastering keeps only its first 0.18 s
   (`maxSeconds`), so nothing rings after it; takes 1 and 4 measure as one clean hit, take 1 is in
   the game until the owner picks.
+- Round 8: the owner picked the wooden knock take 3 (as trimmed to 0.18 s), the ladybug take 2
+  and the snail take 1. Every sound in the game is now the owner's choice.
 
 ## Sound phase 2 and 3: sound in the game (15 October 2026)
 

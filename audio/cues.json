@@ -502,8 +502,7 @@
       "takes": 4,
       "plain": true,
       "note": "Owner, round 7: none of the first takes; a single pretty, pleasant knock without any effects. Mastering keeps only the first 0.18 s.",
-      "pick": 1,
-      "provisional": true,
+      "pick": 3,
       "maxSeconds": 0.18
     },
     {
@@ -528,8 +527,7 @@
       "takes": 3,
       "plain": true,
       "note": "Owner, round 7: too strong and hard; subtle and delicate.",
-      "pick": 1,
-      "provisional": true,
+      "pick": 2,
       "lufs": -24
     },
     {
@@ -556,7 +554,6 @@
       "plain": true,
       "note": "Owner, round 7: too strong and hard; subtle and delicate.",
       "pick": 1,
-      "provisional": true,
       "lufs": -24
     }
   ],
