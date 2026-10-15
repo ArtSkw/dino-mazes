@@ -42,6 +42,12 @@ the rest of the effects (37 cues), the short opening, and the welcome bed (36 s)
 `voices_write`, so replaced voices (Tiny EN, Rocky EN, Czupur preview 1) must be deleted by hand in
 ElevenLabs › Voices; 7 of 10 slots are in use. About 4,600 credits used so far.
 
+**Owner round 2 (15 October 2026):** most new effects sounded rough and dry; 30 of them (all but
+"Graj", the chest and the maze reveal, plus the earlier picks) were made again with a `gentle` style
+sentence (soft attack, music-box delicate, a little room, never harsh or dry). The API caps effect
+prompts at 450 characters. The key now has `voices_write`: the three replaced voices are deleted,
+4 of 10 slots in use.
+
 ## 1. Recommendation in short
 
 - **Everything is generated offline, never in the browser.** A local script calls the API with the

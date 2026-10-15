@@ -30,7 +30,8 @@
       "seconds": 0.8,
       "influence": 0.6,
       "takes": 3,
-      "note": "Owner, round 1: version 2 sounded sci-fi, not like leaves."
+      "note": "Owner, round 1: version 2 sounded sci-fi, not like leaves. Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "style": "gentle"
     },
     {
       "id": "treasure-coconut",
@@ -59,7 +60,9 @@
       "prompt": "A leafy page turning: a soft rustle of big jungle leaves with a small wooden click at the end. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.7,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "ui-close",
@@ -68,7 +71,9 @@
       "prompt": "A short soft rustle of big jungle leaves settling back, gentle and quick. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.5,
       "influence": 0.5,
-      "takes": 1
+      "takes": 1,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "ui-toggle",
@@ -77,7 +82,9 @@
       "prompt": "Two quick soft wooden ticks, low then high, like tapping two small bamboo sticks. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.5,
       "influence": 0.6,
-      "takes": 1
+      "takes": 1,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "ui-play",
@@ -104,7 +111,9 @@
       "prompt": "A tiny soft puff of sand, like a small foot stepping onto a sandy path. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.5,
       "influence": 0.6,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "maze-reset",
@@ -113,7 +122,9 @@
       "prompt": "A soft sweep of a leafy broom over sand, rising gently at the end, friendly. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.8,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "maze-arrive",
@@ -122,7 +133,9 @@
       "prompt": "A short rising marimba glissando, light and happy, ending on a bright note. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.9,
       "influence": 0.5,
-      "takes": 1
+      "takes": 1,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "hint-pollen",
@@ -131,7 +144,9 @@
       "prompt": "Three soft glittery plinks of a tiny glockenspiel, gentle and magical. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.9,
       "influence": 0.5,
-      "takes": 1
+      "takes": 1,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "reward-fly",
@@ -140,7 +155,9 @@
       "prompt": "A quick airy swoosh that ends in a tiny sparkle of chimes. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.9,
       "influence": 0.5,
-      "takes": 1
+      "takes": 1,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "chest",
@@ -158,7 +175,9 @@
       "prompt": "A short glittery twinkle of tiny bells. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.6,
       "influence": 0.5,
-      "takes": 1
+      "takes": 1,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "treasure-nut",
@@ -167,7 +186,9 @@
       "prompt": "A cartoon nut is found: a woody cork-like pop and a tiny tumble of a hard nut on wood, ending in a soft marimba blip. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.2,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "treasure-flower",
@@ -176,7 +197,9 @@
       "prompt": "A flower blooms open: a soft velvety whoosh of petals unfolding with a gentle chime at the end. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.4,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "treasure-stone",
@@ -185,7 +208,9 @@
       "prompt": "A smooth turquoise pebble shines: a clear glassy ting with a short sparkling shimmer. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.2,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "treasure-shell",
@@ -194,7 +219,9 @@
       "prompt": "A small seashell: a soft swirl of the sea heard inside a shell, ending in a delicate chime. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.4,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "treasure-berries",
@@ -203,7 +230,9 @@
       "prompt": "A bunch of berries wobbles: a jelly-like wobbly boing and two tiny bouncy plops. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.2,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "treasure-feather",
@@ -212,7 +241,9 @@
       "prompt": "A light feather floats: an airy, silky swish drifting down with a tiny soft chime. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.4,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "treasure-strawberry",
@@ -221,7 +252,9 @@
       "prompt": "A juicy strawberry hops: a small juicy squish followed by a springy happy boing. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.2,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "treasure-amber",
@@ -230,7 +263,9 @@
       "prompt": "Warm golden amber glows: a soft warm hum swelling gently with a honey-like shimmer of low chimes. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.6,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "treasure-gigaflower",
@@ -239,7 +274,9 @@
       "prompt": "A rare giant flower blooms: a magical harp glissando with a soft leafy whoosh, wondrous and warm. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.8,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "treasure-crystal",
@@ -248,7 +285,9 @@
       "prompt": "A cave crystal sparkles: a cascade of clear crystalline chimes ringing softly downward. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.6,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "friend-tap",
@@ -257,7 +296,9 @@
       "prompt": "A soft leafy pop, like tapping a big friendly leaf. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.5,
       "influence": 0.6,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "toot",
@@ -266,7 +307,9 @@
       "prompt": "A cheerful cartoon dinosaur crest horn: two short warm toots, like a soft wooden horn, tuu-tuu. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.0,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "hop",
@@ -275,7 +318,9 @@
       "prompt": "A small springy cartoon boing, soft and round. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.5,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "snore",
@@ -285,7 +330,9 @@
       "seconds": 4,
       "influence": 0.5,
       "takes": 1,
-      "loop": true
+      "loop": true,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "yawn",
@@ -294,7 +341,9 @@
       "prompt": "A small cartoon dinosaur gives a big, cosy, happy yawn. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.4,
       "influence": 0.5,
-      "takes": 1
+      "takes": 1,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "curtains",
@@ -303,7 +352,9 @@
       "prompt": "A big lush rustle of many jungle leaves parting to both sides. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.2,
       "influence": 0.5,
-      "takes": 1
+      "takes": 1,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "sign",
@@ -312,7 +363,9 @@
       "prompt": "A wooden sign drops and swings on jungle vines: a soft wooden clunk and a creak of vines. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.2,
       "influence": 0.5,
-      "takes": 1
+      "takes": 1,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "sprout",
@@ -321,7 +374,9 @@
       "prompt": "A quick green plant growing: a juicy leafy fwip with a bright little pluck at the end. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.7,
       "influence": 0.5,
-      "takes": 1
+      "takes": 1,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "bum-far",
@@ -330,7 +385,9 @@
       "prompt": "A far-away friendly giant footstep: a muffled soft thump in the distance, then a few birds flapping up from the trees. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 2.0,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     },
     {
       "id": "ambience",
@@ -340,7 +397,9 @@
       "seconds": 20,
       "influence": 0.4,
       "takes": 1,
-      "loop": true
+      "loop": true,
+      "style": "gentle",
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
     }
   ],
   "music": [
@@ -643,5 +702,6 @@
       "eleven_v4"
     ],
     "takes": 2
-  }
+  },
+  "gentle": "Gentle, sweet and playful: soft attack, music-box delicate, a little airy room. Never harsh or dry."
 }
