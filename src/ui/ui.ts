@@ -55,6 +55,7 @@ export class Ui implements UiBridge {
   private curtainsOpened = false;
   private openingSkip!: HTMLButtonElement;
   private startBtn!: HTMLButtonElement;
+  private starting = false;
   private openingTimers: number[] = [];
   private playBtn!: HTMLButtonElement;
   private playLabel!: HTMLElement;
@@ -107,7 +108,7 @@ export class Ui implements UiBridge {
     ctrl.on((e) => this.onEvent(e));
     document.addEventListener('keydown', (e) => {
       if (this.ctrl.state.awaitingTap) {
-        this.ctrl.start();
+        this.pressStart();
         return;
       }
       if (this.ctrl.state.opening) {
@@ -215,11 +216,15 @@ export class Ui implements UiBridge {
       curtain('left'),
       curtain('right'),
       this.spinners[1]!.el,
+      // Pollen drifting in the light between the leaves while the game waits for the first tap.
+      ...Array.from({ length: 18 }, (_, i) =>
+        h('span', { class: 'mote', style: `--x:${(7 + ((i * 37) % 86)).toFixed(0)}%;--y:${(18 + ((i * 53) % 70)).toFixed(0)}%;--d:${(5 + (i % 5) * 1.3).toFixed(1)}s;--delay:${(-(i * 0.9) % 7).toFixed(1)}s` }),
+      ),
     );
     // Before the opening: a tap anywhere on the closed curtains starts it (and allows sound).
     this.startBtn = this.button(
       'tap-start',
-      () => c.start(),
+      () => this.pressStart(),
       h('span', { class: 'btn btn-leaf start-pill', 'aria-hidden': 'true' }, this.icon('play'), this.tr(h('span', { class: 'label' }), 'tapToStart')),
     );
     this.tr(this.startBtn, 'tapToStart', 'aria-label');
@@ -295,8 +300,8 @@ export class Ui implements UiBridge {
     this.tr(this.homeBtn, 'home', 'aria-label');
 
     this.resetLabel = this.tr(h('span', { class: 'label' }), 'startOver');
-    // Its sound is the leaf broom sweeping the path (scene, 'trail-reset').
     this.resetBtn = this.button('btn btn-wood reset-btn', () => {
+      c.sfx('ui-wood');
       c.resetTrail();
     }, this.icon('restart'), this.resetLabel);
     this.tr(this.resetBtn, 'startOverA11y', 'aria-label');
@@ -807,6 +812,32 @@ export class Ui implements UiBridge {
     if (!this.hintBtn.classList.contains('hint-waiting')) return;
     this.hintBtn.classList.remove('hint-waiting');
     flash(this.hintBtn, 'hint-arrive', 500);
+  }
+
+  /**
+   * The start tap: the leaf button squashes, pops into a handful of leaves and
+   * the curtains rustle; then the opening starts (and the curtains part).
+   */
+  private pressStart(): void {
+    if (this.starting || !this.ctrl.state.awaitingTap) return;
+    this.starting = true;
+    this.ctrl.sfx('ui-leaf');
+    this.startBtn.classList.add('starting');
+    this.curtains.classList.add('rustle');
+    const leaf = assetUrl(ASSETS.ui['panel-leaf']?.image ?? '');
+    const burst = Array.from({ length: 10 }, (_, i) => {
+      const a = (i / 10) * Math.PI * 2 + 0.3;
+      const r = 170 + (i % 3) * 60;
+      return h('img', { class: 'start-leaf', src: leaf, alt: '', style: `--dx:${Math.round(Math.cos(a) * r * 1.6)}px;--dy:${Math.round(Math.sin(a) * r)}px;--rot:${(i % 2 ? 1 : -1) * (120 + i * 25)}deg` });
+    });
+    this.startBtn.append(...burst);
+    window.setTimeout(() => {
+      this.ctrl.start();
+      this.startBtn.classList.remove('starting');
+      this.curtains.classList.remove('rustle');
+      this.starting = false;
+    }, 420);
+    window.setTimeout(() => burst.forEach((b) => b.remove()), 1000);
   }
 
   /** DOM side of the opening (driven by the renderer's timeline). */

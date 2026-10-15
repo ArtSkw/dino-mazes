@@ -52,6 +52,17 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 19 (15 October 2026): consistent buttons, a livelier start
+
+- The confirm dialog's two buttons ("Anuluj", "Tak, od nowa") are one size: a two-column grid,
+  and the red pill (rim drawn outside its box) is inset to match the wooden plank's art.
+- "Wróć" clicks like every wooden button (`ui-wood`); the leaf-broom sweep is retired.
+- The start screen breathes while it waits: the leaf curtains sway in a breeze and pollen drifts
+  up in the light. Pressed, the leaf button gives under the finger; released, it squashes, pops
+  into a burst of leaves, the curtains rustle, and the opening begins (0.42 s later).
+- Browsers that report that sound may start on its own (`navigator.getAutoplayPolicy`, Firefox)
+  skip the start screen; Safari and Chrome cannot tell in advance, so they show it.
+
 ## Owner review, round 18 (15 October 2026): tap to start
 
 Browsers allow sound only after a tap, and a tap skipped the opening, so its footsteps and theme

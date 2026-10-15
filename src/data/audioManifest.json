@@ -25,10 +25,6 @@
    "src": "assets/audio/fx/maze-start-e9327d81.m4a",
    "s": 0.4
   },
-  "maze-reset": {
-   "src": "assets/audio/fx/maze-reset-e9abbe0d.m4a",
-   "s": 0.53
-  },
   "maze-arrive": {
    "src": "assets/audio/fx/maze-arrive-b5c937e0.m4a",
    "s": 0.88
@@ -1022,5 +1018,5 @@
    }
   }
  },
- "bytes": 4794174
+ "bytes": 4789220
 }

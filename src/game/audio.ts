@@ -131,6 +131,20 @@ export class SoundBoard {
     }
   }
 
+  /**
+   * Whether this browser lets sound start without a tap. Only browsers with
+   * navigator.getAutoplayPolicy can tell in advance (Firefox); the others
+   * (Safari, Chrome) are treated as needing a tap.
+   */
+  autoplayAllowed(): boolean {
+    const nav = navigator as Navigator & { getAutoplayPolicy?: (type: 'audiocontext') => string };
+    try {
+      return nav.getAutoplayPolicy?.('audiocontext') === 'allowed';
+    } catch {
+      return false;
+    }
+  }
+
   setHidden(hidden: boolean): void {
     this.hidden = hidden;
     if (!this.ctx) return;

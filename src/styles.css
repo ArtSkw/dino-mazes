@@ -581,6 +581,125 @@ button:focus-visible,
   }
 }
 
+/* Pressed: the leaf gives a little under the finger. */
+.tap-start:active .start-pill {
+  scale: 0.93;
+}
+
+/* Released: it squashes, then pops into leaves that fly out. */
+.tap-start.starting .start-pill {
+  animation: start-pop 420ms ease-in forwards;
+}
+
+@keyframes start-pop {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(0.86, 0.8);
+  }
+  100% {
+    transform: scale(1.3) rotate(-4deg);
+    opacity: 0;
+  }
+}
+
+.start-leaf {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 88px;
+  margin: -44px 0 0 -44px;
+  pointer-events: none;
+  animation: start-leaf 900ms cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+@keyframes start-leaf {
+  0% {
+    transform: translate(0, 0) rotate(0) scale(0.4);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), calc(var(--dy) + 60px)) rotate(var(--rot)) scale(1);
+    opacity: 0;
+  }
+}
+
+/* While waiting, the jungle breathes: the curtains sway in a soft breeze. */
+.curtains.waiting .curtain.left {
+  transform-origin: 0% 50%;
+  animation: curtain-sway 5.5s ease-in-out infinite;
+}
+
+.curtains.waiting .curtain.right {
+  transform-origin: 100% 50%;
+  animation: curtain-sway 6.2s ease-in-out -2.4s infinite reverse;
+}
+
+@keyframes curtain-sway {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-9px) rotate(-0.5deg);
+  }
+}
+
+/* The tap rustles them just before they part. */
+.curtains.rustle .curtain.left,
+.curtains.rustle .curtain.right {
+  animation: curtain-rustle 380ms ease-in-out;
+}
+
+@keyframes curtain-rustle {
+  25% {
+    transform: translateX(10px) rotate(0.6deg);
+  }
+  60% {
+    transform: translateX(-8px) rotate(-0.5deg);
+  }
+}
+
+/* Pollen motes drifting up in the light. */
+.mote {
+  display: none;
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffbe6 0%, #fff2b0 25%, rgba(255, 236, 150, 0.55) 50%, rgba(255, 236, 150, 0) 72%);
+  filter: blur(0.3px);
+  pointer-events: none;
+  animation: mote var(--d) ease-in-out var(--delay) infinite;
+}
+
+.curtains.waiting .mote {
+  display: block;
+}
+
+@keyframes mote {
+  0% {
+    transform: translate(0, 20px) scale(0.6);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(18px, -70px) scale(1.1);
+    opacity: 0;
+  }
+}
+
 /* Tap anywhere (or press a key) to skip the opening. */
 .opening-skip {
   position: absolute;
@@ -1516,11 +1635,29 @@ button:focus-visible,
 }
 
 .confirm-actions {
-  display: flex;
+  /* Two buttons of one size, side by side (owner, round 19: keep the UI consistent). */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 210px));
   justify-content: center;
   gap: 14px;
   margin-top: 10px;
-  flex-wrap: wrap;
+}
+
+.confirm-actions .btn {
+  width: 100%;
+  height: 64px;
+  min-height: 64px;
+  box-sizing: border-box;
+}
+
+/* The red pill's rim is drawn outside its box (box-shadow) while the wooden
+   plank has margins inside its art: inset it so both look the same size. */
+.confirm-actions .btn-danger {
+  width: calc(100% - 8px);
+  height: 54px;
+  min-height: 54px;
+  justify-self: center;
+  align-self: center;
 }
 
 /* ---------- Toasts & debug ---------- */

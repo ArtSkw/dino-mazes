@@ -688,7 +688,8 @@ test.describe('opening animation and V3 characters (14 October 2026)', () => {
     const theme = page.waitForRequest(/assets\/audio\/music\/theme-opening-[0-9a-f]{8}\.m4a$/);
     await page.locator('.tap-start').click();
     await theme;
-    expect(await state<string>(page, 'c.state.opening')).toBe('full');
+    // The leaf pops into leaves first, then the curtains part.
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { opening: string | null } } } }).__dino.ctrl.state.opening === 'full');
     await expect(page.locator('.tap-start')).toBeHidden();
   });
 

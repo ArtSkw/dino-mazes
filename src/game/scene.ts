@@ -248,7 +248,6 @@ export class GameScene extends Phaser.Scene {
         break;
       case 'trail-reset':
         this.companion?.react('encouragement');
-        this.ctrl.sfx('maze-reset');
         this.clearHint();
         this.drawTrail();
         break;

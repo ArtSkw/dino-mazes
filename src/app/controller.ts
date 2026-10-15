@@ -253,7 +253,8 @@ export class Controller {
   ready(): void {
     // An opening with sound waits behind the closed curtains for the first tap.
     const plan = this.state.openingPlan;
-    if (plan === 'full' || plan === 'short') {
+    // Browsers that say sound may start on its own (Firefox's autoplay policy) skip the wait.
+    if ((plan === 'full' || plan === 'short') && !this.sound.autoplayAllowed()) {
       this.set({ awaitingTap: true });
       return;
     }
@@ -262,9 +263,7 @@ export class Controller {
 
   /** The first tap on the closed curtains: sound is allowed now, the opening plays. */
   start(): void {
-    if (!this.state.awaitingTap) return;
-    this.sfx('ui-leaf');
-    this.begin();
+    if (this.state.awaitingTap) this.begin();
   }
 
   private begin(): void {
