@@ -83,6 +83,24 @@ async function music() {
   }
 }
 
+/**
+ * Delete a voice this tool saved (only "Dino Mazes …" voices). A key without
+ * the voices_write permission cannot: the voice stays, with a note to delete
+ * it by hand, and generation goes on.
+ */
+async function removeVoice(voiceId, name) {
+  try {
+    const info = await eleven(`/v1/voices/${voiceId}`).catch(() => null);
+    if (info && !info.name?.startsWith('Dino Mazes')) return false;
+    if (info) await eleven(`/v1/voices/${voiceId}`, { method: 'DELETE' });
+    console.log(`  deleted ${name}`);
+    return true;
+  } catch (err) {
+    console.warn(`! could not delete ${name} (${/voices_write/.test(err.message) ? 'the key lacks voices_write' : err.message}); delete it in ElevenLabs › Voices`);
+    return false;
+  }
+}
+
 /** Design each voice (three previews) and save the picked preview to the account. */
 async function voices() {
   const savedFile = join(OUT, 'voices.json');
@@ -115,15 +133,26 @@ async function voices() {
       if (dry) return console.log(`would save voice ${v.id} (preview ${pick})`);
       // A different pick replaces the voice this tool saved before (frees its slot).
       const old = saved[v.id]?.voice_id;
-      if (old) {
-        const info = await eleven(`/v1/voices/${old}`).catch(() => null);
-        if (info?.name?.startsWith('Dino Mazes')) await eleven(`/v1/voices/${old}`, { method: 'DELETE' });
-      }
+      if (old) await removeVoice(old, saved[v.id].name);
       const res = await eleven('/v1/text-to-voice', { method: 'POST', body: { voice_name: v.name, voice_description: v.description, generated_voice_id: generated } });
       saved[v.id] = { voice_id: res.voice_id, generated_voice_id: generated, pick, name: v.name };
       writeJson(savedFile, saved);
       console.log(`  saved ${v.name} (preview ${pick})`);
     });
+  }
+  // Voices this tool saved that are no longer cast (e.g. separate English voices) free their slots.
+  if (!only) {
+    for (const [id, v] of Object.entries(saved)) {
+      if ((cues.voices ?? []).some((c) => c.id === id)) continue;
+      if (dry) {
+        console.log(`would delete voice ${v.name}`);
+        continue;
+      }
+      if (await removeVoice(v.voice_id, v.name)) {
+        delete saved[id];
+        writeJson(savedFile, saved);
+      }
+    }
   }
   return saved;
 }

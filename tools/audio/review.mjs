@@ -4,7 +4,10 @@
 // are compared by sound, not by volume. The owner stars favourites and copies
 // the picks back to Claude. Labels are in Polish, for the owner.
 //
-//   node tools/audio/review.mjs && open art/source/audio/review/index.html
+// Cues with a `pick` in audio/cues.json are already chosen and left out
+// (--all shows everything).
+//
+//   node tools/audio/review.mjs [--all] && open art/source/audio/review/index.html
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { ROOT } from './eleven.mjs';
@@ -16,6 +19,8 @@ const cues = JSON.parse(readFileSync(resolve(ROOT, 'audio/cues.json'), 'utf8'));
 const checks = existsSync(join(SRC, 'checks.json')) ? JSON.parse(readFileSync(join(SRC, 'checks.json'), 'utf8')) : {};
 const saved = existsSync(join(SRC, 'voices.json')) ? JSON.parse(readFileSync(join(SRC, 'voices.json'), 'utf8')) : {};
 const rec = (dir) => (existsSync(join(dir, 'cue.json')) ? JSON.parse(readFileSync(join(dir, 'cue.json'), 'utf8')) : null);
+const all = process.argv.includes('--all');
+const open = (list) => (list ?? []).filter((c) => all || c.pick === undefined);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
 rmSync(join(OUT, 'files'), { recursive: true, force: true });
@@ -36,7 +41,7 @@ const sections = [];
 
 // Effects.
 {
-  const rows = (cues.effects ?? []).map((e) => {
+  const rows = open(cues.effects).map((e) => {
     const r = rec(join(SRC, 'effects', e.id));
     if (!r) return '';
     const takes = r.takes.map((t, i) => take(`efekt: ${e.id}`, `wersja ${i + 1}`, copy(`effects/${e.id}/${t.file}`, -16))).join('');
@@ -47,18 +52,18 @@ const sections = [];
 
 // Music.
 {
-  const rows = (cues.music ?? []).map((m) => {
+  const rows = open(cues.music).map((m) => {
     const r = rec(join(SRC, 'music', m.id));
     if (!r) return '';
     const takes = r.takes.map((t, i) => take(`muzyka: ${m.id}`, `wersja ${i + 1}`, copy(`music/${m.id}/${t.file}`, -19), `${t.seconds} s`)).join('');
-    return `<div class="cue"><h3>Motyw otwarcia <code>${esc(m.id)}</code></h3><p class="prompt">${esc(m.event)}</p><div class="takes">${takes}</div></div>`;
+    return `<div class="cue"><h3>${esc(m.label ?? 'Motyw otwarcia')} <code>${esc(m.id)}</code></h3><p class="prompt">${esc(m.event)}</p><div class="takes">${takes}</div></div>`;
   });
-  sections.push(`<section><h2>2. Muzyka</h2><p>Gra przy pełnym otwarciu (7,5 s). Pierwsza część zostawia miejsce na kroki Giganto, druga to wyskakujący przyjaciele i tabliczka.</p>${rows.join('')}</section>`);
+  sections.push(`<section><h2>2. Muzyka</h2><p>Krótkie motywy w stylu motywu otwarcia (wersja 1, którą wybrałeś).</p>${rows.join('')}</section>`);
 }
 
 // Voice designs.
 {
-  const rows = (cues.voices ?? []).map((v) => {
+  const rows = open(cues.voices).map((v) => {
     const r = rec(join(SRC, 'voices', v.id));
     if (!r) return '';
     const pick = saved[v.id]?.pick;
@@ -82,13 +87,9 @@ const lineRow = (l) => {
   });
   return `<div class="cue"><h3>${esc(l.text)} <code>${esc(l.id)}</code></h3>${l.say !== l.text ? `<p class="prompt">z tagami: ${esc(l.say)}</p>` : ''}<div class="takes">${cells.join('')}</div></div>`;
 };
-const main = (cues.lines ?? []).filter((l) => !l.test);
-const cross = (cues.lines ?? []).filter((l) => l.test);
+const main = open(cues.lines);
 sections.push(
-  `<section><h2>4. Kwestie: model v3 czy v4?</h2><p>Każda kwestia w dwóch modelach, po dwa podejścia. Pod nagraniem: co usłyszała automatyczna transkrypcja (sprawdzam, czy tekst jest poprawny i czy tag typu [giggles] nie został przeczytany na głos); <b>pogrubione</b> = usłyszany śmiech.</p>${main.map(lineRow).join('')}</section>`,
-);
-sections.push(
-  `<section><h2>5. Jeden głos na oba języki?</h2><p>Polski głos Miłki i Czupura mówi po angielsku (v4). Na koncie jest 8 wolnych miejsc na głosy: osobne głosy PL i EN dla 5 postaci i narratora to 12, jeden głos na postać to 6.</p>${cross.map(lineRow).join('')}</section>`,
+  `<section><h2>4. Kwestie</h2><p>Model v4, jeden głos na postać w obu językach, po dwa podejścia. Pod nagraniem: co usłyszała automatyczna transkrypcja (sprawdzam, czy tekst jest poprawny i czy tag typu [giggles] nie został przeczytany na głos); <b>pogrubione</b> = usłyszany śmiech.</p>${main.map(lineRow).join('')}</section>`,
 );
 
 const page = `<!doctype html>

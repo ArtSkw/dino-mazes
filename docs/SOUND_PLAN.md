@@ -34,6 +34,14 @@ Findings so far:
   Polish); no take read a tag aloud.
 - Effects and music did not move the credit counter noticeably; check the account's usage page.
 
+**Owner round 1 (15 October 2026):** `eleven_v4`; **one voice per character for both languages**
+(the Polish designs: Miłka preview 1, Czupur preview 3); picks recorded as `pick` in
+`audio/cues.json`. The bush pop sounded sci-fi (new prompt: real leaves, acoustic); the win must be
+a short happy tune like the opening theme, so it is now music (`jingle-success`, 3 s). Round 2 adds
+the rest of the effects (37 cues), the short opening, and the welcome bed (36 s). The API key lacks
+`voices_write`, so replaced voices (Tiny EN, Rocky EN, Czupur preview 1) must be deleted by hand in
+ElevenLabs › Voices; 7 of 10 slots are in use. About 4,600 credits used so far.
+
 ## 1. Recommendation in short
 
 - **Everything is generated offline, never in the browser.** A local script calls the API with the

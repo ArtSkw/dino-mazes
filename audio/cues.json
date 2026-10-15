@@ -1,5 +1,5 @@
 {
-  "about": "Every sound, music piece, voice and line generated with ElevenLabs (docs/SOUND_PLAN.md). tools/audio/generate.mjs makes the missing or changed ones into art/source/audio/ (local); tools/audio/review.mjs builds the listening page. Phase 1 (pilot): 6 effects, the opening theme, Miłka's and Czupur's voices in Polish and English with 3 lines each.",
+  "about": "Every sound, music piece, voice and line generated with ElevenLabs (docs/SOUND_PLAN.md). tools/audio/generate.mjs makes the missing or changed ones into art/source/audio/ (local); tools/audio/review.mjs builds the listening page. `pick` records the owner's favourite take. Owner decisions (15 Oct 2026): eleven_v4; one voice per character for both languages.",
   "palette": "Warm, round, playful children's cartoon sound, no harsh highs, nothing scary.",
   "effects": [
     {
@@ -9,7 +9,8 @@
       "prompt": "A single soft wooden 'tok' of a small hollow log tapped with a felt mallet, a cartoon button click for a children's game, short and dry.",
       "seconds": 0.5,
       "influence": 0.6,
-      "takes": 3
+      "takes": 3,
+      "pick": 1
     },
     {
       "id": "bum",
@@ -18,25 +19,18 @@
       "prompt": "One deep, friendly footstep of a cartoon giant dinosaur: a soft heavy thump on jungle ground with a gentle low rumble and a few leaves shaking. Playful, no roar.",
       "seconds": 1.5,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "pick": 1
     },
     {
       "id": "pop",
       "label": "Przyjaciel wyskakuje z krzaka",
       "event": "a friend pops out of a bush",
-      "prompt": "A little cartoon dinosaur pops up out of a leafy bush: a quick leaf rustle into a bubbly cartoon 'pop'. Cheerful.",
+      "prompt": "A small animal pushes up through a leafy jungle bush: a quick, crisp rustle of real leaves and twigs, ending in a soft, round, natural 'pop' like a cork. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.8,
-      "influence": 0.5,
-      "takes": 2
-    },
-    {
-      "id": "success",
-      "label": "Labirynt rozwiązany",
-      "event": "maze solved",
-      "prompt": "A short cheerful success jingle for a children's maze game: a quick marimba and kalimba run up, a little slide whistle, ending on a giggly cartoon 'boing'. Bright and warm.",
-      "seconds": 2,
-      "influence": 0.45,
-      "takes": 2
+      "influence": 0.6,
+      "takes": 3,
+      "note": "Owner, round 1: version 2 sounded sci-fi, not like leaves."
     },
     {
       "id": "treasure-coconut",
@@ -45,7 +39,8 @@
       "prompt": "A cartoon coconut is found: a hollow wooden 'donk' of a coconut, a short bouncy roll, and a tiny marimba sparkle at the end.",
       "seconds": 1.5,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "pick": 2
     },
     {
       "id": "flutter",
@@ -54,7 +49,298 @@
       "prompt": "A cartoon butterfly flutters in: soft papery wing flutters with a tiny glassy chime. Gentle and a little magical.",
       "seconds": 1.5,
       "influence": 0.5,
+      "takes": 2,
+      "pick": 2
+    },
+    {
+      "id": "ui-open",
+      "label": "Otwarcie kolekcji / ustawień",
+      "event": "an overlay opens",
+      "prompt": "A leafy page turning: a soft rustle of big jungle leaves with a small wooden click at the end. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.7,
+      "influence": 0.5,
       "takes": 2
+    },
+    {
+      "id": "ui-close",
+      "label": "Zamknięcie okna",
+      "event": "an overlay closes",
+      "prompt": "A short soft rustle of big jungle leaves settling back, gentle and quick. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.5,
+      "influence": 0.5,
+      "takes": 1
+    },
+    {
+      "id": "ui-toggle",
+      "label": "Przełącznik w ustawieniach",
+      "event": "a setting is switched",
+      "prompt": "Two quick soft wooden ticks, low then high, like tapping two small bamboo sticks. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.5,
+      "influence": 0.6,
+      "takes": 1
+    },
+    {
+      "id": "ui-play",
+      "label": "„Graj” / „Szukajmy!”",
+      "event": "start a game",
+      "prompt": "A bright, happy kalimba arpeggio running up four notes, quick and sparkly. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.8,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "maze-reveal",
+      "label": "Odsłonięcie labiryntu",
+      "event": "the maze appears",
+      "prompt": "Big jungle leaves part with an airy, gentle whoosh, like a curtain of leaves opening. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.2,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "maze-start",
+      "label": "Pierwszy dotyk przy wejściu",
+      "event": "the first touch at the entrance",
+      "prompt": "A tiny soft puff of sand, like a small foot stepping onto a sandy path. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.5,
+      "influence": 0.6,
+      "takes": 2
+    },
+    {
+      "id": "maze-reset",
+      "label": "„Wróć” czyści ścieżkę",
+      "event": "the path is cleared",
+      "prompt": "A soft sweep of a leafy broom over sand, rising gently at the end, friendly. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.8,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "maze-arrive",
+      "label": "Rysunek dociera do polanki",
+      "event": "the line reaches the clearing",
+      "prompt": "A short rising marimba glissando, light and happy, ending on a bright note. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.9,
+      "influence": 0.5,
+      "takes": 1
+    },
+    {
+      "id": "hint-pollen",
+      "label": "Kropki pyłku z podpowiedzi",
+      "event": "the hint pollen drops",
+      "prompt": "Three soft glittery plinks of a tiny glockenspiel, gentle and magical. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.9,
+      "influence": 0.5,
+      "takes": 1
+    },
+    {
+      "id": "reward-fly",
+      "label": "Skarb leci do kolekcji",
+      "event": "the treasure flies away",
+      "prompt": "A quick airy swoosh that ends in a tiny sparkle of chimes. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.9,
+      "influence": 0.5,
+      "takes": 1
+    },
+    {
+      "id": "chest",
+      "label": "Skrzynia otwiera się i zamyka",
+      "event": "the treasure chest opens and shuts",
+      "prompt": "A small wooden chest: a short creak of the lid opening, then a bouncy, happy wooden clap as it shuts. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.3,
+      "influence": 0.5,
+      "takes": 1
+    },
+    {
+      "id": "badge",
+      "label": "Plakietka „nowy skarb”",
+      "event": "new treasure badge",
+      "prompt": "A short glittery twinkle of tiny bells. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.6,
+      "influence": 0.5,
+      "takes": 1
+    },
+    {
+      "id": "treasure-nut",
+      "label": "Orzech (dźwięk skarbu)",
+      "event": "the nut is found",
+      "prompt": "A cartoon nut is found: a woody cork-like pop and a tiny tumble of a hard nut on wood, ending in a soft marimba blip. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.2,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "treasure-flower",
+      "label": "Kwiat (dźwięk skarbu)",
+      "event": "the flower is found",
+      "prompt": "A flower blooms open: a soft velvety whoosh of petals unfolding with a gentle chime at the end. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.4,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "treasure-stone",
+      "label": "Kamyk (dźwięk skarbu)",
+      "event": "the turquoise stone is found",
+      "prompt": "A smooth turquoise pebble shines: a clear glassy ting with a short sparkling shimmer. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.2,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "treasure-shell",
+      "label": "Muszelka (dźwięk skarbu)",
+      "event": "the shell is found",
+      "prompt": "A small seashell: a soft swirl of the sea heard inside a shell, ending in a delicate chime. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.4,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "treasure-berries",
+      "label": "Jagody (dźwięk skarbu)",
+      "event": "the berries are found",
+      "prompt": "A bunch of berries wobbles: a jelly-like wobbly boing and two tiny bouncy plops. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.2,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "treasure-feather",
+      "label": "Piórko (dźwięk skarbu)",
+      "event": "the feather is found",
+      "prompt": "A light feather floats: an airy, silky swish drifting down with a tiny soft chime. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.4,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "treasure-strawberry",
+      "label": "Truskawka (dźwięk skarbu)",
+      "event": "the strawberry is found",
+      "prompt": "A juicy strawberry hops: a small juicy squish followed by a springy happy boing. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.2,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "treasure-amber",
+      "label": "Bursztyn (skarb Giganto)",
+      "event": "amber, a Giganto treasure, is found",
+      "prompt": "Warm golden amber glows: a soft warm hum swelling gently with a honey-like shimmer of low chimes. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.6,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "treasure-gigaflower",
+      "label": "Giga kwiat (skarb Giganto)",
+      "event": "the Giga Flower, a Giganto treasure, is found",
+      "prompt": "A rare giant flower blooms: a magical harp glissando with a soft leafy whoosh, wondrous and warm. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.8,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "treasure-crystal",
+      "label": "Kryształ (skarb Giganto)",
+      "event": "the crystal, a Giganto treasure, is found",
+      "prompt": "A cave crystal sparkles: a cascade of clear crystalline chimes ringing softly downward. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.6,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "friend-tap",
+      "label": "Dotknięcie przyjaciela",
+      "event": "a friend is tapped",
+      "prompt": "A soft leafy pop, like tapping a big friendly leaf. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.5,
+      "influence": 0.6,
+      "takes": 2
+    },
+    {
+      "id": "toot",
+      "label": "Trąbka Czupura",
+      "event": "Czupur toots his crest",
+      "prompt": "A cheerful cartoon dinosaur crest horn: two short warm toots, like a soft wooden horn, tuu-tuu. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.0,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "hop",
+      "label": "Podskok przyjaciela",
+      "event": "a friend hops",
+      "prompt": "A small springy cartoon boing, soft and round. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.5,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "snore",
+      "label": "Chrapanie śpiocha (pętla)",
+      "event": "the sleepy friend snores",
+      "prompt": "A very gentle, quiet cartoon snore of a small sleepy dinosaur, slow breaths in and out, cosy and funny. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 4,
+      "influence": 0.5,
+      "takes": 1,
+      "loop": true
+    },
+    {
+      "id": "yawn",
+      "label": "Ziewnięcie po przebudzeniu",
+      "event": "the sleepy friend wakes",
+      "prompt": "A small cartoon dinosaur gives a big, cosy, happy yawn. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.4,
+      "influence": 0.5,
+      "takes": 1
+    },
+    {
+      "id": "curtains",
+      "label": "Kurtyna z liści w otwarciu",
+      "event": "the leaf curtains open",
+      "prompt": "A big lush rustle of many jungle leaves parting to both sides. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.2,
+      "influence": 0.5,
+      "takes": 1
+    },
+    {
+      "id": "sign",
+      "label": "Tabliczka spada na lianach",
+      "event": "the title sign drops",
+      "prompt": "A wooden sign drops and swings on jungle vines: a soft wooden clunk and a creak of vines. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 1.2,
+      "influence": 0.5,
+      "takes": 1
+    },
+    {
+      "id": "sprout",
+      "label": "Wyrasta przycisk „Graj”",
+      "event": "the play button sprouts",
+      "prompt": "A quick green plant growing: a juicy leafy fwip with a bright little pluck at the end. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 0.7,
+      "influence": 0.5,
+      "takes": 1
+    },
+    {
+      "id": "bum-far",
+      "label": "Daleki krok Giganto",
+      "event": "a distant Giganto step",
+      "prompt": "A far-away friendly giant footstep: a muffled soft thump in the distance, then a few birds flapping up from the trees. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 2.0,
+      "influence": 0.5,
+      "takes": 2
+    },
+    {
+      "id": "ambience",
+      "label": "Tło dżungli na ekranie powitalnym (pętla)",
+      "event": "welcome screen ambience",
+      "prompt": "A very calm, quiet jungle morning: distant soft bird calls, gentle insects, a light breeze in the leaves. Peaceful, sparse, no animals close by. Acoustic and organic, no synthesizer, nothing electronic.",
+      "seconds": 20,
+      "influence": 0.4,
+      "takes": 1,
+      "loop": true
     }
   ],
   "music": [
@@ -67,65 +353,295 @@
         {
           "text": "[Instrumental intro]",
           "ms": 3900,
-          "styles": ["cheerful, curious children's cartoon intro", "jungle adventure", "marimba", "kalimba", "soft pizzicato strings", "light wooden percussion", "two soft low tuba notes like friendly giant footsteps", "sparse, leaves space"],
-          "avoid": ["vocals", "singing", "epic", "scary", "dark", "trailer", "heavy drums", "electric guitar"]
+          "styles": [
+            "cheerful, curious children's cartoon intro",
+            "jungle adventure",
+            "marimba",
+            "kalimba",
+            "soft pizzicato strings",
+            "light wooden percussion",
+            "two soft low tuba notes like friendly giant footsteps",
+            "sparse, leaves space"
+          ],
+          "avoid": [
+            "vocals",
+            "singing",
+            "epic",
+            "scary",
+            "dark",
+            "trailer",
+            "heavy drums",
+            "electric guitar"
+          ]
         },
         {
           "text": "[Instrumental outro]",
           "ms": 3600,
-          "styles": ["playful, bouncy burst of joy", "ukulele", "marimba", "pizzicato strings", "wooden percussion", "soft tuba bass", "ends on a happy little flourish"],
-          "avoid": ["vocals", "singing", "epic", "scary", "dark", "trailer", "heavy drums", "electric guitar"]
+          "styles": [
+            "playful, bouncy burst of joy",
+            "ukulele",
+            "marimba",
+            "pizzicato strings",
+            "wooden percussion",
+            "soft tuba bass",
+            "ends on a happy little flourish"
+          ],
+          "avoid": [
+            "vocals",
+            "singing",
+            "epic",
+            "scary",
+            "dark",
+            "trailer",
+            "heavy drums",
+            "electric guitar"
+          ]
+        }
+      ],
+      "pick": 1
+    },
+    {
+      "id": "jingle-success",
+      "label": "Labirynt rozwiązany (krótki motyw)",
+      "event": "a maze is solved: a short happy celebration in the opening theme's style (owner, round 1: the sound effect was not cheerful enough)",
+      "model": "music_v2_5",
+      "takes": 3,
+      "chunks": [
+        {
+          "text": "[Instrumental celebration]",
+          "ms": 3000,
+          "styles": [
+            "short joyful celebration fanfare for a children's cartoon",
+            "same world as a cheerful jungle cartoon theme",
+            "marimba",
+            "kalimba",
+            "pizzicato strings",
+            "ukulele strums",
+            "wooden percussion",
+            "soft tuba bass",
+            "quick rising run, ends on a bright happy final chord",
+            "a little slide whistle"
+          ],
+          "avoid": [
+            "vocals",
+            "singing",
+            "epic",
+            "scary",
+            "dark",
+            "trailer",
+            "heavy drums",
+            "electric guitar",
+            "synthesizer"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "theme-short",
+      "label": "Krótkie otwarcie (kolejne uruchomienia)",
+      "event": "the short opening on later launches",
+      "model": "music_v2_5",
+      "takes": 2,
+      "chunks": [
+        {
+          "text": "[Instrumental sting]",
+          "ms": 3000,
+          "styles": [
+            "short cheerful children's cartoon jungle sting",
+            "marimba",
+            "kalimba",
+            "pizzicato strings",
+            "ukulele",
+            "wooden percussion",
+            "soft tuba bass",
+            "a quick happy flourish then a clean ending"
+          ],
+          "avoid": [
+            "vocals",
+            "singing",
+            "epic",
+            "scary",
+            "dark",
+            "trailer",
+            "heavy drums",
+            "electric guitar",
+            "synthesizer"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "welcome-bed",
+      "label": "Tło muzyczne ekranu powitalnego",
+      "event": "the welcome screen, quiet under the friends' voices, loops",
+      "model": "music_v2_5",
+      "takes": 2,
+      "chunks": [
+        {
+          "text": "[Instrumental]",
+          "ms": 18000,
+          "styles": [
+            "calm, gentle, sparse children's cartoon jungle theme",
+            "relaxed and warm, quiet background",
+            "kalimba",
+            "soft marimba",
+            "light pizzicato strings",
+            "ukulele",
+            "soft shaker",
+            "no big drums",
+            "steady easy tempo"
+          ],
+          "avoid": [
+            "vocals",
+            "singing",
+            "epic",
+            "scary",
+            "dark",
+            "trailer",
+            "heavy drums",
+            "electric guitar",
+            "synthesizer"
+          ]
+        },
+        {
+          "text": "[Instrumental]",
+          "ms": 18000,
+          "styles": [
+            "calm, gentle, sparse children's cartoon jungle theme",
+            "same melody, slightly varied",
+            "kalimba",
+            "soft marimba",
+            "light pizzicato strings",
+            "ukulele",
+            "soft shaker",
+            "ends so it can loop back to the start"
+          ],
+          "avoid": [
+            "vocals",
+            "singing",
+            "epic",
+            "scary",
+            "dark",
+            "trailer",
+            "heavy drums",
+            "electric guitar",
+            "synthesizer"
+          ]
         }
       ]
     }
   ],
   "voices": [
     {
-      "id": "tiny-pl",
+      "id": "tiny",
       "name": "Dino Mazes · Miłka (PL)",
       "description": "An adult female voice actress performing a small, playful triceratops character in a Polish children's cartoon. Native Polish speaker, standard Polish accent. Bright, bubbly and quick, cheeky and warm, with a smile in every word; she lands a joke with a tiny pause and a giggle. Clean studio recording, close microphone.",
       "text": "Cześć, jestem Miłka! Chcesz usłyszeć dowcip? Jak nazywa się śpiący dinozaur? Chrapozaur! Hi, hi! Wyglądam na małą, a jestem najsilniejsza z nas!",
-      "seed": 101
+      "seed": 101,
+      "pick": 1
     },
     {
-      "id": "tiny-en",
-      "name": "Dino Mazes · Tiny (EN)",
-      "description": "An adult female voice actress performing a small, playful triceratops character in an English children's cartoon. Native British English speaker. Bright, bubbly and quick, cheeky and warm, with a smile in every word; she lands a joke with a tiny pause and a giggle. Clean studio recording, close microphone.",
-      "text": "Hi, I'm Tiny! Want to hear a joke? What do you call a sleeping dinosaur? A dino-snore! Hee hee! I may be Tiny, but I'm the strongest of us all!",
-      "seed": 102
-    },
-    {
-      "id": "rocky-pl",
-      "name": "Dino Mazes · Czupur (PL)",
+      "id": "rocky",
+      "name": "Dino Mazes · Czupur / Rocky",
       "description": "An adult male voice actor performing an energetic young parasaurolophus character in a Polish children's cartoon. Native Polish speaker, standard Polish accent. Bold, fast and excitable, slightly raspy, always in a hurry, with loud happy shouts; a proud little show-off, but warm and friendly. Clean studio recording, close microphone.",
       "text": "Cześć, jestem Czupur! Najszybszy dinozaur w dżungli! Mam trąbkę na głowie. Tuuu, tuuu! Kiedyś przybiję piątkę z Giganto. Zobaczysz!",
-      "seed": 103
-    },
-    {
-      "id": "rocky-en",
-      "name": "Dino Mazes · Rocky (EN)",
-      "description": "An adult male voice actor performing an energetic young parasaurolophus character in an English children's cartoon. Native British English speaker. Bold, fast and excitable, slightly raspy, always in a hurry, with loud happy shouts; a proud little show-off, but warm and friendly. Clean studio recording, close microphone.",
-      "text": "Hi, I'm Rocky! The fastest dino in the jungle! I've got a trumpet on my head. Toot, toot! One day I'll high-five Giganto. You'll see!",
-      "seed": 104
+      "seed": 103,
+      "pick": 3
     }
   ],
   "lines": [
-    { "id": "tiny-hello-pl", "voice": "tiny-pl", "lang": "pl", "text": "Cześć, jestem Miłka! Chcesz usłyszeć dowcip?", "say": "[cheerfully] Cześć, jestem Miłka! Chcesz usłyszeć dowcip?" },
-    { "id": "tiny-joke-pl", "voice": "tiny-pl", "lang": "pl", "text": "Jak nazywa się śpiący dinozaur? Chrapozaur!", "say": "Jak nazywa się śpiący dinozaur? [short pause] Chrapozaur! [giggles]" },
-    { "id": "tiny-cheer-pl", "voice": "tiny-pl", "lang": "pl", "text": "Ładnie rysujesz! Jak na moich obrazkach.", "say": "[warmly] Ładnie rysujesz! Jak na moich obrazkach." },
-    { "id": "tiny-hello-en", "voice": "tiny-en", "lang": "en", "text": "Hi, I'm Tiny! Want to hear a joke?", "say": "[cheerfully] Hi, I'm Tiny! Want to hear a joke?" },
-    { "id": "tiny-joke-en", "voice": "tiny-en", "lang": "en", "text": "What do you call a sleeping dinosaur? A dino-snore!", "say": "What do you call a sleeping dinosaur? [short pause] A dino-snore! [giggles]" },
-    { "id": "tiny-cheer-en", "voice": "tiny-en", "lang": "en", "text": "Lovely drawing! Just like my paintings.", "say": "[warmly] Lovely drawing! Just like my paintings." },
-    { "id": "rocky-hello-pl", "voice": "rocky-pl", "lang": "pl", "text": "Cześć, jestem Czupur! Najszybszy dinozaur w dżungli!", "say": "[excited] Cześć, jestem Czupur! Najszybszy dinozaur w dżungli!" },
-    { "id": "rocky-species-pl", "voice": "rocky-pl", "lang": "pl", "text": "Jestem parazaur… paralozaur… Jestem dinozaurem z trąbką!", "say": "Jestem parazaur… paralozaur… [laughs] Jestem dinozaurem z trąbką!" },
-    { "id": "rocky-cheer-pl", "voice": "rocky-pl", "lang": "pl", "text": "Ty rysujesz, a ja trąbię. Tuuu! To dla ciebie!", "say": "[excited] Ty rysujesz, a ja trąbię. Tuuu! To dla ciebie!" },
-    { "id": "rocky-hello-en", "voice": "rocky-en", "lang": "en", "text": "Hi, I'm Rocky! The fastest dino in the jungle!", "say": "[excited] Hi, I'm Rocky! The fastest dino in the jungle!" },
-    { "id": "rocky-species-en", "voice": "rocky-en", "lang": "en", "text": "I'm a parasaur… a paralo… I'm a dino with a trumpet!", "say": "I'm a parasaur… a paralo… [laughs] I'm a dino with a trumpet!" },
-    { "id": "rocky-cheer-en", "voice": "rocky-en", "lang": "en", "text": "You draw, I toot. Toot! That one's for you!", "say": "[excited] You draw, I toot. Toot! That one's for you!" },
-    { "id": "tiny-hello-en-plvoice", "voice": "tiny-pl", "lang": "en", "text": "Hi, I'm Tiny! Want to hear a joke?", "say": "[cheerfully] Hi, I'm Tiny! Want to hear a joke?", "models": ["eleven_v4"], "takes": 1, "test": "one voice for both languages" },
-    { "id": "tiny-joke-en-plvoice", "voice": "tiny-pl", "lang": "en", "text": "What do you call a sleeping dinosaur? A dino-snore!", "say": "What do you call a sleeping dinosaur? [short pause] A dino-snore! [giggles]", "models": ["eleven_v4"], "takes": 1, "test": "one voice for both languages" },
-    { "id": "rocky-hello-en-plvoice", "voice": "rocky-pl", "lang": "en", "text": "Hi, I'm Rocky! The fastest dino in the jungle!", "say": "[excited] Hi, I'm Rocky! The fastest dino in the jungle!", "models": ["eleven_v4"], "takes": 1, "test": "one voice for both languages" },
-    { "id": "rocky-cheer-en-plvoice", "voice": "rocky-pl", "lang": "en", "text": "You draw, I toot. Toot! That one's for you!", "say": "[excited] You draw, I toot. Toot! That one's for you!", "models": ["eleven_v4"], "takes": 1, "test": "one voice for both languages" }
+    {
+      "id": "tiny-hello-pl",
+      "voice": "tiny",
+      "lang": "pl",
+      "text": "Cześć, jestem Miłka! Chcesz usłyszeć dowcip?",
+      "say": "[cheerfully] Cześć, jestem Miłka! Chcesz usłyszeć dowcip?",
+      "pick": 2
+    },
+    {
+      "id": "tiny-joke-pl",
+      "voice": "tiny",
+      "lang": "pl",
+      "text": "Jak nazywa się śpiący dinozaur? Chrapozaur!",
+      "say": "Jak nazywa się śpiący dinozaur? [short pause] Chrapozaur! [giggles]",
+      "pick": 2
+    },
+    {
+      "id": "tiny-cheer-pl",
+      "voice": "tiny",
+      "lang": "pl",
+      "text": "Ładnie rysujesz! Jak na moich obrazkach.",
+      "say": "[warmly] Ładnie rysujesz! Jak na moich obrazkach.",
+      "pick": 1
+    },
+    {
+      "id": "tiny-hello-en",
+      "voice": "tiny",
+      "lang": "en",
+      "text": "Hi, I'm Tiny! Want to hear a joke?",
+      "say": "[cheerfully] Hi, I'm Tiny! Want to hear a joke?"
+    },
+    {
+      "id": "tiny-joke-en",
+      "voice": "tiny",
+      "lang": "en",
+      "text": "What do you call a sleeping dinosaur? A dino-snore!",
+      "say": "What do you call a sleeping dinosaur? [short pause] A dino-snore! [giggles]"
+    },
+    {
+      "id": "tiny-cheer-en",
+      "voice": "tiny",
+      "lang": "en",
+      "text": "Lovely drawing! Just like my paintings.",
+      "say": "[warmly] Lovely drawing! Just like my paintings."
+    },
+    {
+      "id": "rocky-hello-pl",
+      "voice": "rocky",
+      "lang": "pl",
+      "text": "Cześć, jestem Czupur! Najszybszy dinozaur w dżungli!",
+      "say": "[excited] Cześć, jestem Czupur! Najszybszy dinozaur w dżungli!"
+    },
+    {
+      "id": "rocky-species-pl",
+      "voice": "rocky",
+      "lang": "pl",
+      "text": "Jestem parazaur… paralozaur… Jestem dinozaurem z trąbką!",
+      "say": "Jestem parazaur… paralozaur… [laughs] Jestem dinozaurem z trąbką!"
+    },
+    {
+      "id": "rocky-cheer-pl",
+      "voice": "rocky",
+      "lang": "pl",
+      "text": "Ty rysujesz, a ja trąbię. Tuuu! To dla ciebie!",
+      "say": "[excited] Ty rysujesz, a ja trąbię. Tuuu! To dla ciebie!"
+    },
+    {
+      "id": "rocky-hello-en",
+      "voice": "rocky",
+      "lang": "en",
+      "text": "Hi, I'm Rocky! The fastest dino in the jungle!",
+      "say": "[excited] Hi, I'm Rocky! The fastest dino in the jungle!"
+    },
+    {
+      "id": "rocky-species-en",
+      "voice": "rocky",
+      "lang": "en",
+      "text": "I'm a parasaur… a paralo… I'm a dino with a trumpet!",
+      "say": "I'm a parasaur… a paralo… [laughs] I'm a dino with a trumpet!"
+    },
+    {
+      "id": "rocky-cheer-en",
+      "voice": "rocky",
+      "lang": "en",
+      "text": "You draw, I toot. Toot! That one's for you!",
+      "say": "[excited] You draw, I toot. Toot! That one's for you!"
+    }
   ],
-  "lineDefaults": { "models": ["eleven_v3", "eleven_v4"], "takes": 2 }
+  "lineDefaults": {
+    "models": [
+      "eleven_v4"
+    ],
+    "takes": 2
+  }
 }
