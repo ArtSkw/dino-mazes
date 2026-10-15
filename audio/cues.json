@@ -731,12 +731,12 @@
     {
       "id": "mazu-alt",
       "name": "Dino Mazes · Rudzia / Mazu (alt)",
-      "description": "An adult female voice actress performing a clever, curious young ankylosaurus scientist in a children's cartoon. A lower, warm alto voice, clearly deeper and calmer than a bubbly cartoon voice: thoughtful, measured, a little slower, precise diction, a gentle smile and a slight soft huskiness. Patient and kind, never squeaky. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
+      "description": "An adult female voice actress performing a clever, curious young ankylosaurus scientist in a children's cartoon. A light, bright, higher voice, clear and precise, sweet and earnest, a little dreamy when she talks about stars; articulate and gentle, never shrill. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
       "text": "Cześć, jestem Rudzia! Wiem prawie wszystko o dinozaurach. W Gigantopedii zapisuję wszystko, co robi Giganto. Najpierw patrzymy, potem rysujemy. Tak robią naukowcy!",
-      "seed": 116,
+      "seed": 126,
       "compare": [
         {
-          "label": "Miłka (dla porównania)",
+          "label": "Miłka obecna (dla porównania)",
           "voice": "tiny"
         },
         {
@@ -744,7 +744,25 @@
           "voice": "mazu"
         }
       ],
-      "note": "Owner, round 4: Rudzia (preview 2) may sound like Miłka; measured 296 Hz vs 327 Hz median pitch."
+      "note": "Owner, round 5: in the cartoon Rudzia sounds a little higher than Miłka; Miłka is lower, more distinctive and confident."
+    },
+    {
+      "id": "tiny-alt",
+      "name": "Dino Mazes · Miłka / Tiny (alt)",
+      "description": "An adult female voice actress performing a small but very strong, playful triceratops in a children's cartoon. A slightly lower, warm, distinctive voice with a bit of texture, full of confidence and cheeky humour; she lands a joke with a sure little pause and a hearty giggle. Bold and friendly, not squeaky. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
+      "text": "Cześć, jestem Miłka! Chcesz usłyszeć dowcip? Jak nazywa się śpiący dinozaur? Chrapozaur! Hi, hi! Wyglądam na małą, a jestem najsilniejsza z nas!",
+      "seed": 127,
+      "compare": [
+        {
+          "label": "Miłka obecna",
+          "voice": "tiny"
+        },
+        {
+          "label": "Rudzia, obecna próbka 2",
+          "voice": "mazu"
+        }
+      ],
+      "note": "Owner, round 5: Miłka lower, more distinctive and confident than Rudzia (as in the cartoon)."
     }
   ],
   "lines": [
