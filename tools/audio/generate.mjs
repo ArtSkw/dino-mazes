@@ -68,7 +68,9 @@ async function effects() {
   for (const e of cues.effects ?? []) {
     if (!wanted(e.id)) continue;
     // `style` names an extra sentence (e.g. "gentle", owner round 2) added after the palette.
-    const request = { text: `${e.prompt} ${cues.palette}${e.style ? ` ${cues[e.style]}` : ''}`, duration_seconds: e.seconds, prompt_influence: e.influence, model_id: 'eleven_text_to_sound_v2', ...(e.loop ? { loop: true } : {}) };
+    // `plain` cues (real field recordings) skip the cartoon palette.
+    const text = e.plain ? e.prompt : `${e.prompt} ${cues.palette}${e.style ? ` ${cues[e.style]}` : ''}`;
+    const request = { text, duration_seconds: e.seconds, prompt_influence: e.influence, model_id: 'eleven_text_to_sound_v2', ...(e.loop ? { loop: true } : {}) };
     await guarded(e.id, () => takes(join(OUT, 'effects', e.id), request, e.takes, () => eleven('/v1/sound-generation', { method: 'POST', body: request, query: { output_format: FORMAT } })));
   }
 }

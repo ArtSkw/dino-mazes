@@ -48,6 +48,13 @@ sentence (soft attack, music-box delicate, a little room, never harsh or dry). T
 prompts at 450 characters. The key now has `voices_write`: the three replaced voices are deleted,
 4 of 10 slots in use.
 
+**Owner round 3 (15 October 2026):** all other effects and the music picked. The welcome ambience
+is now a real rainforest field recording (`plain`: no cartoon palette). The flower, shell, berries,
+strawberry and amber stings sounded like bubbling or squashing and are remade as magical,
+fairy-tale stings like the Giga Flower and the crystal; the coconut, nut, stone and feather get
+magical alternatives (`compare` shows the current pick next to them). Voices designed for Dudek,
+Rudzia, Giganto and the narrator (8 of 10 slots). About 6,900 credits used.
+
 ## 1. Recommendation in short
 
 - **Everything is generated offline, never in the browser.** A local script calls the API with the

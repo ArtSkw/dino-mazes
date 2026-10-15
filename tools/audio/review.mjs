@@ -44,7 +44,11 @@ const sections = [];
   const rows = open(cues.effects).map((e) => {
     const r = rec(join(SRC, 'effects', e.id));
     if (!r) return '';
-    const takes = r.takes.map((t, i) => take(`efekt: ${e.id}`, `wersja ${i + 1}`, copy(`effects/${e.id}/${t.file}`, -16))).join('');
+    let takes = r.takes.map((t, i) => take(`efekt: ${e.id}`, `wersja ${i + 1}`, copy(`effects/${e.id}/${t.file}`, -16))).join('');
+    // `compare`: the take already picked for another cue plays first, for comparison.
+    const base = e.compare && (cues.effects ?? []).find((c) => c.id === e.compare);
+    const baseRec = base?.pick && rec(join(SRC, 'effects', base.id));
+    if (baseRec) takes = take(`efekt: ${e.id}`, 'obecna (wybrana wcześniej)', copy(`effects/${base.id}/${baseRec.takes[base.pick - 1].file}`, -16)) + takes;
     return `<div class="cue"><h3>${esc(e.label ?? e.event)} <code>${esc(e.id)}</code></h3><p class="prompt">${esc(e.prompt)}</p><div class="takes">${takes}</div></div>`;
   });
   sections.push(`<section><h2>1. Efekty</h2><p>Wszystkie mają tę samą paletę: ciepłe, okrągłe, „kreskówkowa dżungla”. Czy brzmią jak jedna rodzina?</p>${rows.join('')}</section>`);

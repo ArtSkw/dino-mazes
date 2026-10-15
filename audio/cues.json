@@ -31,7 +31,8 @@
       "influence": 0.6,
       "takes": 3,
       "note": "Owner, round 1: version 2 sounded sci-fi, not like leaves. Owner, round 2: too rough and dry; softer, playful, sweet.",
-      "style": "gentle"
+      "style": "gentle",
+      "pick": 3
     },
     {
       "id": "treasure-coconut",
@@ -62,7 +63,8 @@
       "influence": 0.5,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "ui-close",
@@ -73,7 +75,8 @@
       "influence": 0.5,
       "takes": 1,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "ui-toggle",
@@ -84,7 +87,8 @@
       "influence": 0.6,
       "takes": 1,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "ui-play",
@@ -93,7 +97,8 @@
       "prompt": "A bright, happy kalimba arpeggio running up four notes, quick and sparkly. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 0.8,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "pick": 2
     },
     {
       "id": "maze-reveal",
@@ -102,7 +107,8 @@
       "prompt": "Big jungle leaves part with an airy, gentle whoosh, like a curtain of leaves opening. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.2,
       "influence": 0.5,
-      "takes": 2
+      "takes": 2,
+      "pick": 1
     },
     {
       "id": "maze-start",
@@ -113,7 +119,8 @@
       "influence": 0.6,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 2
     },
     {
       "id": "maze-reset",
@@ -124,7 +131,8 @@
       "influence": 0.5,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "maze-arrive",
@@ -135,7 +143,8 @@
       "influence": 0.5,
       "takes": 1,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "hint-pollen",
@@ -146,7 +155,8 @@
       "influence": 0.5,
       "takes": 1,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "reward-fly",
@@ -157,7 +167,8 @@
       "influence": 0.5,
       "takes": 1,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "chest",
@@ -166,7 +177,8 @@
       "prompt": "A small wooden chest: a short creak of the lid opening, then a bouncy, happy wooden clap as it shuts. Acoustic and organic, no synthesizer, nothing electronic.",
       "seconds": 1.3,
       "influence": 0.5,
-      "takes": 1
+      "takes": 1,
+      "pick": 1
     },
     {
       "id": "badge",
@@ -177,7 +189,8 @@
       "influence": 0.5,
       "takes": 1,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "treasure-nut",
@@ -188,18 +201,19 @@
       "influence": 0.5,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 2
     },
     {
       "id": "treasure-flower",
       "label": "Kwiat (dźwięk skarbu)",
       "event": "the flower is found",
-      "prompt": "A flower blooms open: a soft velvety whoosh of petals unfolding with a gentle chime at the end. Acoustic and organic, no synthesizer, nothing electronic.",
+      "prompt": "A magical flower opens: a soft rising harp glissando with a delicate celesta sparkle, like petals of light unfolding. Fairy-tale and joyful.",
       "seconds": 1.4,
       "influence": 0.5,
-      "takes": 2,
+      "takes": 3,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal)."
     },
     {
       "id": "treasure-stone",
@@ -210,29 +224,30 @@
       "influence": 0.5,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 2
     },
     {
       "id": "treasure-shell",
       "label": "Muszelka (dźwięk skarbu)",
       "event": "the shell is found",
-      "prompt": "A small seashell: a soft swirl of the sea heard inside a shell, ending in a delicate chime. Acoustic and organic, no synthesizer, nothing electronic.",
+      "prompt": "A magical seashell treasure: a gentle shimmering wind-chime cascade over a faint, far-away hush of the sea. Dreamy and sweet.",
       "seconds": 1.4,
       "influence": 0.5,
-      "takes": 2,
+      "takes": 3,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal)."
     },
     {
       "id": "treasure-berries",
       "label": "Jagody (dźwięk skarbu)",
       "event": "the berries are found",
-      "prompt": "A bunch of berries wobbles: a jelly-like wobbly boing and two tiny bouncy plops. Acoustic and organic, no synthesizer, nothing electronic.",
+      "prompt": "Magical berries are found: three tiny bouncy glockenspiel notes going up, like happy little berries, with a soft sparkle at the end.",
       "seconds": 1.2,
       "influence": 0.5,
-      "takes": 2,
+      "takes": 3,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal)."
     },
     {
       "id": "treasure-feather",
@@ -243,29 +258,30 @@
       "influence": 0.5,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "treasure-strawberry",
       "label": "Truskawka (dźwięk skarbu)",
       "event": "the strawberry is found",
-      "prompt": "A juicy strawberry hops: a small juicy squish followed by a springy happy boing. Acoustic and organic, no synthesizer, nothing electronic.",
+      "prompt": "A magical strawberry treasure: a playful two-note pizzicato hop and a sweet sparkling celesta twinkle. Cute and joyful.",
       "seconds": 1.2,
       "influence": 0.5,
-      "takes": 2,
+      "takes": 3,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal)."
     },
     {
       "id": "treasure-amber",
       "label": "Bursztyn (skarb Giganto)",
       "event": "amber, a Giganto treasure, is found",
-      "prompt": "Warm golden amber glows: a soft warm hum swelling gently with a honey-like shimmer of low chimes. Acoustic and organic, no synthesizer, nothing electronic.",
+      "prompt": "A magical golden amber treasure: a warm, soft glowing swell of celesta and harp with honey-sweet shimmering bells. Precious and enchanting.",
       "seconds": 1.6,
       "influence": 0.5,
-      "takes": 2,
+      "takes": 3,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal)."
     },
     {
       "id": "treasure-gigaflower",
@@ -276,7 +292,8 @@
       "influence": 0.5,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "treasure-crystal",
@@ -287,7 +304,8 @@
       "influence": 0.5,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "friend-tap",
@@ -298,7 +316,8 @@
       "influence": 0.6,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "toot",
@@ -309,7 +328,8 @@
       "influence": 0.5,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "hop",
@@ -320,7 +340,8 @@
       "influence": 0.5,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "snore",
@@ -332,7 +353,8 @@
       "takes": 1,
       "loop": true,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "yawn",
@@ -343,7 +365,8 @@
       "influence": 0.5,
       "takes": 1,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "curtains",
@@ -354,7 +377,8 @@
       "influence": 0.5,
       "takes": 1,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "sign",
@@ -365,7 +389,8 @@
       "influence": 0.5,
       "takes": 1,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "sprout",
@@ -376,7 +401,8 @@
       "influence": 0.5,
       "takes": 1,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 1
     },
     {
       "id": "bum-far",
@@ -387,19 +413,68 @@
       "influence": 0.5,
       "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "note": "Owner, round 2: too rough and dry; softer, playful, sweet.",
+      "pick": 2
     },
     {
       "id": "ambience",
       "label": "Tło dżungli na ekranie powitalnym (pętla)",
       "event": "welcome screen ambience",
-      "prompt": "A very calm, quiet jungle morning: distant soft bird calls, gentle insects, a light breeze in the leaves. Peaceful, sparse, no animals close by. Acoustic and organic, no synthesizer, nothing electronic.",
+      "prompt": "A real field recording of a tropical rainforest in the morning: natural distant bird songs, a soft insect chorus, a gentle breeze in the leaves, a faint far-away stream. Calm and peaceful, no music, no animals close to the microphone.",
       "seconds": 20,
       "influence": 0.4,
-      "takes": 1,
+      "takes": 2,
       "loop": true,
+      "note": "Owner, round 3: did not sound natural; real jungle sounds, no cartoon palette.",
+      "plain": true
+    },
+    {
+      "id": "treasure-coconut-magic",
+      "label": "Kokos: wersja magiczna (porównaj z obecną)",
+      "event": "the coconut is found, with a magical touch",
+      "prompt": "A magical coconut treasure: a soft hollow wooden donk, then a sweet sparkling marimba and celesta twinkle. Playful and joyful.",
+      "seconds": 1.4,
+      "influence": 0.5,
+      "takes": 2,
       "style": "gentle",
-      "note": "Owner, round 2: too rough and dry; softer, playful, sweet."
+      "compare": "treasure-coconut",
+      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick."
+    },
+    {
+      "id": "treasure-nut-magic",
+      "label": "Orzech: wersja magiczna (porównaj z obecną)",
+      "event": "the nut is found, with a magical touch",
+      "prompt": "A magical nut treasure: a soft wooden tock of a little nut, then a sweet shimmering celesta sparkle rising. Fairy-tale and joyful.",
+      "seconds": 1.4,
+      "influence": 0.5,
+      "takes": 2,
+      "style": "gentle",
+      "compare": "treasure-nut",
+      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick."
+    },
+    {
+      "id": "treasure-stone-magic",
+      "label": "Kamyk: wersja magiczna (porównaj z obecną)",
+      "event": "the stone is found, with a magical touch",
+      "prompt": "A magical turquoise pebble shines: one clear, soft glass-bell note blooming into a gentle sparkling shimmer. Fairy-tale and sweet.",
+      "seconds": 1.4,
+      "influence": 0.5,
+      "takes": 2,
+      "style": "gentle",
+      "compare": "treasure-stone",
+      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick."
+    },
+    {
+      "id": "treasure-feather-magic",
+      "label": "Piórko: wersja magiczna (porównaj z obecną)",
+      "event": "the feather is found, with a magical touch",
+      "prompt": "A magical feather drifts down: a soft airy swish carried by a delicate rising harp shimmer and tiny twinkles. Dreamy and sweet.",
+      "seconds": 1.4,
+      "influence": 0.5,
+      "takes": 2,
+      "style": "gentle",
+      "compare": "treasure-feather",
+      "note": "Owner, round 3: a subtle magical touch for the classic treasures too; compare with the current pick."
     }
   ],
   "music": [
@@ -493,7 +568,8 @@
             "synthesizer"
           ]
         }
-      ]
+      ],
+      "pick": 2
     },
     {
       "id": "theme-short",
@@ -527,7 +603,8 @@
             "synthesizer"
           ]
         }
-      ]
+      ],
+      "pick": 1
     },
     {
       "id": "welcome-bed",
@@ -587,7 +664,8 @@
             "synthesizer"
           ]
         }
-      ]
+      ],
+      "pick": 2
     }
   ],
   "voices": [
@@ -606,6 +684,34 @@
       "text": "Cześć, jestem Czupur! Najszybszy dinozaur w dżungli! Mam trąbkę na głowie. Tuuu, tuuu! Kiedyś przybiję piątkę z Giganto. Zobaczysz!",
       "seed": 103,
       "pick": 3
+    },
+    {
+      "id": "bill",
+      "name": "Dino Mazes · Dudek / Bill",
+      "description": "An adult male voice actor performing a gentle, timid young brachiosaurus in a children's cartoon. Soft, warm, a little breathy and hesitant, slower pace, sweet and kind; he lights up and giggles when food is mentioned. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
+      "text": "Cześć, jestem Dudek! Masz coś do jedzenia? Mam najlepszy nos w dżungli. Wywęszę każdy owoc! Boję się nawet ważek. Ale z tobą jest mi raźniej.",
+      "seed": 105
+    },
+    {
+      "id": "mazu",
+      "name": "Dino Mazes · Rudzia / Mazu",
+      "description": "An adult female voice actress performing a curious, clever young ankylosaurus in a children's cartoon, the little scientist of the group. Clear, articulate, bright and confident, precise diction, warm and patient, never in a hurry. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
+      "text": "Cześć, jestem Rudzia! Wiem prawie wszystko o dinozaurach. W Gigantopedii zapisuję wszystko, co robi Giganto. Najpierw patrzymy, potem rysujemy. Tak robią naukowcy!",
+      "seed": 106
+    },
+    {
+      "id": "giganto",
+      "name": "Dino Mazes · Giganto",
+      "description": "An adult male voice actor performing a huge, gentle giant dinosaur in a children's cartoon. Very deep, slow, soft and kind, a warm rumbling voice that speaks only a word or two, with friendly growls and a cosy, funny side. Never scary. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
+      "text": "GRRRAU! …Cześć. Mrrr… Lubię cię. Tup. Tup. TUP! Ziiiew… Dużo dziś tupania. Mrrr… Ładnie rysujesz. GRRRAU! …Przepraszam. To z radości.",
+      "seed": 107
+    },
+    {
+      "id": "narrator",
+      "name": "Dino Mazes · Narrator",
+      "description": "An adult female storyteller narrating a gentle children's cartoon: warm, calm and smiling, clear and friendly, like reading a bedtime story to a small child, with a little sparkle of wonder. Clean studio recording, close microphone. Speaks Polish natively, standard Polish accent, and also clear English.",
+      "text": "Dudek wywęszył kokos, ale boi się iść sam. Pomożesz mu? Miłka maluje obrazek. Szuka kwiatka, który będzie jej pozował! Nowy skarb: muszelka!",
+      "seed": 108
     }
   ],
   "lines": [
@@ -638,63 +744,72 @@
       "voice": "tiny",
       "lang": "en",
       "text": "Hi, I'm Tiny! Want to hear a joke?",
-      "say": "[cheerfully] Hi, I'm Tiny! Want to hear a joke?"
+      "say": "[cheerfully] Hi, I'm Tiny! Want to hear a joke?",
+      "pick": 2
     },
     {
       "id": "tiny-joke-en",
       "voice": "tiny",
       "lang": "en",
       "text": "What do you call a sleeping dinosaur? A dino-snore!",
-      "say": "What do you call a sleeping dinosaur? [short pause] A dino-snore! [giggles]"
+      "say": "What do you call a sleeping dinosaur? [short pause] A dino-snore! [giggles]",
+      "pick": 2
     },
     {
       "id": "tiny-cheer-en",
       "voice": "tiny",
       "lang": "en",
       "text": "Lovely drawing! Just like my paintings.",
-      "say": "[warmly] Lovely drawing! Just like my paintings."
+      "say": "[warmly] Lovely drawing! Just like my paintings.",
+      "pick": 2
     },
     {
       "id": "rocky-hello-pl",
       "voice": "rocky",
       "lang": "pl",
       "text": "Cześć, jestem Czupur! Najszybszy dinozaur w dżungli!",
-      "say": "[excited] Cześć, jestem Czupur! Najszybszy dinozaur w dżungli!"
+      "say": "[excited] Cześć, jestem Czupur! Najszybszy dinozaur w dżungli!",
+      "pick": 1
     },
     {
       "id": "rocky-species-pl",
       "voice": "rocky",
       "lang": "pl",
       "text": "Jestem parazaur… paralozaur… Jestem dinozaurem z trąbką!",
-      "say": "Jestem parazaur… paralozaur… [laughs] Jestem dinozaurem z trąbką!"
+      "say": "Jestem parazaur… paralozaur… [laughs] Jestem dinozaurem z trąbką!",
+      "pick": 2
     },
     {
       "id": "rocky-cheer-pl",
       "voice": "rocky",
       "lang": "pl",
       "text": "Ty rysujesz, a ja trąbię. Tuuu! To dla ciebie!",
-      "say": "[excited] Ty rysujesz, a ja trąbię. Tuuu! To dla ciebie!"
+      "say": "[excited] Ty rysujesz, a ja trąbię. Tuuu! To dla ciebie!",
+      "pick": 1
     },
     {
       "id": "rocky-hello-en",
       "voice": "rocky",
       "lang": "en",
       "text": "Hi, I'm Rocky! The fastest dino in the jungle!",
-      "say": "[excited] Hi, I'm Rocky! The fastest dino in the jungle!"
+      "say": "[excited] Hi, I'm Rocky! The fastest dino in the jungle!",
+      "pick": 2
     },
     {
       "id": "rocky-species-en",
       "voice": "rocky",
       "lang": "en",
       "text": "I'm a parasaur… a paralo… I'm a dino with a trumpet!",
-      "say": "I'm a parasaur… a paralo… [laughs] I'm a dino with a trumpet!"
+      "say": "I'm a parasaur… a paralo… [laughs] I'm a dino with a trumpet!",
+      "pick": 2
     },
     {
       "id": "rocky-cheer-en",
       "voice": "rocky",
       "lang": "en",
       "text": "You draw, I toot. Toot! That one's for you!",
-      "say": "[excited] You draw, I toot. Toot! That one's for you!"
+      "say": "[excited] You draw, I toot. Toot! That one's for you!",
+      "pick": 1
     }
   ],
   "lineDefaults": {
