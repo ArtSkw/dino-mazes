@@ -690,7 +690,8 @@ export class Ui implements UiBridge {
     const art = ASSETS.intro.titleSign;
     const buttonH = this.playBtn.offsetHeight || 84;
     const fitW = ((lowestHead - regionTop - buttonH - 12) * art.width) / art.height;
-    card.style.width = `${Math.round(Math.max(260, Math.min(600, vw * 0.74, fitW)))}px`;
+    // A phone's sign takes most of the width, so it outweighs the button under it.
+    card.style.width = `${Math.round(Math.max(260, Math.min(600, vw * (vw < 600 ? 0.92 : 0.74), fitW)))}px`;
     const ch = card.offsetHeight;
     const cw = card.offsetWidth;
     const cardX0 = (vw - cw) / 2;

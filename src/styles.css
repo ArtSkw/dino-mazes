@@ -1919,3 +1919,24 @@ button:focus-visible,
     max-width: calc(100vw - 32px);
   }
 }
+
+/* A button's words never break onto two lines. */
+.btn .label,
+.btn-go {
+  white-space: nowrap;
+}
+
+/* Phones: the main buttons a size smaller, so the sign and the friends carry the screen. */
+@media (max-width: 600px) {
+  .welcome-card .btn-play {
+    font-size: 1.45rem;
+    min-width: 200px;
+    min-height: 68px;
+  }
+
+  .btn-go {
+    font-size: 1.4rem;
+    min-width: 190px;
+    min-height: 64px;
+  }
+}

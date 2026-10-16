@@ -398,7 +398,8 @@ export function introLayout(vw: number, vh: number, friend: Pick<FriendFrame, 'a
   // Below the top-right control row, above the friend's head; centred on the screen when there is room.
   const top = portraitTopBar(vw, vh);
   const floor = vh - ch * 0.93 - 16;
-  const h = Math.min(vh * 0.5, 470, floor - top);
+  // On a phone the card hugs its content (treasure, words, button) a little closer.
+  const h = Math.min(vh * (isPhone(vw, vh) ? 0.46 : 0.5), 470, floor - top);
   // Even gaps above (to the top bar) and below (to the friend's head).
   const y = Math.min(floor - h, top + Math.max(0, floor + 16 - top - h) / 2);
   const visibleCenter = cw * (content.x + content.w / 2);

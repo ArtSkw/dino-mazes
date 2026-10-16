@@ -52,6 +52,19 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 23 (16 October 2026): no double sound, phone proportions
+
+- Tapping a friend no longer plays the little pop before its voice: the pop plays only when
+  nothing is said (voices off, or a line without a clip).
+- Button words never wrap (`white-space: nowrap`): "Graj dalej" had broken onto two lines on a
+  phone, where the leaf frame leaves about 150 px for text.
+- Phones: the welcome sign takes 92 % of the width (was 74 %) and the "Graj" button is a size
+  smaller (1.45 rem, 68 px tall), so the sign leads; "Szukajmy!" on the quest card is smaller too
+  (1.4 rem, 64 px), and the card hugs its content a little closer (46 % of the height).
+- Tried and dropped: making the five welcome friends larger on a narrow phone. They are limited by
+  the width; letting the row run past the edge clipped Bill's face, so the row still fits the
+  screen.
+
 ## Codex delivery: a high-fidelity, layered entry (16 October 2026)
 
 The start screen's curtains looked low-res on a desktop (one 1024 × 1536 painting per side,

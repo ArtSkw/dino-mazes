@@ -750,7 +750,8 @@ export class Controller {
   }
 
   wave(characterId: string): void {
-    this.sfx('friend-tap', 0.5);
+    // A friend on the welcome screen answers with its voice (greet); the pop only when voices are off.
+    if (!this.state.settings.voices) this.sfx('friend-tap', 0.5);
     this.emit({ type: 'wave', characterId });
   }
 
@@ -777,7 +778,6 @@ export class Controller {
     const session = this.state.session;
     if (!session) return '';
     const n = this.talks++;
-    this.sfx('friend-tap', 0.5);
     const { lines, cheers } = VOICES[session.characterId];
     const cycle = lines.length + cheers.length + 1;
     const k = n % cycle;
@@ -786,6 +786,8 @@ export class Controller {
     const text = line ? line[this.lang] : this.askLine(session);
     // Mouth poses for as long as the clip plays (or roughly the time to read the line aloud).
     const spoken = this.speak(session.characterId, text);
+    // The voice is the answer to the tap; the little pop plays only when nothing is said.
+    if (spoken === 0) this.sfx('friend-tap', 0.5);
     this.talkMs = spoken;
     this.emit({ type: 'talk', characterId: session.characterId, ms: spoken > 0 ? spoken : Math.min(3200, Math.max(1200, 600 + text.length * 40)) });
     return text;
