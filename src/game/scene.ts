@@ -290,7 +290,12 @@ export class GameScene extends Phaser.Scene {
         this.opening?.skip();
         break;
       case 'layout':
-        this.handleResize(false);
+        // A turned maze (rotated screen) keeps the friend; only the board changes.
+        if (e.turned) {
+          this.clearHint();
+          this.clearPrints();
+        }
+        this.handleResize(false, e.turned === true);
         break;
       default:
         break;
@@ -312,7 +317,7 @@ export class GameScene extends Phaser.Scene {
   // ---------------------------------------------------------------------------
   // Sizing
 
-  private handleResize(initial: boolean): void {
+  private handleResize(initial: boolean, turned = false): void {
     const dpr = Math.min(2, window.devicePixelRatio || 1);
     const w = this.vw;
     const h = this.vh;
@@ -329,9 +334,11 @@ export class GameScene extends Phaser.Scene {
     this.opening?.skip();
     // A resize cancels flights cleanly; rewards are already saved.
     if (this.celebration && !this.celebration.done) this.finishCelebration(true);
-    this.placeEverything();
     this.repaintTimer?.remove();
-    this.repaintTimer = this.time.delayedCall(160, () => this.paintBoardTexture());
+    // A turned maze has a new shape: paint it now, never stretch the old one.
+    if (turned) this.paintBoardTexture();
+    this.placeEverything();
+    if (!turned) this.repaintTimer = this.time.delayedCall(160, () => this.paintBoardTexture());
   }
 
   private placeEverything(): void {

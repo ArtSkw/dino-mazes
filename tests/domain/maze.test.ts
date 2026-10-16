@@ -8,6 +8,9 @@ import {
   generateMaze,
   gridCandidates,
   introMaze,
+  phoneGridCandidates,
+  turnMaze,
+  turnPoint,
   meetsProfile,
   profileFor,
   rebuildMaze,
@@ -18,6 +21,8 @@ import {
   CORRIDOR_RADIUS,
 } from '../../src/domain/maze';
 import { distToSegment } from '../../src/domain/geometry';
+import { TrailEngine } from '../../src/domain/trail';
+import { centerlinePath } from './helpers';
 import type { Difficulty, GridSpec, Maze } from '../../src/domain/types';
 
 const PROFILES: Array<[Difficulty, GridSpec]> = [];
@@ -30,6 +35,13 @@ for (const d of ['easy', ...LEVELS] as Difficulty[]) {
       seen.add(k);
       PROFILES.push([d, g]);
     }
+  }
+}
+
+// Phones are capped at 'medium' and use long grids along the screen.
+for (const landscape of [true, false]) {
+  for (const g of phoneGridCandidates(landscape)) {
+    if (!PROFILES.some(([d, p]) => d === 'medium' && p.cols === g.cols && p.rows === g.rows)) PROFILES.push(['medium', g]);
   }
 }
 
@@ -145,6 +157,84 @@ describe('maze generator', () => {
         expect(gap).toBeGreaterThan(2 * maze.corridorRadius + 0.3);
       }
     }
+  });
+});
+
+describe('long phone mazes (owner request, 16 Oct 2026)', () => {
+  it('are about as rich as a 9x7 tablet maze, well beyond the old 5x5', () => {
+    for (const grid of [{ cols: 9, rows: 5 }, { cols: 5, rows: 9 }]) {
+      const p = profileFor('medium', grid);
+      expect(p.branchChoices[0]).toBeGreaterThanOrEqual(3);
+      expect(p.minSolutionLength).toBeGreaterThanOrEqual(13);
+      expect(p.minSolutionLength).toBeGreaterThan(profileFor('medium', { cols: 5, rows: 5 }).minSolutionLength);
+    }
+  });
+});
+
+describe('turning a maze for a rotated screen (owner decision, 16 Oct 2026)', () => {
+  const samples = (): Maze[] => [
+    ...Array.from({ length: 40 }, (_, i) => generateMaze(`turn-w${i}`, profileFor('medium', { cols: 9, rows: 5 }))),
+    ...Array.from({ length: 40 }, (_, i) => generateMaze(`turn-t${i}`, profileFor('medium', { cols: 5, rows: 9 }))),
+    generateMaze('turn-tablet', profileFor('hard', { cols: 9, rows: 7 })),
+  ];
+
+  it('is the same maze: valid, same route and branches, and turning twice gives it back', () => {
+    for (const maze of samples()) {
+      const t = turnMaze(maze);
+      expect(t.width).toBe(maze.height);
+      expect(t.height).toBe(maze.width);
+      expect(t.layoutHash).toBe(maze.layoutHash);
+      expect(t.goal.cellId).toBe(centerCellOf({ cols: t.width, rows: t.height }));
+      expect(checkGraph(t.cells, t.goal.cellId).ok).toBe(true);
+      t.cells.forEach((c, i) => {
+        expect(c.id).toBe(i);
+        expect(c.x).toBe(i % t.width);
+        expect(c.y).toBe(Math.floor(i / t.width));
+      });
+      // Every corridor joins grid neighbours, and the route is the same length.
+      for (const c of t.cells) for (const n of c.neighbors) expect(Math.abs(c.x - t.cells[n]!.x) + Math.abs(c.y - t.cells[n]!.y)).toBe(1);
+      expect(t.metrics.solution).toHaveLength(maze.metrics.solution.length);
+      expect(t.metrics.solution[t.metrics.solution.length - 1]).toBe(t.goal.cellId);
+      expect(onSide(t)).toBe(true);
+      expect(turnMaze(t)).toEqual(maze);
+    }
+  });
+
+  it('keeps the entrance clear of the friend: right half of the bottom or lower half of the right side', () => {
+    for (const maze of samples()) {
+      const t = turnMaze(maze);
+      const x = t.entrance.insideCell % t.width;
+      const y = Math.floor(t.entrance.insideCell / t.width);
+      expect(['bottom', 'right']).toContain(t.entrance.side);
+      expect(t.entrance.side).toBe(t.width >= t.height ? 'bottom' : 'right');
+      if (t.entrance.side === 'bottom') expect(x).toBeGreaterThanOrEqual(Math.floor(t.width / 2));
+      else expect(y).toBeGreaterThanOrEqual(t.height - Math.ceil(t.height / 2));
+    }
+  });
+
+  it('a trail drawn so far turns with it and still leads on', () => {
+    for (const maze of samples().slice(0, 20)) {
+      const nodes = [maze.entranceNode, ...maze.metrics.solution];
+      const half = centerlinePath(maze, nodes.slice(0, Math.ceil(nodes.length / 2)));
+      const a = new TrailEngine(maze);
+      expect(a.restore(half)).toBe(true);
+      const t = turnMaze(maze);
+      const b = new TrailEngine(t);
+      expect(b.restore(a.points.map(turnPoint))).toBe(true);
+      expect(b.points).toHaveLength(a.points.length);
+      // The turned trail can be finished along the turned route.
+      const all = centerlinePath(t, [t.entranceNode, ...t.metrics.solution]);
+      const c = new TrailEngine(t);
+      expect(c.begin(all[0]!)).toBeTruthy();
+      for (const p of all.slice(1)) expect(c.move(p).lost).toBe(false);
+      expect(c.solved).toBe(true);
+    }
+  });
+
+  it('rebuilds a turned session maze exactly', () => {
+    const grid = { cols: 9, rows: 5 };
+    const a = turnMaze(generateMaze('stored-turned', profileFor('medium', grid)));
+    expect(rebuildMaze('stored-turned', 'medium', grid, false, true)).toEqual(a);
   });
 });
 

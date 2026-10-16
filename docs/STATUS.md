@@ -52,6 +52,40 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 28 (16 October 2026): banner, hideouts, resume fix
+
+- "Nowy skarb" is about the whole quest, so it sits at the top middle of the screen, not of the
+  maze: 44 px from the top where the round buttons leave room (landscape), else 38 px under them
+  (lowered a little for air above it, checked at 393×852, 852×393, 1180×820 and 1440×900).
+- No "turn your device" suggestion on phones any more (their mazes follow the screen); portrait
+  tablets keep it.
+- Opening: the four friends' leafy hideouts form a group centred on the screen (`popupSpots`), a
+  row in landscape (raised a little so the left one clears Giganto) and two rows of two in
+  portrait. On a 393×852 phone they are about 164 px instead of 79, on 852×393 178 instead of 118.
+  The hop down to the cast slots is unchanged.
+- Fix: a game started at 'master' or 'grand' was dropped by the save validator on reload, so
+  "Graj dalej" never came back at the top levels. Both are now valid.
+
+## Owner review, round 27 (16 October 2026): phone mazes follow the screen
+
+- Phones always got a 5×5 square: no grid reaches the 48 px tablet corridor there, so the fitter
+  fell back to the smallest. Phones now have their own grids along the screen (`phoneGridCandidates`:
+  5×9, 5×7, 5×5 in portrait; 9×5, 7×5, 5×5 in landscape) and their own floor (30 px, or 88 % of a
+  5×5 on the same screen for the smallest phones). 393×852 and 360×780 get 5×9, their landscape
+  sides 9×5, 375×667 gets 5×7 / 7×5; the tutorial stays the fixed 5×5. On a landscape phone the
+  9×5 corridors are as wide as the old 5×5.
+- New 'medium' profiles for 9×5 and 5×9: 3–5 real branches, route ≥ 13 cells (the old phone 5×5:
+  2–4 and ≥ 7; a 9×7 tablet maze has a median of 4 branches, route 13). The level cap stays 'medium'.
+- Rotating the screen turns the same maze, trail and all (owner decision): `turnMaze` mirrors it
+  across its diagonal, so the bottom entrance moves to the right side and back, never to the
+  friend's lower-left corner. The session stores `turned`, and a saved game resumes turned, or
+  turns back if the screen was rotated meanwhile. The friend stays; only the board is repainted.
+  Applies wherever a non-square maze would get clearly wider corridors turned (tablets too).
+- Tests: 1,000-seed validity for both new profiles, turn invariants (valid tree, same route,
+  entrance side and half, twice = original, a trail turns and still leads on, exact rebuild),
+  phone grid choices and corridor floors, the `turned` save flag, and an e2e that draws in
+  portrait, rotates, reloads, rotates back and solves (Chromium and WebKit).
+
 ## Owner review, round 25 (16 October 2026): treasure stings that do not echo the win tune
 
 The flower's and the strawberry's magical stings (a harp run, a pizzicato hop with a celesta

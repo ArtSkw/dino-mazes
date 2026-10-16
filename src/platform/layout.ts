@@ -7,7 +7,7 @@
  * never shrink below MIN_CORRIDOR_PX to keep a nominal grid; a smaller grid is
  * chosen instead (and recorded as the effective profile).
  */
-import { CORRIDOR_RADIUS, ENTRANCE_REACH, FRAME_MARGIN, entranceAxes, gridCandidates } from '../domain/maze';
+import { CORRIDOR_RADIUS, ENTRANCE_REACH, FRAME_MARGIN, entranceAxes, gridCandidates, phoneGridCandidates } from '../domain/maze';
 import type { Difficulty, GridSpec, Side } from '../domain/types';
 
 export interface Rect {
@@ -21,6 +21,14 @@ export type Corner = 'left' | 'right';
 export type Orientation = 'landscape' | 'portrait';
 
 export const MIN_CORRIDOR_PX = 48;
+/**
+ * Phones never reach 48 px, not even on a 5×5 grid. A longer maze is used
+ * where its corridors stay at least this wide, about as wide as the old 5×5
+ * on a landscape phone (owner request, 16 Oct 2026), or, on the smallest
+ * phones, nearly as wide as a 5×5 on the same screen (PHONE_CORRIDOR_SHARE).
+ */
+export const MIN_PHONE_CORRIDOR_PX = 30;
+export const PHONE_CORRIDOR_SHARE = 0.88;
 export const MIN_CONTROL_PX = 56;
 const MAX_PITCH = 136;
 /** Hedge frame plus a soft rim around the grid, per side (units). */
@@ -169,12 +177,16 @@ function friendStrip(grid: GridSpec, area: Rect): number {
 export function fitGrid(difficulty: Difficulty, vw: number, vh: number): GridFit {
   const area = boardAreaFor(vw, vh);
   const landscape = orientationOf(vw, vh) === 'landscape';
-  const candidates = gridCandidates(difficulty, landscape);
+  const phone = isPhone(vw, vh) && difficulty !== 'easy';
+  const candidates = phone ? phoneGridCandidates(landscape) : gridCandidates(difficulty, landscape);
   const nominal = candidates[0] as GridSpec;
   const smallestGrid = candidates[candidates.length - 1] as GridSpec;
+  const minCorridor = phone
+    ? Math.min(MIN_PHONE_CORRIDOR_PX, PHONE_CORRIDOR_SHARE * pitchFor(smallestGrid, area) * 2 * CORRIDOR_RADIUS)
+    : MIN_CORRIDOR_PX;
   for (const grid of candidates) {
     const corridorPx = pitchFor(grid, area) * 2 * CORRIDOR_RADIUS;
-    if (corridorPx < MIN_CORRIDOR_PX) continue;
+    if (corridorPx < minCorridor) continue;
     if (landscape && grid !== smallestGrid && friendStrip(grid, area) < minFriendStrip(vh)) continue;
     return { grid, corridorPx, meetsMinimum: true, nominal };
   }
@@ -458,6 +470,33 @@ export function castSlots(vw: number, vh: number, items: Array<{ aspect: number;
     out.push({ x, y: vh - h, w, h });
     x += w;
   });
+  return out;
+}
+
+/**
+ * Where the four friends pop up from their leafy hideouts in the opening:
+ * a group centred on the screen (owner request, 16 Oct 2026), a row in
+ * landscape and two rows of two in portrait, so the friends are big enough on
+ * phones. `x` is the centre and `y` the bottom of a hideout; spots run left to
+ * right (row by row). Afterwards each friend hops down to its own cast slot.
+ */
+export function popupSpots(vw: number, vh: number, count = 4): Array<{ x: number; y: number; size: number }> {
+  const portrait = orientationOf(vw, vh) === 'portrait';
+  const cols = portrait ? Math.min(2, count) : count;
+  const rows = Math.ceil(count / cols);
+  const pitch = 1.08; // centre-to-centre distance, in hideout sizes
+  const size = Math.min(260, (vw * 0.9) / (cols * pitch), (vh * (portrait ? 0.46 : 0.5)) / rows);
+  const out: Array<{ x: number; y: number; size: number }> = [];
+  // Portrait: a little below the middle. Landscape: a little above it, so the
+  // left hideout clears Giganto, who already stands at the lower left.
+  const centreY = vh * (portrait ? 0.52 : 0.42);
+  for (let i = 0; i < count; i++) {
+    const c = i % cols;
+    const r = Math.floor(i / cols);
+    const x = vw / 2 + (c - (cols - 1) / 2) * size * pitch;
+    const mid = centreY + (r - (rows - 1) / 2) * size * 0.98;
+    out.push({ x, y: mid + size * 0.42, size });
+  }
   return out;
 }
 

@@ -10,7 +10,7 @@ import type { CharacterId, Lang, TreasureId } from '../domain/types';
 import { ASSETS, assetUrl, friendFrame } from '../game/assets';
 import type { UiBridge } from '../game/scene';
 import type { OpeningStep } from '../game/opening';
-import { clusterSpec, introCardRect, orientationOf, type Rect } from '../platform/layout';
+import { clusterSpec, introCardRect, isPhone, orientationOf, type Rect } from '../platform/layout';
 import { flash, h, place, show } from './dom';
 import { ICONS, type IconName } from './icons';
 import { VineSpinner } from './vineSpinner';
@@ -1152,14 +1152,17 @@ export class Ui implements UiBridge {
       place(this.resetBtn, L.reset);
       place(this.hintBtn, L.hint);
       place(this.nextBtn, L.next);
-      // "Nowy skarb": in the free space above the maze when there is room (phones
-      // in portrait), centred on the board; otherwise over the board's top edge.
+      // "Nowy skarb" is about the whole quest, so it sits at the top middle of
+      // the screen, not of the maze (owner request, 16 Oct 2026): at the very
+      // top when the round buttons leave room (landscape), else just under them.
       const bw = Math.min(340, L.vw - 24);
       const bh = 74;
+      const bx = (L.vw - bw) / 2;
+      // A little air above it (owner request, 16 Oct 2026): 44 px from the top, 38 px under the buttons.
+      const atTop: Rect = { x: bx, y: 44, w: bw, h: bh };
       const topBar = Math.max(L.clusterRect.y + L.clusterRect.h, L.home.y + L.home.h);
-      const gap = L.board.y - topBar;
-      const by = gap >= bh + 16 ? topBar + (gap - bh) / 2 : Math.max(8, L.board.y + 12);
-      place(this.banner, { x: Math.min(L.vw - bw - 12, Math.max(12, L.board.x + L.board.w / 2 - bw / 2)), y: by, w: bw, h: bh });
+      const clear = !rectsOverlap(atTop, L.clusterRect) && !rectsOverlap(atTop, L.home);
+      place(this.banner, clear ? atTop : { ...atTop, y: topBar + 38 });
       const playing = screen === 'play' && !s.celebrating;
       show(this.resetBtn, playing);
       show(this.hintBtn, playing && this.ctrl.hintAvailable());
@@ -1171,7 +1174,8 @@ export class Ui implements UiBridge {
 
     // Gentle rotate suggestion (never blocks play; hides itself after a while).
     // Only while drawing: the win banner takes its place above the maze.
-    const wantRotate = screen === 'play' && !s.celebrating && orientationOf(vw, vh) === 'portrait' && !this.rotateDismissed;
+    // Not on phones: their mazes follow the screen, so portrait is as good (16 Oct 2026).
+    const wantRotate = screen === 'play' && !s.celebrating && orientationOf(vw, vh) === 'portrait' && !isPhone(vw, vh) && !this.rotateDismissed;
     if (wantRotate && this.rotateToast.hidden) {
       window.setTimeout(() => {
         this.rotateDismissed = true;
@@ -1255,6 +1259,10 @@ const FOOTPRINT_SVG =
  * Lay out treasure slots in rows of `cols`, the last row centred: each slot
  * spans two half-columns, so a short last row can start half a slot in.
  */
+function rectsOverlap(a: Rect, b: Rect): boolean {
+  return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+}
+
 function gridSlots(box: HTMLElement, cols: number): void {
   const kids = [...box.children] as HTMLElement[];
   const n = kids.length;

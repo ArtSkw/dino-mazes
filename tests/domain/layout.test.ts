@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { FRIEND_CORNER, FRIEND_SIZE, MIN_CONTROL_PX, MIN_CORRIDOR_PX, castSlots, clusterSpec, computeLayout, fitGrid, introLayout, isPhone, peekRest, portraitTopBar, toLogical, toScreen, type Layout, type Rect } from '../../src/platform/layout';
+import { FRIEND_CORNER, FRIEND_SIZE, MIN_CONTROL_PX, MIN_CORRIDOR_PX, MIN_PHONE_CORRIDOR_PX, PHONE_CORRIDOR_SHARE, castSlots, clusterSpec, popupSpots, computeLayout, fitGrid, introLayout, isPhone, peekRest, portraitTopBar, toLogical, toScreen, type Layout, type Rect } from '../../src/platform/layout';
 import type { Difficulty } from '../../src/domain/types';
 import { CORRIDOR_RADIUS, ENTRANCE_REACH, FRAME_MARGIN, LEVELS, entranceAxes } from '../../src/domain/maze';
 import { ASSETS, FACING, friendFrame } from '../../src/game/assets';
@@ -225,6 +225,31 @@ describe('layout', () => {
   });
 });
 
+describe("the opening's leafy hideouts (owner request, 16 Oct 2026)", () => {
+  it('are centred on the screen, inside it, apart, and bigger on phones than before', () => {
+    for (const [w, h] of [[393, 852], [852, 393], [375, 667], [667, 375], [1180, 820], [768, 1024], [1366, 768]] as Array<[number, number]>) {
+      const spots = popupSpots(w, h);
+      expect(spots).toHaveLength(4);
+      const mid = spots.reduce((a, p) => a + p.x, 0) / spots.length;
+      expect(Math.abs(mid - w / 2), `${w}x${h}`).toBeLessThan(1);
+      for (const p of spots) {
+        expect(p.x - p.size / 2).toBeGreaterThanOrEqual(0);
+        expect(p.x + p.size / 2).toBeLessThanOrEqual(w);
+        expect(p.y - p.size).toBeGreaterThanOrEqual(0);
+        expect(p.y).toBeLessThanOrEqual(h);
+        // The old size was min(30 % of the height, 20 % of the width, 250).
+        expect(p.size, `${w}x${h}`).toBeGreaterThanOrEqual(Math.min(h * 0.3, w * 0.2, 250) - 0.5);
+      }
+      for (let i = 0; i < 4; i++) for (let j = i + 1; j < 4; j++) {
+        const a = spots[i]!, b = spots[j]!;
+        expect(Math.hypot(a.x - b.x, a.y - b.y)).toBeGreaterThanOrEqual(a.size * 0.95);
+      }
+    }
+    // Phones: about twice the old size in portrait.
+    expect(popupSpots(393, 852)[0]!.size).toBeGreaterThan(150);
+  });
+});
+
 describe("the opening's Giganto peek", () => {
   it('keeps its straight left and bottom cuts beyond the screen edges, sniffing bob included', () => {
     const cut = ASSETS.intro.gigantoPeek.cut!;
@@ -256,10 +281,36 @@ describe('phones (owner request, 15 October 2026)', () => {
     expect(clusterSpec(1180, 820).size).toBeLessThanOrEqual(68);
   });
 
+  it('the maze follows the screen: long along a portrait or a landscape phone (owner request, 16 Oct 2026)', () => {
+    expect(fitGrid('medium', 393, 852).grid).toEqual({ cols: 5, rows: 9 });
+    expect(fitGrid('medium', 852, 393).grid).toEqual({ cols: 9, rows: 5 });
+    expect(fitGrid('medium', 360, 780).grid).toEqual({ cols: 5, rows: 9 });
+    expect(fitGrid('medium', 780, 360).grid).toEqual({ cols: 9, rows: 5 });
+    // A small iPhone gets a slightly shorter maze instead of narrow corridors.
+    expect(fitGrid('medium', 375, 667).grid).toEqual({ cols: 5, rows: 7 });
+    expect(fitGrid('medium', 667, 375).grid).toEqual({ cols: 7, rows: 5 });
+    // The first (tutorial) maze stays the fixed 5×5.
+    expect(fitGrid('easy', 393, 852).grid).toEqual({ cols: 5, rows: 5 });
+  });
+
+  it('long phone mazes keep corridors nearly as wide as a 5×5 on the same screen', () => {
+    for (const [w, h] of [...PHONES, [393, 852] as [number, number], [852, 393] as [number, number], [320, 568] as [number, number], [568, 320] as [number, number]]) {
+      const fit = fitGrid('medium', w, h);
+      const square = fitGrid('easy', w, h).corridorPx;
+      expect(fit.corridorPx, `${w}x${h}`).toBeGreaterThanOrEqual(Math.min(MIN_PHONE_CORRIDOR_PX, square * PHONE_CORRIDOR_SHARE) - 1e-9);
+    }
+  });
+
   it('the maze sits in the middle of a portrait phone, clear of the top bar and the corner friend', () => {
     for (const [w, h] of PHONES.filter(([w, h]) => h > w)) {
       const fit = fitGrid('medium', w, h);
-      const L = computeLayout({ vw: w, vh: h, grid: fit.grid, entranceSide: 'bottom' });
+      const side: Side = entranceAxes(fit.grid).horizontal ? 'right' : 'bottom';
+      const L = computeLayout({ vw: w, vh: h, grid: fit.grid, entranceSide: side });
+      for (const box of entranceBoxes(L, fit.grid, side)) {
+        expect(inside(box, w, h)).toBe(true);
+        expect(overlaps(box, L.reset)).toBe(false);
+        expect(overlaps(box, L.friendVisible)).toBe(false);
+      }
       const mid = L.board.y + L.board.h / 2;
       // On the shortest phones the strip for the friend and "Wróć" keeps it a little above the middle.
       expect(Math.abs(mid - h / 2)).toBeLessThan(h * 0.08);

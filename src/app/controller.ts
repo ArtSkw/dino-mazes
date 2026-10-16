@@ -10,7 +10,7 @@
  */
 import { CHARACTERS, GIGANTO_GENERIC, INTRO_PROMPT, TREASURE_OBJECT, TREASURES, VOICES, questById } from '../data/content';
 import { t, type StringKey } from '../data/i18n';
-import { GENERATOR_VERSION, generateMaze, introMaze, profileFor, rebuildMaze } from '../domain/maze';
+import { GENERATOR_VERSION, generateMaze, introMaze, profileFor, rebuildMaze, turnMaze, turnPoint } from '../domain/maze';
 import { PHONE_LEVEL, award, capDifficulty, levelFor, selectNextQuest, specialDifficulty } from '../domain/progress';
 import { createRng, freshSeed } from '../domain/rng';
 import { TrailEngine, computeHint, type Dir, type Hint } from '../domain/trail';
@@ -92,7 +92,8 @@ export type GameEvent =
   | { type: 'wave'; characterId: string }
   | { type: 'treasure-tap'; treasureId: TreasureId }
   | { type: 'reveal' }
-  | { type: 'layout' }
+  /** `turned`: the maze was turned to fit a rotated screen (same maze, new board). */
+  | { type: 'layout'; turned?: boolean }
   | { type: 'announce'; text: string }
   | { type: 'collection-pulse' };
 
@@ -318,16 +319,23 @@ export class Controller {
   private restoreSession(s: Session): boolean {
     let maze: Maze;
     try {
-      maze = rebuildMaze(s.seed, s.effectiveDifficulty, s.grid, s.intro);
+      maze = rebuildMaze(s.seed, s.effectiveDifficulty, s.grid, s.intro, s.turned === true);
     } catch {
       return false;
     }
     if (s.layoutHash && maze.layoutHash !== s.layoutHash) return false;
-    const engine = new TrailEngine(maze);
     let session = s;
-    if (!engine.restore(s.trail)) {
-      if (s.status === 'solved') return false;
-      session = { ...s, trail: [], status: 'ready' };
+    // The screen may have been rotated since: the same maze, turned to fit.
+    if (this.fitsBetterTurned(maze, s)) {
+      maze = turnMaze(maze);
+      session = { ...withTurned(s, !s.turned), trail: s.trail.map(turnPoint) };
+    }
+    const engine = new TrailEngine(maze);
+    if (!engine.restore(session.trail)) {
+      if (session.status === 'solved') return false;
+      session = { ...session, trail: [], status: 'ready' };
+    }
+    if (session !== s) {
       const save = this.store.get();
       this.store.commit({ ...save, activeSession: session });
     }
@@ -403,7 +411,7 @@ export class Controller {
       const eff = this.screenCap(opts.difficultyOverride ?? prev.effectiveDifficulty);
       const fit = fitGrid(eff, this.viewport.width(), this.viewport.height());
       maze = this.freshMaze(eff, fit.grid, save);
-      session = { ...prev, id: freshSeed(), seed: maze.seed, effectiveDifficulty: eff, difficulty: prev.difficulty, grid: { cols: maze.width, rows: maze.height }, trail: [], status: 'ready', hintUsed: false, resets: 0, layoutHash: maze.layoutHash };
+      session = { ...withTurned(prev, false), id: freshSeed(), seed: maze.seed, effectiveDifficulty: eff, difficulty: prev.difficulty, grid: { cols: maze.width, rows: maze.height }, trail: [], status: 'ready', hintUsed: false, resets: 0, layoutHash: maze.layoutHash };
     } else {
       const sel = selectNextQuest(save, this.rng, save.questBag);
       const choice = sel.choice;
@@ -819,10 +827,50 @@ export class Controller {
       this.emit({ type: 'layout' });
       return;
     }
+    if (!this.state.celebrating && this.fitsBetterTurned(maze, session)) {
+      this.turnBoard(maze, session);
+      return;
+    }
     const layout = this.layoutFor(maze, session);
     this.applyTrailTolerances(layout);
     this.set({ layout });
     this.emit({ type: 'layout' });
+  }
+
+  /**
+   * True when the rotated screen gives the turned maze clearly wider corridors:
+   * a wide maze on a portrait screen or a tall one in landscape (owner
+   * decision, 16 Oct 2026). Square mazes never turn; the 2 % margin keeps a
+   * nearly square screen from flipping the maze back and forth.
+   */
+  private fitsBetterTurned(maze: Maze, session: Pick<Session, 'characterId'>): boolean {
+    if (maze.width === maze.height) return false;
+    const now = this.layoutFor(maze, session).corridorPx;
+    const turned = computeLayout({
+      vw: this.viewport.width(),
+      vh: this.viewport.height(),
+      grid: { cols: maze.height, rows: maze.width },
+      entranceSide: maze.entrance.side === 'bottom' ? 'right' : 'bottom',
+      friend: friendFrame(session.characterId),
+    }).corridorPx;
+    return turned > now * 1.02;
+  }
+
+  /** The same maze and the trail drawn so far, turned to fit the rotated screen. */
+  private turnBoard(maze: Maze, session: Session): void {
+    const turned = turnMaze(maze);
+    const engine = new TrailEngine(turned);
+    const points = (this.engine?.points ?? session.trail).map(turnPoint);
+    const kept = engine.restore(points);
+    this.engine = engine;
+    const layout = this.layoutFor(turned, session);
+    this.applyTrailTolerances(layout);
+    const status = session.status === 'solved' ? 'solved' : kept && engine.started ? 'paused' : 'ready';
+    const next: Session = { ...withTurned(session, !session.turned), trail: kept ? engine.points.slice() : [], status };
+    const save = this.store.get();
+    if (save.activeSession?.id === session.id) this.store.commit({ ...save, activeSession: next });
+    this.set({ maze: turned, session: next, layout });
+    this.emit({ type: 'layout', turned: true });
   }
 
   /** Debug info for QA (shown only with ?debug=1). */
@@ -847,6 +895,13 @@ export class Controller {
       storage: this.state.storage,
     };
   }
+}
+
+/** The session with `turned: true`, or without the field. */
+function withTurned(session: Session, on: boolean): Session {
+  const rest: Session = { ...session };
+  delete rest.turned;
+  return on ? { ...rest, turned: true } : rest;
 }
 
 /** The sound channels a parent's settings allow. */

@@ -20,7 +20,7 @@ import type { CharacterActor } from './actor';
 import { ASSETS, assetUrl, baseHidden } from './assets';
 import { popUp } from './motion';
 import type { OpeningMode } from '../app/controller';
-import { peekRest, type Rect } from '../platform/layout';
+import { peekRest, popupSpots, type Rect } from '../platform/layout';
 
 export type OpeningStep = 'curtains' | 'sign' | 'sprout' | 'finish';
 
@@ -248,14 +248,11 @@ export class OpeningDirector {
       this.rise(actor, false);
       return;
     }
-    const vw = this.host.vw();
-    const vh = this.host.vh();
-    const slot = this.host.castSlots()[this.host.cast().indexOf(actor)];
-    if (!slot) return;
+    const order = POPUP_ORDER.indexOf(actor.id as (typeof POPUP_ORDER)[number]);
+    const spot = popupSpots(this.host.vw(), this.host.vh(), POPUP_ORDER.length)[order];
+    if (!spot) return;
     const cell = ASSETS.intro.popups.cellSize;
-    const size = Math.min(vh * 0.3, vw * 0.2, 250);
-    const x = Math.min(vw - size * 0.45, Math.max(size * 0.45, slot.x + slot.w * 0.5));
-    const y = Math.min(slot.y + slot.h * 0.12, vh * 0.7);
+    const { x, y, size } = spot;
     const name = (i: number): string => `${actor.id}-${i}`;
     const s = this.keep(this.scene.add.sprite(x, y, KEYS.popups, name(0)).setOrigin(0.5, 0.92).setDepth(this.host.depth.popup));
     const scale = size / cell;

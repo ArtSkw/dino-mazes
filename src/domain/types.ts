@@ -118,7 +118,13 @@ export interface Session {
   difficulty: Difficulty;
   /** The difficulty actually used for generation (Giganto may step up). */
   effectiveDifficulty: Difficulty;
+  /** The generated grid (used to rebuild the maze from its seed). */
   grid: GridSpec;
+  /**
+   * The maze is shown turned (turnMaze) because the screen was rotated; the
+   * trail is stored in the shown maze's coordinates.
+   */
+  turned?: boolean;
   intro: boolean;
   trail: Point[];
   status: SessionStatus;

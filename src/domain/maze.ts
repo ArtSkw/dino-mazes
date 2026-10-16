@@ -52,6 +52,10 @@ const RULES: Record<Difficulty, Record<string, ProfileRule>> = {
     '5x5': { branch: [1, 3], minSolution: 7, maxSolution: 15, maxDeadEnd: 4, maxDecisions: 5, bias: [0.2, 0.7] },
   },
   medium: {
+    // Phones (owner request, 16 Oct 2026): a long grid along the screen, about
+    // as rich as a 9×7 tablet maze, with corridors as wide as the old 5×5.
+    '9x5': { branch: [3, 5], minSolution: 13 },
+    '5x9': { branch: [3, 5], minSolution: 13 },
     '7x7': { branch: [3, 5], minSolution: 13 },
     '7x5': { branch: [2, 4], minSolution: 10 },
     '5x7': { branch: [2, 4], minSolution: 10 },
@@ -140,6 +144,17 @@ export function gridCandidates(difficulty: Difficulty, landscape: boolean): Grid
       return [wide(11, 9), { cols: 9, rows: 9 }, wide(9, 7), { cols: 7, rows: 7 }, wide(7, 5), { cols: 5, rows: 5 }];
   }
 }
+/**
+ * Phones (owner request, 16 Oct 2026): the maze follows the screen, long and
+ * narrow along its longer side, instead of a small square. The layout fitter
+ * picks the first that keeps corridors at least MIN_PHONE_CORRIDOR_PX wide.
+ */
+export function phoneGridCandidates(landscape: boolean): GridSpec[] {
+  return landscape
+    ? [{ cols: 9, rows: 5 }, { cols: 7, rows: 5 }, { cols: 5, rows: 5 }]
+    : [{ cols: 5, rows: 9 }, { cols: 5, rows: 7 }, { cols: 5, rows: 5 }];
+}
+
 export function profileFor(difficulty: Difficulty, grid: GridSpec): MazeProfile {
   const rule = RULES[difficulty][key(grid)] ?? RULES.medium[key(grid)] ?? RULES.easy['5x5'];
   if (!rule) throw new Error(`No maze profile for ${difficulty} ${key(grid)}`);
@@ -624,8 +639,48 @@ export function introMaze(): Maze {
   return assembleMaze(INTRO_SEED, profileFor('easy', INTRO_GRID), INTRO_LAYOUT, { usedFallback: false, attempts: 0 });
 }
 
+const TURNED_SIDE: Record<Side, Side> = { bottom: 'right', right: 'bottom', top: 'left', left: 'top' };
+
+export const turnPoint = (p: Point): Point => ({ x: p.y, y: p.x });
+
+/**
+ * The same maze turned to fit a rotated screen (owner decision, 16 Oct 2026):
+ * mirrored across its diagonal, so a wide maze becomes a tall one. Every
+ * corridor, branch and the route stay the same; a bottom entrance (right half)
+ * moves to the right side (lower half) and back, so it never meets the friend
+ * at the lower left. Applying it twice gives the original maze. The layout
+ * hash stays the puzzle's identity.
+ */
+export function turnMaze(maze: Maze): Maze {
+  const cols = maze.height;
+  const rows = maze.width;
+  const id = (old: number): number => (old === maze.entranceNode ? old : (old % maze.width) * cols + Math.floor(old / maze.width));
+  const cells: MazeCell[] = new Array<MazeCell>(maze.cells.length);
+  for (const c of maze.cells) {
+    const n = id(c.id);
+    cells[n] = { id: n, x: c.y, y: c.x, neighbors: c.neighbors.map(id).sort((p, q) => p - q) };
+  }
+  const grid = { cols, rows };
+  return {
+    ...maze,
+    width: cols,
+    height: rows,
+    profile: { ...maze.profile, grid },
+    cells,
+    entrance: {
+      side: TURNED_SIDE[maze.entrance.side],
+      insideCell: id(maze.entrance.insideCell),
+      outside: turnPoint(maze.entrance.outside),
+      opening: [turnPoint(maze.entrance.opening[0]), turnPoint(maze.entrance.opening[1])],
+    },
+    goal: { ...maze.goal, cellId: id(maze.goal.cellId), center: turnPoint(maze.goal.center) },
+    corridors: maze.corridors.map((c) => ({ from: id(c.from), to: id(c.to) })),
+    metrics: { ...maze.metrics, solution: maze.metrics.solution.map(id) },
+  };
+}
+
 /** Rebuild a maze for a stored session (seed + grid + difficulty + version). */
-export function rebuildMaze(seed: string, difficulty: Difficulty, grid: GridSpec, intro: boolean): Maze {
-  if (intro) return introMaze();
-  return generateMaze(seed, profileFor(difficulty, grid));
+export function rebuildMaze(seed: string, difficulty: Difficulty, grid: GridSpec, intro: boolean, turned = false): Maze {
+  const maze = intro ? introMaze() : generateMaze(seed, profileFor(difficulty, grid));
+  return turned ? turnMaze(maze) : maze;
 }

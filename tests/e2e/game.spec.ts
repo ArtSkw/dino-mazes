@@ -240,6 +240,63 @@ test.describe('drawing contract', () => {
   });
 });
 
+test.describe('phones: the maze follows the screen (owner request, 16 Oct 2026)', () => {
+  test('a long maze along the phone turns with it, trail and all, and survives a reload', async ({ page }) => {
+    await page.setViewportSize({ width: 393, height: 852 });
+    await page.addInitScript(() => {
+      if (sessionStorage.getItem('seeded')) return;
+      sessionStorage.setItem('seeded', '1');
+      localStorage.setItem('dino-mazes:save', JSON.stringify({
+        schemaVersion: 1, settings: { lang: 'pl', muted: true, difficulty: 'easy', motion: 'system' }, langChosen: true,
+        collection: {}, recentQuestIds: [], recentLayoutHashes: [], questBag: [], completedOrdinaryMazes: 1,
+        ordinaryCompletionsSinceGiganto: 1, gigantoUnlocked: false, gigantoCompleted: 0, totalCompleted: 1, introDone: true,
+      }));
+    });
+    await boot(page);
+    await startQuest(page);
+    expect(await state<string>(page, '`${c.state.maze.width}x${c.state.maze.height}`')).toBe('5x9');
+    const hash = await state<string>(page, 'c.state.maze.layoutHash');
+    await drag(page, (await solutionPoints(page)).slice(0, 4));
+    const before = await state<Pt[]>(page, 'c.engine.points');
+    expect(before.length).toBeGreaterThan(1);
+
+    await page.setViewportSize({ width: 852, height: 393 });
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { maze: { width: number } } } } }).__dino.ctrl.state.maze.width === 9);
+    expect(await state<string>(page, '`${c.state.maze.width}x${c.state.maze.height}`')).toBe('9x5');
+    expect(await state<string>(page, 'c.state.maze.layoutHash')).toBe(hash);
+    expect(await state<boolean>(page, 's.get().activeSession.turned')).toBe(true);
+    expect(await state<Pt[]>(page, 'c.engine.points')).toEqual(before.map((p) => ({ x: p.y, y: p.x })));
+
+    // Reload in landscape: the turned maze and its trail come back as they were.
+    await page.reload();
+    await boot(page);
+    await page.getByRole('button', { name: /^(Graj dalej|Continue)$/ }).click({ force: true });
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { screen: string } } } }).__dino.ctrl.state.screen === 'play');
+    expect(await state<string>(page, '`${c.state.maze.width}x${c.state.maze.height}`')).toBe('9x5');
+    expect(await state<number>(page, 'c.engine.points.length')).toBe(before.length);
+
+    // Back to portrait: the original maze again, then solve it there.
+    await page.setViewportSize({ width: 393, height: 852 });
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { maze: { width: number } } } } }).__dino.ctrl.state.maze.width === 5);
+    expect(await state<boolean>(page, 's.get().activeSession.turned === undefined')).toBe(true);
+    // Saved trails are rounded to 1e-4 units.
+    const back = await state<Pt[]>(page, 'c.engine.points');
+    expect(back).toHaveLength(before.length);
+    back.forEach((p, i) => expect(Math.hypot(p.x - before[i]!.x, p.y - before[i]!.y)).toBeLessThan(1e-3));
+    const pts = await solutionPoints(page);
+    await drag(page, pts.slice(3));
+    await page.waitForFunction(() => (window as never as { __dino: { ctrl: { state: { celebrating: boolean; screen: string } } } }).__dino.ctrl.state.celebrating || (window as never as { __dino: { ctrl: { state: { screen: string } } } }).__dino.ctrl.state.screen === 'reward');
+    // "Nowy skarb" sits at the top middle of the screen, under the round buttons.
+    const banner = page.locator('.banner');
+    await expect(banner).toBeVisible();
+    const bb = (await banner.boundingBox())!;
+    expect(Math.abs(bb.x + bb.width / 2 - 393 / 2)).toBeLessThan(2);
+    for (const sel of ['.cluster', '.home-btn']) expect(boxesOverlap(bb, (await page.locator(sel).boundingBox())!), sel).toBe(false);
+    // No rotate suggestion on phones: their mazes follow the screen.
+    await expect(page.locator('.toast.rotate')).toBeHidden();
+  });
+});
+
 test.describe('storage', () => {
   test('corrupt storage falls back to a playable game', async ({ page }) => {
     await page.addInitScript(() => localStorage.setItem('dino-mazes:save', '{broken'));

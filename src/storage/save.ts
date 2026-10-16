@@ -58,7 +58,7 @@ export function defaultSave(): SaveV1 {
 const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
 const isNat = (v: unknown): v is number => typeof v === 'number' && Number.isInteger(v) && v >= 0 && v < 1e9;
 const isLang = (v: unknown): v is Lang => v === 'pl' || v === 'en';
-const DIFFICULTIES: readonly Difficulty[] = ['easy', 'medium', 'medium-plus', 'harder', 'hard', 'expert'];
+const DIFFICULTIES: readonly Difficulty[] = ['easy', 'medium', 'medium-plus', 'harder', 'hard', 'expert', 'master', 'grand'];
 const isDiff = (v: unknown): v is Difficulty => (DIFFICULTIES as readonly unknown[]).includes(v);
 const isTreasure = (v: unknown): v is TreasureId => typeof v === 'string' && (ALL_TREASURE_IDS as string[]).includes(v);
 const strList = (v: unknown, cap: number): string[] =>
@@ -94,6 +94,7 @@ function validateSession(raw: unknown): Session | undefined {
     status,
     hintUsed: raw.hintUsed === true,
     ...(isNat(raw.resets) && raw.resets <= 999 ? { resets: raw.resets } : {}),
+    ...(raw.turned === true ? { turned: true } : {}),
     treasureId: raw.treasureId,
     characterId: raw.characterId as Session['characterId'],
     special: raw.special === true,

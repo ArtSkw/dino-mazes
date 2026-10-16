@@ -75,6 +75,26 @@ describe('restart the game', () => {
   });
 });
 
+describe('resuming a game at the highest levels', () => {
+  it('keeps a session started at master or grand', () => {
+    for (const d of ['master', 'grand'] as const) {
+      const r = validateSave({ ...defaultSave(), activeSession: { ...session, difficulty: d, effectiveDifficulty: d } })!;
+      expect(r.save.activeSession?.effectiveDifficulty, d).toBe(d);
+    }
+  });
+});
+
+describe('turned maze flag (rotated screen)', () => {
+  it('keeps a turned session turned, and drops anything but true', () => {
+    expect(validateSave({ ...defaultSave(), activeSession: { ...session, turned: true } })!.save.activeSession?.turned).toBe(true);
+    for (const turned of [false, 'yes', 1]) {
+      const r = validateSave({ ...defaultSave(), activeSession: { ...session, turned } })!;
+      expect(r.save.activeSession).toBeDefined();
+      expect(r.save.activeSession?.turned).toBeUndefined();
+    }
+  });
+});
+
 describe('fresh-start counter (butterfly hint gate)', () => {
   it('keeps a valid reset count with the active session', () => {
     const r = validateSave({ ...defaultSave(), activeSession: { ...session, resets: 2 } })!;
