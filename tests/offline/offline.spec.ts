@@ -44,7 +44,10 @@ test('after the first visit the game relaunches and plays offline', async ({ pag
 });
 
 test('painted UI surfaces and the welcome/opening art load in the production build', async ({ page }) => {
-  await page.goto('./?test');
+  // With an opening, so the layered curtains are fetched too; it waits behind them for the first tap.
+  await page.goto('./?test&opening=full');
+  await page.waitForFunction(() => (window as never as { __dino?: { ctrl: { state: { awaitingTap: boolean } } } }).__dino?.ctrl.state.awaitingTap === true, null, { timeout: 30_000 });
+  await page.locator('.tap-start').click();
   await page.waitForFunction(() => (window as never as { __dino?: { ctrl: { state: { screen: string } } } }).__dino?.ctrl.state.screen === 'welcome', null, { timeout: 30_000 });
   const urls = await page.evaluate(() => {
     const pick = (sel: string, prop: string, pseudo: string | null = null): string => {
@@ -57,7 +60,7 @@ test('painted UI surfaces and the welcome/opening art load in the production bui
       pick('.reset-btn', 'border-image-source'),
       pick('.intro-card', 'background-image', '::after'),
       // DOM art of the welcome screen and the opening.
-      ...['.sign-board', '.vine', '.curtain.left', '.curtain.right', '.sprout'].map((sel) => {
+      ...['.sign-board', '.vine', '.curtain.left .layer-front-top', '.curtain.right .layer-back', '.sprout'].map((sel) => {
         const img = document.querySelector<HTMLImageElement>(sel);
         return img ? `url("${img.src}")` : 'none';
       }),

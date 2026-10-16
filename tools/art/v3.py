@@ -291,13 +291,7 @@ def process_intro(src_root: str, public_root: str, measurements_path: str, cell_
     src = lambda n: Image.open(os.path.join(src_root, f"{n}.png")).convert("RGBA")
     m: dict = {}
 
-    # Curtains: crop to the foliage, keep full height.
-    for side in ("left", "right"):
-        im = Image.fromarray(_floor_alpha(np.array(src(f"intro-leaf-curtain-{side}"))))
-        x0, _, x1, _ = meas[f"intro-leaf-curtain-{side}"]["cells"][0]["boundsAlpha40"]
-        im = im.crop((max(0, x0 - 8), 0, min(im.width, x1 + 8), im.height))
-        path = os.path.join(out_dir, f"curtain-{side}.webp")
-        m[f"curtain{side.title()}"] = {"image": rel(path), "width": im.width, "height": im.height, "bytes": _save_webp(im, path, 82)}
+    # The leaf curtains are layered now (tools/art/entry.py, manifest key `entry`).
 
     im = Image.fromarray(_floor_alpha(np.array(src("intro-light-shafts")), 4))
     path = os.path.join(out_dir, "light-shafts.webp")

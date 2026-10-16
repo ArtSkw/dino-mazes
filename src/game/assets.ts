@@ -45,9 +45,32 @@ export interface AtlasAsset {
   decodedBytes: number;
 }
 
+/** One painted layer of a leaf curtain: where it sits on the shared canvas (canvas px). */
+export interface EntryLayer {
+  name: string;
+  image: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+/**
+ * The entry's layered leaf curtains (tools/art/entry.py, art/CLAUDE_HANDOFF_ENTRY.md):
+ * back, mid, front-top, front-bottom per side on one canvas, the glowing
+ * clearing behind them, and six single leaves for the start-button burst.
+ */
+export interface EntryAssets {
+  canvas: [number, number];
+  /** Canvas px that must stay beyond the screen's outer, top and bottom edges. */
+  overscan: number;
+  left: EntryLayer[];
+  right: EntryLayer[];
+  backing: ItemAsset;
+  leaves: ItemAsset[];
+}
+
 export interface IntroAssets {
-  curtainLeft: ItemAsset;
-  curtainRight: ItemAsset;
   lightShafts: ItemAsset;
   /** `cut`: the cell's straight left and bottom edges and their fade (tools/art/v3.py). */
   gigantoPeek: AtlasAsset & { frames: string[]; frameSize: number; cut?: CellCut };
@@ -66,6 +89,7 @@ interface Manifest {
   ui: Record<string, ItemAsset>;
   backgrounds: Record<'jungle' | 'collection' | 'ground', ItemAsset>;
   intro: IntroAssets;
+  entry: EntryAssets;
   /** Painted parts of the treasures and the butterfly, one atlas (tools/art/rigs.py). */
   rigs?: { atlas?: string; decodedBytes?: number; assets?: Record<string, RigAsset> };
   /** The chest on the collection button: closed layers, open pose, lid hinge (fractions). */

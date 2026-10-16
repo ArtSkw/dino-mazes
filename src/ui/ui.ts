@@ -205,19 +205,31 @@ export class Ui implements UiBridge {
     this.welcome = h('div', { class: 'screen welcome' }, this.castLayer, this.welcomeCard, this.castBubble);
 
     // Opening: closed leaf curtains (also the loading screen) and a tap-to-skip layer.
-    const curtain = (side: 'left' | 'right'): HTMLImageElement => {
-      const art = side === 'left' ? ASSETS.intro.curtainLeft : ASSETS.intro.curtainRight;
-      return h('img', { class: `curtain ${side}`, src: assetUrl(art.image), alt: '', draggable: 'false', style: `--ar:${(art.width / art.height).toFixed(4)}` });
-    };
+    // Each curtain is four painted layers on one canvas (back, mid, front-top,
+    // front-bottom), placed by their canvas offsets; a glowing clearing shows behind.
+    const E = ASSETS.entry;
+    const [cw, ch] = E.canvas;
+    // Only an opening shows the curtains: without one (test hooks) they are never fetched.
+    const wanted = !!ctrlPlan(this.ctrl);
+    const pct = (v: number, of: number): string => `${((v / of) * 100).toFixed(3)}%`;
+    const curtain = (side: 'left' | 'right'): HTMLElement =>
+      h(
+        'div',
+        { class: `curtain ${side}` },
+        ...E[side].map((l) =>
+          h('img', { class: `layer layer-${l.name}`, ...(wanted ? { src: assetUrl(l.image), fetchpriority: 'high' } : {}), alt: '', draggable: 'false', style: `left:${pct(l.x, cw)};top:${pct(l.y, ch)};width:${pct(l.w, cw)};height:${pct(l.h, ch)}` }),
+        ),
+      );
+    const backing = new URL(assetUrl(E.backing.image), document.baseURI).href;
     this.curtains = h(
       'div',
-      { class: 'curtains', hidden: true, 'aria-hidden': 'true' },
-      h('div', { class: 'curtain-backing' }),
+      { class: 'curtains', hidden: true, 'aria-hidden': 'true', style: `--scan:${(E.overscan / ch).toFixed(5)};--ar:${cw} / ${ch}` },
+      h('div', { class: 'curtain-backing', ...(wanted ? { style: `background-image:url("${backing}")` } : {}) }),
       curtain('left'),
       curtain('right'),
       this.spinners[1]!.el,
       // Pollen drifting in the light between the leaves while the game waits for the first tap.
-      ...Array.from({ length: 18 }, (_, i) =>
+      ...Array.from({ length: 10 }, (_, i) =>
         h('span', { class: 'mote', style: `--x:${(7 + ((i * 37) % 86)).toFixed(0)}%;--y:${(18 + ((i * 53) % 70)).toFixed(0)}%;--d:${(5 + (i % 5) * 1.3).toFixed(1)}s;--delay:${(-(i * 0.9) % 7).toFixed(1)}s` }),
       ),
     );
@@ -228,6 +240,7 @@ export class Ui implements UiBridge {
       h('span', { class: 'btn btn-leaf start-pill', 'aria-hidden': 'true' }, this.icon('play'), this.tr(h('span', { class: 'label' }), 'tapToStart')),
     );
     this.tr(this.startBtn, 'tapToStart', 'aria-label');
+    window.addEventListener('pointermove', this.parallax, { passive: true });
     show(this.startBtn, false);
     this.openingSkip = this.button('opening-skip', () => c.skipOpening());
     this.tr(this.openingSkip, 'skip', 'aria-label');
@@ -826,11 +839,12 @@ export class Ui implements UiBridge {
     this.ctrl.sfx('ui-leaf');
     this.startBtn.classList.add('starting');
     this.curtains.classList.add('rustle');
-    const leaf = assetUrl(ASSETS.ui['panel-leaf']?.image ?? '');
-    const burst = Array.from({ length: 10 }, (_, i) => {
-      const a = (i / 10) * Math.PI * 2 + 0.3;
+    const leaves = ASSETS.entry.leaves;
+    const burst = Array.from({ length: 12 }, (_, i) => {
+      const a = (i / 12) * Math.PI * 2 + 0.3;
       const r = 170 + (i % 3) * 60;
-      return h('img', { class: 'start-leaf', src: leaf, alt: '', style: `--dx:${Math.round(Math.cos(a) * r * 1.6)}px;--dy:${Math.round(Math.sin(a) * r)}px;--rot:${(i % 2 ? 1 : -1) * (120 + i * 25)}deg` });
+      const leaf = leaves[i % leaves.length] as { image: string };
+      return h('img', { class: 'start-leaf', src: assetUrl(leaf.image), alt: '', style: `--dx:${Math.round(Math.cos(a) * r * 1.6)}px;--dy:${Math.round(Math.sin(a) * r)}px;--rot:${(i % 2 ? 1 : -1) * (120 + i * 25)}deg;--s:${(0.75 + (i % 4) * 0.12).toFixed(2)}` });
     });
     this.startBtn.append(...burst);
     window.setTimeout(() => {
@@ -841,6 +855,32 @@ export class Ui implements UiBridge {
     }, 420);
     window.setTimeout(() => burst.forEach((b) => b.remove()), 1000);
   }
+
+  /** Leaves loosened by the parting curtains drift down across the screen. */
+  private fallingLeaves(ms: number): void {
+    const leaves = ASSETS.entry.leaves;
+    const layer = h('div', { class: 'falling-leaves', 'aria-hidden': 'true' });
+    for (let i = 0; i < 9; i++) {
+      const leaf = leaves[(i * 2 + 1) % leaves.length] as { image: string };
+      const x = 8 + ((i * 41) % 84);
+      layer.append(
+        h('img', {
+          src: assetUrl(leaf.image),
+          alt: '',
+          style: `left:${x}%;--d:${(1.8 + (i % 4) * 0.35).toFixed(2)}s;--delay:${((i * 0.11) % 0.6).toFixed(2)}s;--sway:${(i % 2 ? 1 : -1) * (40 + i * 9)}px;--rot:${(i % 2 ? 1 : -1) * (200 + i * 30)}deg;--s:${(0.6 + (i % 3) * 0.2).toFixed(2)}`,
+        }),
+      );
+    }
+    this.root.append(layer);
+    window.setTimeout(() => layer.remove(), ms + 3200);
+  }
+
+  /** On a desktop the curtain layers follow the mouse a little, each at its own depth. */
+  private parallax = (e: PointerEvent): void => {
+    if (!this.ctrl.state.awaitingTap || e.pointerType !== 'mouse') return;
+    this.curtains.style.setProperty('--px', ((e.clientX / window.innerWidth) * 2 - 1).toFixed(3));
+    this.curtains.style.setProperty('--py', ((e.clientY / window.innerHeight) * 2 - 1).toFixed(3));
+  };
 
   /** DOM side of the opening (driven by the renderer's timeline). */
   openingStep(step: OpeningStep, ms: number): void {
@@ -857,7 +897,10 @@ export class Ui implements UiBridge {
       }
       c.style.setProperty('--ms', `${ms}ms`);
       void c.offsetWidth;
-      c.classList.add(this.ctrl.state.opening === 'fade' ? 'fade' : 'open');
+      const fade = this.ctrl.state.opening === 'fade';
+      c.classList.add(fade ? 'fade' : 'open');
+      // A few painted leaves drift down over the opening as the curtains part.
+      if (!fade && !this.ctrl.state.reducedMotion) this.fallingLeaves(ms);
       later(() => {
         c.classList.remove('open', 'fade');
         show(c, false);
@@ -1156,6 +1199,11 @@ export class Ui implements UiBridge {
       .map(([k, v]) => `${k}: ${v}`)
       .join('\n');
   }
+}
+
+/** The opening planned at boot (the UI is built after Controller.planOpening). */
+function ctrlPlan(c: Controller): string | null {
+  return c.state.openingPlan;
 }
 
 /** Giganto's three-toed footprint, the badge of his treasure box. */

@@ -52,6 +52,30 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Codex delivery: a high-fidelity, layered entry (16 October 2026)
+
+The start screen's curtains looked low-res on a desktop (one 1024 × 1536 painting per side,
+stretched about 3× on a large Retina window). Codex delivered layered curtains
+(art/CLAUDE_HANDOFF_ENTRY.md): back, mid, front-top and front-bottom per side on one canvas, a
+painted backing (a glowing clearing seen between the curtains) and six single leaves.
+
+- `tools/art/entry.py` trims each layer to its painted area with its canvas offset, stores the
+  soft back layer at 75 % size, and compresses back/mid harder than the sharp front leaves
+  (1.40 MB in all; the old pair was 0.39 MB). The old one-piece curtains are gone.
+- The curtains are sized by the screen's height now (each still covers at least 42 % of a very
+  wide window) with Codex's 48-canvas-px margin beyond the outer, top and bottom edges, and the
+  backing shows between them: about 1.2× magnification on a 1440 × 900 window at 2× instead of 3×.
+- While waiting, every layer sways in its own rhythm (front most, back least, within Codex's
+  tested ±24 px / ±1.5°) and on a desktop the layers follow the mouse at three depths. The start
+  leaf bursts into the painted leaves; parting, the front layers go first and the back last, and a
+  few painted leaves drift down over the opening.
+- The curtain images load only when an opening is planned (never in the test hooks), with high
+  fetch priority, since they are the loading screen.
+- Measured (production, 10 Mbps profile): without an opening, drawable 3.7 s, 4.57 MB. A first
+  visit with the full opening shows the start button at 5.1 s (6.9 MB: the opening's own art plus
+  the curtains), about 0.85 s later than with the old curtains; later visits come from the cache.
+- Codex's review JPGs and GIFs stay out of the repository (`.gitignore`).
+
 ## Owner review, round 21 (16 October 2026): banner, quest card, name, README
 
 - "Nowy skarb" sits in the free space above the maze when there is room (portrait phones),
@@ -515,8 +539,8 @@ parity; welcome wave.
 
 | Target (PRD §9) | Measured | Notes |
 |---|---|---|
-| Initial transfer ≤ 5 MB, complete ≤ 12 MB | **4.95 MB** before play (15 Oct 2026); complete about 15 MB with one language's voices (see Deviations) | gzip for text; images WebP, audio AAC. |
-| First playable ≤ 4 s at 10 Mbps | **3.9 s** drawable, welcome 3.5 s (3 cold runs, 15 Oct 2026; was 3.05–3.10 s before the motion and sound) | Chromium, 10 Mbps down / 5 up / 40 ms, cache + SW disabled, local preview server. |
+| Initial transfer ≤ 5 MB, complete ≤ 12 MB | **4.57 MB** before play without an opening, 6.9 MB with the full opening (16 Oct 2026); complete about 15 MB with one language's voices (see Deviations) | gzip for text; images WebP, audio AAC. |
+| First playable ≤ 4 s at 10 Mbps | **3.7 s** drawable without an opening (16 Oct 2026); with a first visit's full opening the start button appears at **5.1 s** (over target, see Deviations) | Chromium, 10 Mbps down / 5 up / 40 ms, cache + SW disabled, local preview server. |
 | GPU memory ≤ 96 MiB, atlas edge ≤ 2048 | ≈ 50 MiB estimated | Characters 24.6 MiB decoded (all five), board ≤ 2048² (≤ 16 MiB), backgrounds 6 MiB, kits ≈ 7 MiB. |
 | 60 fps / ≥ 30 fps oldest tablet | **pending on devices** | Headless WebKit: median 17 ms, p95 22 ms per frame while drawing a 9×9 maze. Headless Chromium uses software GL at 2880×1800 (83 ms/frame), not representative. |
 | Input response ≤ 50 ms | engine ≈ 0.001 ms/move; frame JS ≈ 0.8 ms | Trail redraw cost cut from 4.4 ms to 0.8 ms per frame (600-point trail) by drawing joints only at bends. |
@@ -527,6 +551,11 @@ easy 5×5 everywhere; medium 7×7 (7×5 at 1024×600); harder 9×9 at 1440×900,
 9×7 at 1366×768, 7×7 at 1024×768 / 1180×820, 7×5 at 1024×600, 7×7 portrait.
 
 ## Deviations from the plan (and why)
+
+- **A first visit's opening reaches its start button at about 5.1 s on 10 Mbps (16 Oct 2026),**
+  over the 4 s first-playable target: the full opening's art and the high-fidelity curtains are
+  6.9 MB. The curtains show at once as the loading screen; every later visit is served from the
+  offline cache.
 
 - **Complete download about 15 MB instead of ≤ 12 MB (15 Oct 2026).** The painted art and its
   motion already reached about 12.4 MB; full voicing adds 1.9 MB per language and effects and

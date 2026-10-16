@@ -533,17 +533,24 @@
   "bytes": 87814,
   "sourceSha256": "9c623da4b1a42a4da70b762f61a14e15652624822382e1fdf84fa809ee9fe2c7"
  },
+ "entry": {
+  "bytes": 1355636,
+  "layers": {
+   "left": [
+    105854,
+    243020,
+    139058,
+    124614
+   ],
+   "right": [
+    122972,
+    203614,
+    154748,
+    119466
+   ]
+  }
+ },
  "intro": {
-  "curtainLeft": {
-   "width": 683,
-   "height": 1536,
-   "bytes": 207070
-  },
-  "curtainRight": {
-   "width": 640,
-   "height": 1536,
-   "bytes": 181998
-  },
   "lightShafts": {
    "width": 1536,
    "height": 1024,

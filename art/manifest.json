@@ -13641,6 +13641,663 @@
       "owner": "Codex",
       "registration": "review/motion/registration.json",
       "motionQA": "review/motion/polish-delivery-qa.json"
+    },
+    {
+      "id": "entry-curtain-left-back",
+      "path": "source/entry/curtain-left-back.png",
+      "canvas": [
+        1024,
+        1536
+      ],
+      "alphaBounds": [
+        0,
+        0,
+        719,
+        1536
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "outerEdgeContact": [
+        "left",
+        "top",
+        "bottom"
+      ],
+      "edgeContactPixelCounts": {
+        "left": 1536,
+        "top": 537,
+        "right": 0,
+        "bottom": 613
+      },
+      "position": [
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "rotation": 0,
+      "pivot": [
+        0,
+        768.0
+      ],
+      "sha256": "0b50a2ed9bf8a250e41ff7a03fd4ed454e933083b2e64fa9ef4d6c9d37bc9822",
+      "bytes": 2382402,
+      "generator": "built-in GPT Imagegen",
+      "approvalStatus": "approved",
+      "promptFiles": [
+        "prompts/entry-executed/entry-curtain-left-back.txt"
+      ],
+      "promptHashes": {
+        "prompts/entry-executed/entry-curtain-left-back.txt": "f346e2e394c63e478eeb0b796be3370abe8db838ad5666fa66d3edd2e80a3858"
+      },
+      "ownerApprovalDate": "2026-10-16",
+      "source": "source/entry/curtain-left-back.png",
+      "status": "source-delivered",
+      "runtimePath": null,
+      "registration": "review/entry/registration.json"
+    },
+    {
+      "id": "entry-curtain-left-mid",
+      "path": "source/entry/curtain-left-mid.png",
+      "canvas": [
+        1024,
+        1536
+      ],
+      "alphaBounds": [
+        0,
+        0,
+        738,
+        1536
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "outerEdgeContact": [
+        "left",
+        "top",
+        "bottom"
+      ],
+      "edgeContactPixelCounts": {
+        "left": 1536,
+        "top": 538,
+        "right": 0,
+        "bottom": 565
+      },
+      "position": [
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "rotation": 0,
+      "pivot": [
+        0,
+        768.0
+      ],
+      "sha256": "e464d4eb8aa521056beaea47a58e7f10933c4256d2c90c46a97e13af95b84ef4",
+      "bytes": 2476108,
+      "generator": "built-in GPT Imagegen",
+      "approvalStatus": "approved",
+      "promptFiles": [
+        "prompts/entry-executed/entry-curtain-left-mid.txt"
+      ],
+      "promptHashes": {
+        "prompts/entry-executed/entry-curtain-left-mid.txt": "604b91ffede1f833d7acb25d5432345a5bfdc30aaabd5dee8c8dbf90ba0d3f1f"
+      },
+      "ownerApprovalDate": "2026-10-16",
+      "source": "source/entry/curtain-left-mid.png",
+      "status": "source-delivered",
+      "runtimePath": null,
+      "registration": "review/entry/registration.json"
+    },
+    {
+      "id": "entry-curtain-left-front-top",
+      "path": "source/entry/curtain-left-front-top.png",
+      "canvas": [
+        1024,
+        1536
+      ],
+      "alphaBounds": [
+        0,
+        0,
+        837,
+        1003
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "outerEdgeContact": [
+        "left",
+        "top"
+      ],
+      "edgeContactPixelCounts": {
+        "left": 766,
+        "top": 395,
+        "right": 0,
+        "bottom": 0
+      },
+      "position": [
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "rotation": 0,
+      "pivot": [
+        0,
+        768.0
+      ],
+      "sha256": "ddf0dc2f3105611527c41de917cbe70fd73bd31f57a5dac99c96cc0e5fc85124",
+      "bytes": 1699695,
+      "generator": "built-in GPT Imagegen",
+      "approvalStatus": "approved",
+      "promptFiles": [
+        "prompts/entry-executed/entry-curtain-left-front-top-revision-2.txt",
+        "prompts/entry-executed/entry-curtain-left-front-top.txt"
+      ],
+      "promptHashes": {
+        "prompts/entry-executed/entry-curtain-left-front-top-revision-2.txt": "c1323881c05b7592d28f685776c917f87ee4b11138ce7cd89b8b3475bd3dde62",
+        "prompts/entry-executed/entry-curtain-left-front-top.txt": "b9bfc317a65fa4856ecb6625ea7e92b42d02167cc41bd832acda0ab6ba8567c3"
+      },
+      "ownerApprovalDate": "2026-10-16",
+      "source": "source/entry/curtain-left-front-top.png",
+      "status": "source-delivered",
+      "runtimePath": null,
+      "registration": "review/entry/registration.json"
+    },
+    {
+      "id": "entry-curtain-left-front-bottom",
+      "path": "source/entry/curtain-left-front-bottom.png",
+      "canvas": [
+        1024,
+        1536
+      ],
+      "alphaBounds": [
+        0,
+        718,
+        848,
+        1536
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "outerEdgeContact": [
+        "left",
+        "bottom"
+      ],
+      "edgeContactPixelCounts": {
+        "left": 800,
+        "top": 0,
+        "right": 0,
+        "bottom": 828
+      },
+      "position": [
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "rotation": 0,
+      "pivot": [
+        0,
+        768.0
+      ],
+      "sha256": "a3a88b279e04a14de5594e526d87e1f73c5b992181ac8b730f64ebfbdc49f8e9",
+      "bytes": 1527084,
+      "generator": "built-in GPT Imagegen",
+      "approvalStatus": "approved",
+      "promptFiles": [
+        "prompts/entry-executed/entry-curtain-left-front-bottom-revision-2.txt",
+        "prompts/entry-executed/entry-curtain-left-front-bottom-revision-3.txt",
+        "prompts/entry-executed/entry-curtain-left-front-bottom.txt"
+      ],
+      "promptHashes": {
+        "prompts/entry-executed/entry-curtain-left-front-bottom-revision-2.txt": "fab3be374987c94273a65506d3473753dae62e6c677ce6a12f44319a168702a2",
+        "prompts/entry-executed/entry-curtain-left-front-bottom-revision-3.txt": "5cd7b75b62ebd88d6bc9ea2f265c97779f166962de49af17e191fa9ba26efd49",
+        "prompts/entry-executed/entry-curtain-left-front-bottom.txt": "4735afa0b66d9e84cdf26b158a2192f9174c4e58a96a7a7d5339f41a0766b46b"
+      },
+      "ownerApprovalDate": "2026-10-16",
+      "source": "source/entry/curtain-left-front-bottom.png",
+      "status": "source-delivered",
+      "runtimePath": null,
+      "registration": "review/entry/registration.json"
+    },
+    {
+      "id": "entry-curtain-right-back",
+      "path": "source/entry/curtain-right-back.png",
+      "canvas": [
+        1024,
+        1536
+      ],
+      "alphaBounds": [
+        244,
+        0,
+        1024,
+        1536
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "outerEdgeContact": [
+        "top",
+        "right",
+        "bottom"
+      ],
+      "edgeContactPixelCounts": {
+        "left": 0,
+        "top": 604,
+        "right": 1536,
+        "bottom": 734
+      },
+      "position": [
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "rotation": 0,
+      "pivot": [
+        1024,
+        768.0
+      ],
+      "sha256": "f0ca0012188ecc448db25fe41389b53845503b01ed39bddf0e4bd82e05f72398",
+      "bytes": 2397832,
+      "generator": "built-in GPT Imagegen",
+      "approvalStatus": "source-qa-complete",
+      "promptFiles": [
+        "prompts/entry-executed/entry-curtain-right-back.txt"
+      ],
+      "promptHashes": {
+        "prompts/entry-executed/entry-curtain-right-back.txt": "d2be73e27d2ad980ffcd8557da7fa2a181c1d695b0c345c6fa480eae4d5b249b"
+      },
+      "source": "source/entry/curtain-right-back.png",
+      "status": "source-delivered",
+      "runtimePath": null,
+      "registration": "review/entry/registration.json"
+    },
+    {
+      "id": "entry-curtain-right-mid",
+      "path": "source/entry/curtain-right-mid.png",
+      "canvas": [
+        1024,
+        1536
+      ],
+      "alphaBounds": [
+        382,
+        0,
+        1024,
+        1536
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "outerEdgeContact": [
+        "top",
+        "right",
+        "bottom"
+      ],
+      "edgeContactPixelCounts": {
+        "left": 0,
+        "top": 560,
+        "right": 1536,
+        "bottom": 524
+      },
+      "position": [
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "rotation": 0,
+      "pivot": [
+        1024,
+        768.0
+      ],
+      "sha256": "f3c541a5661f765a01df5153b2d1f2de8b2cd7380f484de3b70c73cb2eff96b8",
+      "bytes": 2198951,
+      "generator": "built-in GPT Imagegen",
+      "approvalStatus": "source-qa-complete",
+      "promptFiles": [
+        "prompts/entry-executed/entry-curtain-right-mid.txt"
+      ],
+      "promptHashes": {
+        "prompts/entry-executed/entry-curtain-right-mid.txt": "53fe6e889b55cc09b3baa95d33955208c81e9b9ea431fb942295956dec80f814"
+      },
+      "source": "source/entry/curtain-right-mid.png",
+      "status": "source-delivered",
+      "runtimePath": null,
+      "registration": "review/entry/registration.json"
+    },
+    {
+      "id": "entry-curtain-right-front-top",
+      "path": "source/entry/curtain-right-front-top.png",
+      "canvas": [
+        1024,
+        1536
+      ],
+      "alphaBounds": [
+        191,
+        0,
+        1024,
+        1109
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "outerEdgeContact": [
+        "top",
+        "right"
+      ],
+      "edgeContactPixelCounts": {
+        "left": 0,
+        "top": 695,
+        "right": 1015,
+        "bottom": 0
+      },
+      "position": [
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "rotation": 0,
+      "pivot": [
+        1024,
+        768.0
+      ],
+      "sha256": "d6d9a6d1893eff31f46564529eee8b7c7e95062cf7a68412d792ef017bc9efbd",
+      "bytes": 1756316,
+      "generator": "built-in GPT Imagegen",
+      "approvalStatus": "source-qa-complete",
+      "promptFiles": [
+        "prompts/entry-executed/entry-curtain-right-front-top-revision-2.txt",
+        "prompts/entry-executed/entry-curtain-right-front-top.txt"
+      ],
+      "promptHashes": {
+        "prompts/entry-executed/entry-curtain-right-front-top-revision-2.txt": "1f1e7e9e87254f370c1beddd6fa86f87833d448a8e71dcff38b67af841b01931",
+        "prompts/entry-executed/entry-curtain-right-front-top.txt": "1d2c1a7f4d17b2b9cd5e062af795a258a0286252b1e7aa83e8b35ff6df78eeb8"
+      },
+      "source": "source/entry/curtain-right-front-top.png",
+      "status": "source-delivered",
+      "runtimePath": null,
+      "registration": "review/entry/registration.json"
+    },
+    {
+      "id": "entry-curtain-right-front-bottom",
+      "path": "source/entry/curtain-right-front-bottom.png",
+      "canvas": [
+        1024,
+        1536
+      ],
+      "alphaBounds": [
+        143,
+        765,
+        1024,
+        1536
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "outerEdgeContact": [
+        "right",
+        "bottom"
+      ],
+      "edgeContactPixelCounts": {
+        "left": 0,
+        "top": 0,
+        "right": 743,
+        "bottom": 881
+      },
+      "position": [
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "rotation": 0,
+      "pivot": [
+        1024,
+        768.0
+      ],
+      "sha256": "9801df4638c521c0643efdee2bb2fad678593af69a53f55e421e462f2df69fb2",
+      "bytes": 1436432,
+      "generator": "built-in GPT Imagegen",
+      "approvalStatus": "source-qa-complete",
+      "promptFiles": [
+        "prompts/entry-executed/entry-curtain-right-front-bottom-revision-2.txt",
+        "prompts/entry-executed/entry-curtain-right-front-bottom-revision-3.txt",
+        "prompts/entry-executed/entry-curtain-right-front-bottom.txt"
+      ],
+      "promptHashes": {
+        "prompts/entry-executed/entry-curtain-right-front-bottom-revision-2.txt": "db3f232ce5f57244cd15b3f91dea4c7df3536786f448886d758f7111c91bb20d",
+        "prompts/entry-executed/entry-curtain-right-front-bottom-revision-3.txt": "7dff5355718edb14f8edc9a0fadf3ecf00c2e12098940ab331b3129e1a577a18",
+        "prompts/entry-executed/entry-curtain-right-front-bottom.txt": "409365f5058cb710375f7a6bffec4317c9ec8dedb8b8c8780fa41f41d0192715"
+      },
+      "source": "source/entry/curtain-right-front-bottom.png",
+      "status": "source-delivered",
+      "runtimePath": null,
+      "registration": "review/entry/registration.json"
+    },
+    {
+      "id": "entry-backing",
+      "path": "source/entry/backing.png",
+      "canvas": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "hasAlpha": false,
+      "sha256": "67a1eeeb8fb36bbf1eb0d98756e69b04c1a58614199d6f59d0a080355d91c641",
+      "bytes": 1795719,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/entry-executed/entry-backing.txt"
+      ],
+      "promptHashes": {
+        "prompts/entry-executed/entry-backing.txt": "bf5090291c378c925b9631d10aa4874dda1c23e61984a666c14d6c6f59f3002e"
+      },
+      "status": "source-delivered",
+      "source": "source/entry/backing.png",
+      "runtimePath": null,
+      "registration": "review/entry/registration.json"
+    },
+    {
+      "id": "entry-leaves",
+      "path": "source/entry/leaves.png",
+      "canvas": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "hasAlpha": true,
+      "sha256": "0d8bbcbc2afff897a4d0419d4e6833f2a9af7f05d499685b1d9d68711a39f396",
+      "bytes": 2054916,
+      "generator": "built-in GPT Imagegen",
+      "promptFiles": [
+        "prompts/entry-executed/entry-leaves.txt"
+      ],
+      "promptHashes": {
+        "prompts/entry-executed/entry-leaves.txt": "eeaffc75767b49c9c55efa95820552b07dd86746fb0d26023ed2ec9d10b26984"
+      },
+      "status": "source-delivered",
+      "alphaBounds": [
+        65,
+        63,
+        1482,
+        966
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "cells": [
+        {
+          "index": 0,
+          "name": "monstera",
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            65,
+            84,
+            484,
+            469
+          ],
+          "cellEdgeMaxAlpha": 1,
+          "visibleBoundsInsideCell": true,
+          "pivot": [
+            274.5,
+            276.5
+          ],
+          "pivotSpace": "cell-local"
+        },
+        {
+          "index": 1,
+          "name": "heart",
+          "rect": [
+            512,
+            0,
+            1024,
+            512
+          ],
+          "alphaBounds": [
+            581,
+            89,
+            959,
+            502
+          ],
+          "cellEdgeMaxAlpha": 1,
+          "visibleBoundsInsideCell": true,
+          "pivot": [
+            258.0,
+            295.5
+          ],
+          "pivotSpace": "cell-local"
+        },
+        {
+          "index": 2,
+          "name": "fern",
+          "rect": [
+            1024,
+            0,
+            1536,
+            512
+          ],
+          "alphaBounds": [
+            1075,
+            63,
+            1482,
+            493
+          ],
+          "cellEdgeMaxAlpha": 1,
+          "visibleBoundsInsideCell": true,
+          "pivot": [
+            254.5,
+            278.0
+          ],
+          "pivotSpace": "cell-local"
+        },
+        {
+          "index": 3,
+          "name": "banana",
+          "rect": [
+            0,
+            512,
+            512,
+            1024
+          ],
+          "alphaBounds": [
+            85,
+            561,
+            499,
+            966
+          ],
+          "cellEdgeMaxAlpha": 1,
+          "visibleBoundsInsideCell": true,
+          "pivot": [
+            292.0,
+            251.5
+          ],
+          "pivotSpace": "cell-local"
+        },
+        {
+          "index": 4,
+          "name": "curled-round",
+          "rect": [
+            512,
+            512,
+            1024,
+            1024
+          ],
+          "alphaBounds": [
+            598,
+            589,
+            961,
+            966
+          ],
+          "cellEdgeMaxAlpha": 1,
+          "visibleBoundsInsideCell": true,
+          "pivot": [
+            267.5,
+            265.5
+          ],
+          "pivotSpace": "cell-local"
+        },
+        {
+          "index": 5,
+          "name": "two-leaf-sprig",
+          "rect": [
+            1024,
+            512,
+            1536,
+            1024
+          ],
+          "alphaBounds": [
+            1147,
+            606,
+            1466,
+            947
+          ],
+          "cellEdgeMaxAlpha": 1,
+          "visibleBoundsInsideCell": true,
+          "pivot": [
+            282.5,
+            264.5
+          ],
+          "pivotSpace": "cell-local"
+        }
+      ],
+      "cellConvention": "half-open rectangles, row-major; trace alpha <=1 at some cell boundaries retained from native output",
+      "source": "source/entry/leaves.png",
+      "runtimePath": null,
+      "registration": "review/entry/registration.json"
     }
   ],
   "unselectedVariants": [
@@ -13661,7 +14318,7 @@
       "reason": "Extraction attempt increased saturation; original v1 already has usable alpha."
     }
   ],
-  "updatedAt": "2026-10-15",
+  "updatedAt": "2026-10-16",
   "v3": {
     "stage": "source-set-complete",
     "masterCandidatesGenerated": 14,
@@ -13732,7 +14389,11 @@
     "motionReviewGifs": 17,
     "finishReviewGifs": 8,
     "motionPolishPendingApprovalMasters": 0,
-    "motionPolishReviewGifs": 10
+    "motionPolishReviewGifs": 10,
+    "entryPngAssets": 10,
+    "entryCurtainLayers": 8,
+    "entryLeafSheetCells": 6,
+    "entryPreviewGifs": 4
   },
   "motion": {
     "stage": "priority-1-source-complete",
@@ -13884,5 +14545,19 @@
     "handoff": "CLAUDE_HANDOFF_MOTION.md",
     "completedDate": "2026-10-15",
     "reviewGifs": 10
+  },
+  "entry": {
+    "stage": "source-set-complete",
+    "deliveredCount": 10,
+    "remainingCount": 0,
+    "ownerApprovedLeft": true,
+    "ownerApprovalDate": "2026-10-16",
+    "registration": "review/entry/registration.json",
+    "review": "review/entry/index.html",
+    "handoff": "CLAUDE_HANDOFF_ENTRY.md",
+    "qa": "review/entry/entry-qa.json",
+    "completedDate": "2026-10-16",
+    "previewGifs": 4,
+    "sheetCells": 6
   }
 }

@@ -25,6 +25,7 @@ from PIL import Image, ImageFilter
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import rigs  # noqa: E402
 import v3  # noqa: E402
+import entry  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, "art", "source")
@@ -329,6 +330,7 @@ def main() -> int:
     manifest["backgrounds"]["jungle"] = export_background("jungle-backdrop-v1.png", "assets/bg/jungle.webp", 80, report)
     manifest["backgrounds"]["collection"] = export_background("collection-background-v1.png", "assets/bg/collection.webp", 80, report)
     manifest["backgrounds"]["ground"] = export_background("ground-plate-v1.png", "assets/bg/ground.webp", 82, report)
+    manifest["entry"] = entry.process_entry(SRC, os.path.join(ROOT, "public"), os.path.join(ROOT, "art", "review", "entry", "registration.json"), report)
     manifest["intro"] = v3.process_intro(
         SRC,
         os.path.join(ROOT, "public"),
@@ -342,6 +344,7 @@ def main() -> int:
         for v in manifest[group].values():
             if isinstance(v, dict):
                 total += v.get("bytes", 0)
+    total += manifest["entry"]["bytes"]
     manifest["totalBytes"] = total
     with open(os.path.join(OUT, "manifest.json"), "w") as fh:
         json.dump(manifest, fh, indent=1)

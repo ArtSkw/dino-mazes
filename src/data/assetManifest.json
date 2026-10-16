@@ -1803,19 +1803,129 @@
    0.4244
   ]
  },
+ "entry": {
+  "canvas": [
+   1024,
+   1536
+  ],
+  "overscan": 48,
+  "bytes": 1400474,
+  "left": [
+   {
+    "name": "back",
+    "image": "assets/entry/curtain-left-back.webp",
+    "x": 0,
+    "y": 0,
+    "w": 719,
+    "h": 1536,
+    "bytes": 105854
+   },
+   {
+    "name": "mid",
+    "image": "assets/entry/curtain-left-mid.webp",
+    "x": 0,
+    "y": 0,
+    "w": 738,
+    "h": 1536,
+    "bytes": 243020
+   },
+   {
+    "name": "front-top",
+    "image": "assets/entry/curtain-left-front-top.webp",
+    "x": 0,
+    "y": 0,
+    "w": 837,
+    "h": 1004,
+    "bytes": 139058
+   },
+   {
+    "name": "front-bottom",
+    "image": "assets/entry/curtain-left-front-bottom.webp",
+    "x": 0,
+    "y": 718,
+    "w": 848,
+    "h": 818,
+    "bytes": 124614
+   }
+  ],
+  "right": [
+   {
+    "name": "back",
+    "image": "assets/entry/curtain-right-back.webp",
+    "x": 244,
+    "y": 0,
+    "w": 780,
+    "h": 1536,
+    "bytes": 122972
+   },
+   {
+    "name": "mid",
+    "image": "assets/entry/curtain-right-mid.webp",
+    "x": 382,
+    "y": 0,
+    "w": 642,
+    "h": 1536,
+    "bytes": 203614
+   },
+   {
+    "name": "front-top",
+    "image": "assets/entry/curtain-right-front-top.webp",
+    "x": 191,
+    "y": 0,
+    "w": 833,
+    "h": 1110,
+    "bytes": 154748
+   },
+   {
+    "name": "front-bottom",
+    "image": "assets/entry/curtain-right-front-bottom.webp",
+    "x": 143,
+    "y": 764,
+    "w": 881,
+    "h": 772,
+    "bytes": 119466
+   }
+  ],
+  "backing": {
+   "image": "assets/entry/backing.webp",
+   "width": 1536,
+   "height": 1024,
+   "bytes": 123548
+  },
+  "leaves": [
+   {
+    "image": "assets/entry/leaf-0.webp",
+    "width": 192,
+    "height": 176
+   },
+   {
+    "image": "assets/entry/leaf-1.webp",
+    "width": 176,
+    "height": 192
+   },
+   {
+    "image": "assets/entry/leaf-2.webp",
+    "width": 181,
+    "height": 192
+   },
+   {
+    "image": "assets/entry/leaf-3.webp",
+    "width": 192,
+    "height": 188
+   },
+   {
+    "image": "assets/entry/leaf-4.webp",
+    "width": 185,
+    "height": 192
+   },
+   {
+    "image": "assets/entry/leaf-5.webp",
+    "width": 181,
+    "height": 192
+   }
+  ]
+ },
  "intro": {
-  "curtainLeft": {
-   "image": "assets/intro/curtain-left.webp",
-   "width": 683,
-   "height": 1536,
-   "bytes": 207070
-  },
-  "curtainRight": {
-   "image": "assets/intro/curtain-right.webp",
-   "width": 640,
-   "height": 1536,
-   "bytes": 181998
-  },
   "lightShafts": {
    "image": "assets/intro/light-shafts.webp",
    "width": 1536,
@@ -1899,5 +2009,5 @@
    "bytes": 37908
   }
  },
- "totalBytes": 9423363
+ "totalBytes": 10434769
 }
