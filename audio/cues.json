@@ -215,13 +215,15 @@
       "id": "treasure-flower",
       "label": "Kwiat (dźwięk skarbu)",
       "event": "the flower is found",
-      "prompt": "A magical flower opens: a soft rising harp glissando with a delicate celesta sparkle, like petals of light unfolding. Fairy-tale and joyful.",
+      "prompt": "Velvety flower petals softly unfolding: a delicate, airy rustle of petals with one faint, gentle shimmer of light at the end. Quiet, tender and pleasant. No melody, no notes, no tune, no chimes running up or down.",
       "seconds": 1.4,
       "influence": 0.5,
       "takes": 3,
-      "style": "gentle",
-      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal).",
-      "pick": 1
+      "note": "Owner, round 25: the magical take sounded like the win tune right after it (one plays after the other); now a subtle, non-melodic texture.",
+      "pick": 1,
+      "plain": true,
+      "provisional": true,
+      "lufs": -18
     },
     {
       "id": "treasure-stone",
@@ -275,13 +277,15 @@
       "id": "treasure-strawberry",
       "label": "Truskawka (dźwięk skarbu)",
       "event": "the strawberry is found",
-      "prompt": "A magical strawberry treasure: a playful two-note pizzicato hop and a sweet sparkling celesta twinkle. Cute and joyful.",
+      "prompt": "A ripe strawberry gently picked from its stem: one soft, round, juicy little 'pop' with a tiny leafy rustle, then a faint sparkle of light. Quiet, cosy and pleasant. No melody, no notes, no tune, no bounce.",
       "seconds": 1.2,
       "influence": 0.5,
       "takes": 3,
-      "style": "gentle",
-      "note": "Owner, round 3: sounded like bubbling, sliding or squashing; make it delicate, fairy-tale, magical, joyful (like the Giga Flower and the crystal).",
-      "pick": 1
+      "note": "Owner, round 25: the magical take sounded like the win tune right after it (one plays after the other); now a subtle, non-melodic texture.",
+      "pick": 1,
+      "plain": true,
+      "provisional": true,
+      "lufs": -18
     },
     {
       "id": "treasure-amber",

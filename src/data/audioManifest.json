@@ -50,8 +50,8 @@
    "s": 0.78
   },
   "treasure-flower": {
-   "src": "assets/audio/fx/treasure-flower-f8400fb9.m4a",
-   "s": 0.82
+   "src": "assets/audio/fx/treasure-flower-451153c5.m4a",
+   "s": 0.66
   },
   "treasure-stone": {
    "src": "assets/audio/fx/treasure-stone-60d3cadd.m4a",
@@ -70,8 +70,8 @@
    "s": 1.11
   },
   "treasure-strawberry": {
-   "src": "assets/audio/fx/treasure-strawberry-ca846b62.m4a",
-   "s": 0.38
+   "src": "assets/audio/fx/treasure-strawberry-a774a485.m4a",
+   "s": 0.86
   },
   "treasure-amber": {
    "src": "assets/audio/fx/treasure-amber-5a7b5b1f.m4a",
@@ -1018,5 +1018,5 @@
    }
   }
  },
- "bytes": 4789220
+ "bytes": 4791430
 }

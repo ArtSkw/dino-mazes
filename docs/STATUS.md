@@ -52,6 +52,13 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 25 (16 October 2026): treasure stings that do not echo the win tune
+
+The flower's and the strawberry's magical stings (a harp run, a pizzicato hop with a celesta
+twinkle) sounded like the win tune they follow. Both are remade as quiet, non-melodic textures
+(petals unfolding with one faint shimmer; a ripe strawberry picked with a soft pop), mastered a
+little quieter (−18 LUFS); take 1 is in the game until the owner picks on the listening page.
+
 ## Owner review, round 24 (16 October 2026): the vines, the quest card on small phones
 
 - The vines above the sign looked cropped: on a phone the sign hangs low, so a vine must be about
