@@ -49,7 +49,7 @@ export class Ui implements UiBridge {
   private welcome!: HTMLElement;
   private welcomeCard!: HTMLElement;
   private signEl!: HTMLElement;
-  private vines: HTMLImageElement[] = [];
+  private vines: HTMLElement[] = [];
   private sproutImgs: HTMLImageElement[] = [];
   private curtains!: HTMLElement;
   private curtainsOpened = false;
@@ -185,7 +185,16 @@ export class Ui implements UiBridge {
     // Title on a wooden sign hanging from two vines (live, localized text),
     // "Graj" below it; during the opening the button sprouts from a seedling.
     const signArt = ASSETS.intro.titleSign;
-    this.vines = signArt.loops.map(() => h('img', { class: 'vine', src: assetUrl(ASSETS.intro.vine.image), alt: '', draggable: 'false' }));
+    // Each vine: its looped end at its own size, the stem repeating above it to the top of the screen.
+    const stemUrl = new URL(assetUrl(ASSETS.intro.vine.stem.image), document.baseURI).href;
+    this.vines = signArt.loops.map(() =>
+      h(
+        'div',
+        { class: 'vine' },
+        h('div', { class: 'vine-stem', style: `background-image:url("${stemUrl}")` }),
+        h('img', { class: 'vine-loop', src: assetUrl(ASSETS.intro.vine.image), alt: '', draggable: 'false' }),
+      ),
+    );
     this.signEl = h(
       'div',
       { class: 'sign', style: `aspect-ratio:${signArt.width}/${signArt.height}` },
@@ -720,13 +729,16 @@ export class Ui implements UiBridge {
     this.signEl.style.setProperty('--sign-w', `${signW}px`);
     const art = ASSETS.intro.vine;
     const vineW = signW * 0.085;
+    // The looped end at its own proportions; the stem tiles cover the rest (no stretching, no cropping).
     const natural = (vineW * art.height) / art.width;
     ASSETS.intro.titleSign.loops.forEach((loop, i) => {
       const v = this.vines[i];
       if (!v) return;
       const bottom = loop.y * signH + signH * 0.05;
       const needed = cardTop + bottom + 12;
-      const height = Math.max(natural * 0.5, needed);
+      const height = Math.max(natural, needed);
+      const stem = v.firstElementChild as HTMLElement | null;
+      if (stem) stem.style.height = `${Math.max(0, height - natural + 1)}px`;
       v.style.width = `${vineW}px`;
       v.style.height = `${height}px`;
       v.style.left = `${loop.x * signW - vineW * art.bottomX}px`;
@@ -1119,7 +1131,18 @@ export class Ui implements UiBridge {
       this.introTreasureName.textContent = TREASURES[session.treasureId].name[lang];
       this.introRibbon.hidden = !session.special;
       this.goBtn.textContent = this.ctrl.tr('letsLook');
-      place(this.intro.firstElementChild as HTMLElement, introCardRect(vw, vh, friendFrame(session.characterId)));
+      const cardEl = this.intro.firstElementChild as HTMLElement;
+      const cardRect = introCardRect(vw, vh, friendFrame(session.characterId));
+      place(cardEl, cardRect);
+      // Never let the treasure, the words or the button stick out of the card (short phones):
+      // grow it around its middle, staying below the top bar and on the screen.
+      const portrait = orientationOf(vw, vh) === 'portrait';
+      const top = portrait ? clusterSpec(vw, vh).rect.y + clusterSpec(vw, vh).rect.h + 8 : 8;
+      const need = Math.min(contentHeight(cardEl), vh - top - 8);
+      if (need > cardRect.h + 1) {
+        const y = Math.max(top, Math.min(cardRect.y - (need - cardRect.h) / 2, vh - need - 8));
+        place(cardEl, { ...cardRect, y, h: need });
+      }
       this.companionBtn.setAttribute('aria-label', this.ctrl.tr('talkTo', { name: CHARACTERS[session.characterId].name[lang] }));
     }
 
@@ -1200,6 +1223,23 @@ export class Ui implements UiBridge {
       .map(([k, v]) => `${k}: ${v}`)
       .join('\n');
   }
+}
+
+/**
+ * Height a flex column needs for its children: their heights, its gaps, its
+ * padding and its frame (scrollHeight misses what a centred column pushes out at
+ * the top).
+ */
+function contentHeight(el: HTMLElement): number {
+  const cs = getComputedStyle(el);
+  const kids = [...el.children].filter((k) => !(k as HTMLElement).hidden) as HTMLElement[];
+  const gap = parseFloat(cs.rowGap) || 0;
+  const inner = kids.reduce((n, k) => {
+    const m = getComputedStyle(k);
+    return n + k.offsetHeight + (parseFloat(m.marginTop) || 0) + (parseFloat(m.marginBottom) || 0);
+  }, 0);
+  const frame = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0) + (parseFloat(cs.borderTopWidth) || 0) + (parseFloat(cs.borderBottomWidth) || 0);
+  return Math.ceil(inner + gap * Math.max(0, kids.length - 1) + frame);
 }
 
 /** The opening planned at boot (the UI is built after Controller.planOpening). */

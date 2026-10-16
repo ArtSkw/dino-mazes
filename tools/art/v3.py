@@ -44,6 +44,9 @@ CUT_FADE = 0.03
 # The opening's Giganto peek is cut straight on its left and bottom: those edges
 # fade out over this share of the 512 cell.
 PEEK_FADE = 0.06
+# Source rows of the vine (intro-vine.png) whose stem repeats seamlessly: only
+# stem on both rows, centred at x 593 and 74 px wide on each (measured).
+VINE_STEM = (454, 864)
 CHAR_IDS = ["bill", "tiny", "mazu", "rocky", "giganto"]
 SEQ = {
     "idle": [f"idle-{i:02d}" for i in range(0, 8)],
@@ -425,14 +428,22 @@ def process_intro(src_root: str, public_root: str, measurements_path: str, cell_
     vine = vine.crop((max(0, vx0 - 4), 0, min(vine.width, vx1 + 4), min(vine.height, vy1 + 4)))
     va = np.array(vine)[:, :, 3]
     tail = np.nonzero((va[-int(vine.height * 0.08):] >= 40).any(axis=0))[0]
-    vine = _premul_resize(vine, (round(vine.width * 0.5), round(vine.height * 0.5)))
+    # The vine is often taller on screen than its art (the sign hangs low on a
+    # phone). It is cut into its looped end and a stem segment that repeats
+    # upward: rows VINE_STEM of the source hold only the stem, at the same place
+    # and width at both ends, so tiles and the loop join without a seam.
+    s0, s1 = VINE_STEM
+    loop = _premul_resize(vine.crop((0, s1, vine.width, vine.height)), (round(vine.width * 0.5), round((vine.height - s1) * 0.5)))
+    stem = _premul_resize(vine.crop((0, s0, vine.width, s1)), (round(vine.width * 0.5), round((s1 - s0) * 0.5)))
     path = os.path.join(out_dir, "vine.webp")
+    stem_path = os.path.join(out_dir, "vine-stem.webp")
     m["vine"] = {
         "image": rel(path),
-        "width": vine.width,
-        "height": vine.height,
+        "width": loop.width,
+        "height": loop.height,
         "bottomX": round(((tail.min() + tail.max()) / 2) / (va.shape[1]), 4),
-        "bytes": _save_webp(vine, path, 85),
+        "stem": {"image": rel(stem_path), "width": stem.width, "height": stem.height, "bytes": _save_webp(stem, stem_path, 85)},
+        "bytes": _save_webp(loop, path, 85),
     }
     report["intro"] = {k: {kk: vv for kk, vv in v.items() if kk in ("bytes", "decodedBytes", "width", "height")} for k, v in m.items() if isinstance(v, dict)}
     print("intro:", ", ".join(f"{k} {v.get('bytes', 0) / 1024:.0f} KB" for k, v in m.items() if isinstance(v, dict)))

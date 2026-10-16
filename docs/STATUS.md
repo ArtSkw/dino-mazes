@@ -52,6 +52,19 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 24 (16 October 2026): the vines, the quest card on small phones
+
+- The vines above the sign looked cropped: on a phone the sign hangs low, so a vine must be about
+  twice as tall as its art, and `object-fit: cover` enlarged it and cut its leaves along a straight
+  line. The vine is now its looped end at its own proportions with a stem segment repeating above
+  it (`VINE_STEM`, source rows 454–864: only stem on both rows, same place and width, so the tiles
+  join without a seam). Nothing is stretched or cropped any more.
+- The quest card's treasure, name, text and button scale with the height on short screens
+  (portrait under 760 px, landscape phones), and the card measures its content after it is placed
+  and grows around its middle when something would stick out, never past the top bar or the
+  screen. Checked at 360×640, 375×667, 360×740, 390×844, 844×390 and 667×375: all content inside
+  the frame.
+
 ## Owner review, round 23 (16 October 2026): no double sound, phone proportions
 
 - Tapping a friend no longer plays the little pop before its voice: the pop plays only when

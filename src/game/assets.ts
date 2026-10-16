@@ -78,7 +78,8 @@ export interface IntroAssets {
   dust: AtlasAsset & { frames: string[] };
   sprout: { stages: string[]; width: number; height: number; soil: { x: number; y: number } };
   titleSign: ItemAsset & { loops: Array<{ x: number; y: number }>; plank: { top: number; bottom: number } };
-  vine: ItemAsset & { bottomX: number };
+  /** The vine's looped end; `stem` repeats above it as tall as the vine must reach. */
+  vine: ItemAsset & { bottomX: number; stem: ItemAsset };
 }
 
 interface Manifest {

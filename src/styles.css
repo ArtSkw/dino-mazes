@@ -375,11 +375,28 @@ button:focus-visible,
 /* Vines hang from above the screen edge to the rope loops (ui.ts sizes them). */
 .vine {
   position: absolute;
-  object-fit: cover;
-  object-position: 50% 100%;
   pointer-events: none;
   user-select: none;
   filter: drop-shadow(0 4px 6px rgba(20, 40, 10, 0.3));
+}
+
+/* The stem segment repeats upward from the loop; both keep the art's own proportions. */
+.vine-stem {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+  background-position: 50% 100%;
+}
+
+.vine-loop {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
 }
 
 .sign-text {
@@ -1938,5 +1955,34 @@ button:focus-visible,
     font-size: 1.4rem;
     min-width: 190px;
     min-height: 64px;
+  }
+}
+
+/* Short screens (small phones): the quest card's treasure, words and button scale
+   with the height, so they fit the card with room around them. */
+@media (max-height: 760px) and (orientation: portrait), (max-height: 500px) and (orientation: landscape) {
+  .intro-treasure-wrap {
+    width: min(42%, 190px, 17vh);
+  }
+
+  .intro-treasure-name {
+    font-size: 1.3rem;
+  }
+
+  .intro-prompt {
+    font-size: 1.12rem;
+    margin: 2px 0 8px;
+  }
+
+  .btn-go {
+    font-size: 1.3rem;
+    min-height: 58px;
+  }
+}
+
+/* Landscape phones: the card is wide and has height to spare for a larger treasure. */
+@media (max-height: 500px) and (orientation: landscape) {
+  .intro-treasure-wrap {
+    width: min(42%, 190px, 24vh);
   }
 }

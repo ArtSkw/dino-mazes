@@ -2004,10 +2004,16 @@
   "vine": {
    "image": "assets/intro/vine.webp",
    "width": 146,
-   "height": 734,
+   "height": 302,
    "bottomX": 0.6451,
-   "bytes": 37908
+   "stem": {
+    "image": "assets/intro/vine-stem.webp",
+    "width": 146,
+    "height": 205,
+    "bytes": 10078
+   },
+   "bytes": 15130
   }
  },
- "totalBytes": 10434769
+ "totalBytes": 10422069
 }

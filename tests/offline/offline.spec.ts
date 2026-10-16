@@ -60,7 +60,7 @@ test('painted UI surfaces and the welcome/opening art load in the production bui
       pick('.reset-btn', 'border-image-source'),
       pick('.intro-card', 'background-image', '::after'),
       // DOM art of the welcome screen and the opening.
-      ...['.sign-board', '.vine', '.curtain.left .layer-front-top', '.curtain.right .layer-back', '.sprout'].map((sel) => {
+      ...['.sign-board', '.vine-loop', '.curtain.left .layer-front-top', '.curtain.right .layer-back', '.sprout'].map((sel) => {
         const img = document.querySelector<HTMLImageElement>(sel);
         return img ? `url("${img.src}")` : 'none';
       }),
