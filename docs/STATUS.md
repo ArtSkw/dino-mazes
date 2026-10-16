@@ -60,6 +60,7 @@ twinkle) sounded like the win tune they follow. Both are remade as quiet, non-me
 little quieter (−18 LUFS); take 1 is in the game until the owner picks on the listening page.
 Round 26: the strawberry's take 1 kept; the flower's was dry and buzzed at its end, so it is made
 again like the feather (an airy swish, one soft round chime, the `gentle` style) with soft leaves.
+The owner picked its take 2.
 
 ## Owner review, round 24 (16 October 2026): the vines, the quest card on small phones
 
