@@ -215,15 +215,14 @@
       "id": "treasure-flower",
       "label": "Kwiat (dźwięk skarbu)",
       "event": "the flower is found",
-      "prompt": "Velvety flower petals softly unfolding: a delicate, airy rustle of petals with one faint, gentle shimmer of light at the end. Quiet, tender and pleasant. No melody, no notes, no tune, no chimes running up or down.",
+      "prompt": "A flower opens softly in a light breeze: an airy, silky swish and a gentle rustle of soft fresh leaves, with one tiny, soft, round chime at the very end. Light and dreamy, no buzzing, no hum, nothing dry.",
       "seconds": 1.4,
       "influence": 0.5,
       "takes": 3,
-      "note": "Owner, round 25: the magical take sounded like the win tune right after it (one plays after the other); now a subtle, non-melodic texture.",
+      "note": "Owner, round 26: the round-25 take was dry and buzzed at the end; now like the feather (airy swish, one soft chime) with soft leaves.",
       "pick": 1,
-      "plain": true,
       "provisional": true,
-      "lufs": -18
+      "style": "gentle"
     },
     {
       "id": "treasure-stone",
@@ -284,7 +283,6 @@
       "note": "Owner, round 25: the magical take sounded like the win tune right after it (one plays after the other); now a subtle, non-melodic texture.",
       "pick": 1,
       "plain": true,
-      "provisional": true,
       "lufs": -18
     },
     {

@@ -50,8 +50,8 @@
    "s": 0.78
   },
   "treasure-flower": {
-   "src": "assets/audio/fx/treasure-flower-451153c5.m4a",
-   "s": 0.66
+   "src": "assets/audio/fx/treasure-flower-22cef951.m4a",
+   "s": 1.04
   },
   "treasure-stone": {
    "src": "assets/audio/fx/treasure-stone-60d3cadd.m4a",
@@ -1018,5 +1018,5 @@
    }
   }
  },
- "bytes": 4791430
+ "bytes": 4794145
 }

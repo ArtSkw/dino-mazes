@@ -58,6 +58,8 @@ The flower's and the strawberry's magical stings (a harp run, a pizzicato hop wi
 twinkle) sounded like the win tune they follow. Both are remade as quiet, non-melodic textures
 (petals unfolding with one faint shimmer; a ripe strawberry picked with a soft pop), mastered a
 little quieter (−18 LUFS); take 1 is in the game until the owner picks on the listening page.
+Round 26: the strawberry's take 1 kept; the flower's was dry and buzzed at its end, so it is made
+again like the feather (an airy swish, one soft round chime, the `gentle` style) with soft leaves.
 
 ## Owner review, round 24 (16 October 2026): the vines, the quest card on small phones
 
