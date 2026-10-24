@@ -409,7 +409,7 @@ export class Controller {
     if (opts.keepQuestOf) {
       const prev = opts.keepQuestOf;
       const eff = this.screenCap(opts.difficultyOverride ?? prev.effectiveDifficulty);
-      const fit = fitGrid(eff, this.viewport.width(), this.viewport.height());
+      const fit = fitGrid(eff, this.viewport.width(), this.viewport.height(), friendFrame(prev.characterId));
       maze = this.freshMaze(eff, fit.grid, save);
       session = { ...withTurned(prev, false), id: freshSeed(), seed: maze.seed, effectiveDifficulty: eff, difficulty: prev.difficulty, grid: { cols: maze.width, rows: maze.height }, trail: [], status: 'ready', hintUsed: false, resets: 0, layoutHash: maze.layoutHash };
     } else {
@@ -420,7 +420,7 @@ export class Controller {
       if (choice.intro) {
         maze = introMaze();
       } else {
-        const fit = fitGrid(eff, this.viewport.width(), this.viewport.height());
+        const fit = fitGrid(eff, this.viewport.width(), this.viewport.height(), friendFrame(choice.characterId));
         maze = this.freshMaze(eff, fit.grid, save);
       }
       session = {

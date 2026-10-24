@@ -42,7 +42,7 @@ interface ProfileRule {
 
 /**
  * Profile targets per effective grid. Generated mazes start at 'medium' and step
- * up through LEVELS; the grid grows only where the screen keeps corridors ≥ 48 px,
+ * up through LEVELS; the grid grows only where the screen keeps corridors ≥ 40 px,
  * so most of the growth comes from topology: more real branch choices and a
  * longer route. Targets were picked from measured distributions so that the
  * fallback stays rare (tests/domain/maze.test.ts: < 1 % per profile).
@@ -122,12 +122,17 @@ const RULES: Record<Difficulty, Record<string, ProfileRule>> = {
 
 /** Automatic progression of generated mazes (the tutorial maze is 'easy'). */
 // Owner decision (14 Oct 2026): start noticeably harder; bigger grids where the
-// screen keeps corridors ≥ 48 px (9×7 on a 1180×820 tablet, 11×9 on a laptop).
+// screen keeps corridors wide enough (9×9 on a 1180×820 tablet since 24 Oct 2026, 11×9 on a laptop).
 export const LEVELS: Difficulty[] = ['hard', 'expert', 'master', 'grand'];
 
-/** Grid candidates in preference order; the layout fitter picks the first that fits. */
+/**
+ * Grid candidates in preference order; the layout fitter picks the first that fits.
+ * In landscape a tall 7×9 comes before 9×7: it is narrower, so on 4:3 iPads it
+ * leaves the friend room where 9×9 cannot (owner request, 24 Oct 2026).
+ */
 export function gridCandidates(difficulty: Difficulty, landscape: boolean): GridSpec[] {
   const wide = (a: number, b: number): GridSpec => (landscape ? { cols: a, rows: b } : { cols: b, rows: a });
+  const tall97: GridSpec[] = landscape ? [{ cols: 7, rows: 9 }, { cols: 9, rows: 7 }] : [{ cols: 7, rows: 9 }];
   switch (difficulty) {
     case 'easy':
       return [{ cols: 5, rows: 5 }];
@@ -138,10 +143,10 @@ export function gridCandidates(difficulty: Difficulty, landscape: boolean): Grid
     case 'harder':
     case 'hard':
     case 'expert':
-      return [{ cols: 9, rows: 9 }, wide(9, 7), { cols: 7, rows: 7 }, wide(7, 5), { cols: 5, rows: 5 }];
+      return [{ cols: 9, rows: 9 }, ...tall97, { cols: 7, rows: 7 }, wide(7, 5), { cols: 5, rows: 5 }];
     case 'master':
     case 'grand':
-      return [wide(11, 9), { cols: 9, rows: 9 }, wide(9, 7), { cols: 7, rows: 7 }, wide(7, 5), { cols: 5, rows: 5 }];
+      return [wide(11, 9), { cols: 9, rows: 9 }, ...tall97, { cols: 7, rows: 7 }, wide(7, 5), { cols: 5, rows: 5 }];
   }
 }
 /**

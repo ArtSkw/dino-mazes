@@ -5,7 +5,8 @@
  *
  * Priorities: treasure and maze first, friend second, controls third. Corridors
  * never shrink below MIN_CORRIDOR_PX to keep a nominal grid; a smaller grid is
- * chosen instead (and recorded as the effective profile).
+ * chosen instead (and recorded as the effective profile). In landscape the
+ * board gives up width before the friend shrinks (FRIEND_KEEP).
  */
 import { CORRIDOR_RADIUS, ENTRANCE_REACH, FRAME_MARGIN, entranceAxes, gridCandidates, phoneGridCandidates } from '../domain/maze';
 import type { Difficulty, GridSpec, Side } from '../domain/types';
@@ -20,9 +21,15 @@ export interface Rect {
 export type Corner = 'left' | 'right';
 export type Orientation = 'landscape' | 'portrait';
 
-export const MIN_CORRIDOR_PX = 48;
 /**
- * Phones never reach 48 px, not even on a 5×5 grid. A longer maze is used
+ * Tablets keep the mazes of a big screen (owner request, 24 Oct 2026): a 9×9
+ * maze on a 10–11" iPad has corridors of about 40–45 px (7.5–8.5 mm), so the
+ * floor is 40 px instead of the earlier 48, which held iPads at 7×7 or 5×5.
+ * The trail's corridor tolerance keeps a finger drawing inside the corridor.
+ */
+export const MIN_CORRIDOR_PX = 40;
+/**
+ * Phones never reach the tablet floor, not even on a 5×5 grid. A longer maze is used
  * where its corridors stay at least this wide, about as wide as the old 5×5
  * on a landscape phone (owner request, 16 Oct 2026), or, on the smallest
  * phones, nearly as wide as a 5×5 on the same screen (PHONE_CORRIDOR_SHARE).
@@ -149,6 +156,38 @@ export function pitchFor(grid: GridSpec, area: Rect): number {
   return Math.min(area.w / uw, area.h / uh, MAX_PITCH);
 }
 
+/**
+ * In landscape the friend keeps at least this share of its full height beside
+ * a board (owner requests of 13 and 14 Oct 2026): a board that would squeeze it
+ * more is drawn smaller instead, and a grid whose corridors then fall under
+ * MIN_CORRIDOR_PX is not used.
+ */
+export const FRIEND_KEEP = 0.85;
+
+/** Full height of the friend's frame in landscape, before the strip beside the board limits it. */
+function friendFullHeight(vh: number, f: FriendFrame): number {
+  return Math.min(vh * 0.36 * f.size, 300 * f.size);
+}
+
+/**
+ * Pitch of a grid on this screen: the largest that fits its area and, in
+ * landscape on a tablet or computer, leaves the friend's strip wide enough
+ * for FRIEND_KEEP of its full size (phones keep their own proportions).
+ */
+export function boardPitch(grid: GridSpec, vw: number, vh: number, f: FriendFrame = DEFAULT_FRIEND): number {
+  const area = boardAreaFor(vw, vh);
+  const pitch = pitchFor(grid, area);
+  if (orientationOf(vw, vh) !== 'landscape' || isPhone(vw, vh)) return pitch;
+  const bleed = f.flushLeft ? (f.bleed ?? 0.12) : 0;
+  const need = FRIEND_KEEP * friendFullHeight(vh, f) * f.aspect * (1 - bleed) + 4;
+  // computeLayout: the strip ends 10 px before the board's frame, and the board
+  // sits centred in its area, leaning away from the friend by LEAN of the slack.
+  const units = grid.cols + 2 * SIDE_UNITS + (entranceAxes(grid).horizontal ? ENTRANCE_UNITS : 0);
+  const k = 0.5 + LEAN;
+  const cap = (area.x + k * area.w - 10 - need) / (k * units - (SIDE_UNITS - FRAME_MARGIN));
+  return cap > 0 ? Math.min(pitch, cap) : pitch;
+}
+
 export interface GridFit {
   grid: GridSpec;
   corridorPx: number;
@@ -158,40 +197,23 @@ export interface GridFit {
 }
 
 /**
- * In landscape the friend stands in the strip beside the board. A bigger grid
- * is only used if that strip stays at least this wide, so harder mazes never
- * shrink the friend (owner requests of 13 and 14 Oct 2026); otherwise the
- * difficulty comes from topology on a smaller grid.
+ * The first candidate grid whose corridors stay at least the minimum wide.
+ * In landscape the friend's room is already taken out of the board (boardPitch),
+ * so a bigger grid never shrinks the friend below FRIEND_KEEP.
  */
-export function minFriendStrip(vh: number): number {
-  return Math.min(250, vh * 0.28);
-}
-
-/** Width of the strip beside a board of this grid (bottom entrance, no lean). */
-function friendStrip(grid: GridSpec, area: Rect): number {
-  const pitch = pitchFor(grid, area);
-  const bw = (grid.cols + 2 * SIDE_UNITS) * pitch;
-  return area.x + Math.max(0, area.w - bw) / 2 + (SIDE_UNITS - FRAME_MARGIN) * pitch;
-}
-
-export function fitGrid(difficulty: Difficulty, vw: number, vh: number): GridFit {
-  const area = boardAreaFor(vw, vh);
+export function fitGrid(difficulty: Difficulty, vw: number, vh: number, friend?: FriendFrame): GridFit {
   const landscape = orientationOf(vw, vh) === 'landscape';
   const phone = isPhone(vw, vh) && difficulty !== 'easy';
   const candidates = phone ? phoneGridCandidates(landscape) : gridCandidates(difficulty, landscape);
   const nominal = candidates[0] as GridSpec;
-  const smallestGrid = candidates[candidates.length - 1] as GridSpec;
-  const minCorridor = phone
-    ? Math.min(MIN_PHONE_CORRIDOR_PX, PHONE_CORRIDOR_SHARE * pitchFor(smallestGrid, area) * 2 * CORRIDOR_RADIUS)
-    : MIN_CORRIDOR_PX;
-  for (const grid of candidates) {
-    const corridorPx = pitchFor(grid, area) * 2 * CORRIDOR_RADIUS;
-    if (corridorPx < minCorridor) continue;
-    if (landscape && grid !== smallestGrid && friendStrip(grid, area) < minFriendStrip(vh)) continue;
-    return { grid, corridorPx, meetsMinimum: true, nominal };
-  }
   const smallest = candidates[candidates.length - 1] as GridSpec;
-  return { grid: smallest, corridorPx: pitchFor(smallest, area) * 2 * CORRIDOR_RADIUS, meetsMinimum: false, nominal };
+  const corridor = (grid: GridSpec): number => boardPitch(grid, vw, vh, friend) * 2 * CORRIDOR_RADIUS;
+  const minCorridor = phone ? Math.min(MIN_PHONE_CORRIDOR_PX, PHONE_CORRIDOR_SHARE * corridor(smallest)) : MIN_CORRIDOR_PX;
+  for (const grid of candidates) {
+    const corridorPx = corridor(grid);
+    if (corridorPx >= minCorridor) return { grid, corridorPx, meetsMinimum: true, nominal };
+  }
+  return { grid: smallest, corridorPx: corridor(smallest), meetsMinimum: false, nominal };
 }
 
 export interface LayoutInput {
@@ -236,7 +258,8 @@ export function computeLayout(input: LayoutInput): Layout {
   const { vw, vh, grid } = input;
   const orientation = orientationOf(vw, vh);
   const area = boardAreaFor(vw, vh);
-  const pitch = pitchFor(grid, area);
+  const f = input.friend ?? DEFAULT_FRIEND;
+  const pitch = boardPitch(grid, vw, vh, f);
   const corner = FRIEND_CORNER;
 
   // Actual logical extents of this board (entrance room only on its side).
@@ -269,7 +292,6 @@ export function computeLayout(input: LayoutInput): Layout {
   const spec = clusterSpec(vw, vh);
   const cluster: Layout['cluster'] = { x: spec.rect.x + spec.rect.w, y: spec.rect.y, direction: spec.direction, size: spec.size };
   const clusterRect: Rect = spec.rect;
-  const f = input.friend ?? DEFAULT_FRIEND;
   const boardRight = board.x + board.w;
   const boardBottom = board.y + board.h;
 
@@ -294,7 +316,7 @@ export function computeLayout(input: LayoutInput): Layout {
     const stripX1 = corner === 'left' ? board.x - 10 : vw;
     const stripW = stripX1 - stripX0;
     const bleed = f.flushLeft && corner === 'left' ? (f.bleed ?? 0.12) : 0;
-    let ch = Math.min(vh * 0.36 * f.size, 300 * f.size);
+    let ch = friendFullHeight(vh, f);
     let cw = ch * f.aspect;
     if (cw * (1 - bleed) > stripW - 4) {
       cw = (stripW - 4) / (1 - bleed);

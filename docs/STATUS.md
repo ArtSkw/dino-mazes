@@ -52,6 +52,49 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner review, round 30 (24 October 2026): a slip at a junction is not a choice
+
+The ink got stuck when a finger drifted a little toward a side opening at a junction, or
+overshot a turn into the corridor straight ahead: the route committed to that corridor once the
+ink was 0.22 of a cell into it (about 15 px, 3 mm on a tablet), and since the trail cannot go
+back, only "Wróć" helped. Measured on 150 9 × 9 mazes: a drift of 0.25 cell stuck the ink at
+every junction (859 of 859 straight past a side branch, 486 of 486 overshoots at a turn).
+
+- `commitDepth`: the route commits to a corridor only once the ink is 0.7 of a cell into it
+  (first 0.45; the owner then dipped a finger a little way into a wrong corridor and could not
+  come back, so it was widened). Deeper is a real choice, and "Wróć" stays the way back.
+- Corner assist also goes straight on: ink that drifted into a side opening comes back out
+  through the junction's centre instead of stopping at the hedge corner.
+- The ink drawn in an opening the route did not commit to is dropped when the ink leaves it, so
+  a slip leaves no spike in the trail.
+- Result: drifting up to 0.4 cell beside a junction, or dipping 0.6 cell into a wrong corridor
+  and back, never blocks; going 0.9 cell in commits to that corridor.
+- Tests: "a finger drifting into a side opening at a junction can still carry on" and "a finger
+  that dips into a wrong corridor and comes back can still carry on, unless it went deep" (both
+  fail on the previous engine). 321 unit, 87 e2e passed (1 skipped).
+
+## Owner review, round 29 (24 October 2026): tablets keep big-screen mazes
+
+Landscape iPads got simpler mazes than a computer: 7 × 7 on a 1180 × 820 iPad, and 5 × 5 at
+every level on 1024 × 768, 1080 × 810 and 1366 × 1024. Two causes: a 9 × 9 maze has 40–45 px
+corridors there (the floor was 48), and the friend-room check rejected every grid but the
+smallest on 4:3 screens, although a smaller grid gave the friend hardly more room.
+
+- Corridor floor 48 → 40 px (`MIN_CORRIDOR_PX`), owner's choice of complexity over width.
+- `boardPitch`: in landscape the board is drawn smaller rather than squeeze the friend below
+  85 % of its full height (`FRIEND_KEEP`); the strip check and `minFriendStrip` are gone. The
+  grid is fitted for the friend who hosts the maze.
+- Landscape candidates gain a tall 7 × 9 before 9 × 7: on 4:3 iPads it leaves the wider friends
+  room where 9 × 9 cannot.
+- Effective grids, hard → grand (corridor px): 1024 × 768 7 × 9 or 9 × 9 (41–44); 1080 × 810
+  9 × 9 or 7 × 9 (41–44); 1133 × 744 9 × 9 (40); 1180 × 820 and 1194 × 834 9 × 9 (43–45);
+  1366 × 1024 9 × 9 (52–56), 11 × 9 at master/grand (43–47). Computers gain too: 1366 × 768
+  9 × 9 (was 9 × 7), and 11 × 9 at master/grand there and on 1440 × 900 (was 9 × 9).
+- Tests: iPad sizes added to the layout collision tests; new tests for 9-row mazes on every
+  landscape iPad and every friend, and for FRIEND_KEEP. `tools/dev/review-tablet.mjs` shoots
+  mazes at iPad sizes. 319 unit, 87 e2e passed (1 skipped).
+- Pending: drawing a 40 px corridor with a child's finger on the family iPad.
+
 ## Owner review, round 28 (16 October 2026): banner, hideouts, resume fix
 
 - "Nowy skarb" is about the whole quest, so it sits at the top middle of the screen, not of the

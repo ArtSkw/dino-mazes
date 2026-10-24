@@ -267,6 +267,73 @@ describe('lift, resume and reversing', () => {
     }
   });
 
+  it('a finger drifting into a side opening at a junction can still carry on (owner request, 24 Oct 2026)', () => {
+    // Draw the solution, but near each junction drift `d` cells toward a side branch and back.
+    const drawWithDrift = (maze: Maze, i: number, side: number, d: number): TrailEngine => {
+      const nodes = solutionNodes(maze);
+      const P = nodePos(maze, nodes[i] as number);
+      const S = nodePos(maze, side);
+      const pts = [...centerlinePath(maze, nodes), maze.goal.center].map((p) => {
+        const r = dist(p, P);
+        const w = r < 0.35 ? 1 : r < 0.7 ? (0.7 - r) / 0.35 : 0;
+        return { x: p.x + (S.x - P.x) * d * w, y: p.y + (S.y - P.y) * d * w };
+      });
+      const e = new TrailEngine(maze);
+      drawPath(e, pts);
+      return e;
+    };
+    let junctions = 0;
+    for (const maze of mazes()) {
+      const nodes = solutionNodes(maze);
+      for (let i = 1; i < nodes.length - 1; i++) {
+        for (const side of nodeNeighbors(maze, nodes[i] as number).filter((n) => n !== nodes[i - 1] && n !== nodes[i + 1])) {
+          junctions++;
+          // A slip of up to 0.4 cell (straight past the opening, or an overshoot at a turn) never blocks the ink.
+          const slip = drawWithDrift(maze, i, side, 0.4);
+          expect(slip.solved, `${maze.seed} junction ${nodes[i]}`).toBe(true);
+          expect(slip.route).not.toContain(side);
+          expect(polylineInside(slip.points, allCapsules(maze, slip.collisionRadius))).toBe(true);
+          // The slip leaves no spike: the ink stays in the corridors of the route itself.
+          const route = nodes.slice(1).map((n, k) => ({ a: nodePos(maze, nodes[k] as number), b: nodePos(maze, n), r: slip.collisionRadius }));
+          expect(polylineInside(slip.points, route), `${maze.seed} junction ${nodes[i]} spike`).toBe(true);
+        }
+      }
+    }
+    expect(junctions).toBeGreaterThan(10);
+  });
+
+  it('a finger that dips into a wrong corridor and comes back can still carry on, unless it went deep', () => {
+    // Draw the solution to a junction, go `d` cells into a side branch, come back and go on.
+    const drawWithDip = (maze: Maze, i: number, side: number, d: number): TrailEngine => {
+      const nodes = solutionNodes(maze);
+      const P = nodePos(maze, nodes[i] as number);
+      const S = nodePos(maze, side);
+      const dip: Point[] = [];
+      for (let k = 1; k <= 20; k++) dip.push({ x: P.x + (S.x - P.x) * d * (k / 20), y: P.y + (S.y - P.y) * d * (k / 20) });
+      const pts = [...centerlinePath(maze, nodes.slice(0, i + 1)), ...dip, ...[...dip].reverse(), ...centerlinePath(maze, nodes.slice(i)), maze.goal.center];
+      const e = new TrailEngine(maze);
+      drawPath(e, pts);
+      return e;
+    };
+    for (const maze of mazes()) {
+      const nodes = solutionNodes(maze);
+      for (let i = 1; i < nodes.length - 1; i++) {
+        for (const side of nodeNeighbors(maze, nodes[i] as number).filter((n) => n !== nodes[i - 1] && n !== nodes[i + 1])) {
+          // Most of the way into the first cell is still a correction (owner request, 24 Oct 2026).
+          const back = drawWithDip(maze, i, side, 0.6);
+          expect(back.solved, `${maze.seed} junction ${nodes[i]}`).toBe(true);
+          expect(back.route).not.toContain(side);
+          const route = nodes.slice(1).map((n, k) => ({ a: nodePos(maze, nodes[k] as number), b: nodePos(maze, n), r: back.collisionRadius }));
+          expect(polylineInside(back.points, route), `${maze.seed} junction ${nodes[i]} spike`).toBe(true);
+          // Nearly at the next cell's centre is a choice: only "Wróć" undoes it.
+          const deep = drawWithDip(maze, i, side, 0.9);
+          expect(deep.solved).toBe(false);
+          expect(deep.route).toContain(side);
+        }
+      }
+    }
+  });
+
   it('a finger cutting the inside of a turn carries the ink round the corner (touch comfort)', () => {
     for (const maze of mazes()) {
       const nodes = solutionNodes(maze);
@@ -286,10 +353,10 @@ describe('lift, resume and reversing', () => {
         if (!straight) {
           turns++;
           expect(e.connected).toBe(true);
-          expect(e.route).toContain(nodes[i + 1]);
           expect(dist(e.endpoint!, m2)).toBeLessThan(1e-6);
         }
         e.move(c);
+        expect(e.route).toContain(nodes[i + 1]);
       }
       expect(turns).toBeGreaterThan(0);
       expect(polylineInside(e.points, allCapsules(maze, e.collisionRadius))).toBe(true);

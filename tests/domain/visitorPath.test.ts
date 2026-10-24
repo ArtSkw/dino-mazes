@@ -11,7 +11,7 @@ function rng(seed: number): () => number {
 
 const VIEWPORTS: Array<[number, number]> = [[1180, 820], [1366, 768], [1024, 768], [1440, 900], [1280, 720]];
 const layoutFor = (vw: number, vh: number, id: CharacterId = 'tiny') =>
-  computeLayout({ vw, vh, grid: fitGrid('expert', vw, vh).grid, entranceSide: 'bottom', friend: friendFrame(id) });
+  computeLayout({ vw, vh, grid: fitGrid('expert', vw, vh, friendFrame(id)).grid, entranceSide: 'bottom', friend: friendFrame(id) });
 
 describe('jungle visitors at the screen edges', () => {
   it('rails sit beside the board, clear of the corner buttons, the friend and "Wróć"; none in portrait', () => {

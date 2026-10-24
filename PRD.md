@@ -89,7 +89,7 @@ Core controls: “Wróć” / “Start over”, treasure collection, and a small
 4. A wall touch stops new ink at the last safe point. No red cross, error buzz, automatic reset, or penalty. The child can return the pointer to the endpoint and continue a safe direction.
 5. Lifting the pointer preserves the drawing. Resume only near the current endpoint; pressing elsewhere must not create a disconnected trail.
 6. A valid dead end remains a valid drawing. Do not reveal that a branch is wrong through automatic colors, sounds, or a hidden solver.
-7. Reversing over the existing trail must not erase it. v1 does not allow drawing backward to change branches or create loops; the endpoint stops at already-traversed portions. Reset is the intended way to try a different route.
+7. Reversing over the existing trail must not erase it. v1 does not allow drawing backward to change branches or create loops; the endpoint stops at already-traversed portions. Reset is the intended way to try a different route. A slip is not a choice (owner requests, 24 Oct 2026): at a junction the route commits to a corridor only once the ink is 0.7 of a cell into it, so a finger that drifts into a side opening, overshoots a turn or dips a little way into a wrong corridor can come back and carry on, and the ink it drew there is dropped. Deeper is a choice, and "Wróć" undoes it.
 8. “Wróć” / “Start over” clears the **whole attempt**, resets endpoint and hint state, and retains seed, quest, difficulty, collection, and language. No confirmation dialog. A short fade is allowed, but the entrance becomes usable within 300 ms.
 9. Pointer cancellation, loss of capture, browser backgrounding, resize, or opening UI pauses input and preserves accepted points. Never connect a newly resumed pointer across a gap.
 10. Complete only when a continuous valid trail from the entrance reaches the treasure's goal region. The trail must have entered the central clearing through its valid opening. One completion event per session.
@@ -159,17 +159,18 @@ clearly harder than the old "medium" (owner, 14 Oct: the first levels felt too e
 up one level every four completed mazes (owner, 14 Oct; was three), capped at the last level. "Zacznij grę od nowa"
 starts the climb again.
 
-| Level | Mazes (after the tutorial) | Grid on a 1180 × 820 tablet | Larger screens | Meaningful branch choices (7 × 7) | Minimum route (7 × 7) |
-|---|---|---|---|---|---|
-| hard | 1–4 | 7 × 7 | 9 × 7 / 9 × 9 | 5–8 | 18 |
-| expert | 5–8 | 7 × 7 | 9 × 7 / 9 × 9 | 6–8 | 20 |
-| master | 9–12 | 7 × 7 | up to 11 × 9 | 6–9 | 22 |
-| grand | 13+ | 7 × 7 | up to 11 × 9 | 7–9 | 22 |
+| Level | Mazes (after the tutorial) | Grid on a 1180 × 820 tablet | 4:3 iPads (1024 × 768, 1080 × 810) | Larger screens | Meaningful branch choices (9 × 9) | Minimum route (9 × 9) |
+|---|---|---|---|---|---|---|
+| hard | 1–4 | 9 × 9 | 9 × 9 or 7 × 9 | 9 × 9 | 5–8 | 23 |
+| expert | 5–8 | 9 × 9 | 9 × 9 or 7 × 9 | 9 × 9 | 6–9 | 26 |
+| master | 9–12 | 9 × 9 | 9 × 9 or 7 × 9 | up to 11 × 9 | 6–9 | 28 |
+| grand | 13+ | 9 × 9 | 9 × 9 or 7 × 9 | up to 11 × 9 | 7–10 | 30 |
 
-Measured averages on 7 × 7: 5.4 → 7.2 branch choices and a 22–25-cell route (the old
-starting level: 3.9 and 19). A bigger grid is used only where corridors stay ≥ 48 px **and**
-the strip beside the board keeps the friend at least as large as at the old starting level
-(otherwise the friend shrank by a third on tablets); there the climb comes from topology.
+Tablets keep the mazes of a big screen (owner request, 24 Oct 2026; until then a 1180 × 820
+iPad stayed at 7 × 7 and 4:3 iPads at 5 × 5). A bigger grid is used where corridors stay
+≥ 40 px (about 7.5–8.5 mm on a 10–11" iPad). In landscape the board is drawn smaller rather
+than squeeze the friend below 85 % of its full height; on the narrowest 4:3 screens the wider
+friends therefore get a tall 7 × 9 board, which leaves them room.
 Non-square grids open on one axis only (wide: bottom, tall: a side), so they fit more cells.
 Every profile passes 1,000 seeds with fewer than 1 % fallbacks. A centered clearing replaces
 the central cell. Never shrink corridors just to keep a nominal grid size; record the actual
@@ -218,7 +219,7 @@ Reduced motion removes ambient sway, treasure flights, and bounce; use immediate
 - Target iPad Safari, Android tablet Chrome, and MacBook Air Safari/Chrome. Verify real touch and trackpad use; emulation alone cannot prove comfort.
 - Reference layouts: 1024 × 768, 1180 × 820, 1366 × 768, 1440 × 900 CSS pixels; also 768 × 1024 portrait and 1024 × 600 compact fallback.
 - Entire maze and essential controls fit in landscape. Portrait reflows controls and lowers grid density when necessary; offer a gentle rotate suggestion without blocking play.
-- Target usable corridor width ≥ 48 CSS px and primary controls ≥ 56 CSS px at supported layouts. Decorative margins may contract first. Ink width approximately 8–12 CSS px, with a contrasting edge; tune against actual art.
+- Target usable corridor width ≥ 40 CSS px on tablets and computers (48 until 24 Oct 2026, when the owner chose big-screen mazes on tablets) and primary controls ≥ 56 CSS px at supported layouts. Decorative margins may contract first. Ink width approximately 8–12 CSS px, with a contrasting edge; tune against actual art.
 - Do not disable browser zoom globally. Use drawing-specific touch behavior only on the play surface; preserve ordinary UI behavior elsewhere.
 - Accessible DOM controls, visible focus, no hover-only actions, text contrast of at least 4.5:1 for ordinary labels. Provide keyboard route extension along open graph edges as an alternate input using the same validation/reset rules; announce objective, available directions, and success without announcing every pointer sample.
 - Save explicit language, mute, reduced-motion preference override, collection counts, progress counters (which set the automatic difficulty), and active session with maze-generator version. Handle disabled/corrupt storage by falling back to a playable in-memory session.

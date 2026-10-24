@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { FRIEND_CORNER, FRIEND_SIZE, MIN_CONTROL_PX, MIN_CORRIDOR_PX, MIN_PHONE_CORRIDOR_PX, PHONE_CORRIDOR_SHARE, castSlots, clusterSpec, popupSpots, computeLayout, fitGrid, introLayout, isPhone, peekRest, portraitTopBar, toLogical, toScreen, type Layout, type Rect } from '../../src/platform/layout';
+import { FRIEND_CORNER, FRIEND_KEEP, FRIEND_SIZE, MIN_CONTROL_PX, MIN_CORRIDOR_PX, MIN_PHONE_CORRIDOR_PX, PHONE_CORRIDOR_SHARE, castSlots, clusterSpec, popupSpots, computeLayout, fitGrid, introLayout, isPhone, peekRest, portraitTopBar, toLogical, toScreen, type Layout, type Rect } from '../../src/platform/layout';
 import type { Difficulty } from '../../src/domain/types';
 import { CORRIDOR_RADIUS, ENTRANCE_REACH, FRAME_MARGIN, LEVELS, entranceAxes } from '../../src/domain/maze';
 import { ASSETS, FACING, friendFrame } from '../../src/game/assets';
@@ -13,7 +13,14 @@ const VIEWPORTS: Array<[number, number]> = [
   [1440, 900],
   [768, 1024],
   [1024, 600],
+  // Landscape iPads: 10.2", mini, 11" Pro, 13".
+  [1080, 810],
+  [1133, 744],
+  [1194, 834],
+  [1366, 1024],
 ];
+const IPADS: Array<[number, number]> = [[1024, 768], [1080, 810], [1133, 744], [1180, 820], [1194, 834], [1366, 1024]];
+const FRIENDS = ['bill', 'tiny', 'mazu', 'rocky', 'giganto'] as const;
 
 const overlaps = (a: Rect, b: Rect): boolean => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 const inside = (a: Rect, vw: number, vh: number): boolean => a.x >= -0.5 && a.y >= -0.5 && a.x + a.w <= vw + 0.5 && a.y + a.h <= vh + 0.5;
@@ -54,12 +61,37 @@ describe('grid fitting', () => {
   }
 
   it('bigger grids where they fit without shrinking the friend', () => {
-    // A 1180×820 tablet: 9×7 would squeeze the friend's strip, so 7×7 with harder topology.
-    for (const d of LEVELS) expect(fitGrid(d, 1180, 820).grid).toEqual({ cols: 7, rows: 7 });
-    expect(fitGrid('hard', 1366, 768).grid).toEqual({ cols: 9, rows: 7 });
+    // A 1180×820 tablet gets the 9×9 of a big screen (owner request, 24 Oct 2026); 11×9 needs more width.
+    for (const d of LEVELS) expect(fitGrid(d, 1180, 820, friendFrame('tiny')).grid).toEqual({ cols: 9, rows: 9 });
+    expect(fitGrid('hard', 1366, 768).grid).toEqual({ cols: 9, rows: 9 });
     expect(fitGrid('hard', 1440, 900).grid).toEqual({ cols: 9, rows: 9 });
-    expect(fitGrid('master', 1440, 900).grid).toEqual({ cols: 9, rows: 9 });
+    expect(fitGrid('master', 1440, 900).grid).toEqual({ cols: 11, rows: 9 });
     expect(fitGrid('master', 1920, 1080).grid).toEqual({ cols: 11, rows: 9 });
+    expect(fitGrid('master', 1366, 1024).grid).toEqual({ cols: 11, rows: 9 });
+  });
+
+  it('landscape iPads keep the mazes of a big screen: 9×9, or a tall 7×9 on the 4:3 iPads', () => {
+    for (const [vw, vh] of IPADS) {
+      for (const id of FRIENDS) {
+        for (const d of LEVELS) {
+          const { grid } = fitGrid(d, vw, vh, friendFrame(id));
+          expect(grid.cols * grid.rows, `${vw}x${vh} ${d} ${id}: ${grid.cols}x${grid.rows}`).toBeGreaterThanOrEqual(63);
+          expect(grid.rows, `${vw}x${vh} ${d} ${id}`).toBe(9);
+        }
+      }
+    }
+  });
+
+  it('a board shrinks before the friend does: at least FRIEND_KEEP of its full height in landscape', () => {
+    for (const [vw, vh] of [...IPADS, [1440, 900], [1920, 1080]] as Array<[number, number]>) {
+      for (const id of FRIENDS) {
+        const f = friendFrame(id);
+        const { grid } = fitGrid('master', vw, vh, f);
+        const L = computeLayout({ vw, vh, grid, entranceSide: entranceAxes(grid).horizontal ? 'right' : 'bottom', friend: f });
+        const full = Math.min(vh * 0.36 * f.size, 300 * f.size);
+        expect(L.character.h, `${vw}x${vh} ${id}`).toBeGreaterThanOrEqual(FRIEND_KEEP * full - 0.5);
+      }
+    }
   });
 
   it('the friend keeps at least 85 % of its size at the old starting level, at every level', () => {
@@ -84,7 +116,7 @@ describe('layout', () => {
   for (const [vw, vh] of VIEWPORTS) {
     for (const [side, id] of [['bottom', 'bill'], ['right', 'tiny'], ['right', 'mazu'], ['bottom', 'rocky'], ['bottom', 'giganto'], ['right', 'giganto']] as const) {
       it(`${vw}x${vh} entrance ${side}, ${id}: board, friend and controls do not collide`, () => {
-        const fit = fitGrid(id === 'giganto' ? 'expert' : 'hard', vw, vh);
+        const fit = fitGrid(id === 'giganto' ? 'expert' : 'hard', vw, vh, friendFrame(id));
         // Only the sides the generator can open for this grid (entranceAxes; never left).
         const axes = entranceAxes(fit.grid);
         const usable: Side = side === 'bottom' && !axes.vertical ? 'right' : side === 'right' && !axes.horizontal ? 'bottom' : side;

@@ -35,6 +35,13 @@ export interface TrailOptions {
   margin: number;
   /** Minimum distance between stored points (units). */
   minStep: number;
+  /**
+   * How deep the ink must go into a corridor leaving the head node before the
+   * route commits to it (units from the node centre). Until then a finger that
+   * drifts or dips into a wrong corridor can come back and carry on another way
+   * (owner requests, 24 Oct 2026); deeper, only "Wróć" undoes the choice.
+   */
+  commitDepth: number;
 }
 
 export const DEFAULT_TRAIL_OPTIONS: TrailOptions = {
@@ -45,6 +52,7 @@ export const DEFAULT_TRAIL_OPTIONS: TrailOptions = {
   inkRadius: 0.065,
   margin: 0.015,
   minStep: 0.02,
+  commitDepth: 0.7,
 };
 
 export interface MoveResult {
@@ -71,6 +79,12 @@ export class TrailEngine {
   connected = false;
   solved = false;
   private lastPointer: Point | null = null;
+  /**
+   * The ink is in the opening of a corridor it has not committed to: which one,
+   * and the index of its first point there. If the ink leaves that opening
+   * again, those points are dropped, so a slip leaves no spike in the trail.
+   */
+  private slip: { tag: number; from: number } | null = null;
 
   constructor(maze: Maze, opts: Partial<TrailOptions> = {}) {
     this.maze = maze;
@@ -109,6 +123,7 @@ export class TrailEngine {
     this.connected = false;
     this.solved = false;
     this.lastPointer = null;
+    this.slip = null;
   }
 
   /** Capsules the ink may currently occupy. Tag = target node id, or -1 for the head. */
@@ -221,14 +236,17 @@ export class TrailEngine {
     };
     const dIn = unit(head.a, head.b);
     const dOut = unit(into.a, into.b);
-    if (Math.abs(dIn.x * dOut.x + dIn.y * dOut.y) > 0.5) return false; // straight on: no corner
     const R = this.collisionRadius - 0.01;
     const inside = { x: dOut.x - dIn.x, y: dOut.y - dIn.y };
-    const pivots = [
-      { x: node.x + R * inside.x, y: node.y + R * inside.y },
-      { x: node.x + (R / Math.SQRT2) * inside.x, y: node.y + (R / Math.SQRT2) * inside.y },
-      node,
-    ];
+    // Straight on, the only corner in the way is a side opening's, when the ink
+    // drifted into it: back out through the node centre.
+    const pivots = Math.abs(dIn.x * dOut.x + dIn.y * dOut.y) > 0.5
+      ? [node]
+      : [
+          { x: node.x + R * inside.x, y: node.y + R * inside.y },
+          { x: node.x + (R / Math.SQRT2) * inside.x, y: node.y + (R / Math.SQRT2) * inside.y },
+          node,
+        ];
     for (const P of pivots) {
       if (reachAlong(E, P, caps) < 1 - 1e-9) continue;
       const t2 = reachAlong(P, target, caps);
@@ -243,26 +261,33 @@ export class TrailEngine {
   }
 
   private accept(q: Point, caps: Capsule[], result: MoveResult): void {
+    const head = caps.find((c) => c.tag === -1);
+    const zone = head && insideCapsule(q, head) ? -1 : (caps.find((c) => c.tag !== undefined && c.tag >= 0 && insideCapsule(q, c))?.tag ?? -1);
+    if (this.slip && zone !== this.slip.tag) {
+      // Back out of a side opening: drop the ink drawn in it when the trail
+      // stays inside the corridors without it.
+      const last = this.points[this.slip.from - 1];
+      if (last && reachAlong(last, q, caps) >= 1 - 1e-9) this.points.length = this.slip.from;
+      this.slip = null;
+    }
+    if (!this.slip && zone >= 0) this.slip = { tag: zone, from: this.points.length };
     this.points.push(q);
     result.advanced = true;
-    const R = this.collisionRadius;
     let committed = false;
     for (const cap of caps) {
       if (cap.tag === undefined || cap.tag < 0) continue;
       if (!insideCapsule(q, cap)) continue;
       const s = axisParam(cap, q);
-      if (s > R) {
+      if (s > this.opts.commitDepth) {
         this.route.push(cap.tag);
         this.headMax = s;
         result.entered.push(cap.tag);
         committed = true;
+        this.slip = null;
         break;
       }
     }
-    if (!committed) {
-      const head = caps.find((c) => c.tag === -1);
-      if (head) this.headMax = Math.max(this.headMax, axisParam(head, q));
-    }
+    if (!committed && head) this.headMax = Math.max(this.headMax, axisParam(head, q));
     if (this.headNode === this.maze.goal.cellId && dist(q, this.maze.goal.center) <= this.maze.goal.radius) {
       this.solved = true;
       this.connected = false;
