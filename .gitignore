@@ -8,10 +8,10 @@ tools/art/__pycache__/
 
 # Kept on this computer only, never in the public repository:
 # official Gigantosaurus images used as identity references (copyright),
-art/references/
+art/references
 # and the large source/review images (heavy binaries, and high-resolution copies of
 # the character art). The game ships its own optimised copies in public/assets.
-art/source/
+art/source
 art/review/**/*.png
 art/review/**/*.gif
 art/review/**/*.jpg
@@ -24,3 +24,8 @@ art/review/**/*.jpg
 .env.local
 .env.*.local
 art/source/audio/
+
+# Superset workspaces: personal overrides, agent attachments, per-workspace port label
+.superset/config.local.json
+.superset/attachments/
+.superset/ports.json
