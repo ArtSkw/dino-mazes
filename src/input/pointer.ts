@@ -42,6 +42,10 @@ export class PointerAdapter {
     this.ctrl.gesture();
     if (!e.isPrimary) return;
     if (e.pointerType === 'mouse' && e.button !== 0) return;
+    // A new primary pointer means every earlier one has ended, even if the
+    // browser never told us (an iPad swallowed a pointerup, 29 Oct 2026):
+    // forget the stale stroke instead of ignoring the child for good.
+    if (this.active !== null && this.active !== e.pointerId) this.release(this.active);
     if (this.active !== null) return;
     const p = this.logical(e);
     if (!p) return;
@@ -89,7 +93,7 @@ export class PointerAdapter {
     this.ctrl.pointerUp();
   }
 
-  /** Interrupt any stroke (UI opened, resize, page hidden). */
+  /** Interrupt any stroke (UI opened, "Wróć", a new maze, leaving the maze, resize, page hidden). */
   interrupt(): void {
     if (this.active !== null) this.release(this.active);
   }

@@ -52,8 +52,11 @@ const ui = new Ui(uiRoot, ctrl);
 const pointer = new PointerAdapter(ui.surface, ctrl, () => undefined);
 
 // Opening any overlay pauses drawing input; accepted ink is preserved.
+// "Wróć", a new maze and leaving the maze also drop any stroke still held,
+// so a touch the browser never ended cannot keep blocking the next one.
 ctrl.on((e) => {
-  if (e.type === 'state' && ctrl.state.overlay) pointer.interrupt();
+  if (e.type === 'state' && (ctrl.state.overlay || ctrl.state.screen !== 'play')) pointer.interrupt();
+  if (e.type === 'trail-reset' || e.type === 'maze') pointer.interrupt();
 });
 
 const game = createGame(document.getElementById('game') as HTMLElement, ctrl, ui);

@@ -369,6 +369,42 @@ test.describe('touch', () => {
     expect(await state<number>(page, 'c.engine.route.length')).toBe(3);
     expect(await state<boolean>(page, 'c.engine.solved')).toBe(false);
   });
+
+  // An older iPad swallowed a pointerup (29 Oct 2026): every later touch was ignored,
+  // even after "Wróć", the home screen and a new maze.
+  test('a touch whose end never arrives blocks neither the next touch nor "Wróć"', async ({ page }) => {
+    await boot(page);
+    await startQuest(page);
+    const pts = await solutionPoints(page);
+    const fire = (type: string, p: Pt, id: number): Promise<void> =>
+      page.evaluate(([type, p, id]) => {
+        const el = document.querySelector('.play-surface') as HTMLElement;
+        el.dispatchEvent(new PointerEvent(type as string, { bubbles: true, cancelable: true, pointerId: id as number, pointerType: 'touch', isPrimary: true, clientX: (p as Pt).x, clientY: (p as Pt).y, buttons: 1 }));
+      }, [type, p, id] as const);
+    const stroke = async (id: number, to: number): Promise<void> => {
+      await fire('pointerdown', pts[0]!, id);
+      for (let i = 1; i <= to; i++) {
+        const a = pts[i - 1]!;
+        const b = pts[i]!;
+        for (let k = 1; k <= 8; k++) await fire('pointermove', { x: a.x + ((b.x - a.x) * k) / 8, y: a.y + ((b.y - a.y) * k) / 8 }, id);
+      }
+    };
+    // Finger 1 draws, then its pointerup is lost. Finger 2 still draws.
+    await stroke(1, 1);
+    expect(await state<number>(page, 'c.engine.route.length')).toBe(2);
+    await page.getByRole('button', { name: /Wyczyść ścieżkę|Clear the path/ }).click({ force: true });
+    await stroke(2, 2);
+    await fire('pointerup', pts[2]!, 2);
+    expect(await state<number>(page, 'c.engine.route.length')).toBe(3);
+    // Finger 3 is lost mid-stroke; "Wróć" forgets it, so its late moves draw nothing.
+    await page.getByRole('button', { name: /Wyczyść ścieżkę|Clear the path/ }).click({ force: true });
+    await stroke(3, 1);
+    await page.getByRole('button', { name: /Wyczyść ścieżkę|Clear the path/ }).click({ force: true });
+    await fire('pointermove', pts[1]!, 3);
+    expect(await state<number>(page, 'c.engine.points.length')).toBe(0);
+    await stroke(4, 2);
+    expect(await state<number>(page, 'c.engine.route.length')).toBe(3);
+  });
 });
 
 test.describe('special guest and settings', () => {

@@ -52,6 +52,27 @@ tests or screenshots; device checks are still pending as before.
 Measured visible-content boxes per character frame are now part of the asset manifest
 (`content`, `contentActive`, written by `tools/art/extract.py`); only JSON changed when re-run.
 
+## Owner tablet test, round 31 (29 October 2026): a lost touch no longer blocks drawing
+
+On an older iPad, in Giganto's giga flower maze (the 7th or 8th), no touch could start the
+path: everything else worked (animations, "Wróć", the home screen, tapping Giganto).
+
+- Cause: `PointerAdapter` draws with one pointer at a time and ignored every press while it still
+  held one. When the browser never delivers a pointerup or pointercancel (a system gesture, a
+  palm), that stale pointer stayed held forever. Neither "Wróć", nor the home screen, nor a new
+  maze released it. Only an overlay, a resize or hiding the page did.
+- Fix: a new *primary* pointer replaces a stale one (a primary touch means every earlier touch has
+  ended). "Wróć", a new maze and leaving the play screen interrupt any held stroke, so its late
+  moves draw nothing.
+- Not reproducible from here: WebKit at 1024×768, 1080×810 and 1112×834 (both orientations), the
+  real maze 5 → Giganto flow and Chromium at 6× CPU throttling all drew normally. So the lost
+  pointerup is the cause that matches the owner's report, not one observed on the device.
+- Still open: a thumb or palm resting on the screen *before* the drawing finger lands makes that
+  finger non-primary, and it is ignored by design (plan §4.2). The owner decides whether to accept it.
+- Evidence: e2e "a touch whose end never arrives blocks neither the next touch nor "Wróć""
+  fails on the previous code (route 0 instead of 3) and passes now. Full check, 321 unit tests and
+  88 e2e (Chromium + WebKit) are green.
+
 ## Owner review, round 30 (24 October 2026): a slip at a junction is not a choice
 
 The ink got stuck when a finger drifted a little toward a side opening at a junction, or
